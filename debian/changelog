@@ -2,12 +2,13 @@ surfraw (2.1.0-1) unstable; urgency=low
 
   * Ian Beckwith <ianb@nessie.mcc.ac.uk>:
     + New elvi: dmoz, w3html, w3link, w3css, w3rdf.
+    + New elvi: rae (by Ruben Pollan <meskio@terra.es>)
     + surfraw.IN:w3_url_escape: escaped `(' and `)'.
     + Added appendix 2 to HACKING on preparing a release.
 
- -- Christian Surchi <csurchi@debian.org>  Wed, 15 Sep 2004 17:39:53 +0100
+ -- Christian Surchi <csurchi@debian.org>  Sat,  2 Oct 2004 17:12:22 +0100
 
-surfraw (2.0.2-2) testing-proposed-updates; urgency=high
+surfraw (2.0.2-2) unstable; urgency=low
 
   * Applied Brian Mcdonald's workaround for bash bug (Closes: #269982)
 

@@ -37,6 +37,7 @@ elvi_SCRIPTS	= \
 		  openbsd \
 		  pgpkeys \
 		  pubmed \
+		  rae \
 		  rfc \
 		  rhyme \
 		  slashdot \
