@@ -1,6 +1,12 @@
 surfraw (2.0.2-1) unstable; urgency=low
 
-  * Added bash completion code by Justin B Rye (Closes: #240629)
+  * Several patches from Justin B Rye:
+    + Add bash completion (Closes: #240629)
+    + Add some missing elvis in surfraw_elvi.list (Closes: #241079)
+    + Don't set DISPLAY when in text-only mode (Closes: #235251)
+    + Correctly test for text-mode in w3_browse_url()
+    + Readability improvements
+    + Use argv[0] instead of computing it through basename
   * Removed elvi:
     + sharereactor: has been closed down
 
