@@ -17,8 +17,8 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-    w3_browse_url "http://www.linuxdoc.com/"
+    w3_browse_url "http://www.tldp.org/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.linuxdoc.org/cgi-bin/ldpsrch.cgi?db=0&rpt=40?&srch=${escaped_args}"
+    w3_browse_url "http://www.tldp.org/cgi-bin/ldpsrch.cgi?svr=&words=${escaped_args}"
 fi

@@ -38,5 +38,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://scaleplus.law.gov.au/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://scaleplus.law.gov.au/cgi-bin/topicSrch.pl?Action=Search&SearchPage=%2FWelcome97.html&ResultTemplate=scaleresults.htm&ViewTemplate=scaleview.htm&ResultMaxDocs=${SURFRAW_scaleplus_results}&SEARCH.y=0&SEARCH.x=0&querytext=${escaped_args}&category=CL&category=CC&category=SL&category=SC&category=OT&category=HD"
+    w3_browse_url "http://scaleplus.law.gov.au/cgi-bin/topicSrch.pl?Action=Search&SearchPage=%2FWelcome97.html&ResultTemplate=scaleresults.hts&ViewTemplate=scaleview.hts&ResultMaxDocs=${SURFRAW_scaleplus_results}&querytext=${escaped_args}&category=CL&category=CC&category=SL&category=SC&category=OT&category=HD"
 fi

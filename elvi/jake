@@ -1,46 +1,48 @@
 #!/bin/sh
+# $Id$
 # elvis: jake		-- Search journal/databases in jake (jake.med.yale.edu)
 # daniel.chudnov@yale.edu
 . surfraw || exit 1
 
 w3_config_hook () {
 def   SURFRAW_jake_method title
+def   SURFRAW_jake_spage ""
+def   SURFRAW_jake_epage ""
+
 }
 
 w3_usage_hook () {
     cat <<EOF
-Usage: $w3_argv0 [options] [journal-or-db-name|issn|jakeid]
+Usage: $w3_argv0 [options] [journal-or-db-name|issn]
 Description:
   Surfraw jake for journal/database info and article links
 Example:
   \$ jake proc nat acad sci
   \$ jake 0362-8841 
-  \$ jake -method=jakeid 2004
-  \$ jake -format=xml mo jones
-  \$ jake -volume=141 -issue=10 -page=1089 -year=1999 acta neurochir
+  \$ jake -volume=141 -issue=10 -spage=1089 -epage=1105 -year=1999 acta neurochir
 Local options:
- -format=xml             return data as text/xml
- -method=                search type
-	 title    |      (default)
-	 issn     |      search by issn
-	 jakeid   |      search by jakeid
- -volume=[volume]        look for this volume
- -issue=[issue]          look for this issue
- -page=[page]            look for this page
- -year=[year]            look for this year
+ -method=                       search type
+     title    |                 (default)
+     issn                       search by issn
+ -volume=[volume]               look for this volume
+ -issue=[issue]                 look for this issue
+ -spage=[page]                  start page
+ -epage=[page]                  end page
+ -year=[year]                   look for this year
 EOF
-    w3_global_usage
+	    w3_global_usage
 }
 
 w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in 
-        -method=*) setopt   SURFRAW_jake_method $optarg ;;
+	-method=*) setopt   SURFRAW_jake_method $optarg ;;
 	-format=*) setopt   SURFRAW_jake_format $optarg	;;
 	-volume=*) setopt   SURFRAW_jake_volume $optarg ;;
 	-issue=*)  setopt   SURFRAW_jake_issue  $optarg ;;
-	-page=*)   setopt   SURFRAW_jake_page   $optarg ;;
+	-spage=*)  setopt   SURFRAW_jake_spage  $optarg ;;
+	-epage=*)  setopt   SURFRAW_jake_epage  $optarg ;;
 	-year=*)   setopt   SURFRAW_jake_year   $optarg ;;
 	*) return 1 ;;
     esac
@@ -55,5 +57,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://jake.med.yale.edu/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://jake.med.yale.edu/?${SURFRAW_jake_method}=${escaped_args}&format=${SURFRAW_jake_format}&volume=${SURFRAW_jake_volume}&issue=${SURFRAW_jake_issue}&page=${SURFRAW_jake_page}&year=${SURFRAW_jake_year}"
+    w3_browse_url "http://jake.med.yale.edu/search?sid=jake-db.org%3Ajake&${SURFRAW_jake_method}=${escaped_args}&volume=${SURFRAW_jake_volume}&issue=${SURFRAW_jake_issue}&spage=${SURFRAW_jake_spage}&epage=${SURFRAW_jake_epage}&date=${SURFRAW_jake_year}"
 fi

@@ -1,7 +1,6 @@
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/alioth.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/altavista.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/amazon.1.gz
-usr/share/man/man1/surfraw.1.gz usr/share/man/man1/appwatch.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/ask.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/austlii.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/britannica.1.gz
@@ -18,8 +17,6 @@ usr/share/man/man1/surfraw.1.gz usr/share/man/man1/fast.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/filesearching.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/freebsd.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/freshmeat.1.gz
-usr/share/man/man1/surfraw.1.gz usr/share/man/man1/ftpfind.1.gz
-usr/share/man/man1/surfraw.1.gz usr/share/man/man1/ftpsearch.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/google.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/happypenguin.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/jake.1.gz
@@ -27,7 +24,6 @@ usr/share/man/man1/surfraw.1.gz usr/share/man/man1/leodict.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/netbsd.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/openbsd.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/pubmed.1.gz
-usr/share/man/man1/surfraw.1.gz usr/share/man/man1/raging.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/rhyme.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/scaleplus.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/scpan.1.gz

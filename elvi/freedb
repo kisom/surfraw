@@ -1,4 +1,5 @@
 #!/bin/sh
+# $Id$
 # elvis: freedb		-- Search for cd track listings in FreeDB (www.freedb.org)
 # ianb@nessie.mcc.ac.uk 20030129
 # notes at end of script

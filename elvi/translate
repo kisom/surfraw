@@ -83,21 +83,17 @@ w3_parse_option_hook () {
 w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
-test -z "$w3_args" || escaped_args=`w3_url_of_arg $w3_args`
-case $SURFRAW_translate_provider in
-    babelfish | raging)
-	case $SURFRAW_translate_provider in raging) r=raging/ ;; *) r="";; esac
-    	if test -z "$escaped_args"; then
-	    w3_browse_url "http://babelfish.altavista.com/${r}translate.dyn"
-	else
-	    case "$escaped_args" in
-	    	http*) w3_browse_url "http://babelfish.altavista.com/${r}translate.dyn?doit=done&BabelFishFrontPage=yes&bblType=url&url=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
+if test -z "$w3_args"
+then
+	w3_browse_url "http://babelfish.altavista.com/"
+else
+	escaped_args=`w3_url_of_arg $w3_args`
+	case "$escaped_args" in
+		http*) w3_browse_url "http://babelfish.altavista.com/babelfish/urltrurl?tt=url&url=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
 		;;
-		*) w3_browse_url "http://babelfish.altavista.com/${r}translate.dyn?doit=done&BabelFishFrontPage=yes&bblType=urltext&urltext=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
-	        ;;
-	    esac
-	fi
-	;;
-   *) err "unknown provider ${SURFRAW_translate_provider}"
-esac
+		*) w3_browse_url "http://babelfish.altavista.com/babelfish/tr?doit=done&tt=urltext&intl=1&urltext=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
+        ;;
+    esac
+fi
+
 exit $?

@@ -1,3 +1,4 @@
+# $Id$
 %define name	surfraw
 %define version @VERSION@
 %define release 1

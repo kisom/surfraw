@@ -50,10 +50,10 @@ Distribution:
   For example:
 
   $ surfraw
+W               -- Activate Surfraw defined web-browser
 alioth          -- Search Alioth (alioth.debian.org)
 altavista       -- Search the web using Altavista (www.altavista.com)
 amazon          -- Search the amazon.com bookstore
-appwatch        -- Search entries on Appwatch (www.appwatch.com)
 ask             -- Question the web using Ask Jeeves (www.ask.com)
 austlii         -- Search Australian Law docs (www.austlii.edu.au)
 bbcnews         -- Search BBC News (news.bbc.co.uk)
@@ -73,16 +73,14 @@ filesearching   -- Search files on filesearching (www.filesearching.com)
 freebsd         -- Search FreeBSD related information (www.freebsd.org)
 freedb          -- Search for cd track listings in FreeDB (www.freedb.org)
 freshmeat       -- Search Freshmeat (www.freshmeat.net)
-ftpfind         -- Search files on ftpfind (www.ftpfind.com)
-ftpsearch       -- Search files on ftpsearch (ftpsearch.lycos.com)
 google          -- Search the web using Google (www.google.com)
+happypenguin    -- Search the Linux Game Tome (www.happypenguin.org)
 imdb            -- Search the Internet Movie Database (www.imdb.com)
 jake            -- Search journal/databases in jake (jake.med.yale.edu)
 leodict         -- Search leo's German <-> English dictionary (dict.leo.org)
 netbsd          -- Search NetBSD related information (www.netbsd.org)
 openbsd         -- Search OpenBSD related information (www.openbsd.org)
 pubmed          -- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
-raging          -- Search the web using Raging (www.raging.com)
 rhyme           -- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
 scaleplus       -- Search Australian Law using ScalePlus (scaleplus.law.gov.au)
 scpan           -- Search the Comprehensive Perl Archive Network (search.cpan.org)

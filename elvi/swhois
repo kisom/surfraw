@@ -16,8 +16,8 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-    w3_browse_url "http://www.geektools.com/cgi-bin/proxy.cgi"
+    w3_browse_url "http://www.geektools.com/whois.php"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.geektools.com/cgi-bin/proxy.cgi?query=${escaped_args}&targetnic=auto&btnGo=Whois+%BB"
+    w3_browse_url "http://www.geektools.com/whois.php?query=${escaped_args}"
 fi

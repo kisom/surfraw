@@ -3,7 +3,6 @@ bin_SCRIPTS	= \
 		  alioth \
 		  altavista \
 		  amazon \
-		  appwatch \
 		  ask \
 		  austlii \
 		  bbcnews \
@@ -22,8 +21,6 @@ bin_SCRIPTS	= \
 		  filesearching \
 		  freebsd \
 		  freedb \
-		  ftpfind \
-		  ftpsearch \
 		  freshmeat \
 		  jake \
 		  google \
@@ -35,7 +32,6 @@ bin_SCRIPTS	= \
 		  netbsd \
 		  openbsd \
 		  pubmed \
-		  raging \
 		  rhyme \
 		  slashdot \
 		  sundocs \

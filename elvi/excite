@@ -19,5 +19,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://www.excite.com/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.excite.com/search.gw?search=${escaped_args}"
+	w3_browse_url "http://msxml.excite.com/_1_Y5CUB602ZUH3__info.xcite/dog/results?otmpl=dog/webresults.htm&qcat=web&foo=bar&qk=20&fs=infospace_excite_search&stype=web&qkw=${escaped_args}&top=1&start=&ver=31756"
 fi

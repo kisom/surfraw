@@ -1,4 +1,5 @@
 #!/bin/sh
+# $Id$
 # elvis: stockquote	-- Get a single stock quote (multiple providers)
 . surfraw || exit 1
 

@@ -4,9 +4,9 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-def   SURFRAW_debian_arch i386
-def   SURFRAW_debian_distro stable
-def   SURFRAW_debian_search cgi-bin/search_contents.pl
+def   SURFRAW_debcontents_arch i386
+def   SURFRAW_debcontents_distro stable
+def   SURFRAW_debcontents_search cgi-bin/search_contents.pl
 }
 
 w3_usage_hook () {
@@ -22,14 +22,14 @@ Local options:
 	  sparc		|	sparc
 	  powerpc	|	PowerPC
 	  arm		|	ARM
-                                Default: $SURFRAW_debian_arch
-                                Environment: SURFRAW_debian_arch
+                                Default: $SURFRAW_debcontents_arch
+                                Environment: SURFRAW_debcontents_arch
   -distro=                      Specific distribution
           stable        |       Stable
           testing       |       Testing
           unstable      |       Unstable
-                                Default: $SURFRAW_debian_distro
-                                Environment: SURFRAW_debian_distro
+                                Default: $SURFRAW_debcontents_distro
+                                Environment: SURFRAW_debcontents_distro
 EOF
     w3_global_usage
 }
@@ -38,8 +38,8 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-arch=*) setopt   SURFRAW_debian_arch $optarg	;;
-	-distro=*)  setopt   SURFRAW_debian_distro  $optarg	;;
+	-arch=*) setopt   SURFRAW_debcontents_arch $optarg	;;
+	-distro=*)  setopt   SURFRAW_debcontents_distro  $optarg	;;
 	*) return 1 ;;
     esac
     return 0
@@ -52,5 +52,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://packages.debian.org/#search_contents"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://packages.debian.org/${SURFRAW_debian_search}?word=${escaped_args}&case=insensitive&version=${SURFRAW_debian_distro}&arch=${SURFRAW_debian_arch}&directories=yes"
+    w3_browse_url "http://packages.debian.org/${SURFRAW_debcontents_search}?word=${escaped_args}&case=insensitive&version=${SURFRAW_debcontents_distro}&arch=${SURFRAW_debcontents_arch}&searchmode=searchfilesanddirs"
 fi
