@@ -1,6 +1,6 @@
 #!/bin/sh
 # elvis: woffle		-- Search the web using Woffle (localhost:8080)
- /usr/local/bin/surfraw || exit 1
+ . surfraw || exit 1
 
 w3_config_hook () {
 def   SURFRAW_woffle_search htdig/htsearch

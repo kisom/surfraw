@@ -38,11 +38,11 @@ def   SURFRAW_graphical		no
 
 # name/path of text browser executable
 # e.g links, lynx, w3m
-def   SURFRAW_text_browser	lynx
+def   SURFRAW_text_browser	sensible-browser
 
 # name/path of browser executable
 # e.g mozilla, netscape etc
-def   SURFRAW_graphical_browser	@sr_graphical_browser@
+def   SURFRAW_graphical_browser	sensible-browser
 
 # text browser arguments, or "none"
 def   SURFRAW_text_browser_args	none

@@ -1,3 +1,18 @@
+surfraw (1.0.7-3) unstable; urgency=low
+
+  * Force default browser to sensible-browser (Closes: #119357)
+    - This supercedes NMU changes (Closes: #200164, #201229, #149584)
+    - Change default browser in manpage (Closes: #113148)
+  * Rename stranslate back to translate (Closes: #141243)
+  * Make woffle not look for /usr/local/bin/surfraw (Closes: #156466)
+  * Add lynx to Recommends (Closes: #141242)
+  * Make surfraw lintian-clean
+    - Remove '(s)' from copyright
+    - Remove /etc conffile entries
+  * Kevin Kreamer <kkreamer@etherhogz.org> did this work.
+
+ -- Thomas Smith <tgs@debian.org>  Thu,  4 Sep 2003 18:09:29 -0500
+
 surfraw (1.0.7-2) unstable; urgency=low
 
   * The first "collaborative" release :)

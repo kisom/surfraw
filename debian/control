@@ -8,7 +8,7 @@ Build-Depends-Indep: debhelper (>> 3.0)
 Package: surfraw
 Architecture: all
 Depends: lynx | www-browser 
-Recommends: links | w3m | w3m-ssl 
+Recommends: links | w3m | w3m-ssl | lynx
 Suggests: screen
 Conflicts: surfaw
 Replaces: surfaw
