@@ -1,3 +1,9 @@
+surfraw (2.0.2-2) testing-proposed-updates; urgency=high
+
+  * Applied Brian Mcdonald's workaround for bash bug (Closes: #269982)
+
+ -- Christian Surchi <csurchi@debian.org>  Mon, 13 Sep 2004 16:34:53 +0100
+
 surfraw (2.0.2-1) unstable; urgency=low
 
   * Several patches from Justin B Rye:

@@ -24,4 +24,4 @@ _surfraw()
 	return 0
 }
 # test first in case removed-but-unpurged
-type -p surfraw >&- && complete -F _surfraw surfraw sr
+type -p surfraw >/dev/null 2>&1 && complete -F _surfraw surfraw sr
