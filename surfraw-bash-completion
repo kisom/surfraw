@@ -13,7 +13,7 @@ _surfraw()
 	elif    [ "$COMP_CWORD" -eq 1 ]
 	then    COMPREPLY=( $( compgen -W "$elvi" -- $cur ) )
 		# "sr g<tab>" for google
-	elif    [[ $prev == @(alioth|deb@(bug|content|package)s|freshmeat|sourceforge) ]]
+	elif    [[ $prev == @(alioth|deb@(bug|content|package|pt)s|freshmeat|sourceforge) ]]
 	then    COMPREPLY=( $(apt-cache --generate pkgnames $cur) )
 		# "sr debbugs 4<tab>" to check 44bsd-rdist bugs...
 	elif    test -x /usr/bin/look # in bsdmainutils, "important"
