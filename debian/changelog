@@ -28,7 +28,7 @@ surfraw (2.0.1-1) unstable; urgency=low
   * Removed elvi:
     + britannica: gone subscription-only
     + swhois: all whois sites I can find have anti-harvester features
-	  that stop us using them.
+	  that stop us using them (Closes: #231939).
   * Fixed elvi:
     + wikipedia - added missing quotes (could've sworn I did this already)
     + cnn - updated url
