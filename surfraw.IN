@@ -42,19 +42,10 @@ err () {
 
 yesno () {
     eval value=\$${1}
-    case "$value" in
-	# "yes", "true", "on", or "1"
-	[Yy][Ee][Ss]|[Tt][Rr][Uu][Ee]|[Oo][Nn]|1)
-	    return 0
-        ;;
-        # "no", "false", "off", or "0"
-        [Nn][Oo]|[Ff][Aa][Ll][Ss][Ee]|[Oo][Ff][Ff]|0)
-	    return 1
-        ;;
-
-        *)
-        err "\"$1\" is not set correctly. Should be (yes|on|1|no|off|0). Is \"$value\""
-        ;;
+    case `echo "$value" | tr A-Z a-z` in
+	yes|true|on|1)	return 0 ;;
+	no|false|off|0)	return 1 ;;
+	*) err "\"$1\" is not set correctly. Should be (yes|on|1|no|off|0). Is \"$value\"" ;;
     esac
 }
 
@@ -265,7 +256,8 @@ w3_parse_option () {
 	-q | -quote)	    setoptyn SURFRAW_quote_args	    	yes	;;
 	-new)		    setoptyn SURFRAW_new_window		yes	;;
 	-new=*)		    setoptyn SURFRAW_new_window		$optarg ;;
-	-t | -text)	    setoptyn SURFRAW_graphical 		no	;;
+	-t | -text)	    unset DISPLAY
+			    setoptyn SURFRAW_graphical 		no	;;
 	-version)	    echo $surfraw_version; exit 0	    	;;
 	--)		    return 1					;;
 	-*)		    w3_bad_option "$opt"		    	;;
@@ -310,7 +302,7 @@ w3_parse_args () {
 }
 
 w3_browse_url () {
-   if ok SURFRAW_new_screen && test -n "$STY" && test mode = text; then
+   if ok SURFRAW_new_screen && test -n "$STY" && test $mode == text; then
    	screen=yes
    else
    	screen=no
@@ -352,8 +344,8 @@ quote () {
 
 surfraw_usage() {
 	cat <<EOF
-Usage: `basename $0` [-help] [-elvi] elvis [elvioptions] [search terms]
-       `basename $0` [options] bookmark
+Usage: $w3_argv0 [-help] [-elvi] elvis [elvioptions] [search terms]
+       $w3_argv0 [options] bookmark
     If you wish to run the elvi directly, run "surfraw-update-path" to append
 	$elvidir to your \$PATH in your shell's config files.
     See surfraw-update-path(1) for details
@@ -405,23 +397,22 @@ then
 	done
 	if [ -z "$elvi" ]
 	then
-		surfraw_usage
-		exit 0
+	    surfraw_usage
+	    exit 0
+	elif [ -x "$elvidir/$elvi" ]
+	then
+	    sh -c "$elvidir/$elvi $opts $searchterms"
 	else
-		if [ -x "$elvidir/$elvi" ]
-		then
- 			sh -c "$elvidir/$elvi $opts $searchterms"
-		else
-			bookmark=`bookmark_lookup $elvi`
-			if [ -n "$bookmark" ]
-			then
-				w3_parse_args "$opts"
-				w3_browse_url "$bookmark"
-			else
-				echo "`basename $0`: $elvi: No elvis or bookmark with that name"
-				surfraw_usage
-				exit 1
-			fi
-	   fi
+	    bookmark=`bookmark_lookup $elvi`
+	    if [ -n "$bookmark" ]
+	    then
+		w3_parse_args "$opts"
+		w3_browse_url "$bookmark"
+	    else
+		echo "`basename $0`: $elvi: No elvis or bookmark with that name"
+		surfraw_usage
+		exit 1
+	    fi
 	fi
+    fi
 fi
