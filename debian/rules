@@ -61,11 +61,13 @@ install: build
 	dh_testroot
 	dh_clean -k
 	dh_installdirs
+	po2debconf debian/templates > debian/templates.merged
+	mkdir -p debian/tmp/DEBIAN
+	cp debian/templates.merged debian/tmp/DEBIAN/templates
 
 	# Add here commands to install the package into debian/surfraw.
 	# $(MAKE) install prefix=$(CURDIR)/debian/surfraw/usr
 	$(MAKE) install DESTDIR=`pwd`/debian/surfraw/ # sysconfdir=`pwd`/debian/surfraw/etc
-	# mv `pwd`/debian/surfraw/usr/bin/translate `pwd`/debian/surfraw/usr/bin/stranslate
 
 # Build architecture-independent files here.
 binary-indep: build install
