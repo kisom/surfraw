@@ -5,7 +5,9 @@ bin_SCRIPTS	= \
 		  appwatch \
 		  ask \
 		  austlii \
+		  bbcnews \
 		  britannica \
+		  cddb \
 		  cite \
 		  cnn \
 		  currency \
@@ -17,11 +19,13 @@ bin_SCRIPTS	= \
 		  fast \
 		  filesearching \
 		  freebsd \
+		  freedb \
 		  ftpfind \
 		  ftpsearch \
 		  freshmeat \
 		  jake \
 		  google \
+		  imdb \
 		  slinuxdoc \
 		  netbsd \
 		  openbsd \

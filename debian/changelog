@@ -4,8 +4,9 @@ surfraw (1.0.7-2) unstable; urgency=low
   * Easy bugs first
     - fix type in README (Closes: #154304)
     - s/README/README.gz/ in manpage (Closes: #164206)
+  * Added elvi for imdb, cddb, freedb and bbcnews written by Ian Beckwith.
 
- -- Christian Surchi <csurchi@debian.org>  Fri,  1 Aug 2003 09:23:45 +0000
+ -- Christian Surchi <csurchi@debian.org>  Fri, 15 Aug 2003 13:32:00 +0000
 
 surfraw (1.0.7-1) unstable; urgency=low
 

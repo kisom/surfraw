@@ -1,0 +1,52 @@
+#!/bin/sh
+# $Id$
+# elvis: bbcnews		-- Search BBC News (news.bbc.co.uk)
+# ianb@nessie.mcc.ac.uk 20030209
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def SURFRAW_bbcnews_scope world
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search BBC News (news.bbc.co.uk)
+Local options:
+  -scope=world | uk             Search world or uk news
+                                Default: $SURFRAW_bbcnews_scope
+                                Environment: SURFRAW_bbcnews_scope
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-scope=*) setopt   SURFRAW_bbcnews_scope $optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+	if [ $SURFRAW_bbcnews_scope = uk ]; then
+		w3_browse_url "http://news.bbc.co.uk/1/hi.html"
+	else
+		w3_browse_url "http://news.bbc.co.uk/2/hi.html"
+	fi
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	if [ $SURFRAW_bbcnews_scope = uk ]; then
+		w3_browse_url "http://newssearch.bbc.co.uk/cgi-bin/results.pl?scope=newsukfs&tab=news&q=${escaped_args}"
+	else
+		w3_browse_url "http://newssearch.bbc.co.uk/cgi-bin/results.pl?scope=newsifs&tab=news&q=${escaped_args}"
+	fi
+fi
+

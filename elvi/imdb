@@ -1,0 +1,55 @@
+#!/bin/sh
+# $Id$
+# elvis: imdb		-- Search the Internet Movie Database (www.imdb.com)
+# ianb@nessie.mcc.ac.uk 20030209
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_imdb_category All
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the Internet Movie Database (www.imdb.com)
+Local options:
+  -category=                    Category to search
+             All          |
+             Titles       |
+             MyMovies     |
+             People       |
+             Characters   |
+             Quotes       |
+             Bios         |
+             Plots
+                                Default: $SURFRAW_imdb_category
+                                Environment: SURFRAW_imdb_category
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-category=*) setopt   SURFRAW_imdb_category $optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.imdb.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	#Avoids people having to quote "My+Movies" on command line
+	if [ $SURFRAW_imdb_category = MyMovies ]; then
+		SURFRAW_imdb_category="My+Movies"
+	fi
+    w3_browse_url "http://www.imdb.com/Find?select=${SURFRAW_imdb_category}&for=${escaped_args}"
+fi
