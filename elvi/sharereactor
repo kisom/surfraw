@@ -1,0 +1,138 @@
+#!/bin/sh
+# elvi: sharereactor -- Search the Sharereactor filesharing index
+# Author: Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_sharereactor_category	all
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string]
+Description:
+  Search the Sharereactor filesharing index
+Local options:
+  -category= | -c=  
+	all	    All categories
+	dvdrips	    DVD-Rips
+	dvdr        Complete DVD images
+	screener    Screeners, VHS-Rips	
+	anime       Anime
+	manga       Manga
+	hentai	    Hentai
+	series      TV series
+	pcgames     PC games
+	consoles    Console games
+        ps2         Playstation 2 games
+	xbox        XBox-Games
+	software    PC software
+	books	    (E-)Books
+	funstuff    More of less funny things
+	adult	    Porn
+	gay	    Gay porn	
+		    Default: all
+		    Environment: SURFRAW_sharereactor_category
+
+Examples:
+  $w3_argv0 -c=dvdrips revolution os
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-category=*)	setopt	SURFRAW_sharereactor_category		$optarg	;;
+	-c=*)	setopt	SURFRAW_sharereactor_category		$optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+# disable requoting, doesn't work with this elvi.
+SURFRAW_quote_ifs=0
+w3_parse_args "$@"
+
+prefix="http://www.sharereactor.com/search.php?search="
+suffix="&submit=Search"
+
+if [ $SURFRAW_sharereactor_category = all ]; then
+	category="&category=0"		
+fi
+
+if [ $SURFRAW_sharereactor_category = dvdrips ]; then
+	category="&category=1"		
+fi
+
+if [ $SURFRAW_sharereactor_category = dvdr ]; then
+	category="&category=19"		
+fi
+
+if [ $SURFRAW_sharereactor_category = screener ]; then
+	category="&category=2"		
+fi
+
+if [ $SURFRAW_sharereactor_category = anime ]; then
+	category="&category=6"		
+fi
+
+if [ $SURFRAW_sharereactor_category = manga ]; then
+	category="&category=18"		
+fi
+
+if [ $SURFRAW_sharereactor_category = hentai ]; then
+	category="&category=15"		
+fi
+
+if [ $SURFRAW_sharereactor_category = series ]; then
+	category="&category=7"		
+fi
+
+if [ $SURFRAW_sharereactor_category = pcgames ]; then
+	category="&category=3"		
+fi
+
+if [ $SURFRAW_sharereactor_category = consoles ]; then
+	category="&category=11"		
+fi
+
+if [ $SURFRAW_sharereactor_category = psx2 ]; then
+	category="&category=16"		
+fi
+
+if [ $SURFRAW_sharereactor_category = xbox ]; then
+	category="&category=14"		
+fi
+
+if [ $SURFRAW_sharereactor_category = software ]; then
+	category="&category=4"		
+fi
+
+if [ $SURFRAW_sharereactor_category = books ]; then
+	category="&category=12"		
+fi
+
+if [ $SURFRAW_sharereactor_category = funstuff ]; then
+	category="&category=8"		
+fi
+
+if [ $SURFRAW_sharereactor_category = adult ]; then
+	category="&category=9"		
+fi
+
+if [ $SURFRAW_sharereactor_category = gay ]; then
+	category="&category=17"		
+fi
+
+if null "$w3_args"; then
+    w3_browse_url "http://www.sharereactor.com"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "${prefix}${escaped_args}${category}${suffix}"
+fi
+
+
+

@@ -79,6 +79,15 @@ Or... How to Eat The CHEESE
 
     This ends the regular initialisation code.
 
+7.5)Note that surfraw now supports quoting arguments, eg with:
+	  sr google foo "bar baz" bam
+	it adds the quotes back.
+
+	Not all sites support arguments in double quotes. If you want to
+	disable it for your elvis, add
+	  SURFRAW_quote_ifs=0
+	in between the calls to w3_config and w3_parse_args.
+
 8)  What happens next depends on the type of evil we are dealing
     with. In the Peoples' Front Against Forum Stealing Dogs case, we have
     previously performed a search on the http://www.pfafsd.org search
@@ -122,7 +131,7 @@ Or... How to Eat The CHEESE
 
 	3: add elviname to the bin_SCRIPTS list in elvi/Makefile.am
 
-	4: add a link for the manpage in debian/surfraw.links
+	4: add a link for the manpage in links.IN
 	
 	5: rm elvi/surfraw_elvi.list
 

@@ -1,5 +1,4 @@
 #!/bin/sh
-# elvis: happypenguin	-- Search the Linux Game Tome (www.happypenguin.org)
 # Linux Game Tome plugin (http://www.happypenguin.org)
 #                                      jmm@informatik.uni-bremen.de
 # $Id$
@@ -16,6 +15,8 @@ EOF
 }
 
 w3_config
+# disable requoting, doesn't work with this elvi.
+SURFRAW_quote_ifs=0
 w3_parse_args "$@"
 if test -z "$w3_args"; then
     w3_browse_url "http://www.happypenguin.org/"

@@ -1,0 +1,51 @@
+#!/bin/sh
+# elvis: pgpkeys		-- Search the PGP key database
+# Author: Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_pgpkeys_sigs	off
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string]
+Description:
+  Search the PGP key database
+Local options:
+  -s                              Displays signatures of the keys
+				  Default: $SURFRAW_pgpkeys_sigs
+				  Environment: SURFRAW_pgpkeys_sigs
+
+Examples:
+  $w3_argv0 -s rms@gnu.org
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-s*)	setopt	SURFRAW_pgpkeys_sigs on	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+
+prefix="http://pgp.mit.edu:11371/pks/lookup?search="
+suffix="&op=index"
+
+if [ $SURFRAW_pgpkeys_sigs = on ]; then
+	suffix="&op=vindex"
+fi
+
+if null "$w3_args"; then
+    w3_browse_url "http://pgp.mit.edu"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "${prefix}${escaped_args}${suffix}"
+fi

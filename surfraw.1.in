@@ -1,0 +1,406 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH SURFRAW 1 "Feb 03, 2004"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+surfraw \- a fast unix command line interface to WWW services
+.SH SYNOPSIS
+.B surfraw
+.I elviname [options]  search words ...
+.br
+.B sr
+.I elviname  [options]  search words ...
+.br
+.B sr -elvi
+.br
+.B sr
+.I bookmark
+.br
+
+.SH DESCRIPTION
+
+Surfraw provides a fast unix command line interface to a variety of
+popular WWW search engines and other artifacts of power.
+It reclaims google, altavista, dejanews, freshmeat, research index,
+slashdot and many others from the false-prophet, pox-infested heathen
+lands of html-forms, placing these wonders where they belong, deep in
+unix heartland, as god loving extensions to the shell.
+
+.PP
+Surfraw consists of a collection of \fBelvi\fP, each of which knows how
+to search a specific web site.
+To see the list of elvi type:
+
+ surfraw -elvi
+
+Note that sr is an alias for surfraw, so that could equally be
+
+ sr -elvi
+
+To search using an elvis use:
+
+ sr elviname [options] search terms..
+
+For example, to search google for information on Debian ports,
+using the "I'm feeling lucky" option:
+
+ sr google -l debian ports
+
+.SS Adding the elvi to your path
+  
+If you are a regular user of surfraw, you will probably get sick
+of typing sr or surfraw each time. You can regain the old
+behaviour of running the elvi directly by adding the elvi
+directory (\%@ELVIDIR@) to your path, either manually or using
+\fB\%surfraw-update-path(1)\fP.
+
+.SS Bookmarks
+
+Surfraw now supports bookmarks. To add a bookmark, add it to
+\fB\%@sysconfdir@/surfraw.bookmarks\fP or
+\fB\%$HOME/.surfraw.bookmarks\fP
+
+The format of the bookmarks file is simple, each bookmark is on a
+separate line, with the bookmark and URL separated by whitespace,
+eg:
+
+ ntk   http://www.ntk.net/
+
+To invoke a bookmark, use "surfraw bookmark" or "sr bookmark",
+and if an elvis of that name doesn't exist, it searches for a
+bookmark of that name instead.
+
+There are some example bookmarks in \%@sysconfdir@/surfraw.bookmarks
+
+.SH OPTIONS
+
+Use	\fB\%sr elviname -help\fP for elvi-specific options.
+
+The following options work with all elvi.
+
+.TP
+.B \-help
+Show summary of options (including elvi-specific options).
+
+.TP
+.B \-version
+Show version of program.
+
+.TP
+\fB\-browser=\fP\fIEXECUTABLE\fP
+Set browser (default: sensible-browser).
+
+.TP
+.B -elvi
+Display a list of other Surfraw mechanisms for conquering evil.
+
+.TP
+.B -escape-url-args=yes|no
+Apply url escaping to arguments (default: yes)
+
+.TP
+.B -p0rn=yes|no
+Yes, yes, harder, deeper, faster, oh baybe (default: yes)
+
+.TP
+.B -q|-quote
+Bracket all arguments with " characters (default: no).
+Note that putting quotes round arguments works now, so you can do,
+for example:
+
+ sr google foo "bar baz" bam
+
+and the quoting is passed on to the search engine
+
+.TP
+.B -quiet=yes|no
+I can't enjoy it with you talking all the time (default: no)
+
+.SH EXAMPLES
+
+ $ sr ask why is jeeves gay?
+ $ surfraw google -results=100 RMS, GNU, which is sinner, which is sin?
+ $ sr austlii -method=phrase dog like
+ $ /usr/lib/surfraw/rhyme -method=perfect Julian
+
+.SH CONFIGURATION
+
+Surfraw gets its configuration from three sources, in order:
+
+.IP 1. 4
+Environment variables
+.IP 2.
+\%@sysconfdir@/surfraw.conf
+.IP 3.
+\%$HOME/.surfraw.conf
+
+.PP
+
+@sysconfdir@/surfraw.conf and $HOME/.surfraw.conf are both fragments of
+bourne-shell style shell script.
+
+@sysconfdir@/surfraw.conf should use def and defyn to define variables.
+These functions set variables unless they are already set by the
+environment.
+defyn is used for boolean configuration variables, def for
+all others. For instance:
+
+ def     SURFRAW_text_browser	/usr/bin/lynx
+ defyn   SURFRAW_graphical		no
+
+$HOME/.surfraw.conf should use sh-style entries, eg:
+
+ SURFRAW_text_browser=/usr/bin/lynx
+ SURFRAW_graphical=no
+
+This is because you want them to override environment variables
+unconditionally.
+
+.SH CONFIGURATION VARIABLES
+
+.TP
+.B SURFRAW_global_conf
+Location of global configuration file.
+
+Default:
+
+ def SURFRAW_global_conf @sysconfdir@/surfraw.conf
+
+.TP
+.B SURFRAW_conf
+Location of per-user configuration file.
+
+Default:
+
+ def SURFRAW_conf $HOME/.surfraw.conf
+
+.TP
+.B SURFRAW_graphical
+Whether to use a graphical browser.
+
+Default:
+
+defyn SURFRAW_graphical no
+
+.TP
+.B SURFRAW_text_browser
+Name/path of text browser executable.
+e.g. links, lynx, w3m
+
+Default:
+
+def SURFRAW_text_browser sensible-browser
+
+.TP
+.B SURFRAW_graphical_browser
+Name/path of graphical browser executable.
+e.g mozilla, netscape etc.
+
+Default:
+
+ def SURFRAW_graphical_browser sensible-browser
+
+.TP
+.B SURFRAW_text_browser_args
+Text browser arguments, or "none".
+
+Default:
+
+ def SURFRAW_text_browser_args none
+
+.TP
+.B SURFRAW_graphical_browser_args
+Graphical browser arguments, or "none".
+
+Default:
+
+ def SURFRAW_graphical_browser_args none
+
+.TP
+.B SURFRAW_graphical_remote
+Whether to use "\fB-remote openURL\fP" for graphical browser.
+
+Default:
+
+ defyn SURFRAW_graphical_remote yes
+
+.TP
+.B SURFRAW_new_window
+When using SURFRAW_graphical_remote, open a new window?
+
+Default:
+
+ defyn SURFRAW_new_window no
+
+.TP
+.B SURFRAW_screen
+
+Name of screen command to run.
+
+Default:
+
+ def SURFRAW_screen screen
+
+.TP
+.B SURFRAW_new_screen
+If surfraw is running under screen(1), start a new screen
+for each text browser invocation?
+
+Default:
+
+ defyn SURFRAW_new_screen no
+
+.TP
+.B SURFRAW_p0rn
+Some elvi support p0rn filters.
+Keep p0rning anyway?
+
+Default:
+
+ defyn SURFRAW_p0rn yes
+
+.TP
+.B SURFRAW_quiet
+I can't enjoy it with you talking all the time.
+
+Default:
+
+ defyn SURFRAW_quiet no
+
+.TP
+.B SURFRAW_quote_args
+Whether to "quote" all the arguments.
+
+Default:
+
+ defyn SURFRAW_quote_args no
+
+.TP
+.B SURFRAW_quote_ifs
+Whether to re-quote arguments if they have spaces in, ie so:
+ sr google foo "bar baz" bam
+.br
+works as expected.
+
+Default:
+
+defyn SURFRAW_quote_ifs    yes
+
+.TP
+.B SURFRAW_results
+Default number of results to return (not supported by all elvi).
+
+Default:
+
+ def SURFRAW_results 30
+
+.TP
+.B SURFRAW_escape_url_args
+Whether to escape [% "$%&+,/:;<=>?@[\^{|}~'] characters in command line arguments
+subsequently used to construct a url.
+
+Default:
+
+ defyn SURFRAW_escape_url_args yes
+
+.TP
+.B SURFRAW_elvi_list
+File containing list of elvi
+
+Default:
+
+ def SURFRAW_elvi_list @sysconfdir@/surfraw_elvi.list
+
+
+.SH FILES
+
+.TP
+.B @ELVIDIR@
+Location of the elvi.
+
+
+.TP
+.B @sysconfdir@/surfraw.conf
+Default system wide configuration file.
+
+.TP
+.B $HOME/.surfraw.conf
+Default per-user config file
+
+.TP
+.B @sysconfdir@/surfraw.bookmarks
+System wide bookmarks file.
+
+.TP
+.B $HOME/.surfraw.bookmarks
+Per-user bookmarks file.
+
+.TP
+.B @sysconfdir@/surfraw_elvi.list
+List of all elvi.
+
+.SH BUGS
+
+Please report any bugs found (or any web sites in need of surfrawizing)
+either via the debian bug tracking system (\%http://bugs.debian.org/) or
+to the surfraw-devel list (\%surfraw-devel@lists.alioth.debian.org).
+
+.SH SEE ALSO
+
+http://alioth.debian.org/projects/surfraw/
+
+.SH PROPAGANDA
+
+.ce 1000
+Oh Baybe
+I need some
+Deep Linking
+Let us go
+Surfin' in the raw!
+.ce 0
+
+Read HACKING. Surfrawize the soul of your favourite internet wonder.
+Join the \fBS\fPhell \fBU\fPsers' \fBR\fPevolutionary \fBFr\fPont
+\fBA\fPgainst the WW\fBW\fP by submitting code.
+Reclaim heathen lands.
+Bear witness to the truth.
+Its love will set you free.
+
+Join us on surfraw-devel@lists.alioth.debian.org
+
+.SH AUTHORS
+
+Originally written by Julian Assange.
+
+Now maintained by the surfraw-devel team
+<\%surfraw-devel@lists.alioth.debian.org>.
+
+See the file AUTHORS for the full list of contributors.
+
+Man page by Ian Beckwith, based on the original README and an earlier
+man page by Christian Surchi.
+
+.SH COPYRIGHT
+
+  Copyright (c) 2003, 2004 The Surfraw-Devel Team
+                           <surfraw-devel@lists.alioth.debian.org>
+  Copyright (c) 2000-2001 Julian Assange <proff@iq.org>
+  Copyright (c) 2001 Australian Institute for Collaborative Research
+  Copyright (c) 2000 Melbourne Institute for Advanced Study
+
+The copyright holders listed above assert no rights on this release
+of the software ``surfraw'' and thereby explicity place this release into
+the into the public domain. Do what you will.

@@ -1,0 +1,13 @@
+# $Id$
+
+%: %.IN
+	-rm -f $@ $@.tmp
+	sed 's,@bindir\@,${bindir},g; \
+	     s,@mandir\@,${mandir},g; \
+	     s,@VERSION\@,${VERSION},g; \
+	     s,@prefix\@,${prefix},g; \
+	     s,@ELVIDIR\@,${ELVIDIR},g; \
+	     s,@sysconfdir\@,${sysconfdir},g' $< >$@.tmp
+	chmod +x $@.tmp
+	mv $@.tmp $@
+

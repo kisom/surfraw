@@ -1,0 +1,77 @@
+#!/bin/sh
+# elvi: ebay -- Search the Ebay auction site
+# Author: Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_ebay_country	com
+def   SURFRAW_ebay_results	50
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string]
+Description:
+  Search the Ebay auction site
+Local options:
+  -country= | -c=  
+	com	    eBay.com
+	de          eBay.de
+	uk          eBay.co.uk
+	fr          eBay.fr
+		    Default: com
+		    Environment: SURFRAW_ebay_country
+  -results= | -r  
+	            Amount of results per page
+		    Default: 50
+		    Environment: SURFRAW_ebay_results
+
+Examples:
+  $w3_argv0 -c=de sauerkraut
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-country=*)	setopt	SURFRAW_ebay_country		$optarg	;;
+	-c=*)	setopt	SURFRAW_ebay_country		$optarg	;;
+	-results=*)	setopt	SURFRAW_ebay_results		$optarg	;;
+	-r=*)	setopt	SURFRAW_ebay_results		$optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+
+# This can be trimmed
+
+if [ $SURFRAW_ebay_country = de ]; then
+	country="http://search.ebay.de/search/search.dll?MfcISAPICommand=GetResult&krd=1&ht=1&shortcut=4&SoftProperty=MetaEndSort&cgiurl=http%3A%2F%2Fcgi.ebay.de%2Fws%2F&maxRecordsPerPage=$SURFRAW_ebay_results&st=2&ebaytag1code=77&query="
+fi
+
+if [ $SURFRAW_ebay_country = com ]; then
+	country="http://search.ebay.com/search/search.dll?MfcISAPICommand=GetResult&krd=1&ht=1&shortcut=4&SoftProperty=MetaEndSort&cgiurl=http%3A%2F%2Fcgi.ebay.com%2Fws%2F&maxRecordsPerPage=$SURFRAW_ebay_results&st=2&ebaytag1code=77&query="
+fi
+
+if [ $SURFRAW_ebay_country = uk ]; then
+	country="http://search.ebay.co.uk/search/search.dll?MfcISAPICommand=GetResult&krd=1&ht=1&shortcut=4&SoftProperty=MetaEndSort&cgiurl=http%3A%2F%2Fcgi.ebay.co.uk%2Fws%2F&maxRecordsPerPage=$SURFRAW_ebay_results&st=2&ebaytag1code=77&query="
+fi
+
+if [ $SURFRAW_ebay_country = fr ]; then
+	country="http://search.ebay.fr/search/search.dll?MfcISAPICommand=GetResult&krd=1&ht=1&shortcut=4&SoftProperty=MetaEndSort&cgiurl=http%3A%2F%2Fcgi.ebay.fr%2Fws%2F&maxRecordsPerPage=$SURFRAW_ebay_results&st=2&ebaytag1code=77&query="
+fi
+
+if null "$w3_args"; then
+    w3_browse_url "http://www.ebay.com"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "${country}${escaped_args}"
+fi
+
+
+

@@ -272,6 +272,8 @@ w3_parse_option_hook () {
 }
 
 w3_config
+# disable requoting, doesn't work with this elvi.
+SURFRAW_quote_ifs=0
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if [ $SURFRAW_deblists_searchhelp -eq 1 ]; then

@@ -1,5 +1,5 @@
 #!/bin/sh
-# elvis: leodict		-- Search leo's German <-> English dictionary (dict.leo.org)
+# elvis: leodict		-- Search Leo's German <-> English dictionary (dict.leo.org)
 # $Id$
 # surfraw plugin for the biggest English/German dictionary on
 # the WWW: dict.leo.org          jmm@informatik.uni-bremen.de

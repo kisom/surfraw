@@ -3,20 +3,74 @@
 # elvis: debbugs		-- Search the debian BTS (bugs.debian.org)
 . surfraw || exit 1
 
-# no variables at this time.
-#w3_config_hook () {
-#def   SURFRAW_dummy 0
-#}
+w3_config_hook () {
+def    SURFRAW_debbugs_search     pkg
+defyn  SURFRAW_debbugs_archive    0
+defyn  SURFRAW_debbugs_merge      0
+defyn  SURFRAW_debbugs_statussort 1
+defyn  SURFRAW_debbugs_head       1
+defyn  SURFRAW_debbugs_foot       1
+def    SURFRAW_debbugs_incstatus  ""
+def    SURFRAW_debbugs_excstatus  ""
+def    SURFRAW_debbugs_incsev     ""
+def    SURFRAW_debbugs_excsev     ""
+def    SURFRAW_debbugs_inctag     ""
+def    SURFRAW_debbugs_exctag     ""
+defyn  SURFRAW_debbugs_asmbox     0
+defyn  SURFRAW_debbugs_revstat    0
+defyn  SURFRAW_debbugs_revsev     0
+defyn  SURFRAW_debbugs_revbugs    0
+defyn  setsearch                  0
+}
 
 w3_usage_hook () {
     cat <<EOF
-Usage: $w3_argv0 [package | bug number | maintainer email]
+Usage: $w3_argv0 [options] [package | bug number | maintainer email]
 Description:
   Surfraw search debian BTS (bugs.debian.org)
 Examples:
-  debbugs 20000			|	show report for bug #20000
-  debbugs csurchi@debian.org 	|	show bugs for csurchi
-  debbugs surfraw		|	show bugs for surfraw package
+  debbugs 20000                 | show report for bug #20000
+  debbugs csurchi@debian.org    | show bugs for csurchi
+  debbugs surfraw               | show bugs for surfraw package
+  debbugs -raw -rb surfraw      | show surfraw bugs newest first
+Defaults if -search is not supplied:
+  If arg is numeric, searches by bug number, 
+  If it contains '@', searches by maintainer,
+  Otherwise, searches by package.
+Local options:
+  -search= pkg          |       Search type.
+           src          |
+           bug          |       (bug number)
+           maint        | 
+           tag          |
+           submitter
+  -arc                          Show archived bugs.
+  -raw                          Do not sort by status or severity.
+  -rb                           Reverse order of bugs shown.
+  -rst                          Reverse order of statuses shown.
+  -rse                          Reverse order of severities show
+  -merge                        Display merged bugs only once.
+  -nohead                       Do not show table of contents header.
+  -nofoot                       Do not show statistics in the footer.
+  -mbox                         View results in mbox format 
+                                 (only when searching by bug number).
+  -incstat=stat1,stat2          Include given status list.
+  -exstat=stat3,stat4           Exclude given status list.
+                                Available statuses:
+                                 open, forwarded, pending, fixed, done.
+  -incsev=sev1,sev2             Include given severities.
+  -exsev=sev3,sev4              Exclude given severities.
+                                Available severities:
+                                 critical, grave, serious, important, 
+                                 normal, minor, wishlist, fixed.
+  -inctag=tag1,tag2             Include given tags.
+  -extag=tag3,tag4              Exclude given tags.
+                                Available tags:
+                                 potato, woody, sarge, sarge-ignore, sid, 
+                                 experimental, confirmed, d-i, fixed, 
+                                 fixed-in-experimental, fixed-upstream, 
+                                 help, moreinfo, patch, pending, security, 
+                                 unreproducible, upstream, wontfix
 EOF
     w3_global_usage
 }
@@ -25,7 +79,22 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-dummy=*)  ;;  # nothing to do, we seem to need the case block.
+	-se*=*)      setopt   SURFRAW_debbugs_search     $optarg; setoptyn setsearch 1  ;;
+	-arc*)       setoptyn SURFRAW_debbugs_archive    1;;  
+	-mer*)       setoptyn SURFRAW_debbugs_merge      1;;  
+	-raw*)       setoptyn SURFRAW_debbugs_statussort 0;;  
+	-noh*)       setoptyn SURFRAW_debbugs_head       0;;  
+	-nof*)       setoptyn SURFRAW_debbugs_foot       0;;  
+	-in*stat*=*) setopt   SURFRAW_debbugs_incstatus  $optarg;;  
+	-ex*stat*=*) setopt   SURFRAW_debbugs_excstatus  $optarg;;  
+	-in*sev*=*)  setopt   SURFRAW_debbugs_incsev     $optarg;;  
+	-ex*sev*=*)  setopt   SURFRAW_debbugs_excsev     $optarg;;  
+	-in*tag*=*)  setopt   SURFRAW_debbugs_inctag     $optarg;;  
+	-ex*tag*=*)  setopt   SURFRAW_debbugs_exctag     $optarg;;
+	-rb*)        setoptyn SURFRAW_debbugs_revbugs    1;;
+	-rst*)       setoptyn SURFRAW_debbugs_revstat    1;;
+	-rse*)       setoptyn SURFRAW_debbugs_revsev     1;;
+	-mb*)        setoptyn SURFRAW_debbugs_asmbox     1;;  
 	*) return 1 ;;
     esac
     return 0
@@ -38,5 +107,96 @@ if test -z "$w3_args"; then
     w3_browse_url "http://bugs.debian.org/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://bugs.debian.org/${escaped_args}"
+	setoptyn donum 0
+	setoptyn domaint 0
+
+	case "$SURFRAW_debbugs_search" in
+		bug*) setoptyn donum 1;;
+	esac
+	# default search unless searchtype set on cmdline
+	if ifno setsearch
+	then
+	    export escaped_args
+		if perl -e 'if($ENV{escaped_args} =~/^((\#|\%23)(\s|\%20)*)?\d+$/) { exit 0; } exit 1;'
+		then # %23 = uri escaped '#', %20=' '
+			setoptyn donum 1
+		elif perl -e 'if($ENV{escaped_args} =~/\%40|@/) { exit 0; } exit 1;'
+		then # %40 = uri escaped '@'
+			setopt SURFRAW_debbugs_search "maint"
+		fi
+	fi
+	
+	if ifyes donum
+	then
+		url="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=${escaped_args}"
+		if yesno SURFRAW_debbugs_asmbox
+		then
+			url="$url&mbox=yes"
+		fi
+	else
+		url="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=${SURFRAW_debbugs_search}&data=${escaped_args}"
+		if yesno SURFRAW_debbugs_archive
+		then
+			url="$url&archive=yes"
+		fi
+		if ifyes SURFRAW_debbugs_merge
+		then
+			url="$url&repeatmerged=no"
+		fi
+		if ifno SURFRAW_debbugs_statussort
+		then
+			url="$url&raw=yes"
+		fi
+		if ifno SURFRAW_debbugs_head
+		then
+			url="$url&show_list_header=no"
+		fi
+		if ifno SURFRAW_debbugs_foot
+		then
+			url="$url&show_list_footer=no"
+		fi
+		if ifyes SURFRAW_debbugs_revstat
+		then
+			url="$url&pend-rev=yes"
+		fi
+		if ifyes SURFRAW_debbugs_revsev
+		then
+			url="$url&sev-rev=yes"
+		fi
+		if ifyes SURFRAW_debbugs_revbugs
+		then
+			url="$url&bug-rev=yes"
+		fi
+		if [ "$SURFRAW_debbugs_incstatus" != "" ]
+		then
+			add=`echo "$SURFRAW_debbugs_incstatus"|perl -ne 's/pending/pending-fixed/g;s/open/pending/g;print(join("&pend-inc=","",split(/\s*,\s*/,$_)));'`
+			url="${url}${add}"
+		fi
+		if [ "$SURFRAW_debbugs_excstatus" != "" ]
+		then
+			add=`echo "$SURFRAW_debbugs_excstatus"|perl -ne 'print(join("&pend-exc=","",split(/\s*,\s*/,$_)));'`
+			url="${url}${add}"
+		fi
+		if [ "$SURFRAW_debbugs_incsev" != "" ]
+		then
+			add=`echo "$SURFRAW_debbugs_incsev"|perl -ne 'print(join("&sev-inc=","",split(/\s*,\s*/,$_)));'`
+			url="${url}${add}"
+		fi
+		if [ "$SURFRAW_debbugs_excsev" != "" ]
+		then
+			add=`echo "$SURFRAW_debbugs_excsev"|perl -ne 'print(join("&sev-exc=","",split(/\s*,\s*/,$_)));'`
+			url="${url}${add}"
+		fi
+		if [ "$SURFRAW_debbugs_inctag" != "" ]
+		then
+			add=`echo "$SURFRAW_debbugs_inctag"|perl -ne 'print(join("&include=","",split(/\s*,\s*/,$_)));'`
+			url="${url}${add}"
+		fi
+		if [ "$SURFRAW_debbugs_exctag" != "" ]
+		then
+			add=`echo "$SURFRAW_debbugs_exctag"|perl -ne 'print(join("&exclude=","",split(/\s*,\s*/,$_)));'`
+			url="${url}${add}"
+		fi
+	fi
+    w3_browse_url "$url"
 fi

@@ -14,6 +14,8 @@
 
 @SET_MAKE@
 
+# $Id$
+
 srcdir = @srcdir@
 top_srcdir = @top_srcdir@
 VPATH = @srcdir@
@@ -101,122 +103,31 @@ sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
 # $Id$
-elvidir = $(ELVIDIR)
+noinst_DATA = templates
 
-elvi_SCRIPTS = \
-		  alioth \
-		  altavista \
-		  amazon \
-		  ask \
-		  austlii \
-		  bbcnews \
-		  cddb \
-		  cite \
-		  cnn \
-		  currency \
-		  debbugs \
-		  debcontents \
-		  deblists \
-		  debpackages \
-		  deja \
-		  ebay \
-		  excite \
-		  fast \
-		  filesearching \
-		  freebsd \
-		  freedb \
-		  freshmeat \
-		  jake \
-		  google \
-		  happypenguin \
-		  imdb \
-		  scpan \
-		  slinuxdoc \
-		  leodict \
-		  netbsd \
-		  openbsd \
-		  pgpkeys \
-		  pubmed \
-		  rfc \
-		  rhyme \
-		  sharereactor \
-		  slashdot \
-		  sundocs \
-		  sourceforge \
-		  stockquote \
-		  scaleplus \
-		  sunsolve \
-		  thesaurus \
-		  translate \
-		  webster \
-		  wetandwild \
-		  wikipedia \
-		  woffle \
-		  xxx \
-		  yahoo
+CLEANFILES = templates
 
-sysconf_DATA = surfraw_elvi.list
+EXTRA_DIST = changelog config control copyright docs linda.overrides postinst \
+           prerm rules surfraw.dirs templates.IN
 
-EXTRA_DIST = $(elvi_SCRIPTS)
-
-CLEANFILES = surfraw_elvi.list
-subdir = elvi
+subdir = debian
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES =
-SCRIPTS = $(elvi_SCRIPTS)
-
 DIST_SOURCES =
-DATA = $(sysconf_DATA)
+DATA = $(noinst_DATA)
 
-DIST_COMMON = $(srcdir)/Makefile.in Makefile.am
+DIST_COMMON = $(srcdir)/Makefile.in $(top_srcdir)/Makefile.include \
+	Makefile.am
 all: all-am
 
 .SUFFIXES:
-$(srcdir)/Makefile.in:  Makefile.am  $(top_srcdir)/configure.in $(ACLOCAL_M4)
+$(srcdir)/Makefile.in:  Makefile.am $(top_srcdir)/Makefile.include $(top_srcdir)/configure.in $(ACLOCAL_M4)
 	cd $(top_srcdir) && \
-	  $(AUTOMAKE) --gnu  elvi/Makefile
+	  $(AUTOMAKE) --gnu  debian/Makefile
 Makefile:  $(srcdir)/Makefile.in  $(top_builddir)/config.status
 	cd $(top_builddir) && $(SHELL) ./config.status $(subdir)/$@ $(am__depfiles_maybe)
-elviSCRIPT_INSTALL = $(INSTALL_SCRIPT)
-install-elviSCRIPTS: $(elvi_SCRIPTS)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(elvidir)
-	@list='$(elvi_SCRIPTS)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  if test -f $$d$$p; then \
-	    f=`echo "$$p" | sed 's|^.*/||;$(transform)'`; \
-	    echo " $(elviSCRIPT_INSTALL) $$d$$p $(DESTDIR)$(elvidir)/$$f"; \
-	    $(elviSCRIPT_INSTALL) $$d$$p $(DESTDIR)$(elvidir)/$$f; \
-	  else :; fi; \
-	done
-
-uninstall-elviSCRIPTS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(elvi_SCRIPTS)'; for p in $$list; do \
-	  f=`echo "$$p" | sed 's|^.*/||;$(transform)'`; \
-	  echo " rm -f $(DESTDIR)$(elvidir)/$$f"; \
-	  rm -f $(DESTDIR)$(elvidir)/$$f; \
-	done
 uninstall-info-am:
-sysconfDATA_INSTALL = $(INSTALL_DATA)
-install-sysconfDATA: $(sysconf_DATA)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)
-	@list='$(sysconf_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(sysconfDATA_INSTALL) $$d$$p $(DESTDIR)$(sysconfdir)/$$f"; \
-	  $(sysconfDATA_INSTALL) $$d$$p $(DESTDIR)$(sysconfdir)/$$f; \
-	done
-
-uninstall-sysconfDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(sysconf_DATA)'; for p in $$list; do \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(sysconfdir)/$$f"; \
-	  rm -f $(DESTDIR)$(sysconfdir)/$$f; \
-	done
 tags: TAGS
 TAGS:
 
@@ -229,6 +140,7 @@ top_distdir = ..
 distdir = $(top_distdir)/$(PACKAGE)-$(VERSION)
 
 distdir: $(DISTFILES)
+	$(mkinstalldirs) $(distdir)/..
 	@srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`; \
 	topsrcdirstrip=`echo "$(top_srcdir)" | sed 's|.|.|g'`; \
 	list='$(DISTFILES)'; for file in $$list; do \
@@ -257,10 +169,9 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(SCRIPTS) $(DATA)
+all-am: Makefile $(DATA)
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(elvidir) $(DESTDIR)$(sysconfdir)
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
@@ -302,9 +213,9 @@ info: info-am
 
 info-am:
 
-install-data-am: install-elviSCRIPTS
+install-data-am:
 
-install-exec-am: install-sysconfDATA
+install-exec-am:
 
 install-info: install-info-am
 
@@ -328,22 +239,30 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-elviSCRIPTS uninstall-info-am \
-	uninstall-sysconfDATA
+uninstall-am: uninstall-info-am
 
 .PHONY: all all-am check check-am clean clean-generic distclean \
 	distclean-generic distdir dvi dvi-am info info-am install \
-	install-am install-data install-data-am install-elviSCRIPTS \
-	install-exec install-exec-am install-info install-info-am \
-	install-man install-strip install-sysconfDATA installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
-	pdf-am ps ps-am uninstall uninstall-am uninstall-elviSCRIPTS \
-	uninstall-info-am uninstall-sysconfDATA
+	install-am install-data install-data-am install-exec \
+	install-exec-am install-info install-info-am install-man \
+	install-strip installcheck installcheck-am installdirs \
+	maintainer-clean maintainer-clean-generic mostlyclean \
+	mostlyclean-generic pdf pdf-am ps ps-am uninstall uninstall-am \
+	uninstall-info-am
 
 
-surfraw_elvi.list: $(elvi_SCRIPTS)
-	cat $(elvi_SCRIPTS)|egrep '^#.*elvis:'|sed 's/^.*elvis: *//'|sort > $@
+templates: templates.IN
+
+%: %.IN
+	-rm -f $@ $@.tmp
+	sed 's,@bindir\@,${bindir},g; \
+	     s,@mandir\@,${mandir},g; \
+	     s,@VERSION\@,${VERSION},g; \
+	     s,@prefix\@,${prefix},g; \
+	     s,@ELVIDIR\@,${ELVIDIR},g; \
+	     s,@sysconfdir\@,${sysconfdir},g' $< >$@.tmp
+	chmod +x $@.tmp
+	mv $@.tmp $@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

@@ -1,17 +1,49 @@
+ORIGINAL AUTHOR
+
 Julian Assange <proff@iq.org>
 	original concept / code
+
+THE SURFRAW-DEVEL TEAM <surfraw-devel@lists.alioth.debian.org>
+
+Christian Surchi <csurchi@debian.org>
+    Debian maintainer
+	elvi: debcontents, debbugs, debpackages
+
+Ian Beckwith <ianb@nessie.mcc.ac.uk>
+	elvi: alioth, bbcnews, cddb, deblists, freedb, imdb, scpan
+	plus various tweaks/bugfixes/features.
+
+Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
+	elvi: ebay, leodict, wikipedia, sharereactor, pgpkeys, happypenguin
+
+Thomas Smith <tgs@debian.org>
+	Bugfixes, uploading.
+
+Stephen Stafford <bagpuss@debian.org>
+	Bug fixes
+
+Kevin Kreamer <kkreamer@etherhogz.org>
+	Bug fixes
+
+OTHER ELVI AUTHORS
 
 Christian Weisgerber <naddy@mips.inka.de>
 	elvi: fast, thesaurus, webster
 
-Christian Surchi <csurchi@debian.org>
-	elvi: debcontents, debbugs, debpackages
-
 Jason Harris <jharris@widowmaker.com>
 	elvi: freebsd, openbsd, filesearching, ftpfind
 
-Ian Beckwith <ianb@nessie.mcc.ac.uk>
-	elvi: alioth, bbcnews, cddb, deblists, freedb, imdb, scpan
-	plus various tweaks.
+
+OTHER CONTRIBUTORS
+
+Brian Nelson           <bnelson@bloodclot.net>
+Christian Garbs        <mitch@yggdrasil.mitch.h.shuttle.de>
+Hector Blanco          <hector.blanko@hispalinux.es>
+Jeff Bailey            <jbailey@nisa.net>
+Mark W. Eichin         <eichin@thok.org>
+Teófilo Ruiz Suárez  <teo@debian.org>
+
+
+If we've missed anyone, let us know.
 
 $Id$

@@ -1,0 +1,18 @@
+#!/bin/sh -e
+# $Id$
+. /usr/share/debconf/confmodule
+
+# If they upgraded from 2.0-1, warn them the elvi have moved *again*
+# otherwise, just tell them about new location
+
+if [ "$2" = "2.0-1" ]
+then
+	db_input medium surfraw/surfraw-v2-upgrade || true
+else
+	db_input medium surfraw/surfraw-path || true
+fi
+
+db_go || true
+
+exit 0
+

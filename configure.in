@@ -2,10 +2,22 @@ dnl $Id$
 
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(surfraw.in)
 dnl This is the only place where the package version appears
-AM_INIT_AUTOMAKE(surfraw, 1.0.7)
+AC_INIT(surfraw, 2.0.1)
+AC_PREREQ(2.54)
+AC_CONFIG_SRCDIR([surfraw.IN])
 
+dnl minimum automake version, not surfraw version
+AM_INIT_AUTOMAKE([1.7])
+
+ELVIDIR="\$(libdir)/surfraw"
+
+AC_ARG_WITH([elvidir],
+	[  --with-elvidir=ELVIDIR  specify location of elvi],
+	[if test -n "$withval" && test "$withval" != "no" ; then ELVIDIR="$withval";fi])
+
+AC_SUBST(ELVIDIR)
+						  
 AC_SUBST(VERSION)
 
 ISODATE=`date +%Y-%m-%d`
@@ -20,4 +32,6 @@ AC_SUBST(sr_text_browser)
 AC_CHECK_PROGS(sr_graphical_browser, mozilla konqueror netscape opera kfm)
 AC_SUBST(sr_graphical_browser)
 
-AC_OUTPUT(Makefile surfraw.conf surfraw.lsm surfraw surfraw.spec elvi/Makefile)
+AC_CONFIG_FILES([Makefile surfraw.conf surfraw.lsm surfraw.spec elvi/Makefile debian/Makefile surfraw.1 elvi.1sr])
+AC_OUTPUT
+

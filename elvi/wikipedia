@@ -1,0 +1,48 @@
+#!/bin/sh
+# elvis: wikipedia	-- Search the free encyclopedia wikipedia
+# $Id$
+# Author: Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_wikipedia_language	en
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string]
+Description:
+  Search the Wikipedia online encyclopedia
+Local options:
+  -language=ISOCODE | -l=ISOCODE  Two letter language code (resembles ISO country codes)
+				  Default: $SURFRAW_wikipedia_language
+				  Environment: SURFRAW_wikipedia_language
+
+Examples:
+  $w3_argv0 -language=de Richard Stallman
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-language=*)	setopt	SURFRAW_wikipedia_language		$optarg	;;
+	-l=*)	setopt	SURFRAW_wikipedia_language		$optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+
+prefix="http://${SURFRAW_wikipedia_language}.wikipedia.org/w/wiki.phtml?search="
+
+if null "$w3_args"; then
+    w3_browse_url "http://${SURFRAW_wikipedia_language}.wikipedia.org"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "${prefix}${escaped_args}"
+fi

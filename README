@@ -1,10 +1,12 @@
 
         Surfraw - Shell Users' Revolutionary Front Rage Against the Web
                                        
-Home Page: [1]http://surfraw.sourceforge.net/
+Original Home Page: http://surfraw.sourceforge.net/
 
-Distribution:
-[2]ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/surfraw-1.0.7.tar.gz
+Original Distribution:
+ ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/surfraw-1.0.7.tar.gz
+
+New project home page: http://alioth.debian.org/projects/surfraw/
 
         ______  _     _  ______   _______  ______   _______  _  _  _
        / _____)(_)   (_)(_____ \ (_______)(_____ \ (_______)(_)(_)(_)
@@ -13,14 +15,15 @@ Distribution:
        _____) )| |___| || |  \ \ | |      | |  \ \ | |   | || || || |
       (______/  \_____/ |_|   |_||_|      |_|   |_||_|   |_| \_____/
 
-      Surfraw - Shell Users' Revolutionary Front Rage Against the Web
-                     http://surfraw.sourceforge.net/
+   Surfraw - Shell Users' Revolutionary Front Rage Against the Web
+		 Old: http://surfraw.sourceforge.net/
+	   New: http://alioth.debian.org/projects/surfraw/
 
-                                 Oh Baybe
-                                I need some
-                               Deep Linking
-                                 Let us go
-                            Surfin' in the raw!
+			       Oh Baybe
+			     I need some
+			     Deep Linking
+			      Let us go
+			 Surfin' in the raw!
 
   Surfraw provides a fast unix command line interface to a variety of
   popular WWW search engines and other artifacts of power. It reclaims
@@ -38,19 +41,71 @@ Distribution:
   of navigating speeds that leave GUI tainted idolaters agape with fear
   and wonder.
 
-  For example:
+  Surfraw consists of a collection of elvi, each of which knows how
+  to search a specific web site.
+  To see the list of elvi type:
 
-         $ ask why is jeeves gay?
-         $ google -results=100 RMS, GNU, which is sinner, which is sin?
-         $ austlii -method=phrase dog like
-         $ rhyme -method=perfect Julian
+   surfraw -elvi
+
+  Note that sr is an alias for surfraw, so that could equally be
+
+   sr -elvi
+
+  To search using an elvis use:
+
+   sr elviname [options] search terms..
+
+  For example, to search google for information on Debian ports,
+  using the "I'm feeling lucky" option:
+
+   sr google -l debian ports
+
+  Note that putting quotes round arguments works now, so you can do,
+  for example:
+
+   sr google foo "bar baz" bam
+
+  and the quoting is passed on to the search engine.
+
+Adding the elvi to your path
+  
+  If you are a regular user of surfraw, you will probably get sick
+  of typing sr or surfraw each time. You can regain the old
+  behaviour of running the elvi directly by adding the elvi
+  directory (usually /usr/lib/surfraw or /usr/local/lib/surfraw/) to
+  your path, either manually or using surfraw-update-path(1).
+
+Bookmarks
+
+  Surfraw now supports bookmarks. To add a bookmark, add it to
+  /etc/surfraw.bookmarks or $HOME/.surfraw.bookmarks
+
+  The format of the bookmarks file is simple, each bookmark is on a
+  separate line, with the bookmark and URL separated by whitespace,
+  eg:
+
+   ntk   http://www.ntk.net/
+
+  To invoke a bookmark, use "surfraw bookmark" or "sr bookmark",
+  and if an elvis of that name doesn't exist, it searches for a
+  bookmark of that name instead.
+
+  There are some example bookmarks in /etc/surfraw.bookmarks
+
+Examples
+
+         $ sr ask why is jeeves gay?
+         $ surfraw google -results=100 RMS, GNU, which is sinner, which is sin?
+         $ sr austlii -method=phrase dog like
+         $ /usr/lib/surfraw/rhyme -method=perfect Julian
+
+Options
 
   Global options are common to all Surfraw elvi (clients). You can
   get a list of the currently installed elvi by just typing `surfraw'.
   For example:
 
   $ surfraw
-W               -- Activate Surfraw defined web-browser
 alioth          -- Search Alioth (alioth.debian.org)
 altavista       -- Search the web using Altavista (www.altavista.com)
 amazon          -- Search the amazon.com bookstore
@@ -74,13 +129,13 @@ freebsd         -- Search FreeBSD related information (www.freebsd.org)
 freedb          -- Search for cd track listings in FreeDB (www.freedb.org)
 freshmeat       -- Search Freshmeat (www.freshmeat.net)
 google          -- Search the web using Google (www.google.com)
-happypenguin    -- Search the Linux Game Tome (www.happypenguin.org)
 imdb            -- Search the Internet Movie Database (www.imdb.com)
 jake            -- Search journal/databases in jake (jake.med.yale.edu)
 leodict         -- Search leo's German <-> English dictionary (dict.leo.org)
 netbsd          -- Search NetBSD related information (www.netbsd.org)
 openbsd         -- Search OpenBSD related information (www.openbsd.org)
 pubmed          -- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
+rfc             -- Search RFCs (internet standards documents)
 rhyme           -- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
 scaleplus       -- Search Australian Law using ScalePlus (scaleplus.law.gov.au)
 scpan           -- Search the Comprehensive Perl Archive Network (search.cpan.org)
@@ -95,6 +150,7 @@ thesaurus       -- Look up word in Merriam-Webster's Thesaurus (www.m-w.com)
 translate       -- Translate human languages (various providers)
 webster         -- Look up word in Merriam-Webster's Dictionary (www.m-w.com)
 wetandwild      -- Real time weather information (many sources)
+wikipedia       -- Search the free encyclopedia wikipedia
 woffle          -- Search the web using Woffle (localhost:8080)
 xxx             -- Superior XXX, hot and ready to press (arXiv.org)
 yahoo           -- Search Yahoo categories (www.yahoo.com)
@@ -106,8 +162,8 @@ Description:
   Surfraw search for rhymes and other word correlations using
   Lycos Rhyme (http://rhyme.lycos.com)
 Example:
-  $ rhyme Julian
-  $ rhyme -method=rel surfer
+  $ surfraw rhyme Julian
+  $ sr rhyme -method=rel surfer
 Results:
   Hurclean St. Julien.
   surfboarder, bather, natator, swimmer
@@ -128,7 +184,7 @@ Local options:
 Global options:
   -browser=EXECUTABLE           Set browser
                                 Default: mozilla
-  -elvi                         List Surfraw mechanims for conquering evil
+  -elvi                         List Surfraw mechanisms for conquering evil
   -escape-url-args=yes|no       Apply url escaping to arguments
                                 Default: yes
                                 Environment: SURFRAW_escape_url_args
@@ -149,6 +205,8 @@ Global options:
                                 Environment: SURFRAW_quote_args
   -version                      Display Surfraw version (1.0.4)
 Copyright:
+  Copyright (c) 2003, 2004 The Surfraw-Devel Team
+                           <surfraw-devel@lists.alioth.debian.org>
   Copyright (c) 2000-2001 Julian Assange
   Copyright (c) 2001 Australian Institute for Collaborative Research
   Copyright (c) 2000 Melbourne Institute for Advanced Study
@@ -175,18 +233,17 @@ Copyright:
   submitting code. Reclaim heathen lands. Bear witness to the
   truth. Its love will set you free.
 
-        - Julian Assange
+  Join us on surfraw-devel@lists.alioth.debian.org
+     _________________________________________________________________
+
+README originally by Julian Assange
+Updated 2004-02-03 by Ian Beckwith
+     _________________________________________________________________
+
+See NEWS or debian/changelog for a more detailed summary of changes.
+     _________________________________________________________________
 
   $Id$
      _________________________________________________________________
    
-   
-    [3]Julian Assange
-    
-   Last modified: Sun Dec 23 21:02:17 EST 2001
 
-References
-
-   1. http://surfraw.sourceforge.net/
-   2. ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/surfraw-1.0.7.tar.gz
-   3. mailto:proff-projects-surfraw@iq.org

@@ -40,8 +40,8 @@ Languages:
 
 Examples:
   $w3_argv0 			Provider's standard translation page
-  $w3_argv0 -provider raging	Use raging search as a translation provider
-  $w3_argv0 -from fr -to en la verite vous liberera
+  $w3_argv0 -provider=raging	Use raging search as a translation provider
+  $w3_argv0 -from=fr -to=en la verite vous liberera
 Bugs:
   Systrans derived providers only support the following translation
   combinations:

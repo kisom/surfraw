@@ -3,21 +3,40 @@
 # elvis: webster		-- Look up word in Merriam-Webster's Dictionary (www.m-w.com)
 . surfraw || exit 1
 
+w3_config_hook () {
+def   SURFRAW_webster_book Dictionary
+}
+
 w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words]...
 Description:
   Look up word in Merriam-Webster's Dictionary (www.m-w.com)
+Local options:
+  -t                            Search in Thesaurus
 EOF
     w3_global_usage
 }
 
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -t*) setopt   SURFRAW_webster_book Thesaurus ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+
 w3_config
+# disable requoting, doesn't work with this elvi.
+SURFRAW_quote_ifs=0
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
     w3_browse_url "http://www.m-w.com/dictionary.htm"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.m-w.com/cgi-bin/dictionary?book=Dictionary&va=${escaped_args}"
+    w3_browse_url "http://www.m-w.com/cgi-bin/dictionary?book=${SURFRAW_webster_book}&va=${escaped_args}"
 fi

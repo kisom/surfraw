@@ -1,0 +1,497 @@
+#!/usr/bin/perl -w
+# $Id$
+# Ian Beckwith <ianb@nessie.mcc.ac.uk> 20030927
+# adds surfraw's elvi directory to your PATH in your shell's config file
+# see end of file for POD documentation
+
+use strict;
+use Getopt::Long;
+use Fcntl qw(SEEK_END);
+
+use vars qw($me $elvidir);
+$me=($0=~/(?:.*\/)?(.*)/)[0];
+
+$elvidir="@ELVIDIR@";
+
+use vars qw($starttag $endtag);
+$starttag="### Added by surfraw.";
+$endtag  ="### End surfraw addition.";
+
+use vars qw(%shells);
+%shells=(
+	"bash" 	=> \&sh_bash,
+	"sh" 	=> \&sh_posix,
+	"ash" 	=> \&sh_posix,
+	"dash" 	=> \&sh_posix,
+	"csh" 	=> \&sh_csh,
+	"tcsh" 	=> \&sh_csh,
+	"pdksh"	=> \&sh_posix,
+	"ksh"	=> \&sh_posix,
+	"zsh"	=> \&sh_zsh,
+	"rc"	=> \&sh_rc,
+	"es"	=> \&sh_es,
+    );
+
+use vars qw($ADD $CHECK $REMOVE);
+$ADD	= 0;
+$CHECK	= 1;
+$REMOVE	= 2;
+
+use vars qw($OK $NOTFOUND $ERROR);
+$OK=0;
+$NOTFOUND=1;
+$ERROR=2;
+
+use vars qw($POSIX $CSH $RC @syntax);
+$POSIX = 0;
+$CSH   = 1;
+$RC    = 2;
+
+@syntax=();
+$syntax[$POSIX]="\texport PATH=\$PATH:$elvidir\n";
+$syntax[$CSH]="\tset path=(\$PATH $elvidir)\n";
+$syntax[$RC]="\tpath=(\$path $elvidir)\n";
+
+my $sys=0;
+my $allshells=0;
+my $help=0;
+my $action=$CHECK; #default
+my $shell=$ENV{SHELL};
+
+GetOptions('add'	 => sub { $action=$ADD;    },
+		   'check'	 => sub { $action=$CHECK;  },
+		   'remove'	 => sub { $action=$REMOVE; },
+		   'sys'	 => \$sys,
+		   'shell=s' => \$shell,
+		   'all'	 => \$allshells,
+		   'help'    => \$help);
+
+if($help)      { usage(); exit 0; }
+
+if($allshells)
+{
+	my $ret=0;
+	my @shells=qw(sh csh zsh);
+	# rc and es only have user startup files
+	# bash sys startup file is same as sh
+	unless($sys) { @shells=(@shells, qw(bash es rc)); }
+	for my $s (@shells)
+	{
+		my $thisret=$shells{$s}($action,$sys);
+		$ret=max($thisret,$ret);
+	}
+	exit $ret;
+}
+else
+{
+	if(defined($shell))
+	{
+		$shell=~s/.*\/\-?//; # strip path
+	}
+	else
+	{
+		print STDERR "$me: Cannot determine shell. Use -shell=shellname\n";
+		exit $ERROR;
+	}
+
+	unless(exists($shells{$shell}))
+	{
+		print STDERR "Shell $shell not supported, please manually add $elvidir to your \$PATH\n";
+		exit $ERROR;
+	}
+	
+	exit($shells{$shell}($action,$sys));
+}
+
+sub sh_posix
+{
+	my($action,$sys)=@_;
+	if($sys) { return scan("/etc/profile",$action,$sys,$POSIX); }
+	elsif(exists($ENV{ENV}))
+	{
+		return scan($ENV{ENV},$action,$sys,$POSIX);
+	}
+	elsif(exists($ENV{HOME}))
+	{
+		return scan($ENV{HOME}."/.profile",$action,$sys,$POSIX);
+	}
+	else
+	{
+		print STDERR "$me: Cannot find home directory (\$HOME is not set)\n";
+		return $ERROR;
+	}
+}
+
+sub sh_csh
+{
+	my($action,$sys)=@_;
+	if($sys) { return scan("/etc/csh.cshrc",$action,$sys,$CSH); }
+	elsif(exists($ENV{HOME}))
+	{
+		return scan($ENV{HOME}."/.cshrc",$action,$sys,$CSH);
+	}
+	else
+	{
+		print STDERR "$me: Cannot find home directory (\$HOME is not set)\n";
+		return $ERROR;
+	}
+}
+
+sub sh_bash
+{
+	my($action,$sys)=@_;
+	if($sys) { return scan("/etc/profile",$action,$sys,$POSIX); }
+	elsif(exists($ENV{HOME}))
+	{
+		my $home=$ENV{HOME};
+		my $file;
+		if(-r $home."/.bash_profile") { $file=$home."/.bash_profile"; }
+		elsif(-r $home."/.bash_login") { $file=$home."/.bash_login"; }
+		else { $file=$home."/.profile"; } #  whether it exists or not
+		# for interactive login shells
+		my $ret1=scan($file,$action,$sys,$POSIX);
+		# for interactive non-login shells
+		my $ret2=scan($home."/.bashrc",$action,$sys,$POSIX);
+		return(max($ret1,$ret2));
+	}
+	else
+	{
+		print STDERR "$me: Cannot find home directory (\$HOME is not set)\n";
+		return $ERROR;
+	}
+}
+
+sub sh_zsh 
+{
+	my($action,$sys)=@_;
+	if($sys)
+	{
+		if(-d "/etc/zsh")
+		{
+			return scan("/etc/zsh/zshenv",$action,$sys,$POSIX);
+		}
+		else
+		{
+			return scan("/etc/zshenv",$action,$sys,$POSIX);
+		}
+	}
+	elsif(exists($ENV{ZDOTDIR}))
+	{
+		return scan($ENV{ZDOTDIR}."/.zshenv",$action,$sys,$POSIX);
+	}
+	elsif(exists($ENV{HOME}))
+	{
+		return scan($ENV{HOME}."/.zshenv",$action,$sys,$POSIX);
+	}
+	else
+	{
+		print STDERR "$me: Cannot find home directory (\$HOME is not set)\n";
+		return $ERROR;
+	}
+}
+
+sub sh_rc
+{
+	my($action,$sys)=@_;
+	if($sys)
+	{
+		print STDERR "$me: Shell rc has no system config file\n";
+		return $ERROR;
+	}
+	elsif(exists($ENV{HOME}))
+	{
+		return scan($ENV{HOME}."/.rcrc",$action,$sys,$RC);
+	}
+	else
+	{
+		print STDERR "$me: Cannot find home directory (\$HOME is not set)\n";
+		return $ERROR;
+	}
+}
+
+sub sh_es
+{
+	my($action,$sys)=@_;
+	if($sys)
+	{
+		print STDERR "$me: Shell es has no system config file\n";
+		return $ERROR;
+	}
+	elsif(exists($ENV{HOME}))
+	{
+		return scan($ENV{HOME}."/.esrc",$action,$sys,$RC);
+	}
+	else
+	{
+		print STDERR "$me: Cannot find home directory (\$HOME is not set)\n";
+		return $ERROR;
+	}
+}
+
+sub scan
+{
+	my($file,$action,$sys,$type)=@_;
+	if(-e $file) 
+	{
+		# file exists
+		my $mode="<";
+		if(($action==$ADD) || ($action==$REMOVE)) { $mode="+<"; }
+		unless(open(F,"$mode$file"))
+		{
+			print STDERR "$me: Cannot open $file: $!\n";
+			return $ERROR;
+		}
+		my $found=0;
+		my $startoffset=0;
+		my $aftertag=0;
+		my $rest='';
+		my $offset=tell(F);
+		while(<F>)
+		{
+			if(/$starttag/)
+			{
+				$found=1;
+				$startoffset=$offset;
+			}
+			elsif($found && /$endtag/)
+			{
+				$aftertag=1;
+			}
+			elsif($aftertag)
+			{
+				$rest.=$_;
+			}
+			$offset=tell(F);
+		}
+		if($found)
+		{
+			if($action==$ADD)
+			{
+				print STDERR "$me: Surfraw config already present in $file\n";
+				return $OK;
+			}
+			elsif($action==$CHECK)
+			{
+				print("$me: Surfraw config present in $file\n");
+				return $OK;
+			}
+			else # remove
+			{
+				# move rest of file up to startoffset
+				unless(truncate(F,$startoffset))
+				{
+					print STDERR "$me: Cannot truncate $file: $!\n";
+					return $ERROR;
+				}
+				# just in case, seek to new end
+				unless(seek(F,0, SEEK_END))
+				{
+					print STDERR "$me: $file: Cannot seek: $!\n";
+					return $ERROR;
+				}
+				print F $rest;
+				print "$me: Removed surfraw config code from $file\n";
+				return $OK;
+			}
+		}
+		else # tag not found
+		{
+			if($action==$ADD)
+			{
+				# seek to end just in case
+				unless(seek(F,0,SEEK_END))
+				{
+					print STDERR "$me: $file: Cannot seek: $!\n";
+					return $ERROR;
+				}
+				print F maketag($sys,$type);
+				print "$me: Added surfraw config code to $file\n";
+				return $OK;
+			}
+			elsif($action==$CHECK)
+			{
+				print "$me: surfraw config code not found in $file\n";
+				return $NOTFOUND;
+			}
+			else # remove
+			{
+				print STDERR "$me: cannot remove surfraw code: not found\n";
+				return $ERROR;
+			}
+		}
+		unless(close(F))
+		{
+			print STDERR "$me: Cannot close $file: $!\n";
+			return $ERROR;
+		}
+	}
+	else # file doesnt exist
+	{
+		if($action==$CHECK)
+		{
+			print "$me: surfraw config code not found (file $file not found)\n";
+			return $NOTFOUND;
+		}
+		elsif($action==$REMOVE)
+		{
+			print STDERR "$me: Cannot remove surfraw config (file $file not found)\n";
+			return $ERROR;
+		}
+		else
+		{
+			# create file
+			unless(open(F,">$file"))
+			{
+				print STDERR "$me: Cannot open $file for writing: $!\n";
+				return $ERROR;
+			}
+			print F maketag($sys,$type);
+			unless(close(F))
+			{
+				print STDERR "$me: Error closing $file: $!\n";
+				return $ERROR;
+			}
+			chmod(0644,$file) or warn("$me: Could not set permissions on $file: $!\n");	
+			print "$me: Added surfraw config code to $file\n";
+			return $OK;
+		}
+	}
+}
+
+sub maketag
+{
+	my ($sys,$type)=@_;
+	my $remove=" To remove use $me -remove";
+	my $tag=$starttag;
+	$tag .= $remove;
+	if($sys) { $tag .= " -sys"; }
+	$tag .= "\n";
+	$tag .= $syntax[$type];
+	$tag .= $endtag . "\n";
+	return $tag;
+}
+
+sub max
+{
+	my($a,$b)=@_;
+	return(($a>$b)?$a:$b);
+}
+
+sub usage
+{
+	print "Usage: $me [-add] [-remove] [-check] [-sys] [-all] [-help] [-shell=SHELL]\n";
+	print " Adds code to your shell config to add $elvidir to your PATH.\n";
+	print "Options:\n";
+	print "\t-add          Add surfraw code.\n";
+	print "\t-check        Check if surfraw code is installed (Default).\n";
+	print "\t-remove       Remove Surfraw code.\n";
+	print "\t-sys          Alter system files rather than user files.\n";
+	print "\t-shell=SHELL  Specify shell to configure (defaults to \$SHELL).\n";
+	print "\t-all          Configure all known shells.\n";
+	print "\t-help         This help.\n";
+	print "Supported shells: sh, ash, bash, dash, csh, tcsh, ksh, pdksh, zsh, rc, es\n";
+}
+
+
+__DATA__
+
+=head1 NAME
+
+surfraw-update-path - updates PATH in shell config files
+
+=head1 SYNOPSIS
+
+surfraw-update-path [B<-add>] [B<-remove>] [B<-check>] [B<-sys>] [B<-all>] [B<-help>] [B<-shell>=I<SHELL>] 
+
+=head1 DESCRIPTION
+
+surfraw-update-path adds the surfraw elvi directory (@ELVIDIR@) to
+your PATH in your shell's config file.
+
+Currently it supports B<bash>, B<sh>, B<csh>, B<tcsh>, B<ash>,
+B<dash>, B<ksh>, B<pdksh>, B<zsh>, B<rc>, and B<es>
+
+Don't forget to login again or source your login files for it to take
+effect.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-check>
+
+Checks to see if the surfraw config code is present.
+This is the default.
+
+=item B<-add>
+
+Adds the surfraw config code.
+
+=item B<-remove>
+
+Removes the surfraw config code
+
+=item B<-sys>
+
+Updates the system-wide shell config instead of the user.
+Must be done as root.
+
+=item B<-shell>=I<SHELL>
+
+Selects the shell to configure. Defaults to the value of the $SHELL
+environment variable.
+
+Currently supported shells are:
+
+B<sh>, B<ash>, B<bash>, B<dash>, B<csh>, B<tcsh>, B<ksh>, B<pdksh>,
+B<zsh>, B<rc>, and B<es>.
+
+=item B<-all>
+
+Attempts to configure the startup files for all known shells
+
+=item B<-help>
+
+Gives a usage message
+
+=back
+
+=head1 RETURN VALUE
+
+-check returns 0 if the surfraw code is present in the file, 1 if it
+is not found, or 2 on error.
+
+All other options return 0 on success, or 2 on error.
+
+=head1 ENVIRONMENT
+
+=over 4
+
+=item SHELL
+
+Used to determine which shell to configure, if B<-shell> is not given.
+
+=item HOME
+
+Used to find users config files.
+
+=item ENV
+
+Used by posix-compliant shells to specify a startup rc file.
+
+=item ZDOTDIR
+
+Used to find user config files for zsh. If not set, defaults to HOME.
+
+=back
+
+=head1 SEE ALSO
+
+surfraw(1), sh(1), ash(1), bash(1), dash(1), csh(1), tcsh(1), ksh(1),
+pdksh(1), zsh(1), rc(1), es(1)
+
+=head1 AUTHOR
+
+Ian Beckwith <ianb@nessie.mcc.ac.uk>
+
+=cut

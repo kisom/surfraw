@@ -1,0 +1,192 @@
+#!/bin/sh
+# $Id$
+# elvis: rfc		-- Search RFCs (internet standards documents)
+# ianb@nessie.mcc.ac.uk 20031220
+. surfraw || exit 1
+
+w3_config_hook () {
+def SURFRAW_rfc_search        all
+def SURFRAW_rfc_field         all
+def SURFRAW_rfc_results       $SURFRAW_results
+def SURFRAW_rfc_output        txt
+defyn SURFRAW_rfc_matchexact  no
+defyn SURFRAW_rfc_showabs     no
+defyn SURFRAW_rfc_showkw      no
+defyn SURFRAW_rfc_reverse     no
+defyn SURFRAW_rfc_ftp         no
+defyn SURFRAW_rfc_nodirect    no
+searchset=0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the RFC (Request For Comments) internet standards.
+Local options:
+  -results=NUM                  Number of search results returned
+                                Default: $SURFRAW_rfc_results
+                                Environment: SURFRAW_rfc_results
+  -pdf                          Return files as PDF (Default: text)
+  -rev                          Reverse order of results
+  -exact                        Match exact words (instead of prefixes)
+  -abs                          Show abstracts
+  -keywords                     Show keywords
+  -nodirect                     Don't try and go direct to RFC (Tries when
+                                 arg is numeric and -search/-field not used)
+  -ftp                          Retrieve RFCs via FTP instead of HTTP
+  -field=                       Which field to search
+          all           |       All fields
+          number        |       
+          title         |       
+          author        |       
+          keyword              
+                                Default: if args are numeric, "number",
+                                else "all"
+                                Environment: SURFRAW_rfc_field
+  -search=                      Collection to search
+          all           |       All
+          rfc           |       Requests For Comments
+          std           |       Standards
+          bcp           |       Best Current Practices
+          fyi                   Informational (For Your Information)
+                                Default: $SURFRAW_rfc_search
+                                Environment: SURFRAW_rfc_search
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -res*=*)  setopt    SURFRAW_rfc_results     $optarg ;;
+    -pdf*)    setopt    SURFRAW_rfc_output      pdf     ;;
+    -rev*)    setoptyn  SURFRAW_rfc_reverse     yes     ;;
+    -ex*)     setoptyn  SURFRAW_rfc_matchexact  yes     ;;
+    -abs*)    setoptyn  SURFRAW_rfc_showabs     yes     ;;
+    -k*)      setoptyn  SURFRAW_rfc_showkw      yes     ;;
+    -ftp*)    setoptyn  SURFRAW_rfc_ftp         yes     ;;
+    -no*)     setoptyn  SURFRAW_rfc_nodirect    yes     ;;
+    -se*=*)   setopt    SURFRAW_rfc_search      $optarg ;;
+    -fi*=*)   setopt    SURFRAW_rfc_field   $optarg ; searchset=1 ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.rfc-editor.org/rfcsearch.html"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+
+    # Is cmdline numeric?
+    nodirect=0
+    if echo "$escaped_args" |grep  '^[0-9]*$' &>/dev/null
+    then
+        isnum=1
+        if ifyes SURFRAW_rfc_nodirect
+        then
+            nodirect=1
+        fi
+    else
+        isnum=0
+    fi
+
+    # Do we want to go direct to rfc?
+    if [ $isnum -eq 1 -a $searchset -eq 0 -a $nodirect -eq 0 ]
+    then
+        # do we want txt
+        if [ "$SURFRAW_rfc_output" = "txt" ]
+        then
+            subdir=""
+            case "$SURFRAW_rfc_search" in
+                all) fileprefix="rfc";;
+                rfc) fileprefix="rfc";;
+                std) fileprefix="std"; subdir="/std";;
+                bcp) fileprefix="bcp"; subdir="/bcp";;
+                fyi) fileprefix="fyi"; subdir="/fyi";;
+                *) echo "Unknown search: $SURFRAW_rfc_search"; exit;;
+            esac
+            if ifyes SURFRAW_rfc_ftp
+            then
+                url="ftp://ftp.rfc-editor.org/in-notes${subdir}/${fileprefix}${escaped_args}.txt"
+            else
+                url="http://www.rfc-editor.org/rfc${subdir}/${fileprefix}${escaped_args}.txt"
+            fi
+        else # godless PDFs
+            case "$SURFRAW_rfc_search" in
+                all) ;;
+                rfc) ;;
+                *) echo "Only RFCs available as PDF files, not STDs, BCPs or FYIs. Try without -pdf";
+                   exit 1;;
+            esac
+            # pdfs only available through ftp
+            url="ftp://ftp.rfc-editor.org/in-notes/pdfrfc/rfc${escaped_args}.txt.pdf"
+        fi
+
+    else
+
+        # not direct to rfc, construct url from options
+        url="http://www.rfc-editor.org/cgi-bin/rfcsearch.pl?searchwords=${escaped_args}"
+
+        if [ $isnum -eq 1 -a $searchset -eq 0 ]
+        then
+            url="$url&opt=Number"
+        else
+            case "$SURFRAW_rfc_field" in
+                all*)   url="$url&opt=All+Fields";;
+                num*)   url="$url&opt=Number";;
+                tit*)   url="$url&opt=Title";;
+                auth*)  url="$url&opt=Author";;
+                key*)   url="$url&opt=Keywords";;
+                kw*)    url="$url&opt=Keywords";;
+                *)      url="$url&opt=All+Fields";;
+            esac
+        fi
+            
+        url="$url&num=$SURFRAW_rfc_results"
+        url="$url&filefmt=$SURFRAW_rfc_output"
+        url="$url&search_doc=search_$SURFRAW_rfc_search"
+            
+        if ifyes SURFRAW_rfc_matchexact
+        then    
+            url="$url&match_method=entire"
+        else
+            url="$url&match_method=prefix"
+        fi
+            
+        if ifyes SURFRAW_rfc_showabs
+        then
+            url="$url&abstract=abson"
+        else
+            url="$url&abstract=absoff"
+        fi
+            
+        if ifyes SURFRAW_rfc_showkw
+        then
+            url="$url&keywords=keyon"
+        else
+            url="$url&keywords=keyoff"
+        fi
+            
+        if ifyes SURFRAW_rfc_reverse
+        then
+            url="$url&sort_method=older"
+        else
+            url="$url&sort_method=newer"
+        fi
+            
+        if ifyes SURFRAW_rfc_ftp
+        then
+            url="$url&format=ftp"
+        else
+            url="$url&format=http"
+        fi
+    fi
+
+    w3_browse_url "$url"
+fi

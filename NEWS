@@ -12,10 +12,109 @@
 			       Deep Linking
 				 Let us go
 			    Surfin' in the raw!
+
+				  N E W S
+
+Sun Feb  1 20:07:05 GMT 2004 - surfraw 2.0.1
+
+Please note that the elvi have moved again, to /usr/lib/surfraw
+
+If you used surfraw-update-path from version 2.0 to add the elvi
+directory to your path, you will need to run it again, first with
+-remove to remove the old path, then again with -add. To change your
+path you will need to either log out and in again or source the
+relevant config files.
+
+  * Moved elvi to /usr/lib/surfraw
+  * Updated docs for new elvi location
+  * Changed man page section for all elvi to 1sr
+  * Fixed surfraw help text
+  * Added man page links for pgpkeys, ebay and sharereactor
+  * Added linda override (and surfraw.dirs) for usr-lib-in-arch-all
+  * Added debhelper tokens to prerm/postinst 
+    (they were in released 2.0-1 but not CVS)
+  * Rewrote man page surfraw.1.in, added man page elvi.1sr.in
+    Both go via autoconf.
+  * Removed old debian/surfraw.1
+  * Updated debian/surfraw.links to point elvi to elvi.1sr.gz
+  * Updated AUTHORS to hopefully include every contributor, ever.
+  * Changed a few "def"s to "defyn"s in surfraw.conf.in
+  * Fixed quoting so   sr google foo "bar baz" qux   works
+  * Makefile.am: Added missing files to EXTRA_DIST
+  * Added a debconf note (only visible if upgrading from 2.0-1)
+    explaining the elvi have moved again
+  * configure.in: changed to new AM_INIT_AUTOMAKE format,
+    specified minimum automake version 1.7
+  * updated surfraw.lsm with new URLs
+  * deleted debian/rules.save (old rules backup)
+  * Removed elvi:
+    + britannica: gone subscription-only
+    + swhois: all whois sites I can find have anti-harvester features
+	  that stop us using them.
+  * Fixed elvi:
+    + wikipedia - added missing quotes (could've sworn I did this already)
+    + cnn - updated url
+    + translate - corrected docs
+  * Moved debian/surfraw.links to links.IN in top dir, now uses autoconf
+    and is not debian-specific
+  * Makefile.am: Added install-data-hook to create links
+  * configure.in, elvi/Makefile.in: fixed ELVIDIR quoting
+  * added elvi/surfraw_elvi to CLEANFILES & removed it from cvs, as it is
+    generated on build.
+  * disabled ifs quoting in elvi that don't like it:
+    freedb, happypenguin, jake, rhyme, scaleplus, 
+	sharereactor, thesaurus, webster, deblists.
+  * Added note to HACKING explaining how to disable ifs quoting
+
+Tue Dec 23 03:19:58 GMT 2003 - surfraw 2.0
+
+New development team, see http://alioth.debian.org/projects/surfraw
+
+  * Moved elvi to /usr/bin/surfraw-elvi. (Closes: #209155, #192869, #201175)
+  * Provided surfraw-update-path to put new dir in path.
+  * Added sr as alias to surfraw.
+  * Added bookmark support and /etc/surfraw.bookmarks.
+  * New elvi: alioth, rfc, scpan, deblists. (Closes: #134498)
+    plus leodict and happypenguin by Moritz Muehlenhoff (Closes: #217799)
+    and wikipedia, also by Moritz Muehlenhoff (Closes: #223953)
+    and sharereactor, pgpkeys and ebay, also by Moritz Muehlenhoff
+  * Fixed elvi: altavista, debcontents, excite, jake, scaleplus,
+    slinuxdoc, sundocs, swhois, translate.
+  * amazon: fixed test (Closes: #163903) and -country, removed tag-id stuff.
+  * debcontents: changed options to SURFRAW_debcontents_*.
+  * sourceforge: added -type and -exact options.
+  * webster: added -t (thesaurus) option.
+  * debbugs: added options.
+  * Removed elvi: appwatch, ftpsearch, ftpfind, raging (sites defunct).
+  * Updated Debian Standards-Version to 3.6.1.0
+  * surfraw.in:
+    - Applied Brian Nelson's "-remote openURL" patch (Closes: #165967).
+    - Fixed browser selection (Closes: #118314).
+  * google -l/-lucky support (Closes: #127078, #128544).
+  * Added deja patch from Christian Garbs (Closes: #149600).
+  * debian/rules: changed to use DESTDIR.
+  * Force default browser to sensible-browser (Closes: #119357)
+    - This supercedes NMU changes (Closes: #200164, #201229, #149584)
+    - Change default browser in manpage (Closes: #113148)
+  * Rename stranslate back to translate (Closes: #141243)
+  * Make woffle not look for /usr/local/bin/surfraw (Closes: #156466)
+  * Add lynx to Recommends (Closes: #141242)
+  * Make surfraw lintian-clean
+    - Remove '(s)' from copyright
+    - Remove /etc conffile entries
+  * Kevin Kreamer <kkreamer@etherhogz.org> did this work.
+  * Easy bugs first
+    - fix type in README (Closes: #154304)
+    - s/README/README.gz/ in manpage (Closes: #164206)
+  * Added elvi for imdb, cddb, freedb and bbcnews written by Ian Beckwith.
+  * changed "Author(s)" to "Author" in debian/copyright
+  * removed debian/conffiles to prevent debhelper being so incredibly
+    "helpful" as to inlude conffiles *twice*
+
 Wed Dec 26 02:48:06 EST 2001 - Surfraw 1.0.7
     Fix major sed lossage in 1.0.6 which removed all references to
      http:// (not just in the documentation strings as was intended)
-				  N E W S
+
 Sun Dec 23 21:02:57 EST 2001 - Surfraw 1.0.6
     New elvi: freebsd, openbsd, filesearching, ftpfind
     Updated elvi: translate (babelfish), ftpsearch, fast, netbsd

@@ -3,17 +3,16 @@ Title:		surfraw
 Version:	@VERSION@
 Entered-date:	@ISODATE@
 Description:	Shell Users' Revolutionary Front Rage Against the Web
-		@configure_input@
 		Fast unix command line interface to a variety of popular WWW
 		search engines and other evils
 Keywords:	surfraw, www, search
 Author: 	proff@iq.org (Julian Assange)
-Maintained-by:	proff@iq.org (Julian Assange)
-Primary-site:	surfraw.sourceforge.net
-		31k surfraw-@VERSION@.tar.gz
+Maintained-by:	surfraw-devel@lists.alioth.debian.org
+Primary-site:   alioth.debian.org/projects/surfraw/
+		118k surfraw-@VERSION@.tar.gz
 		500  surfraw.lsm
-Alternate-site: 
-Original-site:  
+Alternate-site: surfraw.alioth.debian.org
+Original-site:  surfraw.sourceforge.net
 Platforms: shell and sed script
-Copying-policy:	GNU copyleft
+Copying-policy:	Public Domain
 End

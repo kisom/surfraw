@@ -1,12 +1,13 @@
 # $Id$
-bin_SCRIPTS	= \
+elvidir=$(ELVIDIR)
+
+elvi_SCRIPTS	= \
 		  alioth \
 		  altavista \
 		  amazon \
 		  ask \
 		  austlii \
 		  bbcnews \
-		  britannica \
 		  cddb \
 		  cite \
 		  cnn \
@@ -16,6 +17,7 @@ bin_SCRIPTS	= \
 		  deblists \
 		  debpackages \
 		  deja \
+		  ebay \
 		  excite \
 		  fast \
 		  filesearching \
@@ -31,26 +33,31 @@ bin_SCRIPTS	= \
 		  leodict \
 		  netbsd \
 		  openbsd \
+		  pgpkeys \
 		  pubmed \
+		  rfc \
 		  rhyme \
+		  sharereactor \
 		  slashdot \
 		  sundocs \
 		  sourceforge \
 		  stockquote \
 		  scaleplus \
 		  sunsolve \
-		  swhois \
 		  thesaurus \
 		  translate \
-		  W \
 		  webster \
 		  wetandwild \
+		  wikipedia \
 		  woffle \
 		  xxx \
 		  yahoo
 sysconf_DATA	= surfraw_elvi.list
 
-EXTRA_DIST	= $(bin_SCRIPTS)
+EXTRA_DIST	= $(elvi_SCRIPTS)
 
-surfraw_elvi.list: $(bin_SCRIPTS)
-	cat $(bin_SCRIPTS)|egrep '^#.*elvis:'|sed 's/^.*elvis: *//'|sort > $@
+CLEANFILES = surfraw_elvi.list
+
+surfraw_elvi.list: $(elvi_SCRIPTS)
+	cat $(elvi_SCRIPTS)|egrep '^#.*elvis:'|sed 's/^.*elvis: *//'|sort > $@
+
