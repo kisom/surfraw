@@ -3,7 +3,7 @@ dnl $Id$
 dnl Process this file with autoconf to produce a configure script.
 
 dnl This is the only place where the package version appears
-AC_INIT(surfraw, 2.0.1)
+AC_INIT(surfraw, 2.0.2)
 AC_PREREQ(2.54)
 AC_CONFIG_SRCDIR([surfraw.IN])
 
