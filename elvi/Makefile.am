@@ -37,7 +37,6 @@ elvi_SCRIPTS	= \
 		  pubmed \
 		  rfc \
 		  rhyme \
-		  sharereactor \
 		  slashdot \
 		  sundocs \
 		  sourceforge \

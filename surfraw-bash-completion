@@ -1,0 +1,6 @@
+# Programmable completion for Surfraw elvi
+_surfraw()
+{	COMPREPLY=( $( compgen -W "$(ls /usr/lib/surfraw)" -- ${COMP_WORDS[COMP_CWORD]} ) )
+	return 0
+}
+complete -F _surfraw surfraw sr
