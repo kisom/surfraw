@@ -1,0 +1,3 @@
+automake
+autoconf
+sh configure

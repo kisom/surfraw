@@ -1,0 +1,41 @@
+#!/bin/sh
+# $Id$
+# elvis: yahoo		-- Search Yahoo categories (www.yahoo.com)
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_yahoo_results $SURFRAW_results
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search Yahoo categories (www.yahoo.com)
+Local options:
+  -results=NUM                  Number of search results returned
+                                Default: $SURFRAW_yahoo_results
+				Environment: SURFRAW_yahoo_results
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-results=*) setopt   SURFRAW_yahoo_results $optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.yahoo.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://search.yahoo.com/search?p=${escaped_args}&d=y&o=i&g=0&n=${SURFRAW_yahoo_results}&h=c"
+fi

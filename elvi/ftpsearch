@@ -1,0 +1,23 @@
+#!/bin/sh
+# $Id$
+# elvis: ftpsearch	-- Search files on ftpsearch (ftpsearch.lycos.com)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search files on ftpsearch.lycos.com (ftpsearch.lycos.com)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://"ftpsearch.lycos.com/static/advanced_search.asp""
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://ftpsearch.lycos.com/swadv/AdvResults.asp?form=advanced&query=${escaped_args}&doit=Search&type=Case+insensitive+substring+search&offset=0&hits=15&matches=&hitsprmatch=&limdom=&limpath=&limsize1=&limsize2=&limtime1=&limtime2=&f1=Count&f2=Type&f3=Size&f4=Date&f5=Host&f6=Path&header=none&sort=none&trlen=20"
+fi

@@ -1,0 +1,56 @@
+#!/bin/sh
+# $Id$
+# elvis: debcontents	-- Search contents of debian packages(packages.debian.org)
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_debian_arch i386
+def   SURFRAW_debian_distro stable
+def   SURFRAW_debian_search cgi-bin/search_contents.pl
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search debian packages (packages.debian.org)
+Local options:
+  -arch=			Specialized search on architecture
+	  i386		|	Intel 386
+	  m68k		|	M68k
+	  alpha		|	alpha
+	  sparc		|	sparc
+	  powerpc	|	PowerPC
+	  arm		|	ARM
+                                Default: $SURFRAW_debian_arch
+                                Environment: SURFRAW_debian_arch
+  -distro=                      Specific distribution
+          stable        |       Stable
+          testing       |       Testing
+          unstable      |       Unstable
+                                Default: $SURFRAW_debian_distro
+                                Environment: SURFRAW_debian_distro
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-arch=*) setopt   SURFRAW_debian_arch $optarg	;;
+	-distro=*)  setopt   SURFRAW_debian_distro  $optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://packages.debian.org/#search_contents"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://packages.debian.org/${SURFRAW_debian_search}?word=${escaped_args}&case=insensitive&version=${SURFRAW_debian_distro}&arch=${SURFRAW_debian_arch}&directories=yes"
+fi

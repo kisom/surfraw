@@ -1,0 +1,80 @@
+#!/bin/sh
+# $Id$
+# elvis: wetandwild	-- Real time weather information (many sources)
+. surfraw || exit 1
+
+w3_config_hook () {
+# Perhaps we could pick these up from /etc/localtime?
+def   SURFRAW_weather_provider  yahoo
+def   SURFRAW_weather_city	melbourne
+def   SURFRAW_weather_state	vic
+def   SURFRAW_weather_country	au
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [city[,state][;country]]
+Description:
+  Surfraw real time weather information (various sources)
+Local options:
+  -city=CITY|US_POSTCODE	Town or City or (US only) postcode
+				Default: $SURFRAW_weather_city
+				Environment: SURFRAW_weather_city
+  -country=COUNTRY		Two letter domain-style country code
+				Default: $SURFRAW_weather_country
+				Environment: SURFRAW_weather_country
+  -provider=yahoo		Weather provision service
+				Default: $SURFRAW_weather_provider
+                                Environment: SURFRAW_weather_provider
+  -state=STATE			State, province or region
+				Default: $SURFRAW_weather_state
+				Environment: SURFRAW_weather_state
+Examples:
+  $w3_argv0 -country=au -state=vic -city=sydney
+  $w3_argv0 -country=us -state=nm -city="white sands"
+  $w3_argv0 london\\;uk
+  $w3_argv0 melbourne
+Bugs:
+  The "yahoo" provider, while multi-country, does not understand
+  states outside the context of the Uninted State of America.
+
+  This elvi is named "wetandwild" instead of "weather" due to
+  conflicts with a common tcl/expect script of the same name.
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+#only yahoo for now
+	-provider=yahoo) setopt	SURFRAW_weather_provider	$optarg	;;
+	-city=*)     	setopt	SURFRAW_weather_city		$optarg	;;
+	-country=*)	setopt	SURFRAW_weather_country		$optarg	;;
+	-state=*)	setopt	SURFRAW_weather_state		$optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test "$SURFRAW_weather_provider" = "yahoo"; then
+    if test -z "$w3_args"; then
+    	q="$SURFRAW_weather_city"
+	if test "$SURFRAW_weather_country" = "us" ||
+	   test "$SURFRAW_weather_country" = "US" &&
+	   test "$SURFRAW_weather_state" != "none"; then
+	       q="${q},${SURFRAW_weather_state}"
+	fi
+	q="${q};${SURFRAW_weather_country}"
+        w3_browse_url "http://search.weather.yahoo.com/weather/query.cgi?q=${q}"
+    else
+        escaped_args=`w3_url_of_arg $w3_args`
+        w3_browse_url "http://search.weather.yahoo.com/weather/query.cgi?q=${escaped_args}"
+   fi
+else
+   err "-provider ${SURFRAW_weather_provider} unsupported"
+fi

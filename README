@@ -1,0 +1,187 @@
+
+        Surfraw - Shell Users' Revolutionary Front Rage Against the Web
+                                       
+Home Page: [1]http://surfraw.sourceforge.net/
+
+Distribution:
+[2]ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/surfraw-1.0.7.tar.gz
+
+        ______  _     _  ______   _______  ______   _______  _  _  _
+       / _____)(_)   (_)(_____ \ (_______)(_____ \ (_______)(_)(_)(_)
+      ( (____   _     _  _____) ) _____    _____) ) _______  _  _  _
+       \____ \ | |   | ||  __  / |  ___)  |  __  / |  ___  || || || |
+       _____) )| |___| || |  \ \ | |      | |  \ \ | |   | || || || |
+      (______/  \_____/ |_|   |_||_|      |_|   |_||_|   |_| \_____/
+
+      Surfraw - Shell Users' Revolutionary Front Rage Against the Web
+                     http://surfraw.sourceforge.net/
+
+                                 Oh Baybe
+                                I need some
+                               Deep Linking
+                                 Let us go
+                            Surfin' in the raw!
+
+  Surfraw provides a fast unix command line interface to a variety of
+  popular WWW search engines and other artifacts of power. It reclaims
+  google, altavista, babelfish, dejanews, freshmeat, research index,
+  slashdot and many others from the false-prophet, pox-infested heathen
+  lands of html-forms, placing these wonders where they belong, deep in
+  unix heartland, as god loving extensions to the shell.
+
+  Surfraw abstracts the browser away from input. Doing so lets it get on
+  with what it's good at. Browsing. Interpretation of linguistic forms
+  is handed back to the shell, which is what it, and human beings are
+  good at. Combined with netscape-remote or incremental text browsers,
+  such as links (http://artax.karlin.mff.cuni.cz/~mikulas/links/), w3m
+  (http://www.w3m.org/), and screen(1) a Surfraw liberateur is capable
+  of navigating speeds that leave GUI tainted idolaters agape with fear
+  and wonder.
+
+  For example:
+
+         $ ask why is jeeves gay?
+         $ google -results=100 RMS, GNU, which is sinner, which is sin?
+         $ austlii -method=phrase dog like
+         $ rhyme -method=perfect Julian
+
+  Global options are common to all Surfraw elvi (clients). You can
+  get a list of the currently installed elvi by just typing `surfraw'.
+  For example:
+
+  $ surfraw
+W               -- Activate Surfraw defined web-browser
+altavista       -- Search the web using Altavista (www.altavista.com)
+amazon          -- Search the amazon.com bookstore
+appwatch        -- Search entries on Appwatch (www.appwatch.com)
+ask             -- Question the web using Ask Jeeves (www.ask.com)
+austlii         -- Search Australian Law docs (www.austlii.edu.au)
+britannica      -- Look up word in Encyclopedia Britannica (www.britannica.com)
+cite            -- Search computer science papers (www.researchindex.com)
+cnn             -- Search on CNN (cnn.com)
+currency        -- Abuse the Universal Currency Converter (www.xe.net/ucc)
+debbugs         -- Search the debian BTS (bugs.debian.org)
+debcontents     -- Search contents of debian packages(packages.debian.org)
+debpackages     -- Search debian packages (packages.debian.org)
+deja            -- Search usenet using Deja News (www.dejanews.com)
+excite          -- Search on Excite (www.excite.com)
+fast            -- Search the web using FAST Search (www.alltheweb.com)
+filesearching   -- Search files on filesearching (www.filesearching.com)
+freebsd         -- Search FreeBSD related information (www.freebsd.org)
+freshmeat       -- Search Freshmeat (www.freshmeat.net)
+ftpfind         -- Search files on ftpfind (www.ftpfind.com)
+ftpsearch       -- Search files on ftpsearch (ftpsearch.lycos.com)
+google          -- Search the web using Google (www.google.com)
+jake            -- Search journal/databases in jake (jake.med.yale.edu)
+linuxdoc        -- Search entries in LDP (www.linuxdoc.org)
+netbsd          -- Search NetBSD related information (www.netbsd.org)
+openbsd         -- Search OpenBSD related information (www.openbsd.org)
+pubmed          -- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
+raging          -- Search the web using Raging (www.raging.com)
+rhyme           -- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
+scaleplus       -- Search Australian Law using ScalePlus (scaleplus.law.gov.au)
+slashdot        -- Search stories on Slashdot (www.slashdot.org)
+sourceforge     -- Search SourceForge (www.sourceforge.net)
+stockquote      -- Get a single stock quote (multiple providers)
+sundocs         -- Search docs on Sun.com (docs.sun.com)
+sunsolve        -- Search public docs on Sunsolve (sunsolve.sun.com)
+swhois          -- Search Whois (www.geektools.com)
+thesaurus       -- Look up word in Merriam-Webster's Thesaurus (www.m-w.com)
+translate       -- Translate human languages (various providers)
+webster         -- Look up word in Merriam-Webster's Dictionary (www.m-w.com)
+wetandwild      -- Real time weather information (many sources)
+woffle          -- Search the web using Woffle (localhost:8080)
+xxx             -- Superior XXX, hot and ready to press (arXiv.org)
+yahoo           -- Search Yahoo categories (www.yahoo.com)
+
+  All elvi have useful low calorie help, for example:
+
+Usage: rhyme [options] [search words]...
+Description:
+  Surfraw search for rhymes and other word correlations using
+  Lycos Rhyme (http://rhyme.lycos.com)
+Example:
+  $ rhyme Julian
+  $ rhyme -method=rel surfer
+Results:
+  Hurclean St. Julien.
+  surfboarder, bather, natator, swimmer
+Local options:
+  -method=                      Type of word correlation to search for
+          prefect       |       Perfect rhyme
+          syn           |       Synonyms
+          hom           |       Homophones
+          cons          |       Consonsant rhymes only
+          rel           |       Semantically related words
+          sub           |       Phrases
+          spell         |       Similar spellings
+          pic           |       Pictures
+          shake         |       Match with Shakespeare archives
+          def                   Find wordnet definition
+                                Default: perfect
+                                Environment: SURFRAW_rhyme_method
+Global options:
+  -browser=EXECUTABLE           Set browser
+                                Default: mozilla
+  -elvi                         List Surfraw mechanims for conquering evil
+  -escape-url-args=yes|no       Apply url escaping to arguments
+                                Default: yes
+                                Environment: SURFRAW_escape_url_args
+  -g | -graphical               Get some windowed sin
+  -p0rn=yes|no                  Yes, yes, harder, deeper, faster, oh baybe
+                                Default: yes
+                                Environment: SURFRAW_p0rn
+  -help                         What you're reading now, dude
+  -quiet=yes|no                 I can't enjoy it with you talking all the time
+                                Default: no
+                                Environment: SURFRAW_quiet
+  -new[=yes|no]                 Start in a new window
+                                Default: no
+                                Environment: SURFRAW_new_window
+  -t | -text                    Back to the yellow brick road
+  -q | -quote                   Quote arguments with " characters
+                                Default: no
+                                Environment: SURFRAW_quote_args
+  -version                      Display Surfraw version (1.0.4)
+Copyright:
+  Copyright (c) 2000-2001 Julian Assange
+  Copyright (c) 2001 Australian Institute for Collaborative Research
+  Copyright (c) 2000 Melbourne Institute for Advanced Study
+  ---
+
+  The system wide configuration file can be found in:
+
+        SURFRAW_global_conf     @sysconfdir@/surfraw.conf
+
+  Where @sysconfdir@ is something like /etc, or /usr/local/etc
+
+  Each user can also specify their own overrides in:
+
+         SURFRAW_conf           $HOME/.surfraw.conf
+
+  e.g
+
+        SURFRAW_graphical_remote=yes
+        SURFRAW_graphical_broswer=mozilla
+        SURFRAW_text_browser=w3m
+
+  Read HACKING. Surfrawize the soul of your favourite internet wonder.
+  Join the Shell Users' Revolutionary Front Against the WWW by
+  submitting code. Reclaim heathen lands. Bear witness to the
+  truth. Its love will set you free.
+
+        - Julian Assange
+
+  $Id$
+     _________________________________________________________________
+   
+   
+    [3]Julian Assange
+    
+   Last modified: Sun Dec 23 21:02:17 EST 2001
+
+References
+
+   1. http://surfraw.sourceforge.net/
+   2. ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/surfraw-1.0.7.tar.gz
+   3. mailto:proff-projects-surfraw@iq.org

@@ -1,0 +1,24 @@
+#!/bin/sh
+# $Id$
+# elvis: slinuxdoc	-- Search entries in LDP (www.linuxdoc.org)
+# version 0.1 by Ross Campbell rcampbel3@yahoo.com 8/1/2000
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search entries in LDP (www.linuxdoc.org)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.linuxdoc.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.linuxdoc.org/cgi-bin/ldpsrch.cgi?db=0&rpt=40?&srch=${escaped_args}"
+fi

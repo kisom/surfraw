@@ -1,0 +1,58 @@
+#!/bin/sh
+# $Id$
+# elvis: rhyme		-- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_rhyme_method perfect
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search for rhymes and other word correlations using
+  Lycos Rhyme (rhyme.lycos.com)
+Example:
+  \$ rhyme Julian
+  \$ rhyme -method=rel surfer
+Results:
+  Hurclean St. Julien.
+  surfboarder, bather, natator, swimmer
+Local options:
+  -method=                      Type of word correlation to search for
+          prefect       |       Perfect rhyme
+	  syn		|	Synonyms
+	  hom		|	Homophones
+	  cons		|	Consonsant rhymes only
+	  rel		|	Semantically related words
+	  sub		|	Phrases
+	  spell		|	Similar spellings
+	  pic		|	Pictures
+	  shake		|	Match with Shakespeare archives
+	  def			Find wordnet definition
+                                Default: $SURFRAW_rhyme_method
+				Environment: SURFRAW_rhyme_method
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-method=*) setopt   SURFRAW_rhyme_method $optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://rhyme.lycos.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://rhyme.lycos.com/r/rhyme.cgi?Word=${escaped_args}&typeofrhyme=${SURFRAW_rhyme_method}&org1=syl&org2=l"
+fi

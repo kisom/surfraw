@@ -1,0 +1,152 @@
+#!/bin/sh
+# $Id$
+# elvis: freebsd		-- Search FreeBSD related information (www.freebsd.org)
+. surfraw || exit 1
+
+w3_config_hook () {
+defyn   SURFRAW_freebsd_mail	no
+defyn   SURFRAW_freebsd_pr	no
+defyn   SURFRAW_freebsd_cvs	no
+defyn   SURFRAW_freebsd_mid	no
+defyn   SURFRAW_freebsd_gg	no
+defyn   SURFRAW_freebsd_ps	no
+defyn   SURFRAW_freebsd_prs	no
+defyn   SURFRAW_freebsd_elogs	no
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string | PR-number]
+Description:
+  Surfraw search FreeBSD related information
+Local options:
+  -mail[=(yes|no)]		Search FreeBSD mailinglists
+  				Default: $SURFRAW_freebsd_mail
+  				Environment: SURFRAW_freebsd_mail
+  -gg[=(yes|no)]		Search FreeBSD mailinglists at Google Groups
+  				Default: $SURFRAW_freebsd_mail
+  				Environment: SURFRAW_freebsd_mail
+  -pr[=(yes|no)]		Query Problem Reports
+  				Default: $SURFRAW_freebsd_pr
+  				Environment: SURFRAW_freebsd_pr
+  -cvs[=(yes|no)]		Query cvsweb
+  				Default: $SURFRAW_freebsd_cvs
+  				Environment: SURFRAW_freebsd_cvs
+  -mid[=(yes|no)]		Query mailing lists by Message-ID
+  				Default: $SURFRAW_freebsd_mid
+  				Environment: SURFRAW_freebsd_mid
+  -ps[=(yes|no)]		Teleport to the Port Survey Page
+  				Default: $SURFRAW_freebsd_ps
+  				Environment: SURFRAW_freebsd_ps
+  -prs[=(yes|no)]		Teleport to the Problem Report Survey Page
+  				Default: $SURFRAW_freebsd_prs
+  				Environment: SURFRAW_freebsd_prs
+  -elogs[=(yes|no)]		Teleport to the Build Error Logs Page
+  				Default: $SURFRAW_freebsd_elogs
+  				Environment: SURFRAW_freebsd_elogs
+Examples:
+  $w3_argv0 			Teleport to the FreeBSD website
+  $w3_argv0 mycroft		Search FreeBSD website for odeur de mycroft
+  $w3_argv0 -mail  		Teleport to the mail-index Query form
+  $w3_argv0 -mail proff		Search mailing-list archives for odeur de proff
+  $w3_argv0 -gg  		Teleport to FreeBSD mailinglists at Google
+  $w3_argv0 -gg proff		Search Google archives for odeur de proff
+  $w3_argv0 -pr			Query Problem Report form
+  $w3_argv0 -pr 666		Display PR 666
+  $w3_argv0 -cvs		Query cvsweb
+  $w3_argv0 -cvs ports/		Display cvsweb tree for ports/
+  $w3_argv0 -mid		Query mailing lists by Message-ID
+  $w3_argv0 -mid <x>		Display message with ID <x>
+  $w3_argv0 -ps			Teleport to the Port Survey page
+  $w3_argv0 -prs		Teleport to the Port Report Survey page
+  $w3_argv0 -elogs		Teleport to the Build Error Logs page
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-mail)	setoptyn	SURFRAW_freebsd_mail		yes	;;
+	-mail=*) setoptyn	SURFRAW_freebsd_mail		$optarg	;;
+	-gg)	setoptyn	SURFRAW_freebsd_gg		yes	;;
+	-gg=*)	setoptyn	SURFRAW_freebsd_gg		$optarg	;;
+	-pr)	setoptyn	SURFRAW_freebsd_pr		yes	;;
+	-pr=*)	setoptyn	SURFRAW_freebsd_pr		$optarg	;;
+	-cvs)	setoptyn	SURFRAW_freebsd_cvs		yes	;;
+	-cvs=*)	setoptyn	SURFRAW_freebsd_cvs		$optarg	;;
+	-mid)	setoptyn	SURFRAW_freebsd_mid		yes	;;
+	-mid=*)	setoptyn	SURFRAW_freebsd_mid		$optarg	;;
+	-ps)	setoptyn	SURFRAW_freebsd_ps		yes	;;
+	-prs)	setoptyn	SURFRAW_freebsd_prs		yes	;;
+	-elogs)	setoptyn	SURFRAW_freebsd_elogs		yes	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+test -z "$w3_args" || escaped_args=`w3_url_of_arg $w3_args`
+
+if ok SURFRAW_freebsd_pr; then
+    if test -z "$escaped_args"; then
+        w3_browse_url "http://www.freebsd.org/cgi/query-pr-summary.cgi?query"
+    else
+        w3_browse_url "http://www.freebsd.org/cgi/query-pr.cgi?pr=${escaped_args}"
+    fi
+    exit $?
+fi
+if ok SURFRAW_freebsd_mail; then
+    if test -z "$escaped_args"; then
+        w3_browse_url "http://docs.freebsd.org/mail/"
+    else
+	w3_browse_url "http://www.freebsd.org/cgi/search.cgi?words=${escaped_args}&max=25&sort=score&index=recent&source=freebsd-questions"
+    fi
+    exit $?
+fi
+if ok SURFRAW_freebsd_gg; then
+    if test -z "$escaped_args"; then
+        w3_browse_url "http://groups.google.com/groups?hl=en&group=mailing.freebsd"
+    else
+	w3_browse_url "http://groups.google.com/groups?q=${escaped_args}&hl=en&meta=group%3Dmailing.freebsd.*"
+    fi
+    exit $?
+fi
+if ok SURFRAW_freebsd_cvs; then
+    if test -z "$escaped_args"; then
+        w3_browse_url "http://cvsweb.freebsd.org/"
+    else
+	w3_browse_url "http://cvsweb.freebsd.org/cgi/cvsweb.cgi?path=${escaped_args}"
+    fi
+    exit $?
+fi
+if ok SURFRAW_freebsd_mid; then
+    if test -z "$escaped_args"; then
+        w3_browse_url "http://www.freebsd.org/search/search-mid.html"
+    else
+	w3_browse_url "http://www.freebsd.org/cgi/mid.cgi?id=${escaped_args}&db=mid"
+    fi
+    exit $?
+fi
+if ok SURFRAW_freebsd_ps; then
+   w3_browse_url "http://people.freebsd.org/~fenner/portsurvey/"
+   exit $?
+fi
+if ok SURFRAW_freebsd_elogs; then
+   w3_browse_url "http://people.freebsd.org/~fenner/errorlogs/"
+   exit $?
+fi
+if ok SURFRAW_freebsd_prs; then
+   w3_browse_url "http://people.freebsd.org/~fenner/ports-prs.html"
+   exit $?
+fi
+if test -z "$escaped_args"; then
+    w3_browse_url "http://www.freebsd.org/"
+else
+    w3_browse_url "http://www.freebsd.org/cgi/search.cgi?words=${escaped_args}&max=25&source=www"
+
+fi
+exit $?

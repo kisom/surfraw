@@ -1,0 +1,87 @@
+        ______  _     _  ______   _______  ______   _______  _  _  _
+       / _____)(_)   (_)(_____ \ (_______)(_____ \ (_______)(_)(_)(_)
+      ( (____   _     _  _____) ) _____    _____) ) _______  _  _  _
+       \____ \ | |   | ||  __  / |  ___)  |  __  / |  ___  || || || |
+       _____) )| |___| || |  \ \ | |      | |  \ \ | |   | || || || |
+      (______/  \_____/ |_|   |_||_|      |_|   |_||_|   |_| \_____/
+                                                               
+      Surfraw - Shell Users' Revolutionary Front Rage Against the Web
+
+				 Oh Baybe
+				I need some
+			       Deep Linking
+				 Let us go
+			    Surfin' in the raw!
+Wed Dec 26 02:48:06 EST 2001 - Surfraw 1.0.7
+    Fix major sed lossage in 1.0.6 which removed all references to
+     http:// (not just in the documentation strings as was intended)
+				  N E W S
+Sun Dec 23 21:02:57 EST 2001 - Surfraw 1.0.6
+    New elvi: freebsd, openbsd, filesearching, ftpfind
+    Updated elvi: translate (babelfish), ftpsearch, fast, netbsd
+    Rename linuxdoc elvi to slinuxdoc, to prevent name clash with sgmltools
+    Use test -r instead of test -e which inexplicably chocked Solaris8
+    Documentation changes
+
+Tue Nov  6 11:14:21 EST 2001 - Surfraw 1.0.5
+    Fix wayward indentation introduced in 1.0.4
+     which caused -browser to fail
+    Note that SURFRAW_browser was made obsolete in 1.0.4.
+     SURFRAW_text_browser and SURFRAW_graphical_browser
+     replace its functionality
+    STATE EXTRA CLEARLY THE FORMAT OF ~/.surfraw.conf so
+     even Redhat users get it.
+
+Thu Oct 25 05:32:25 EST 2001 - Surfraw 1.0.4
+    New elvi: debbugs, debcontents, debpackages, swhois, woffle
+    Dead elvi: ircsearch, newscientist
+    -g and -t switch between graphical & text browsers
+    -new opens a new window on -remote comprehending browsers
+    Support "--" option to end all options
+    Fix url space escaping problem
+    Surfraw placed into the public domain
+
+Fri Jan 12 14:51:10 EST 2001 - Surfraw 1.0.3
+    New elvi: amazon
+    Add `scaleplus' elvi to elvi/Makefile.am
+    Minor documentation bug fixes
+
+Wed Sep 27 06:37:48 EST 2000 - Surfraw 1.0.2
+    Viva l`explorateur de texte!
+      http://slashdot.org/articles/00/08/28/1143249.shtml
+      http://www.theage.com.au/frontpage/20000828/A32287-2000Aug28.html
+    Translate elvi didn't correctly parse -from or -to
+    HACKING file was missing from EXTRA_DIST
+
+Fri Aug 25 23:42:31 EST 2000 - Surfraw 1.0.1
+    New elvi: britannica
+    Updated elvi: freshmeat
+
+Fri Aug 25 02:26:31 EST 2000 - Surfraw 0.5.8
+    New elvi: stockquote (nasdaq, quote.com, yahoo), jake
+    Don't open new screen(1)s by default
+    Zorch usage of local variables (not POSIX)
+
+Sat Aug 12 20:00:45 EST 2000 - Surfraw 0.5.7
+    New elvi: fast netbsd translate W wetandwild.
+    Auto detect browser during configure phase.
+    Built in support for screen(1)
+    Built in support for netscape-remote
+    `surfraw' on its own now displays a list of elvi
+
+Sun Aug  6 11:43:50 EST 2000 - Surfraw 0.5.6
+    New elvi: newscientist pubmed freshmeat
+
+Sat Aug  5 16:07:55 EST 2000 - Surfraw 0.5.5
+    New elvi: appwatch cnn excite ftpsearch linuxdoc scaleplus sundocs
+              sunsolve thesaurus weather webster
+
+Wed Aug  2 08:56:04 EST 2000
+    Name change, surfaw -> surfraw
+    Web-site is now http://surfraw.sourceforge.net/
+
+Sun Jul 30 17:51:50 EST 2000 - Surfaw 0.5.4
+    A Lazy sunday. A tired, but happy mood. The afternoon drowses by and
+    we have the initial version.
+
+$Id$

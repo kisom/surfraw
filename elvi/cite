@@ -1,0 +1,46 @@
+#!/bin/sh
+# $Id$
+# elvis: cite		-- Search computer science papers (www.researchindex.com)
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_cite_results $SURFRAW_results
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+   Surfraw search CiteSeer (www.researchindex.com)
+
+   Research Index is a scientific literature digital library that
+   indexes the full text of spidered PDF and PS documents and performes
+   sophisticated clustering and citation analysis on the results.
+
+Local options:
+  -results=NUM                  Number of search results returned
+                                Default: $SURFRAW_cite_results
+				Environment: SURFRAW_cite_results
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-results=*) setopt   SURFRAW_cite_results $optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.researchindex.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://citeseer.nj.nec.com/cs?cs=1&cf=Any&co=Citations&cm=100&submit=Search+Indexed+Articles&af=Any&ao=Citations&am=${SURFRAW_cite_results}&q=${escaped_args}"
+fi

@@ -1,0 +1,103 @@
+#!/bin/sh
+# $Id$
+# elvis: translate	-- Translate human languages (various providers)
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_translate_provider	babelfish
+def   SURFRAW_translate_from		fr
+def   SURFRAW_translate_to		en
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [words-to-translate]...
+Description:
+  Surfraw translate human language
+Local options:
+  -from=LANGUAGE		Souce language
+  				Default: $SURFRAW_translate_from
+				Environment: SURFRAW_translate_from
+  -to=LANGUAGE			Destination language
+  				Default: $SURFRAW_translate_to
+				Environment: SURFRAW_translate_to
+  -provider=	                Translation service provider
+            babelfish		babelfish.altavista.com (systrans)
+	    raging		babelfish.altavista.com/raging (systrans)
+                                Default: $SURFRAW_translate_provider
+				Environment: SURFRAW_translate_provider
+Languages:
+  de				German
+  en				English
+  es				Spanish
+  fr				French
+  it				Italian
+  ja				Japanese
+  ko				Korean
+  pt				Portuguese
+  ru				Russian
+  zh				Chinese
+
+Examples:
+  $w3_argv0 			Provider's standard translation page
+  $w3_argv0 -provider raging	Use raging search as a translation provider
+  $w3_argv0 -from fr -to en la verite vous liberera
+Bugs:
+  Systrans derived providers only support the following translation
+  combinations:
+	English to Chinese
+	English to French
+	English to German
+	English to Italian
+	English to Japanese
+	English to Korean
+	English to Portuguese
+	English to Spanish
+	Chinese to English
+	French to English
+	French to German
+	German to English
+	German to French
+	Italian to English
+	Japanese to English
+	Korean to English
+	Portuguese to English
+	Russian to English
+	Spanish to English
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-from=*)	setopt SURFRAW_translate_from		$optarg ;;
+	-to=*)		setopt SURFRAW_translate_to		$optarg ;;
+	-provider=*)	setopt SURFRAW_translate_provider	$optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+test -z "$w3_args" || escaped_args=`w3_url_of_arg $w3_args`
+case $SURFRAW_translate_provider in
+    babelfish | raging)
+	case $SURFRAW_translate_provider in raging) r=raging/ ;; *) r="";; esac
+    	if test -z "$escaped_args"; then
+	    w3_browse_url "http://babelfish.altavista.com/${r}translate.dyn"
+	else
+	    case "$escaped_args" in
+	    	http*) w3_browse_url "http://babelfish.altavista.com/${r}translate.dyn?doit=done&BabelFishFrontPage=yes&bblType=url&url=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
+		;;
+		*) w3_browse_url "http://babelfish.altavista.com/${r}translate.dyn?doit=done&BabelFishFrontPage=yes&bblType=urltext&urltext=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
+	        ;;
+	    esac
+	fi
+	;;
+   *) err "unknown provider ${SURFRAW_translate_provider}"
+esac
+exit $?

@@ -1,0 +1,23 @@
+#!/bin/sh
+# $Id$
+# elvis: thesaurus	-- Look up word in Merriam-Webster's Thesaurus (www.m-w.com)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Look up word in Merriam-Webster's Thesaurus (www.m-w.com)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.m-w.com/thesaurus.htm"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.m-w.com/cgi-bin/thesaurus?book=Thesaurus&va=${escaped_args}"
+fi

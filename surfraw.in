@@ -1,0 +1,313 @@
+#!/bin/sh
+# $Id$
+# Surfraw -- Shell Users' Revolutionary Front Against the World wide web
+#
+# (c) 2000-2001 Julian Assange, placed into the public domain
+# (c) 2000 Melbourne Institute for Advanced Study, placed into the public domain
+#
+# see the file COPYING for further copyright details
+#
+# @configure_input@
+
+surfraw_version=@VERSION@
+surfraw_api_version=1.0
+w3_argv0=`basename "$0"`
+
+# defaults
+
+w3_config_hook () {
+    return 1
+}
+
+w3_config () {
+prefix=@prefix@
+def   SURFRAW_global_conf	@sysconfdir@/surfraw.conf
+def   SURFRAW_conf		$HOME/.surfraw.conf
+
+    test -r "$SURFRAW_global_conf" || err "couldn't source SURFRAW_global_conf ($SURFRAW_global_conf)"
+    . "$SURFRAW_global_conf"
+    w3_config_hook
+    test -r "$SURFRAW_conf" && . "$SURFRAW_conf"
+}
+
+warn () {
+    echo "$w3_argv0 WARNING: ""$@"
+}
+
+err () {
+    echo "$w3_argv0 ERROR: ""$@"
+    exit 1
+}
+
+yesno () {
+    eval value=\$${1}
+    case "$value" in
+	# "yes", "true", "on", or "1"
+	[Yy][Ee][Ss]|[Tt][Rr][Uu][Ee]|[Oo][Nn]|1)
+	    return 0
+        ;;
+        # "no", "false", "off", or "0"
+        [Nn][Oo]|[Ff][Aa][Ll][Ss][Ee]|[Oo][Ff][Ff]|0)
+	    return 1
+        ;;
+
+        *)
+        err "\"$1\" is not set correctly. Should be (yes|on|1|no|off|0). Is \"$value\""
+        ;;
+    esac
+}
+
+ifyes () {
+    yesno "$@" && return 0
+    return 1
+}
+
+ifno () {
+    yesno "$@" && return 1
+    return 0
+}
+
+ok () {
+    yesno "$@"
+}
+
+null () {
+    test -z "$@" && return 0
+    return 1
+}
+
+def () {
+    eval value=\$${1}
+    test -z "$value" || return 0
+    eval ${1}="$2"
+    return 0
+}
+
+defyn () {
+    eval value=\$${1}
+    test -z "$value" && eval ${1}="$2"
+    yesno "$1"
+}
+
+setopt  () {
+    eval value=\$${1}
+    eval ${1}="$2"
+}
+
+setoptyn () {
+    eval value=\$${1}
+    eval ${1}="$2"
+    yesno "$1"
+}
+
+w3_find_prog () {
+  prog="$1"
+  old_ifs="${IFS:-\" \"}"
+  IFS=":"
+  path_ifs="$PATH"
+  for dir in $path_ifs; do
+    test -z "$dir" && dir=.
+    if test -e "$dir/$prog"; then
+	echo "$dir/$prog"
+	IFS="$old_ifs"
+	return 0
+    fi
+  done
+  IFS="$old_ifs"
+  return 1
+}
+
+w3_url_escape () {
+    echo "$@" | sed 's/%/%25/g;
+		     s/+/%2B/g;
+#		     s/ /+/g;
+		     s/ /%20/g;
+		     s/"/%22/g;
+		     s/#/%23/g;
+		     s/\$/%24/g;
+		     s/&/%26/g;
+		     s/,/%2C/g;
+		     s/\./%2E/g;
+		     sx/x%2Fx;
+		     s/:/%3A/g;
+		     s/;/%3B/g;
+		     s/</%3C/g;
+		     s/=/%3D/g;
+		     s/>/%3E/g;
+		     s/?/%3F/g;
+		     s/@/%40/g;
+		     s/\[/%5B/g;
+		     s/\\/%74/g;
+		     s/\]/%5D/g;
+		     s/\^/%5E/g;
+		     s/{/%7B/g;
+		     s/|/%7C/g;
+		     s/}/%7D/g;
+		     s/~/%7E/g;
+		   '"s/'/%60/g"
+}
+
+w3_url_of_arg () {
+    if ok SURFRAW_quote_args; then
+        args=\""$@"\"
+    else
+        args="$@"
+    fi
+    if ok SURFRAW_escape_url_args; then
+	w3_url_escape "$args"
+    else
+	echo "$@"
+    fi
+}
+
+true () {
+    return 0
+}
+
+false () {
+    return 1
+}
+
+w3_global_usage () {
+# style: keep sorted
+#-------------------------------------79 cols----------------------------------
+    cat <<EOF
+Global options:
+  -browser=EXECUTABLE		Set browser
+				Default: $SURFRAW_browser
+  -elvi				List Surfraw mechanims for conquering evil
+  -escape-url-args=yes|no	Apply url escaping to arguments
+				Default: $SURFRAW_escape_url_args
+				Environment: SURFRAW_escape_url_args
+  -g | -graphical		Get some windowed sin
+  				Default: $SURFRAW_graphical
+				Environment: SURFRAW_graphical
+  -p0rn=yes|no			Yes, yes, harder, deeper, faster, oh baybe
+				Default: $SURFRAW_p0rn
+				Environment: SURFRAW_p0rn
+  -help				What you're reading now, dude
+  -quiet=yes|no			I can't enjoy it with you talking all the time
+				Default: $SURFRAW_quiet
+				Environment: SURFRAW_quiet
+  -new[=yes|no]			Start in a new window
+				Default: $SURFRAW_new_window
+				Environment: SURFRAW_new_window
+  -t | -text			Back to the yellow brick road
+  -q | -quote			Quote arguments with " characters
+				Default: $SURFRAW_quote_args
+				Environment: SURFRAW_quote_args
+  -version			Display Surfraw version ($surfraw_version)
+Copyright:
+  Copyright (c) 2000-2001 Julian Assange <proff@iq.org>
+  Copyright (c) 2001 Australian Institute for Collaborative Research
+  Copyright (c) 2000 Melbourne Institute for Advanced Study
+EOF
+}
+
+w3_usage_hook () {
+    echo "Usage: $w3_argv0 [options] [args...]"
+    w3_global_usage
+}
+
+w3_bad_option () {
+    err "bad option \"${opt}\". Try ${w3_argv0} -help for usage information"
+}
+
+w3_parse_option_hook () {
+    return 1
+}
+
+w3_parse_option () {
+    opt="$1"
+    case "$opt" in
+	    -*=*) optarg=`echo "$opt" | sed 's/[-_a-zA-Z0-9]*=//'`
+    esac
+    w3_parse_option_hook "$opt" "$optarg" && return 0
+    
+    case "$opt" in
+	-browser=*)	    setopt   SURFRAW_browser		$optarg	;;
+	-elvi)		    cat "$SURFRAW_elvi_list"; exit 0            ;;
+	-escape-url-args=*) setoptyn SURFRAW_escape_url_args	$optarg ;;
+	-g | -graphical)    setoptyn SURFRAW_graphical		yes	;;
+	-p0rn=*)	    setoptyn SURFRAW_p0rn	    	$optarg ;;
+	-help | --help)     do_help=1					;;
+	-quiet=*)	    setoptyn SURFRAW_quiet	    	$optarg ;;
+	-q | -quote)	    setoptyn SURFRAW_quote_args	    	yes	;;
+	-new)		    setoptyn SURFRAW_new_window		yes	;;
+	-new=*)		    setoptyn SURFRAW_new_window		$optarg ;;
+	-t | -text)	    setoptyn SURFRAW_graphical 		no	;;
+	-version)	    echo $surfraw_version; exit 0	    	;;
+	--)		    return 1					;;
+	-*)		    w3_bad_option "$opt"		    	;;
+	*)		    return 1					;;
+    esac
+    return 0
+}
+
+w3_parse_args () {
+    w3_args=
+    SURFRAW_browser=none
+    SURFRAW_browser_args=none
+    do_help=0
+    mode=unknown
+    for arg in "$@"; do
+	w3_parse_option "$arg" || w3_args="$w3_args $arg"
+    done
+    if test $SURFRAW_browser = none; then
+	if ok SURFRAW_graphical && test -n "$DISPLAY"; then
+		SURFRAW_browser=$SURFRAW_graphical_browser
+		SURFRAW_browser_args=$SURFRAW_graphical_browser_args
+		mode=graphics
+	else
+		SURFRAW_browser=$SURFRAW_text_browser
+		SURFRAW_browser_args=$SURFRAW_text_browser_args
+		mode=text
+	fi
+    fi
+    if ok do_help; then
+	w3_usage_hook
+	exit 0
+    fi
+}
+
+w3_browse_url () {
+   if ok SURFRAW_new_screen && test -n "$STY" && test mode = text; then
+   	screen=yes
+   else
+   	screen=no
+   fi
+    if ok screen; then
+	if test $SURFRAW_browser_args = "none"; then
+		$SURFRAW_screen $SURFRAW_browser "$@"
+	else
+		$SURFRAW_screen $SURFRAW_browser $SURFRAW_browser_args "$@"
+	fi
+    else
+	if ok SURFRAW_graphical_remote && test mode = graphical; then
+		if ok SURFRAW_new_window; then 
+			newwin=", new-window"
+		else
+			newwin=""
+		fi
+		if test $SURFRAW_browser_args = "none"; then
+			$SURFRAW_browser -remote "openURL($*$newwin)" 2>/dev/null || $SURFRAW_browser "$@" &
+		else
+			$SURFRAW_browser -remote "openURL($*$newwin)" 2>/dev/null || $SURFRAW_browser $SURFRAW_browser_args "$@" &
+		fi
+	else
+		if test $SURFRAW_browser_args = "none"; then
+			$SURFRAW_browser "$@"
+		else
+			$SURFRAW_browser $SURFRAW_browser_args "$@"
+		 fi
+	fi
+		
+    fi
+#    ifno SURFRAW_quiet && echo "Thank you for supporting the Shell Users' Revolutionary Front Rage Against the Web"
+}
+
+case "$w3_argv0" in
+    surfraw) 
+        w3_config
+	w3_parse_option -elvi ;;
+esac

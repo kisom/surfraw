@@ -1,0 +1,32 @@
+#!/bin/sh
+# elvis: sourceforge	-- Search SourceForge (www.sourceforge.net)
+. surfraw || exit 1
+
+# version 0.1
+# Incomplete - does not use sourceforge's form options
+# type_of_search="soft"/"people"
+# exact="1"/"0"
+# maybe later :-)
+# this version just find 'n' replaced from freshmeat script
+# this great work has been achieved by Caiaphas Pechorin (caiaphas@operamail.com)
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search SourceForge (www.sourceforge.net)
+Local options:
+  Not yet implemented :-(
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.sourceforge.net/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://sourceforge.net/search?q=${escaped_args}"
+fi

@@ -1,0 +1,22 @@
+#!/bin/sh
+# $Id$
+# elvis: currency	-- Abuse the Universal Currency Converter (www.xe.net/ucc)
+. surfraw || exit 1
+
+# alright, admitedly this is lame, we should be able to do something like
+# $ currency USD 1 AUD, but xe's cgi-script expects extremely
+# verbose options, the entirity of which we'd have copy here, and the
+# xe' interface isn't too bad
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options]
+Description:
+  Surfraw activate the Universeal Currency Converter (www.xe.net/ucc)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+w3_browse_url "http://www.xe.net/ucc/"

@@ -1,0 +1,42 @@
+#!/bin/sh
+# $Id$
+# elvis: debbugs		-- Search the debian BTS (bugs.debian.org)
+. surfraw || exit 1
+
+# no variables at this time.
+#w3_config_hook () {
+#def   SURFRAW_dummy 0
+#}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [package | bug number | maintainer email]
+Description:
+  Surfraw search debian BTS (bugs.debian.org)
+Examples:
+  debbugs 20000			|	show report for bug #20000
+  debbugs csurchi@debian.org 	|	show bugs for csurchi
+  debbugs surfraw		|	show bugs for surfraw package
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-dummy=*)  ;;  # nothing to do, we seem to need the case block.
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://bugs.debian.org/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://bugs.debian.org/${escaped_args}"
+fi

@@ -1,0 +1,66 @@
+#!/bin/sh
+# elvis: woffle		-- Search the web using Woffle (localhost:8080)
+ /usr/local/bin/surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_woffle_search htdig/htsearch
+def   SURFRAW_woffle_format 'builtin-long'
+def   SURFRAW_woffle_method and
+def   SURFRAW_woffle_sort score
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the web using Woffle (localhost:8080/)
+Local options:
+  -method=                  Method used for searching...
+          and           |       ALL
+          or            |       ANY
+          bool          |       BOOLEAN
+  -format=                  Format of results
+          short         |       just a link and title
+          long          |       description please
+  -sort=                    Sort method
+          score         |       best result
+          revscore      |       worst result!
+          time          |       newest
+          revtime       |       oldest
+          title         |       abc by title
+          revtitle      |       zyx by title
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-format=*)  if [ "$optarg" = "short" ] ; then
+					optarg="builtin-short"
+				else
+					optarg="builtin-long"
+				fi
+				setopt   SURFRAW_woffle_format $optarg
+				;;
+	-method=*)  if [ "$optarg" = "bool" ] ; then
+					optarg="boolean"	
+				fi
+				setopt   SURFRAW_woffle_method $optarg
+				;;
+	-sort=*)  setopt   SURFRAW_woffle_sort  $optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://localhost:8080/htdig/search.html"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://localhost:8080/${SURFRAW_woffle_search}?words=${escaped_args}&method=${SURFRAW_woffle_method}&format=${SURFRAW_woffle_format}&sort=${SURFRAW_woffle_sort}"
+fi

@@ -1,0 +1,41 @@
+surfraw (1.0.7-1) unstable; urgency=low
+
+  * New upstream release 
+  * New debian/rules with DH_COMPAT=3 too
+  * Elvi: linuxdoc renamed to slinuxdoc
+          translate renamed to stranslate
+  * Removed unuseful scripts in debian directory
+  * Removed emacs settings in changelog
+  
+ -- Christian Surchi <csurchi@debian.org>  Sat,  2 Mar 2002 23:54:34 +0100
+
+surfraw (1.0.4-1) unstable; urgency=low
+
+  * New upstream release, surfraw becomes public domain
+  * Support "--" option to end all options (Closes:#113429)
+  * Added elvi for Debian bugs search (Closes:#70109)
+  * Fixed typo (Closes:#100431)
+  * Removed elvi: ircsearch, newscientist (Closes:#113004,#80099)
+
+ -- Christian Surchi <csurchi@debian.org>  Thu, 25 Oct 2001 06:56:17 -0400
+
+surfraw (1.0.2-2) unstable; urgency=low
+
+  * linuxdoc renamed to linuxdoc.surfraw (Closes: #78994)
+  * surfraw-translate renamed to translate.surfraw
+
+ -- Christian Surchi <csurchi@debian.org>  Thu, 21 Dec 2000 10:54:45 -0500
+
+surfraw (1.0.2-1) unstable; urgency=low
+
+  * New upstream release
+  * New and patched elvi (Closes:#70110)
+
+ -- Christian Surchi <csurchi@debian.org>  Tue,  3 Oct 2000 15:49:08 +0200
+
+surfraw (0.5.5-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Christian Surchi <csurchi@debian.org>  Sat,  5 Aug 2000 16:56:47 +0200
+

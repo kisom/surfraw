@@ -1,0 +1,90 @@
+#!/bin/sh
+# $Id$
+# elvis: amazon		-- Search the amazon.com bookstore
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_amazon_country	us
+def   SURFRAW_amazon_search	all
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string]
+Description:
+  Search amazon
+Local options:
+  -country=COUNTRY		Two letter domain-style country code
+				Default: $SURFRAW_amazon_country
+				Environment: SURFRAW_amazon_country
+  -search=			Sepecialised search on topic
+          all		    |   All products
+	  auctions	    |   Auctions
+	  books             |	Books
+	  cars		    |   New Cars
+	  classical         |	Classical Music
+	  dvd		    |	DVD
+	  electronics       |	Electronics
+	  garden            |	Lawn & Patio
+	  kitchen           |	Kitchen
+	  music             |	Popular Music
+	  outlet	    |   Outlet
+	  photo 	    |	Camera & Photo
+	  software          |	Software
+	  toys		    |	Toys & Games
+	  tools		    |	Tools & Hardware
+	  vhs		    |	Video
+	  videogames	    |   Video Games
+	  zshops	    |   zShops
+	  wireless	       	Mobile & Wireless
+				Default: $SURFRAW_amazon_search
+				Environment: SURFRAW_amazon_search
+
+Examples:
+  $w3_argv0 -books -country=uk -q The Lotus and The Robot
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-search=*)	setopt	SURFRAW_amazon_search		$optarg ;;
+	-country=*)	setopt	SURFRAW_amazon_country		$optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+case "$SURFRAW_amazon_country" in
+    uk)	host=www.amazon.co.uk	;;
+    de) host=www.amazon.de	;;
+    fr) host=www.amazon.fr	;;
+    jp) host=www.amazon.co.jp	;;
+    *)  host=www.amazon.com	;;
+esac
+
+# repair amazon brain-damage
+p="$SURFRAW_amazon_search"
+case "$p" in
+    all)	p=blended		;;
+    auctions)	p=auction-redirect	;;
+    cars)	p=greenlight		;;
+    classical)  p=classical-music	;;
+    mobiles)	p=wireless-phones	;;
+    tools)	p=universal		;;
+    zshops)	p=fixed-price-redirect	;;
+esac
+
+pre_url="http://${host}/exec/obidos"
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if null $w3_args; then
+    w3_browse_url "${pre_url}/redirect-home/undergroundpubli?tag-id=undergroundpubli"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "${pre_url}/external-search?tag-id=undergroundpubli&index=${SURFRAW_amazon_search}&keyword=${escaped_args}"
+fi

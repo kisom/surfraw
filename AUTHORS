@@ -1,0 +1,13 @@
+Julian Assange <proff@iq.org>
+	original concept / code
+
+Christian Weisgerber <naddy@mips.inka.de>
+	elvi: fast, thesaurus, webster
+
+Christian Surchi <csurchi@debian.org>
+	elvi: debcontents, debbugs, debpackages
+
+Jason Harris <jharris@widowmaker.com>
+	elvi: freebsd, openbsd, filesearching, ftpfind
+
+$Id$

@@ -1,0 +1,44 @@
+#!/bin/sh
+# $Id$
+# elvis: fast		-- Search the web using FAST Search (www.alltheweb.com)
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_fast_type all
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the web using FAST Search (www.alltheweb.com)
+Local options:
+  -type=                        Search for
+        all             |       All of the words
+        any             |       Any of the words
+        phrase                  The exact phrase
+                                Default: $SURFRAW_fast_type
+				Environment: SURFRAW_fast_type
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-type=*) setopt   SURFRAW_fast_type $optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.alltheweb.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.alltheweb.com/cgi-bin/search?type=${SURFRAW_fast_type}&query=${escaped_args}&exec=FAST+Search"
+fi

@@ -1,0 +1,115 @@
+        ______  _     _  ______   _______  ______   _______  _  _  _
+       / _____)(_)   (_)(_____ \ (_______)(_____ \ (_______)(_)(_)(_)
+      ( (____   _     _  _____) ) _____    _____) ) _______  _  _  _
+       \____ \ | |   | ||  __  / |  ___)  |  __  / |  ___  || || || |
+       _____) )| |___| || |  \ \ | |      | |  \ \ | |   | || || || |
+      (______/  \_____/ |_|   |_||_|      |_|   |_||_|   |_| \_____/
+                                                               
+      Surfraw - Shell Users' Revolutionary Front Rage Against the Web
+
+				 Oh Baybe
+				I need some
+			       Deep Linking
+				 Let us go
+			    Surfin' in the raw!
+
+			       H A C K I N G
+				   
+Or... How to Eat The CHEESE
+
+1)  First, find a front end (`an elvi, types of elvis -- makes evil
+    nice') in the elvi/ directory that does something similar to what you
+    want. In this example we shall use the `google' elvis.
+
+2)  Copy the `google' elvis to the name of your new elvis.
+    In this example we shall create an elvis for the
+    Peoples' Front Against Forum Stealing Dogs
+    http://www.pfafsd.org/ mailing-list search service
+
+3)  At the top of the file, you will see something like:
+
+    # elvis: google -- Search the web using Google (http://www.google.com)
+
+    Keep the "elvis:" take and change the rest of the line. This
+    description is used at Surfraw installation time to generate a list
+    of Surfraw clients
+
+    Immediately after we see:
+
+        . surfraw || exit 1
+    
+    Which pulls in the Surfraw functions. Keep it.
+
+4)  Next we (optionally) define w3_config_hook(). It is  called
+    by w3_config and is used to define default configuration
+    variables. It is called after the global configuration file
+    is interpreted, but before ~/.surfraw.
+
+    You will notice the use of:
+
+    def    -- define configuration variable unless already defined
+              (i.e by the environment)
+    defyn  -- define boolean configuration variable unless
+	      already defined
+
+    Which are pre-defined surfraw functions, but you can
+    of course use your own arbitrary broken shell code instead.
+
+5)  Any non-trivial program will then define w3_usage_hook(). 
+    $w3_argv0 is set to contain $0, otherwise usage is self
+    explanatory. You must call w3_global_usage at the end
+    of this function and follow the surfraw usage style
+    least you be marked a quiche eater.
+    
+6)  Next define w3_parse_option_hook(). This is called at w3_config()
+    time, and takes two arguments. The first is the current
+    option being examined, the second is only present if the
+    option was of the form `-foo=bar'. It's the `bar'.
+
+    w3_parse_option_hook() is called before Surfraw global options
+    are parsed and so you can selectively over-ride them.
+
+    Return value: 0 if the option was recognised, 1 otherwise.
+
+7)  After this, w3_config() and w3_parse_args "$@" are called.
+    w3_config() scans the configuration files and calls
+    w3_config_hook(). w3_parse_args "$@" processes options,
+    called w3_parse_option_hook() as needed and builds
+    $w3_args -- the list non-option arguments.
+
+    This ends the regular initialisation code.
+
+8)  What happens next depends on the type of evil we are dealing
+    with. In the Peoples' Front Against Forum Stealing Dogs case, we have
+    previously performed a search on the http://www.pfafsd.org search
+    service, and noted (with the '=' key in lynx, links) the url
+    returned. We then analyse this url to work out which CGI variable is
+    being used to convey search the search string, number of results et
+    al.
+
+    Q: What about those proslytizers of iniquity that worship idols like
+       method=POST?
+      
+    A: Most sites will take GETs in the place of POSTs, even if they
+       preach method=POST in forms. For those that don't? Walking with
+       the devil should not be a an exercise in relaxed discourse. The
+       problem is getting the browser to automatically submit the data
+       using POST as a method. One partial solution is to have surfraw
+       generate a pre-filled method=POST form as a local file and have
+       the browser read it. Exploration of other ideas is encouraged.
+
+    w3_url_of_arg() is then used to escape the command line search
+    string argument into something that can be seen in a URL without
+    embarrassment.
+
+    i.e escaped_args=`w3_url_of_arg $w3_args`
+
+    In our last exhilarating moments we then build the final URL and
+    pass it onto the currently selected browser with w3_browse_url,
+    proud in the knowledge that the Shell Users' Revolutionary Front
+    Against the WWW has brought the holy word of the command line to
+    yet another heathen land.
+
+    -Julian Assange <proff-projects-surfraw@iq.org>
+
+$Id$

@@ -1,0 +1,68 @@
+%define name	surfraw
+%define version @VERSION@
+%define release 1
+%define builddir $RPM_BUILD_DIR/%{name}-%{version}
+
+Name:		%{name}
+Version:	%{version}
+Release:	%{release}
+Vendor:		Julian Assange 
+Packager:	Julian Assange proff-projects-surfraw@iq.org
+#URL:		
+Source:         %{name}-%{version}.tar.gz
+#Patch:		
+Group:		Application/Generic
+Copyright:	GPL
+#Icon:		
+#Requires:	
+BuildRoot:	/var/tmp/%{name}-%{version}
+BuildArchitectures:    noarch
+
+Summary:	Shell Users Revolutionary Front Rage Against the Web
+%description
+  Surfraw provides a fast unix command line interface to a variety of
+  popular WWW search engines and other artifacts of power. It reclaims
+  google, altavista, dejanews, freshmeat, research index, slashdot
+  and many others from the false-prophet, pox-infested heathen lands of
+  html-forms, placing these wonders where they belong, deep in unix
+  heartland, as god loving extensions to the shell.
+
+  Surfraw abstracts the browser away from input. Doing so lets it get
+  on with what it's good at. Browsing. Interpretation of linguistic
+  forms is handed back to the shell, which is what it, and human
+  beings are good at. Combined with incremental text browsers, such
+  as links, w3m (or even lynx), and screen(1), or netscape-remote
+  a Surfraw liberateur is capable of research speeds that leave
+  GUI tainted idolaters agape with fear and wonder.
+
+  For example:
+
+         $ ask why is jeeves gay?
+         $ google -results=100 RMS, GNU, which is sinner, which is sin?
+         $ austlii -method=phrase dog like
+         $ ryhme -method=perfect Julian
+@configure_input@
+%prep
+%setup -n %{name}-%{version} 
+#%patch -p1
+
+%build
+CFLAGS="$RPM_OPT_FLAGS" ./configure --prefix=%{_prefix}
+make
+
+%install
+if [ -d $RPM_BUILD_ROOT ]; then rm -rf $RPM_BUILD_ROOT; fi
+mkdir -p $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
+# Build the file-list automagically :)
+cd $RPM_BUILD_ROOT
+find . -type d | sed '1,2d;s,^\.,\%attr(-\,root\,root) \%dir ,' > $RPM_BUILD_DIR/file.list.%{name}
+find . -type f | sed 's,^\.,\%attr(-\,root\,root) ,' >> $RPM_BUILD_DIR/file.list.%{name}
+find . -type l | sed 's,^\.,\%attr(-\,root\,root) ,' >> $RPM_BUILD_DIR/file.list.%{name}
+
+%clean
+rm -rf $RPM_BUILD_ROOT
+rm ../file.list.%{name}
+
+%files -f ../file.list.%{name}
+%doc README

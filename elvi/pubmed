@@ -1,0 +1,48 @@
+#!/bin/sh
+# $Id$
+# elvis: pubmed		-- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_pubmed_database	PubMed
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search PubMed	medical/molbio databases (www.ncbi.nlm.nih.gov)
+Local options:
+  -db=				Database to search
+      PubMed		|	
+      Nucleotide	|
+      Protein		|
+      Genome		|
+      Structure		|
+      Popset
+      				Default: $SURFRAW_pubmed_database
+      				Environment: SURFRAW_pubmed_database
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-db=PubMed | -db=Nucleotide | -db=Protein | -db=Genome | -db=Structure | -db=Popset)
+		setopt   SURFRAW_pubmed_database	$optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.ncbi.nlm.nih.gov/entrez/query.fcgi"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?SUBMIT=y&term=${escaped_args}&db=${SURFRAW_pubmed_database}&orig_db=PubMed&cmd="
+fi

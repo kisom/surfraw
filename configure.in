@@ -1,0 +1,23 @@
+dnl $Id$
+
+dnl Process this file with autoconf to produce a configure script.
+
+AC_INIT(surfraw.in)
+dnl This is the only place where the package version appears
+AM_INIT_AUTOMAKE(surfraw, 1.0.7)
+
+AC_SUBST(VERSION)
+
+ISODATE=`date +%Y-%m-%d`
+AC_SUBST(ISODATE)
+
+AC_CANONICAL_HOST
+
+dnl Checks for programs.
+AC_PROG_INSTALL
+AC_CHECK_PROGS(sr_text_browser, links w3m lynx)
+AC_SUBST(sr_text_browser)
+AC_CHECK_PROGS(sr_graphical_browser, mozilla konqueror netscape opera kfm)
+AC_SUBST(sr_graphical_browser)
+
+AC_OUTPUT(Makefile surfraw.conf surfraw.lsm surfraw surfraw.spec elvi/Makefile)

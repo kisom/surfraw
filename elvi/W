@@ -1,0 +1,17 @@
+#!/bin/sh
+# $Id$
+# elvis: W		-- Activate Surfraw defined web-browser
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [browser-options] url
+Description:
+  Surfraw activate the currently configured web-browser ($SURFRAW_browser)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+w3_browse_url "$w3_args"
