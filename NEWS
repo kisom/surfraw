@@ -65,6 +65,8 @@ relevant config files.
     freedb, happypenguin, jake, rhyme, scaleplus, 
 	sharereactor, thesaurus, webster, deblists.
   * Added note to HACKING explaining how to disable ifs quoting
+  * synced NAMESPACE branch with HEAD
+    Please use the main HEAD branch from now on.
 
 Tue Dec 23 03:19:58 GMT 2003 - surfraw 2.0
 

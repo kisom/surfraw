@@ -43,8 +43,10 @@ surfraw (2.0.1-1) unstable; urgency=low
     freedb, happypenguin, jake, rhyme, scaleplus, sharereactor
     thesaurus, webster, deblists.
   * Added note to HACKING explaining how to disable ifs quoting
+  * synced NAMESPACE branch with HEAD
+    Please use the main HEAD branch from now on.
 
- -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Thu,  5 Feb 2004 23:11:54 +0000
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Fri,  6 Feb 2004 00:37:03 +0000
 
 surfraw (2.0-1) unstable; urgency=low
 
