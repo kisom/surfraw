@@ -24,6 +24,7 @@ Local options:
                                 Default: $SURFRAW_debian_release
                                 Environment: SURFRAW_debian_release
   -distro=                      Specific distribution
+          all           |       All distributions
           stable        |       Stable
           testing       |       Testing
           unstable      |       Unstable
