@@ -1,0 +1,133 @@
+#!/bin/sh
+# $Id$
+# elvis: w3rdf		-- Validate a RDF URL with the w3c RDF validator (validator.w3.org)
+# ianb@nessie.mcc.ac.uk 20040909
+. surfraw || exit 1
+
+w3_config_hook () {
+def    SURFRAW_w3rdf_output       "PRINT_TRIPLES"
+def    SURFRAW_w3rdf_format       "PNG_EMBEDDED"
+defyn  SURFRAW_w3rdf_savedot      0
+defyn  SURFRAW_w3rdf_ntriples     0
+defyn  SURFRAW_w3rdf_embedded     0
+defyn  SURFRAW_w3rdf_useme        0
+defyn  SURFRAW_w3rdf_anon         0
+def    SURFRAW_w3rdf_node         "Black"
+def    SURFRAW_w3rdf_nodetext     "Blue"
+def    SURFRAW_w3rdf_arc          "Darkgreen"
+def    SURFRAW_w3rdf_arctext      "Red"
+def    SURFRAW_w3rdf_fontsize     10
+def    SURFRAW_w3rdf_orientation  "LR"
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [URL]
+Description:
+  Validate a RDF URL with the w3c RDF validator (www.w3.org/RDF/Validator)
+Local options:
+  -output=TYPE                  Type of output displayed.
+                                Values: Triples, Graphs, Both
+                                Default: Triples
+                                Environment: SURFRAW_w3rdf_output
+  -format=TYPE                  Graph Format
+                                Values: PNG_EMBED, PNG_LINK, SVG_LINK, 
+                                        SVG_EMBED, GIF_EMBED, GIF_LINK,
+                                        PS_LINK, HP_PCL_LINK, HP_GL_LINK,
+                                        ISV_ZVTM
+                                Default: $SURFRAW_w3rdf_format
+                                Environment: SURFRAW_w3rdf_format
+  -savedot                      Save GraphViz DOT file.
+                                Environment: SURFRAW_w3rdf_savedot
+  -ntriples                     Display triples in N-Triples format
+                                Environment: SURFRAW_w3rdf_ntriples
+  -embedded                     RDF is NOT enclosed in <RDF>..</RDF> tags.
+                                Environment: SURFRAW_w3rdf_embedded
+  -useme                        I grant w3c permission to save the RDF
+                                for developing test cases.
+                                Environment: SURFRAW_w3rdf_useme
+  -anon                         Make anonymous nodes unlabelled.
+                                Environment: SURFRAW_w3rdf_anon
+  -fontsize=SIZE                Font Size.
+                                Values: 10, 12, 14, 16, 20
+                                Default: $SURFRAW_w3rdf_fontsize
+                                Environment: SURFRAW_w3rdf_fontsize
+  -orient=ORIENTATION           Orientation
+                                Values: TB (Top to Bottom), LR (Left to Right)
+                                Default: $SURFRAW_w3rdf_orientation
+                                Environment: SURFRAW_w3rdf_orientation
+  -node=COLOUR                  Node Colour.
+                                Environment: SURFRAW_w3rdf_node
+                                Default:  $SURFRAW_w3rdf_node
+  -nodetext=COLOUR              Node Text Colour.
+                                Environment: SURFRAW_w3rdf_nodetext
+                                Default:  $SURFRAW_w3rdf_nodetext
+  -arc=COLOUR                   Arc Colour.
+                                Environment: SURFRAW_w3rdf_arc
+                                Default:  $SURFRAW_w3rdf_arc
+  -arctext=COLOUR               Arc Text Colour.
+                                Environment: SURFRAW_w3rdf_arctext
+                                Default:  $SURFRAW_w3rdf_arctext
+                                Valid Colours: Black, Blue, Darkgreen, Red
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -out*=*)      case "$optarg" in
+	            [Tt]*) setopt SURFRAW_w3rdf_output  "PRINT_TRIPLES" ;;
+				[Gg]*) setopt SURFRAW_w3rdf_output  "PRINT_GRAPH" ;;
+				[Bb]*) setopt SURFRAW_w3rdf_output  "PRINT_GRAPH" ;;
+				*)     echo "Invalid value $optarg"; exit 1      ;;
+				esac ;;
+    -for*=*)    setopt    SURFRAW_w3rdf_format      "$optarg"      ;;
+    -sav*)      setoptyn  SURFRAW_w3rdf_savedot     1 ;;
+    -nt*)       setoptyn  SURFRAW_w3rdf_ntriples    1 ;;
+    -em*)       setoptyn  SURFRAW_w3rdf_embedded    1 ;;
+    -use*)      setoptyn  SURFRAW_w3rdf_useme       1 ;;
+    -anon*)     setoptyn  SURFRAW_w3rdf_anon        1 ;;
+    -font*=*)   setopt    SURFRAW_w3rdf_fontsize    "$optarg" ;;
+    -or*=*)     setopt    SURFRAW_w3rdf_orientation "$optarg" ;;
+    -node=*)    setopt    SURFRAW_w3rdf_node        "$optarg" ;;
+    -nodet*)    setopt    SURFRAW_w3rdf_nodetext    "$optarg" ;;
+    -arc=*)     setopt    SURFRAW_w3rdf_arc         "$optarg" ;;
+    -arct*=*)   setopt    SURFRAW_w3rdf_arctext     "$optarg" ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.w3.org/RDF/Validator/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	url="http://www.w3.org/RDF/Validator/ARPServlet?PARSE=PARSE_URI&URI=${escaped_args}&TRIPLES_AND_GRAPH=${SURFRAW_w3rdf_output}&FORMAT=${SURFRAW_w3rdf_format}&NODE_COLOR=${SURFRAW_w3rdf_node}&NODE_TEXT_COLOR=${SURFRAW_w3rdf_nodetext}&EDGE_COLOR=${SURFRAW_w3rdf_arc}&EDGE_TEXT_COLOR=${SURFRAW_w3rdf_arctext}&FONT_SIZE=${SURFRAW_w3rdf_fontsize}&ORIENTATION=${SURFRAW_w3rdf_orientation}"
+	if [ $SURFRAW_w3rdf_savedot -eq 1 ]
+	then
+		url="${url}&SAVE_DOT_FILE=on"
+	fi
+	if [ $SURFRAW_w3rdf_ntriples -eq 1 ]
+	then
+		url="${url}&NTRIPLES=on"
+	fi
+	if [ $SURFRAW_w3rdf_embedded -eq 1 ]
+	then
+		url="${url}&EMBEDDED_RDF=on"
+	fi
+	if [ $SURFRAW_w3rdf_useme -eq 1 ]
+	then
+		url="${url}&SAVE_RDF=on"
+	fi
+	if [ $SURFRAW_w3rdf_anon -eq 1 ]
+	then
+		url="${url}&ANON_NODES_EMPTY=on"
+	fi
+
+	w3_browse_url "${url}"
+fi

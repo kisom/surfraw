@@ -121,27 +121,63 @@ Or... How to Eat The CHEESE
 
     -Julian Assange <proff-projects-surfraw@iq.org>
 
-	APPENDIX 1
-	
-	Adding an elvi to the distribution:
+ APPENDIX 1
+    
+    Adding an elvi to the distribution:
 
-	1: write it (see above)
+    1: write it (see above)
 
-	2: copy elviname to the elvi directory
+    2: copy elviname to the elvi directory
 
-	3: add elviname to the bin_SCRIPTS list in elvi/Makefile.am
+    3: add elviname to the bin_SCRIPTS list in elvi/Makefile.am
 
-	4: add a link for the manpage in links.IN
-	
-	5: run automake and autoconf
+    4: add a link for the manpage in links.IN
+    
+    5: run automake and autoconf
 
-	6: rebuild the package (eg fakeroot debian/rules binary)
+    6: rebuild the package (eg fakeroot debian/rules binary)
        (this recreates elvi/surfraw.list)
 
-	7: update the elvi list in README from elvi/surfraw_elvi.list
+    7: update the elvi list in README from elvi/surfraw_elvi.list
 
-	8: add an entry to the changelog.
+    8: add an entry to the changelog.
 
-	9: if using cvs, '(cd elvi;cvs add elviname)' then 'cvs commit'
+    9: if using cvs, '(cd elvi;cvs add elviname)' then 'cvs commit'
+
+ APPENDIX 2
+
+    Preparing a release of surfraw:
+
+    1: Change into the surfraw source directory.
+
+    2: cvs update
+
+    3: If you have made changes, cvs commit
+
+    4: cvs tag -c surfraw_version-number_debianversion
+
+    5: mkdir ../release
+
+    6: cd ../release
+
+    7: cvs -d :ext:user@cvs.alioth.debian.org:/cvsroot/surfraw export -r surfraw_version-number_debianversion surfraw
+
+    8: cd surfraw
+
+    9: fakeroot make distcheck
+
+    10: cp surfraw-version.tar.gz ../surfraw_version.orig.tar.gz
+
+    11: mv surfraw-version.tar.gz ..
+
+    12: fakeroot dpkg-buildpackage -sa
+
+    13: cd ..
+
+    14: upload the debian packages
+
+    15: copy the .tar.gz, .orig.tar.gz, .dsc, .deb, .diff.gz files to the webspace
+
+    16: see the README.WEB file in the website tree for how to update the website.
 
 $Id$

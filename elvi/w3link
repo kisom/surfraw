@@ -1,0 +1,88 @@
+#!/bin/sh
+# $Id$
+# elvis: w3link		-- Check web page links with the w3c linkchecker (validator.w3.org/checklink)
+# ianb@nessie.mcc.ac.uk 20040908
+. surfraw || exit 1
+
+w3_config_hook () {
+def    SURFRAW_w3link_depth            -1
+defyn  SURFRAW_w3link_summary           1
+defyn  SURFRAW_w3link_hiderd            0
+defyn  SURFRAW_w3link_dhiderd           0
+defyn  SURFRAW_w3link_noacceptlanguage  0
+defyn  SURFRAW_w3link_recurse           0
+defyn  SURFRAW_w3link_cookie            0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [URL]
+Description:
+  Check web page links with the w3c linkchecker (validator.w3.org/checklink)
+Local options:
+  -r                            Check linked documents recursively.
+                                Environment: SURFRAW_w3link_recurse
+  -d=DEPTH                      Recursion depth.
+                                Default: unlimited (-1)
+                                Environment: SURFRAW_w3link_depth
+  -s                            Summary only.
+                                Environment: SURFRAW_w3link_summary
+  -hiderd                       Hide Redirects.
+                                Environment: SURFRAW_w3link_hiderd
+  -dhiderd                      Hide Redirects for directories only.
+                                Environment: SURFRAW_w3link_dhidedrd
+  -nolang                       Don't send the Accept-Language: header.
+                                Environment: SURFRAW_w3link_noacceptlanguage
+  -cookie                       Save options in a cookie. 
+                                Environment: SURFRAW_w3link_cookie
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -d*=*)    setopt    SURFRAW_w3link_depth    "$optarg" ;;
+	-r)       setoptyn  SURFRAW_w3link_recurse          1 ;;
+	-s)       setoptyn  SURFRAW_w3link_summary          1 ;;
+	-hiderd)  setoptyn  SURFRAW_w3link_hiderd           1 ;;
+	-dhiderd) setoptyn  SURFRAW_w3link_dhiderd          1 ;;
+	-nolang)  setoptyn  SURFRAW_w3link_noacceptlanguage 1 ;;
+	-cookie)  setoptyn  SURFRAW_w3link_cookie           1 ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://validator.w3.org/checklink"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	url="http://validator.w3.org/checklink?uri=${escaped_args}&depth=${SURFRAW_w3link_depth}"
+	if [ $SURFRAW_w3link_recurse -eq 1 -o $SURFRAW_w3link_depth -ge 0 ]
+	then
+		url="${url}&recursive=on"
+	fi
+	if [ $SURFRAW_w3link_summary -eq 1 ]
+	then
+		url="${url}&summary=on"
+	fi
+	if [ $SURFRAW_w3link_noacceptlanguage -eq 1 ]
+	then
+		url="${url}&no_accept_language=on"
+	fi
+
+	if [ $SURFRAW_w3link_hiderd -eq 1 ]
+	then
+		url="${url}&hide_redirects=on&hide_type=all"
+	elif [ $SURFRAW_w3link_dhiderd -eq 1 ]
+	then
+		url="${url}&hide_redirects=on&hide_type=dir"
+	fi
+
+	w3_browse_url "${url}"
+fi

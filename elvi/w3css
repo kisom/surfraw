@@ -1,0 +1,66 @@
+#!/bin/sh
+# $Id$
+# elvis: w3css		-- Validate a CSS URL with the w3c CSS validator (jigsaw.w3.org/css-validator)
+# ianb@nessie.mcc.ac.uk 20040909
+. surfraw || exit 1
+
+w3_config_hook () {
+def    SURFRAW_w3css_warnings  "1"
+def    SURFRAW_w3css_profile   "css2"
+def    SURFRAW_w3css_medium    "all"
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [URL]
+Description:
+  Validate a CSS URL with the w3c CSS validator (jigsaw.w3.org/css-validator/)
+Local options:
+  -warnings=LEVEL               Level of warnings displayed.
+                                Default: normal
+                                Values: all, normal, important, none
+                                Environment: SURFRAW_w3css_warnings
+  -profile=PROFILE              CSS Profile.
+                                Default: $SURFRAW_w3css_profile
+                                Values: none, css1, css2, css3, svg, svgbasic,
+                                        svgtiny, mobile, atsv-tv, tv
+                                Environment: SURFRAW_w3css_profile
+  -medium=MEDIUM                User Medium
+                                Default: $SURFRAW_w3css_medium
+                                Values: all, aural, braille, embossed, 
+                                        handheld, print, projection, 
+                                        screen, tty, tv, presentation
+                                Environment: SURFRAW_w3css_medium
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-prof*=*)   setopt    SURFRAW_w3css_profile  "$optarg" ;;
+	-med*=*)    setopt    SURFRAW_w3css_medium   "$optarg" ;;
+    -warn*=*)   case "$optarg" in
+	            [Aa]*)         setopt SURFRAW_w3css_warnings "2"  ;;
+	            [Nn][Oo][Rr]*) setopt SURFRAW_w3css_warnings "1"  ;;
+	            [Ii]*)         setopt SURFRAW_w3css_warnings "0"  ;;
+	            [Nn][Oo][Nn]*) setopt SURFRAW_w3css_warnings "no" ;;
+				*) echo "Invalid value $optarg"; exit 1 ;;
+				esac ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://jigsaw.w3.org/css-validator/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	url="http://jigsaw.w3.org/css-validator/validator?uri=${escaped_args}&warning=${SURFRAW_w3css_warnings}&profile=${SURFRAW_w3css_profile}&usermedium=${SURFRAW_w3css_medium}"
+
+	w3_browse_url "${url}"
+fi

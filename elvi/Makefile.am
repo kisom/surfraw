@@ -18,6 +18,7 @@ elvi_SCRIPTS	= \
 		  debpackages \
 		  debpts \
 		  deja \
+		  dmoz \
 		  ebay \
 		  excite \
 		  fast \
@@ -46,6 +47,10 @@ elvi_SCRIPTS	= \
 		  sunsolve \
 		  thesaurus \
 		  translate \
+		  w3css \
+		  w3html \
+		  w3link \
+		  w3rdf \
 		  webster \
 		  wetandwild \
 		  wikipedia \

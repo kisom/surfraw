@@ -1,0 +1,81 @@
+#!/bin/sh
+# $Id$
+# elvis: dmoz		-- Search the Open Directory Project web directory (dmoz.org)
+# ianb@nessie.mcc.ac.uk 20040910
+. surfraw || exit 1
+
+w3_config_hook () {
+def    SURFRAW_dmoz_category     ""
+def    SURFRAW_dmoz_searchtype   "b"
+defyn  SURFRAW_dmoz_kids         0
+defyn  SURFRAW_dmoz_teens        0
+defyn  SURFRAW_dmoz_mteens       0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [URL]
+Description:
+  Search the Open Directory Project web directory (dmoz.org)
+Local options:
+  -cat=CATEGORY                 Search category
+                                Default: all
+                                Values: Arts, Business, Computers, Games, 
+                                        Health, Home, Kids_and_Teens, News,
+                                        Recreation, Reference, Regional, 
+                                        Science, Shopping, Society, Sports, 
+                                        World, Adult
+                                Environment: SURFRAW_dmoz_category
+  -type=SEARCHTYPE              Search type
+                                Default: b
+                                Values: c - Categories Only
+                                        s - Sites only
+                                        b - Both
+                                Environment: SURFRAW_dmoz_searchtype
+  -kids                         Sites for kids.
+                                Environment: SURFRAW_dmoz_kids
+  -teens                        Sites for teens.
+                                Environment: SURFRAW_dmoz_teens
+  -mteens                       Sites for mature teens.
+                                Environment: SURFRAW_dmoz_mteens
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -cat*=*)    setopt    SURFRAW_dmoz_category          "$optarg" ;;
+	-ty*=*)     setopt    SURFRAW_dmoz_searchtype        "$optarg" ;;
+	-ki*)       setoptyn  SURFRAW_dmoz_kids                1 ;;
+	-te*)       setoptyn  SURFRAW_dmoz_teens               1 ;;
+	-mt*)       setoptyn  SURFRAW_dmoz_mteens              1 ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://dmoz.org/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	url="http://search.dmoz.org/cgi-bin/search?search=${escaped_args}&all=no&cat=${SURFRAW_dmoz_category}&t=${SURFRAW_dmoz_searchtype}"
+	if [ $SURFRAW_dmoz_kids -eq 1 ]
+	then
+		url="${url}&Kids=1"
+	fi
+	if [ $SURFRAW_dmoz_teens -eq 1 ]
+	then
+		url="${url}&Teens=1"
+	fi
+	if [ $SURFRAW_dmoz_mteens -eq 1 ]
+	then
+		url="${url}&Mteens=1"
+	fi
+
+	w3_browse_url "${url}"
+fi

@@ -1,0 +1,117 @@
+#!/bin/sh
+# $Id$
+# elvis: w3html		-- Validate a web page URL with the w3c validator (validator.w3.org)
+# ianb@nessie.mcc.ac.uk 20040906
+. surfraw || exit 1
+
+w3_config_hook () {
+def    SURFRAW_w3html_encoding "%28detect+automatically%29"
+def    SURFRAW_w3html_doctype  "Inline"
+defyn  SURFRAW_w3html_verbose             1
+defyn  SURFRAW_w3html_encodingfallback    0
+defyn  SURFRAW_w3html_doctypefallback     0
+defyn  SURFRAW_w3html_showsource          0
+defyn  SURFRAW_w3html_showparsetree       0
+defyn  SURFRAW_w3html_showoutline         0
+defyn  SURFRAW_w3html_excludeattributes   0
+defyn  SURFRAW_w3html_validateerror       0
+defyn  SURFRAW_w3html_usage               0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [URL]
+Description:
+  Validate a web page URL with the w3c validator (validator.w3.org)
+Local options:
+  -usage                        Go to help page for validator.
+  -encoding=ENCODING            Set page encoding.
+                                Default: autodetect
+                                Environment: SURFRAW_w3html_encoding
+  -encfb                        Fall back to encoding rather than override.
+                                Environment: SURFRAW_w3html_encodingfallback
+  -doctype="DOCTYPE"            Set page doctype.
+                                Default: SURFRAW_w3html_doctype
+  -docfb                        Fall back to doctype rather than override.
+                                Environment: SURFRAW_w3html_doctypefallback
+  -nv                           Be less verbose.
+                                Environment: SURFRAW_w3html_verbose
+  -showsource                   Show page source.
+                                Environment: SURFRAW_w3html_showsource
+  -showoutline                  Show page outline (headings)
+                                Environment: SURFRAW_w3html_showoutline
+  -showparsetree                Show parse tree.
+                                Environment: SURFRAW_w3html_showparsetree
+  -excludeatt                   Exclude attributes from parse tree.
+                                Environment: SURFRAW_w3html_excludeattributes
+  -err                          Validate Error (404) pages.
+                                Environment: SURFRAW_w3html_validateerror
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -enco*=*)   setopt    SURFRAW_w3html_encoding `w3_url_escape "$optarg"` ;;
+	-docty*=*)  setopt    SURFRAW_w3html_doctype  `w3_url_escape "$optarg"` ;;
+	-encfb)     setoptyn  SURFRAW_w3html_encodingfallback    1 ;;
+	-docfb)     setoptyn  SURFRAW_w3html_doctypefallback     1 ;;
+	-shows*)    setoptyn  SURFRAW_w3html_showsource          1 ;;
+	-showp*)    setoptyn  SURFRAW_w3html_showparsetree       1 ;;
+	-showo*)    setoptyn  SURFRAW_w3html_showoutline         1 ;;
+	-exc*)      setoptyn  SURFRAW_w3html_excludeattributes   1 ;;
+	-err*)      setoptyn  SURFRAW_w3html_validateerror       1 ;;
+	-nv*)       setoptyn  SURFRAW_w3html_verbose             0 ;;
+	-us*)       setoptyn  SURFRAW_w3html_usage               1 ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if [ $SURFRAW_w3html_usage -eq 1 ]; then
+	w3_browse_url "http://validator.w3.org/docs/users.html#Options"
+elif test -z "$w3_args"; then
+    w3_browse_url "http://validator.w3.org/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	url="http://validator.w3.org/check?uri=${escaped_args}&charset=${SURFRAW_w3html_encoding}&doctype=${SURFRAW_w3html_doctype}"
+	if [ $SURFRAW_w3html_encodingfallback -eq 1 ]
+	then
+		url="${url}&fbc=1"
+	fi
+	if [ $SURFRAW_w3html_doctypefallback -eq 1 ]
+	then
+		url="${url}&fbd=1"
+	fi
+	if [ $SURFRAW_w3html_showsource -eq 1 ]
+	then
+		url="${url}&ss=1"
+	fi
+	if [ $SURFRAW_w3html_showparsetree -eq 1 ]
+	then
+		url="${url}&sp=1"
+	fi
+	if [ $SURFRAW_w3html_showoutline -eq 1 ]
+	then
+		url="${url}&outline=1"
+	fi
+	if [ $SURFRAW_w3html_excludeattributes -eq 1 ]
+	then
+		url="${url}&noatt=1"
+	fi
+	if [ $SURFRAW_w3html_validateerror -eq 1 ]
+	then
+		url="${url}&No200=1"
+	fi
+	if [ $SURFRAW_w3html_verbose -eq 1 ]
+	then
+		url="${url}&verbose=1"
+	fi
+
+	w3_browse_url "${url}"
+fi

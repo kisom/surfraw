@@ -17,6 +17,7 @@ elvi.1sr.gz @mandir@/man1/deblists.1sr.gz
 elvi.1sr.gz @mandir@/man1/debpackages.1sr.gz
 elvi.1sr.gz @mandir@/man1/debpts.1sr.gz
 elvi.1sr.gz @mandir@/man1/deja.1sr.gz
+elvi.1sr.gz @mandir@/man1/dmoz.1sr.gz
 elvi.1sr.gz @mandir@/man1/ebay.1sr.gz
 elvi.1sr.gz @mandir@/man1/excite.1sr.gz
 elvi.1sr.gz @mandir@/man1/fast.1sr.gz
@@ -45,6 +46,10 @@ elvi.1sr.gz @mandir@/man1/sundocs.1sr.gz
 elvi.1sr.gz @mandir@/man1/sunsolve.1sr.gz
 elvi.1sr.gz @mandir@/man1/thesaurus.1sr.gz
 elvi.1sr.gz @mandir@/man1/translate.1sr.gz
+elvi.1sr.gz @mandir@/man1/w3css.1sr.gz
+elvi.1sr.gz @mandir@/man1/w3html.1sr.gz
+elvi.1sr.gz @mandir@/man1/w3link.1sr.gz
+elvi.1sr.gz @mandir@/man1/w3rdf.1sr.gz
 elvi.1sr.gz @mandir@/man1/webster.1sr.gz
 elvi.1sr.gz @mandir@/man1/wetandwild.1sr.gz
 elvi.1sr.gz @mandir@/man1/wikipedia.1sr.gz
