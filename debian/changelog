@@ -9,6 +9,7 @@ surfraw (2.0.2-1) unstable; urgency=low
     + Use argv[0] instead of computing it through basename
   * Removed elvi:
     + sharereactor: has been closed down
+  * Added French debconf template by Christian Perrier (Closes: #236088)
 
  -- Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>  Mon, 29 Mar 2004 21:34:48 +0200
 
