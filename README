@@ -162,7 +162,7 @@ Copyright:
   e.g
 
         SURFRAW_graphical_remote=yes
-        SURFRAW_graphical_broswer=mozilla
+        SURFRAW_graphical_browser=mozilla
         SURFRAW_text_browser=w3m
 
   Read HACKING. Surfrawize the soul of your favourite internet wonder.

@@ -1,3 +1,12 @@
+surfraw (1.0.7-2) unstable; urgency=low
+
+  * The first "collaborative" release :)
+  * Easy bugs first
+    - fix type in README (Closes: #154304)
+    - s/README/README.gz/ in manpage (Closes: #164206)
+
+ -- Christian Surchi <csurchi@debian.org>  Fri,  1 Aug 2003 09:23:45 +0000
+
 surfraw (1.0.7-1) unstable; urgency=low
 
   * New upstream release 
