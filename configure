@@ -1879,7 +1879,7 @@ done
 
 
 
-                                                                                ac_config_files="$ac_config_files Makefile surfraw.conf surfraw.lsm surfraw.spec elvi/Makefile debian/Makefile surfraw.1 elvi.1sr"
+                                                                      ac_config_files="$ac_config_files Makefile surfraw.conf surfraw.lsm surfraw.spec elvi/Makefile surfraw.1 elvi.1sr"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -2437,7 +2437,6 @@ do
   "surfraw.lsm" ) CONFIG_FILES="$CONFIG_FILES surfraw.lsm" ;;
   "surfraw.spec" ) CONFIG_FILES="$CONFIG_FILES surfraw.spec" ;;
   "elvi/Makefile" ) CONFIG_FILES="$CONFIG_FILES elvi/Makefile" ;;
-  "debian/Makefile" ) CONFIG_FILES="$CONFIG_FILES debian/Makefile" ;;
   "surfraw.1" ) CONFIG_FILES="$CONFIG_FILES surfraw.1" ;;
   "elvi.1sr" ) CONFIG_FILES="$CONFIG_FILES elvi.1sr" ;;
   *) { { echo "$as_me:$LINENO: error: invalid argument: $ac_config_target" >&5

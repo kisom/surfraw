@@ -1,0 +1,103 @@
+#
+#    Translators, if you are not familiar with the PO format, gettext
+#    documentation is worth reading, especially sections dedicated to
+#    this format, e.g. by running:
+#         info -n '(gettext)PO Files'
+#         info -n '(gettext)Header Entry'
+#
+#    Some information specific to po-debconf are available at
+#            /usr/share/doc/po-debconf/README-trans
+#         or http://www.debian.org/intl/l10n/po-debconf/README-trans
+#
+#    Developers do not need to manually edit POT or PO files.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-09 20:08+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: note
+#. Description
+#: ../templates:3
+msgid "New layout for surfraw elvi"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:3
+msgid ""
+"Surfraw has been rearranged so the elvi (tools to search websites) are in a "
+"separate directory (/usr/lib/surfraw) and no longer in your path. To run an "
+"elvis now, use:"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:3
+msgid "surfraw elviname [options] searchterms"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:3
+msgid "sr is an alias for surfraw, so you could do, for example:"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:3
+msgid "sr google -lucky my 200 monkeys"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:3
+msgid ""
+"If you wish to retain the old behaviour of running elvi directly, use "
+"surfraw-update-path(1) to append /usr/lib/surfraw to your shell's PATH (or "
+"optionally, all users and/or all known shells)"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:20
+msgid "Elvi have moved *again*"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:20
+msgid "The elvi have moved again to /usr/lib/surfraw"
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:20
+msgid ""
+"If you ran surfaw-update-path when version 2.0-1 was installed, you will "
+"need to run it again, twice, to update your config files to the new location."
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:20
+msgid ""
+"First run it with -remove, to remove the existing path, then with -add to "
+"add the new path."
+msgstr ""
+
+#. Type: note
+#. Description
+#: ../templates:20
+msgid ""
+"Remember you will need source your config files (or log out and in again) "
+"for this to take effect."
+msgstr ""

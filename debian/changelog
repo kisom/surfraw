@@ -37,16 +37,21 @@ surfraw (2.0.1-1) unstable; urgency=low
     and is not debian-specific
   * Makefile.am: Added install-data-hook to create links
   * configure.in, elvi/Makefile.in: fixed ELVIDIR quoting
-  * added elvi/surfraw_elvi to CLEANFILES & removed it from cvs, as it is
+  * Added elvi/surfraw_elvi to CLEANFILES & removed it from cvs, as it is
     generated on build.
-  * disabled ifs quoting in elvi that don't like it: 
+  * Disabled ifs quoting in elvi that don't like it: 
     freedb, happypenguin, jake, rhyme, scaleplus, sharereactor
     thesaurus, webster, deblists.
   * Added note to HACKING explaining how to disable ifs quoting
-  * synced NAMESPACE branch with HEAD
+  * Synced NAMESPACE branch with HEAD
     Please use the main HEAD branch from now on.
+  * links.IN: made links relative
+  * Converted debconf to po-debconf
+  * Eliminated templates.IN, as it confused po-debconf
+  * Deautoconfiscated the debian directory, as only templates went through
+    autoconf
 
- -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Fri,  6 Feb 2004 00:37:03 +0000
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Tue, 10 Feb 2004 03:33:14 +0000
 
 surfraw (2.0-1) unstable; urgency=low
 

@@ -4,7 +4,7 @@ Priority: optional
 Maintainer: Christian Surchi <csurchi@debian.org>
 Uploaders: Thomas Smith <tgs@debian.org>
 Standards-Version: 3.6.1.0
-Build-Depends-Indep: debhelper (>> 3.0)
+Build-Depends-Indep: debhelper (>= 4.1.16), 
 
 Package: surfraw
 Architecture: all
