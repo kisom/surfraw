@@ -10,8 +10,20 @@ surfraw (2.0.2-1) unstable; urgency=low
   * Removed elvi:
     + sharereactor: has been closed down
   * Added French debconf template by Christian Perrier (Closes: #236088)
+  * Added German debconf template by Helge Kreutzmann (Closes: #253800)
+  * New elvi: debpts.
+  * man page hyphenation fixes.
+  * debian/control:
+    + Dropped optional last part of Standards-Version.
+    + Changed lynx to lynx-cur in Recommends to avoid confusing apt.
+    + Added po-debconf to Build-Depends-Indep.
+  * debian/rules clean:
+    + enabled config.{guess,sub} update.
+    + remove templates.merged.
+  * HACKING: updated Appendix 1.
+  * surfraw.conf.in: set SURFRAW_graphical_browser to x-www-browser (Closes: #256201)
 
- -- Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>  Mon, 29 Mar 2004 21:34:48 +0200
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Thu, 29 Jul 2004 15:31:10 +0100
 
 surfraw (2.0.1-1) unstable; urgency=low
 

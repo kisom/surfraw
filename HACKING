@@ -133,14 +133,14 @@ Or... How to Eat The CHEESE
 
 	4: add a link for the manpage in links.IN
 	
-	5: rm elvi/surfraw_elvi.list
+	5: run automake and autoconf
 
-	6: run automake and autoconf
-
-	7: rebuild the package (eg fakeroot debian/rules binary)
+	6: rebuild the package (eg fakeroot debian/rules binary)
        (this recreates elvi/surfraw.list)
 
-	8: update the elvi list in README from elvi/surfraw_elvi.list
+	7: update the elvi list in README from elvi/surfraw_elvi.list
+
+	8: add an entry to the changelog.
 
 	9: if using cvs, '(cd elvi;cvs add elviname)' then 'cvs commit'
 

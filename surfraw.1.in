@@ -44,11 +44,11 @@ Surfraw consists of a collection of \fBelvi\fP, each of which knows how
 to search a specific web site.
 To see the list of elvi type:
 
- surfraw -elvi
+ surfraw \-elvi
 
 Note that sr is an alias for surfraw, so that could equally be
 
- sr -elvi
+ sr \-elvi
 
 To search using an elvis use:
 
@@ -57,7 +57,7 @@ To search using an elvis use:
 For example, to search google for information on Debian ports,
 using the "I'm feeling lucky" option:
 
- sr google -l debian ports
+ sr google \-l debian ports
 
 .SS Adding the elvi to your path
   
@@ -87,7 +87,7 @@ There are some example bookmarks in \%@sysconfdir@/surfraw.bookmarks
 
 .SH OPTIONS
 
-Use	\fB\%sr elviname -help\fP for elvi-specific options.
+Use	\fB\%sr elviname \-help\fP for elvi-specific options.
 
 The following options work with all elvi.
 
@@ -104,19 +104,19 @@ Show version of program.
 Set browser (default: sensible-browser).
 
 .TP
-.B -elvi
+.B \-elvi
 Display a list of other Surfraw mechanisms for conquering evil.
 
 .TP
-.B -escape-url-args=yes|no
+.B \-escape-url-args=yes|no
 Apply url escaping to arguments (default: yes)
 
 .TP
-.B -p0rn=yes|no
+.B \-p0rn=yes|no
 Yes, yes, harder, deeper, faster, oh baybe (default: yes)
 
 .TP
-.B -q|-quote
+.B \-q|\-quote
 Bracket all arguments with " characters (default: no).
 Note that putting quotes round arguments works now, so you can do,
 for example:
@@ -126,15 +126,15 @@ for example:
 and the quoting is passed on to the search engine
 
 .TP
-.B -quiet=yes|no
+.B \-quiet=yes|no
 I can't enjoy it with you talking all the time (default: no)
 
 .SH EXAMPLES
 
  $ sr ask why is jeeves gay?
- $ surfraw google -results=100 RMS, GNU, which is sinner, which is sin?
- $ sr austlii -method=phrase dog like
- $ /usr/lib/surfraw/rhyme -method=perfect Julian
+ $ surfraw google \-results=100 RMS, GNU, which is sinner, which is sin?
+ $ sr austlii \-method=phrase dog like
+ $ /usr/lib/surfraw/rhyme \-method=perfect Julian
 
 .SH CONFIGURATION
 

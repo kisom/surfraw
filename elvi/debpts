@@ -1,0 +1,43 @@
+#!/bin/sh
+# $Id$
+# elvis: debpts		-- Search the Debian Package Tracking System (packages.qa.debian.org)
+# ianb@nessie.mcc.ac.uk 20040729
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def SURFRAW_debpts_viewdocs  0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search the Debian Package Tracking System (packages.qa.debian.org)
+Local options:
+  -doc                          View PTS documentation
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -d*) setopt   SURFRAW_debpts_viewdocs 1 ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if [ $SURFRAW_debpts_viewdocs -eq 1 ]; then
+    w3_browse_url "http://www.debian.org/doc/manuals/developers-reference/ch-resources.en.html#s-pkg-tracking-system"
+elif test -z "$w3_args"; then
+	w3_browse_url "http://packages.qa.debian.org/common/index.html"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	w3_browse_url "http://packages.qa.debian.org/common/index.html?src=${escaped_args}"
+fi

@@ -16,6 +16,7 @@ elvi_SCRIPTS	= \
 		  debcontents \
 		  deblists \
 		  debpackages \
+		  debpts \
 		  deja \
 		  ebay \
 		  excite \

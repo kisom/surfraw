@@ -3,14 +3,14 @@ Section: web
 Priority: optional
 Maintainer: Christian Surchi <csurchi@debian.org>
 Uploaders: Thomas Smith <tgs@debian.org>
-Standards-Version: 3.6.1.0
-Build-Depends-Indep: debhelper (>= 4.1.16), 
+Standards-Version: 3.6.1
+Build-Depends-Indep: debhelper (>= 4.1.16), po-debconf
 
 Package: surfraw
 Architecture: all
 Pre-Depends: debconf (>=0.2.17)
 Depends: lynx | www-browser 
-Recommends: links | w3m | w3m-ssl | lynx
+Recommends: links | w3m | w3m-ssl | lynx-cur
 Suggests: screen
 Conflicts: surfaw
 Replaces: surfaw
