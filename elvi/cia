@@ -1,0 +1,27 @@
+#!/bin/sh
+# jbr20050112
+# elvis: cia		-- Search CIA documents at www.cia.gov
+. surfraw || exit 1
+
+# could have -worldfactbook etc, but I always use Entire Site
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search CIA documents at www.cia.gov
+Example:
+  cia WDM
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.cia.gov/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.cia.gov/search?NS-collection=Entire+Site&NS-search-page=results&NS-query=${escaped_args}"
+fi

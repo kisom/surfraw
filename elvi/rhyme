@@ -53,8 +53,9 @@ SURFRAW_quote_ifs=0
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-    w3_browse_url "http://rhyme.lycos.com/"
-else
+    w3_browse_url "http://www.rhymezone.com/"
+ else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://rhyme.lycos.com/r/rhyme.cgi?Word=${escaped_args}&typeofrhyme=${SURFRAW_rhyme_method}&org1=syl&org2=l"
+    w3_browse_url "http://www.rhymezone.com/r/rhyme.cgi?Word=${escaped_args}&typeofrhyme=${SURFRAW_rhyme_method}&org1=syl&org2=l"
+
 fi

@@ -1,11 +1,17 @@
-This package was debianized by Christian Surchi <csurchi@debian.org> on
-Sat,  5 Aug 2000 18:59:30 +0200.
+This package has initially been debianized by Christian Surchi
+<csurchi@debian.org>  since Sat,  5 Aug 2000 18:59:30 +0200. 
 
-It was downloaded from ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/
+surfraw has originally been developed by Julian Assange <proff@iq.org>,
+and was downloaded from ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/
 
-Upstream Author: Julian Assange <proff@iq.org>
+Since July 2003 it's development has continued through the surfraw Alioth
+project, you're welcome to contribute.
 
 Copyright:
 
-Surfraw is now public domain.
+surfraw is Copyright (c) 2003-2005 The Surfraw-Devel team
+           Copyright (c) 2000-2001 Julian Assange <proff@iq.org>
+           Copyright (c) 2001 Australian Institute for Collaborative Research
+           Copyright (c) 2000 Melbourne Institute for Advanced Study
 
+Surfraw is now public domain. You may freely use, modify and/or distribute it.

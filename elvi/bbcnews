@@ -44,9 +44,9 @@ if test -z "$w3_args"; then
 else
     escaped_args=`w3_url_of_arg $w3_args`
 	if [ $SURFRAW_bbcnews_scope = uk ]; then
-		w3_browse_url "http://newssearch.bbc.co.uk/cgi-bin/results.pl?scope=newsukfs&tab=news&q=${escaped_args}"
-	else
-		w3_browse_url "http://newssearch.bbc.co.uk/cgi-bin/results.pl?scope=newsifs&tab=news&q=${escaped_args}"
+                w3_browse_url "http://newssearch.bbc.co.uk/cgi-bin/search/results.pl?scope=newsukfs&tab=news&q=${escaped_args}"
+ 	else
+                w3_browse_url "http://newssearch.bbc.co.uk/cgi-bin/search/results.pl?scope=newsifs&tab=news&q=${escaped_args}"
 	fi
 fi
 
