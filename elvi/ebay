@@ -1,5 +1,5 @@
 #!/bin/sh
-# elvi: ebay -- Search the Ebay auction site
+# elvis: ebay		-- Search the Ebay auction site
 # Author: Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
 . surfraw || exit 1
 
