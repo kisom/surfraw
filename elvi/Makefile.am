@@ -27,9 +27,11 @@ bin_SCRIPTS	= \
 		  freshmeat \
 		  jake \
 		  google \
+		  happypenguin \
 		  imdb \
 		  scpan \
 		  slinuxdoc \
+		  leodict \
 		  netbsd \
 		  openbsd \
 		  pubmed \

@@ -1,6 +1,6 @@
-# Makefile.in generated automatically by automake 1.4-p4 from Makefile.am
+# Makefile.in generated automatically by automake 1.4-p6 from Makefile.am
 
-# Copyright (C) 1994, 1995-8, 1999 Free Software Foundation, Inc.
+# Copyright (C) 1994, 1995-8, 1999, 2001 Free Software Foundation, Inc.
 # This Makefile.in is free software; the Free Software Foundation
 # gives unlimited permission to copy and/or distribute it,
 # with or without modifications, as long as this notice is preserved.
@@ -61,14 +61,18 @@ PRE_UNINSTALL = :
 POST_UNINSTALL = :
 host_alias = @host_alias@
 host_triplet = @host@
+CC = @CC@
+HAVE_LIB = @HAVE_LIB@
 ISODATE = @ISODATE@
+LIB = @LIB@
+LTLIB = @LTLIB@
 MAKEINFO = @MAKEINFO@
 PACKAGE = @PACKAGE@
 VERSION = @VERSION@
 sr_graphical_browser = @sr_graphical_browser@
 sr_text_browser = @sr_text_browser@
 
-bin_SCRIPTS =  		  alioth 		  altavista 		  amazon 		  appwatch 		  ask 		  austlii 		  bbcnews 		  britannica 		  cddb 		  cite 		  cnn 		  currency 		  debbugs 		  debcontents 		  deblists 		  debpackages 		  deja 		  excite 		  fast 		  filesearching 		  freebsd 		  freedb 		  ftpfind 		  ftpsearch 		  freshmeat 		  jake 		  google 		  imdb 		  scpan 		  slinuxdoc 		  netbsd 		  openbsd 		  pubmed 		  raging 		  rhyme 		  slashdot 		  sundocs 		  sourceforge 		  stockquote 		  scaleplus 		  sunsolve 		  swhois 		  thesaurus 		  translate 		  W 		  webster 		  wetandwild 		  woffle 		  xxx 		  yahoo
+bin_SCRIPTS =  		  alioth 		  altavista 		  amazon 		  appwatch 		  ask 		  austlii 		  bbcnews 		  britannica 		  cddb 		  cite 		  cnn 		  currency 		  debbugs 		  debcontents 		  deblists 		  debpackages 		  deja 		  excite 		  fast 		  filesearching 		  freebsd 		  freedb 		  ftpfind 		  ftpsearch 		  freshmeat 		  jake 		  google 		  happypenguin 		  imdb 		  scpan 		  slinuxdoc 		  leodict 		  netbsd 		  openbsd 		  pubmed 		  raging 		  rhyme 		  slashdot 		  sundocs 		  sourceforge 		  stockquote 		  scaleplus 		  sunsolve 		  swhois 		  thesaurus 		  translate 		  W 		  webster 		  wetandwild 		  woffle 		  xxx 		  yahoo
 
 sysconf_DATA = surfraw_elvi.list
 

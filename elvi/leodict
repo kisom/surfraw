@@ -1,0 +1,96 @@
+#!/bin/sh
+# elvis: leodict		-- Search leo's German <-> English dictionary (dict.leo.org)
+# $Id$
+# surfraw plugin for the biggest English/German dictionary on
+# the WWW: dict.leo.org          jmm@informatik.uni-bremen.de
+# options added by Ian Beckwith <ianb@nessie.mcc.ac.uk>
+. surfraw || exit 1
+
+w3_config_hook () {
+defyn SURFRAW_leodict_link  yes
+defyn SURFRAW_leodict_head  yes
+defyn SURFRAW_leodict_grid  yes
+def   SURFRAW_leodict_to    "either"
+def   SURFRAW_leodict_spell "standard"
+def   SURFRAW_leodict_tol   "standard"
+def   SURFRAW_leodict_lang  `perl -e 'if((exists($ENV{LANG})) && ($ENV{LANG}=~/de/i)) { print "de\n"; } else { print "en\n"; }'`
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -link*=*)   setopt  SURFRAW_leodict_link    $optarg ;;
+    -head*=*)   setopt  SURFRAW_leodict_head    $optarg ;;
+    -grid*=*)   setopt  SURFRAW_leodict_grid    $optarg ;;
+    -to=*)      setopt  SURFRAW_leodict_to      $optarg ;;
+    -spell*=*)  setopt  SURFRAW_leodict_spell   $optarg ;;
+    -tol*=*)    setopt  SURFRAW_leodict_tol     $optarg ;;
+    -lang*=*)   setopt  SURFRAW_leodict_lang    $optarg ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [search words]...
+Description:
+  Surfraw search the German/English dictionary LEO (dict.leo.org)
+Local options:
+  -to=de | en | either          Language to translate to.
+                                Default: $SURFRAW_leodict_to
+                                Environment: SURFRAW_leodict_to
+  -lang=en | de                 Language web page is in.
+                                Default: en, unless \$LANG is set and contains "de"
+                                Environment: SURFRAW_leodict_lang, LANG
+  -link=on | off                Link results.
+                                Default: $SURFRAW_leodict_link
+                                Environment: SURFRAW_leodict_link
+  -head=on | off                Display headlines.
+                                Default: $SURFRAW_leodict_head
+                                Environment: SURFRAW_leodict_head
+  -grid=on | off                Show results in grid.
+                                Default: $SURFRAW_leodict_grid
+                                Environment: SURFRAW_leodict_grid
+  -spell=off | standard | force Spelling tolerance
+                                Default: $SURFRAW_leodict_spell
+                                Environment: SURFRAW_leodict_spell
+  -tol=off | standard | high    Special characters tolerance
+                                Default: $SURFRAW_leodict_tol
+                                Environment: SURFRAW_leodict_tol
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "http://dict.leo.org/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    url="http://dict.leo.org/?search=${escaped_args}"
+
+    if yesno SURFRAW_leodict_link ; then url="$url&relink=on"
+    else                                 url="$url&relink=off";fi
+    if yesno SURFRAW_leodict_head ; then url="$url&sectHdr=on"
+    else                                 url="$url&sectHdr=off";fi
+    if yesno SURFRAW_leodict_grid ; then url="$url&tableBorder=1"
+    else                                 url="$url&tableBorder=0";fi
+
+    if   [ "$SURFRAW_leodict_to" = "de" ] ; then url="$url&searchLoc=-1"
+    elif [ "$SURFRAW_leodict_to" = "en" ] ; then url="$url&searchLoc=1"
+    else                                         url="$url&searchLoc=0" ; fi
+
+    if   [ "$SURFRAW_leodict_spell" = "off" ]   ; then url="$url&spellToler=off"
+    elif [ "$SURFRAW_leodict_spell" = "force" ] ; then url="$url&spellToler=on"
+    else                                               url="$url&spellToler=standard" ; fi
+
+    if   [ "$SURFRAW_leodict_tol" = "high" ] ; then url="$url&cmpType=fuzzy"
+    elif [ "$SURFRAW_leodict_tol" = "off" ]  ; then url="$url&cmpType=exact"
+    else                                            url="$url&cmpType=relaxed" ; fi
+
+    url="$url&lang=$SURFRAW_leodict_lang"
+
+    w3_browse_url "$url"
+fi

@@ -21,7 +21,9 @@ usr/share/man/man1/surfraw.1.gz usr/share/man/man1/freshmeat.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/ftpfind.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/ftpsearch.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/google.1.gz
+usr/share/man/man1/surfraw.1.gz usr/share/man/man1/happypenguin.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/jake.1.gz
+usr/share/man/man1/surfraw.1.gz usr/share/man/man1/leodict.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/netbsd.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/openbsd.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/pubmed.1.gz
@@ -37,7 +39,7 @@ usr/share/man/man1/surfraw.1.gz usr/share/man/man1/sundocs.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/sunsolve.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/swhois.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/thesaurus.1.gz
-usr/share/man/man1/surfraw.1.gz usr/share/man/man1/translate.1.gz
+usr/share/man/man1/surfraw.1.gz usr/share/man/man1/stranslate.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/webster.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/wetandwild.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/woffle.1.gz
