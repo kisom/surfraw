@@ -1,0 +1,317 @@
+#!/bin/sh
+# $Id$
+# elvis: deblists	-- Search debian mailing lists (lists.debian.org/search.html)
+# ianb@nessie.mcc.ac.uk 2003919
+. surfraw || exit 1
+
+function dodate
+{
+    if [ $# -eq 0 ]
+    then
+    	datespec=""
+    else
+	datespec="$1"
+    fi
+
+    echo "$datespec" |
+    perl -w -e '
+######################################################################
+# start perl
+
+$arg=<>;
+chomp($arg);
+$arg=~s/\s//g;
+$arg=lc($arg);
+
+$arcstartyear="1995";
+$arcstartquarter="3";
+$arcstartdate="1995q3";
+$arcstartrange="1995q3-1995q4";
+
+$ynow=qx/date +%Y/; chomp($ynow);
+$mnow=qx/date +%m/; chomp($mnow);
+$qnow=sprintf("%.0d",($mnow / 4)); $qnow++;
+if($arg eq "") { $arg="${ynow}q${qnow}"; }
+    
+@ranges=split(/,/,$arg,-1);
+@ranges=map(canonrange($_),@ranges);
+@ranges=map(fillrange($_),@ranges);
+@ranges=unique(@ranges);
+@ranges=sort(@ranges);
+@ranges=map(toform($_),@ranges);
+
+my $dsep="&dates=";
+print($dsep,join($dsep,@ranges),"\n");
+
+sub unique
+{
+    my %hash=map { $_ => 1; } @_;
+    return(keys(%hash));
+}
+
+sub toform
+{
+    my $range=shift;
+    my @quarters=("Jan+to+Mar+",
+		  "Apr+to+Jun+",
+		  "Jul+to+Sep+",
+		  "Oct+to+Dec+");
+    my ($y,$q)=($range=~/^(\d+)q(\d)/i);
+    $q--;
+    return($quarters[$q].$y);
+}
+
+sub fillrange
+{
+    my $range=shift;
+    my @ranges=();
+    my $year;
+    # expand bare years
+    if(($year)=($range=~/^(\d+)$/))
+    {
+	if($year eq $arcstartyear)   { push(@ranges,fillrange($arcstartrange)); }
+	elsif($year eq $ynow)
+	{
+	    if($qnow>1) { push(@ranges,fillrange("${ynow}q1-${ynow}q$qnow")); }
+	    else { push(@ranges,"${ynow}q1"); }
+	}
+	else
+	{
+	    push(@ranges,fillrange("${year}q1-${year}q4"));
+	}
+    }
+    if(my ($start,$end)=($range=~/(.*)-(.*)/))
+    {
+	push(@ranges,expandrange($start,$end));
+    }
+    else
+    {
+	push(@ranges,$range);
+    }
+    return @ranges;
+}
+
+# convert eg "1998q3","1999q2" -> ("1998q3","1998q4","1999q1","1999q2")
+sub expandrange
+{
+    my($start,$end)=@_;
+    my($sy,$sq)=($start=~/^(\d+)q(\d)/);
+    my($ey,$eq)=($end  =~/^(\d+)q(\d)/);
+    my @quarts=();
+    for (my $q=$sq;$q<=4;$q++)      { push(@quarts,"${sy}q$q"); }
+    for (my $y=($sy+1);$y<$ey;$y++) { for my $q (1..4) { push(@quarts,"${y}q$q") } }
+    for (my $q=1;$q<=$eq;$q++)      { push(@quarts, "${ey}q$q") }
+    return @quarts;
+}
+
+# fill in range defaults
+sub canonrange
+{
+    my $arg=shift;
+    if($arg=~/(.*)-(.*)/)
+    {
+	my($start,$end)=(canondate($1),canondate($2));
+	# if arcstartyear, get the right start quarter
+	if(($start eq "") || ($start eq $arcstartyear)) { $start=$arcstartdate;}
+	# if they specified a start quarter but no year
+	if($start!~/^\d+/) { $start=$arcstartyear.$start;}
+	# start in 1st quarter
+	if($start!~/q\d$/) { $start.="q1"; }
+	# end in last quarter
+	if($end  !~/q\d$/) { $end  .="q4"; } 
+	# default to current year/quarter
+	if(($end eq "") || ($end eq $ynow)) { $end=$ynow."q".$qnow;}
+	if($end  !~/^\d+/) { $end  =$ynow.$end   ;}
+	return($start."-".$end);
+    }
+    else
+    {
+	$arg=canondate($arg);
+	# default to current year/quarter
+	if($arg eq "") { $arg=$ynow."q".$qnow; }
+	if($arg!~/^\d+/) { $arg=$ynow.$arg;   }
+	# expand a year to all its quarters
+	if($arg=~/^(\d+)$/)
+	{
+	    my $y=$1;
+	    my $startq=1;
+	    # get archive start right
+	    if($y eq $arcstartyear) { $startq = $arcstartquarter; }
+	    my @arg=map({$y."q".$_} $startq..4); return @arg;
+	}
+	return $arg;
+    }
+}
+
+# checks date and make it 4 digit
+sub canondate
+{
+    my $datespec=shift;
+    return "" if($datespec eq "");
+    unless($datespec=~/^(\d*)?(q\d)?$/)
+    {
+	print("Bad date spec: $datespec\n");
+	exit(1);
+    }
+    if($datespec=~/^(\d+)/)
+    {
+	my $year=$1;
+	if(($year>90) && ($year <= 99)) { $datespec="19".$datespec; }
+	elsif($year<90)
+	{
+	    $newyear=sprintf("20%02.d",$year);
+	    $datespec=~s/^$year/$newyear/;
+	}
+    }
+    return($datespec);
+}
+
+
+#end perl
+######################################################################
+' # end of perl quoting
+    return $?
+}
+
+w3_config_hook () {
+def SURFRAW_deblists_results    $SURFRAW_results
+def SURFRAW_deblists_lists      "user" 
+def SURFRAW_deblists_dates      ""
+def SURFRAW_deblists_case       ""
+def SURFRAW_deblists_errors     0
+def SURFRAW_deblists_partial    ""
+def SURFRAW_deblists_sameline   ""
+def SURFRAW_deblists_maxlines   10
+def SURFRAW_deblists_searchhelp	0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search patterns]...
+Description:
+  Surfraw search debian mailing lists (lists.debian.org/search.html)
+Local options:
+  -shelp		|	Go to search help page
+				(http://lists.debian.org/glimpse.html#sect7)
+  -results=NUM		|	Number of search results returned
+  				Default: $SURFRAW_deblists_results	
+				Environment: SURFRAW_deblists_results
+  -dates=DATESPEC	|	Specify quarters to search
+    				Format: YEARqQUARTER eg 1998q3
+  				Separate multiple quarters with commas
+				Whole years expanded (eg 97 => 1997q1-1997q4)
+				Ranges allowed
+				Range ends default to archive start/now
+				Examples: 
+					1995,96q2-97q1,99q3-0,2002-
+					- (whole archive)
+				Archive starts 1995q3  
+  				Default: current quarter
+  				Environment: SURFRAW_deblists_dates
+  -case			|	Case-sensitive search
+  				Default: no
+				Environment: SURFRAW_deblists_case
+  -errors=0|1|2|best	|	Errors allowed (best=Best Match)
+  				Default: $SURFRAW_deblists_errors
+				Environment: SURFRAW_deblists_errors
+  -partial		|	Allow partial matches (eg deb => "debian" or "debug")
+  				Default: no
+				Environment: SURFRAW_deblists_partial
+  -sameline		|	Words separated by ';' must appear on same line
+  		        	Default: no
+				Environment: SURFRAW_deblists_sameline
+  -lines=0|5|10|50|100	|	Max lines per message (0=titles only)
+  -list=LIST		|	List to search
+	  			Default: $SURFRAW_deblists_lists
+  				Environment: SURFRAW_deblists_lists
+				Lists (as of 2003-09-18):
+	68k accessibility admintool alpha amd64 announce apache arm autobuild
+	beowulf books boot bsd cd cd-vendors cdwrite changes chinese
+	chinese-big5 chinese-gb commercial consultants ctte curiosa debbugs
+	deity devel devel-announce devel-changes devel-french devel-games
+	devel-italian devel-m68k-changes devel-portuguese
+	devel-powerpc-changes devel-spanish devel-sparc-changes doc dpkg edu
+	emacsen embedded esperanto events-eu events-na faq firewall french gcc
+	glibc gtk-gnome hams handheld hppa hurd i18n ia64 ipv6 isp italian
+	japanese java jr kde l10n-catalan l10n-danish l10n-dutch l10n-english
+	l10n-finnish l10n-french l10n-german l10n-greek l10n-hungarian
+	l10n-italian l10n-polish l10n-portuguese l10n-spanish l10n-turkish
+	laespiral laptop lcs-eng legal lex lint-maint lsb lsb-confcall
+	lsb-discuss lsb-impl lsb-spec lsb-test med mentors mips mirrors
+	multimedia newmaint newmaint-admin newmaint-discuss news news-french
+	news-german news-portuguese nonprofit ocaml-maint openoffice parisc
+	perl pilot policy pool powerpc project publicity python qa qa-packages
+	qa-private qt-kde release russian s390 s390-changes security
+	security-announce sgml simplified-chinese snapshots sparc
+	sparc-changes spi-announce spi-general ssh superh testing tetex-maint
+	toolchain ultralinux user user-catalan user-danish user-de user-french
+	user-german user-indonesian user-polish user-portuguese user-spanish
+	user-swedish user-turkish user-ukrainian vgui-discuss vote win32 wnpp
+	www x
+
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-result*=*)	setopt	SURFRAW_deblists_results	$optarg	;;
+	-error*=*) 	setopt	SURFRAW_deblists_errors 	$optarg	;;
+	-line*=*) 	setopt	SURFRAW_deblists_maxlines 	$optarg	;;
+	-lis*=*) 	setopt	SURFRAW_deblists_lists		$optarg	;;
+	-date*=*) 	setopt	SURFRAW_deblists_dates		$optarg ;;
+	-case) 		setopt	SURFRAW_deblists_case		on	;;
+	-partial) 	setopt	SURFRAW_deblists_partial	on	;;
+	-same*) 	setopt	SURFRAW_deblists_sameline	on	;;
+	-shelp*)	setopt	SURFRAW_deblists_searchhelp	1	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if [ $SURFRAW_deblists_searchhelp -eq 1 ]; then
+    w3_browse_url "http://lists.debian.org/glimpse.html#sect7"
+elif test -z "$w3_args"; then
+    w3_browse_url "http://lists.debian.org/search.html"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    url="http://lists.debian.org/cgi-bin/searchlists?query=${escaped_args}&maxfiles=${SURFRAW_deblists_results}&maxlines=${SURFRAW_deblists_maxlines}&errors=${SURFRAW_deblists_errors}"
+
+# 2003-09-19: website implies you can search multiple lists
+# simultaneously, but it doesn't work (and hasn't for a long time
+# judging by bug reports), so this code is disabled for now
+#    lists=`echo "${SURFRAW_deblists_lists}" | sed 's/[[:space:]]//g;s/,/\&lists=/g'`
+    url="${url}&lists=${SURFRAW_deblists_lists}"
+    
+    dodate_ret=`dodate "${SURFRAW_deblists_dates}"`
+    if [ $? -eq 0 ]
+    then
+        url="${url}${dodate_ret}"
+    else
+	# error in date spec - abort
+        echo "$0: $dodate_ret"
+	exit 1
+    fi
+    
+    if [ "${SURFRAW_deblists_case}" != "" ]
+    then
+	url="${url}&case=${SURFRAW_deblists_case}"
+    fi
+    if [ "${SURFRAW_deblists_partial}" != "" ]
+    then
+	url="${url}&partial=${SURFRAW_deblists_partial}"
+    fi
+    if [ "${SURFRAW_deblists_sameline}" != "" ]
+    then
+	url="${url}&lineonly=${SURFRAW_deblists_sameline}"
+    fi
+
+    w3_browse_url "$url"
+
+fi
+

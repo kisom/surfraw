@@ -246,8 +246,8 @@ w3_parse_option () {
 
 w3_parse_args () {
     w3_args=
-    SURFRAW_browser=none
-    SURFRAW_browser_args=none
+    def SURFRAW_browser none
+    def SURFRAW_browser_args none
     do_help=0
     mode=unknown
     for arg in "$@"; do
@@ -257,7 +257,7 @@ w3_parse_args () {
 	if ok SURFRAW_graphical && test -n "$DISPLAY"; then
 		SURFRAW_browser=$SURFRAW_graphical_browser
 		SURFRAW_browser_args=$SURFRAW_graphical_browser_args
-		mode=graphics
+		mode=graphical
 	else
 		SURFRAW_browser=$SURFRAW_text_browser
 		SURFRAW_browser_args=$SURFRAW_text_browser_args
@@ -283,7 +283,7 @@ w3_browse_url () {
 		$SURFRAW_screen $SURFRAW_browser $SURFRAW_browser_args "$@"
 	fi
     else
-	if ok SURFRAW_graphical_remote && test mode = graphical; then
+	if ok SURFRAW_graphical_remote && test $mode = graphical; then
 		if ok SURFRAW_new_window; then 
 			newwin=", new-window"
 		else

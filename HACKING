@@ -112,4 +112,27 @@ Or... How to Eat The CHEESE
 
     -Julian Assange <proff-projects-surfraw@iq.org>
 
+	APPENDIX 1
+	
+	Adding an elvi to the distribution:
+
+	1: write it (see above)
+
+	2: copy elviname to the elvi directory
+
+	3: add elviname to the bin_SCRIPTS list in elvi/Makefile.am
+
+	4: add a link for the manpage in debian/surfraw.links
+	
+	5: rm elvi/surfraw_elvi.list
+
+	6: run automake and autoconf
+
+	7: rebuild the package (eg fakeroot debian/rules binary)
+       (this recreates elvi/surfraw.list)
+
+	8: update the elvi list in README from elvi/surfraw_elvi.list
+
+	9: if using cvs, '(cd elvi;cvs add elviname)' then 'cvs commit'
+
 $Id$

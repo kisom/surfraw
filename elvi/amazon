@@ -82,7 +82,7 @@ pre_url="http://${host}/exec/obidos"
 w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
-if null $w3_args; then
+if null "$w3_args"; then
     w3_browse_url "${pre_url}/redirect-home/undergroundpubli?tag-id=undergroundpubli"
 else
     escaped_args=`w3_url_of_arg $w3_args`

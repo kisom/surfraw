@@ -10,4 +10,8 @@ Christian Surchi <csurchi@debian.org>
 Jason Harris <jharris@widowmaker.com>
 	elvi: freebsd, openbsd, filesearching, ftpfind
 
+Ian Beckwith <ianb@nessie.mcc.ac.uk>
+	elvi: alioth, bbcnews, cddb, deblists, freedb, imdb, scpan
+	plus various tweaks.
+
 $Id$

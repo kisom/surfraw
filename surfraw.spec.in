@@ -40,7 +40,7 @@ Summary:	Shell Users Revolutionary Front Rage Against the Web
          $ ask why is jeeves gay?
          $ google -results=100 RMS, GNU, which is sinner, which is sin?
          $ austlii -method=phrase dog like
-         $ ryhme -method=perfect Julian
+         $ rhyme -method=perfect Julian
 @configure_input@
 %prep
 %setup -n %{name}-%{version} 

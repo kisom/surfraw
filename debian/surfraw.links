@@ -1,3 +1,4 @@
+usr/share/man/man1/surfraw.1.gz usr/share/man/man1/alioth.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/altavista.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/amazon.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/appwatch.1.gz
@@ -9,6 +10,7 @@ usr/share/man/man1/surfraw.1.gz usr/share/man/man1/cnn.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/currency.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/debbugs.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/debcontents.1.gz
+usr/share/man/man1/surfraw.1.gz usr/share/man/man1/deblists.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/debpackages.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/deja.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/excite.1.gz
@@ -26,6 +28,7 @@ usr/share/man/man1/surfraw.1.gz usr/share/man/man1/pubmed.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/raging.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/rhyme.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/scaleplus.1.gz
+usr/share/man/man1/surfraw.1.gz usr/share/man/man1/scpan.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/slashdot.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/slinuxdoc.1.gz
 usr/share/man/man1/surfraw.1.gz usr/share/man/man1/sourceforge.1.gz

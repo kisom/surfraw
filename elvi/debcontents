@@ -1,6 +1,6 @@
 #!/bin/sh
 # $Id$
-# elvis: debcontents	-- Search contents of debian packages(packages.debian.org)
+# elvis: debcontents	-- Search contents of debian packages (packages.debian.org)
 . surfraw || exit 1
 
 w3_config_hook () {

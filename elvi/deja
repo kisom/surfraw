@@ -1,21 +1,23 @@
 #!/bin/sh
 # $Id$
-# elvis: deja		-- Search usenet using Deja News (www.dejanews.com)
+# elvis: deja		-- Search usenet using Google Groups (groups.google.com)
 . surfraw || exit 1
 
 w3_config_hook () {
 def   SURFRAW_deja_results $SURFRAW_results
+def   SURFRAW_deja_style   "normal"
 }
 
 w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words]...
 Description:
-  Search the usenet using Deja-News (www.dejanews.com)
+  Search usenet using Google Groups (groups.google.com)
 Local options:
   -results=NUM                  Number of search results returned
                                 Default: $SURFRAW_deja_results
-                                Environment: $SURFRAW_deja_results
+                                Environment: SURFRAW_deja_results
+  -m                            Search for Message-ID
 EOF
     w3_global_usage
 }
@@ -25,6 +27,7 @@ w3_parse_option_hook () {
     optarg="$2"
     case "$opt" in
 	-results=*) setopt   SURFRAW_deja_results $optarg	;;
+	-m*)        setopt   SURFRAW_deja_style   "message-id"  ;;
 	*) return 1 ;;
     esac
     return 0
@@ -34,8 +37,12 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-    w3_browse_url "http://www.dejanews.com/"
+    w3_browse_url "http://groups.google.com/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://x25.deja.com/=dnc/[ST_rn=ps]/qs.xp?ST=PS&svcclass=dnserver&QRY=${escaped_args}&defaultOp=AND&DBS=1&OP=dnquery.xp&LNG=ALL&showsort=date&test=PS&maxhits=${SURFRAW_deja_results}"
+    if test "${SURFRAW_deja_style}" = "normal"; then
+       w3_browse_url "http://groups.google.com/groups?q=${escaped_args}&num=${SURFRAW_deja_results}"
+    else
+       w3_browse_url "http://groups.google.com/groups?as_umsgid=${escaped_args}&num=${SURFRAW_deja_results}"
+    fi
 fi

@@ -1,5 +1,6 @@
 # $Id$
 bin_SCRIPTS	= \
+		  alioth \
 		  altavista \
 		  amazon \
 		  appwatch \
@@ -13,6 +14,7 @@ bin_SCRIPTS	= \
 		  currency \
 		  debbugs \
 		  debcontents \
+		  deblists \
 		  debpackages \
 		  deja \
 		  excite \
@@ -26,6 +28,7 @@ bin_SCRIPTS	= \
 		  jake \
 		  google \
 		  imdb \
+		  scpan \
 		  slinuxdoc \
 		  netbsd \
 		  openbsd \

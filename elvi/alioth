@@ -1,6 +1,6 @@
 #!/bin/sh
-# elvis: alioth	-- Search Alioth (alioth.debian.org)
 # $Id$
+# elvis: alioth		-- Search Alioth (alioth.debian.org)
 # ianb@nessie.mcc.ac.uk 20030910
 # adapted from sourceforge elvi
 
