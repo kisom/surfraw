@@ -1,12 +1,12 @@
-# -*- sh -*- bash programmable completion for Surfraw, v2.1
+# -*- sh -*- bash programmable completion for Surfraw, v2.2
 _surfraw() 
 {       COMPREPLY=()
 	local cur=${COMP_WORDS[COMP_CWORD]}
 	local prev=${COMP_WORDS[COMP_CWORD-1]}
-	local opts='-browser= -elvi -escape-url-args -graphical \
+	local opts='-browser -elvi -escape-url-args -graphical \
 		-help -p0rn -q -quote -quiet -text -version'
 	local elvi="$(cut -f1 /etc/surfraw.bookmarks ~/.surfraw.bookmarks 2>&-
-			ls /usr/lib/surfraw 2>&-)"
+			cd /usr/lib/surfraw && echo * 2>&-)"
 	if      [[ $cur == -* ]]
 	then    COMPREPLY=( $( compgen -W "$opts" -- $cur ) )
 	# I can't see a way to get the =yes/=no parts to work...
@@ -23,4 +23,5 @@ _surfraw()
 	fi
 	return 0
 }
-complete -F _surfraw surfraw sr
+# test first in case removed-but-unpurged
+type -p surfraw >&- && complete -F _surfraw surfraw sr
