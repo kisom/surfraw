@@ -1,22 +1,382 @@
 #!/bin/sh
 # $Id$
-# elvis: currency	-- Abuse the Universal Currency Converter (www.xe.net/ucc)
+# elvis: currency	-- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
 . surfraw || exit 1
 
-# alright, admitedly this is lame, we should be able to do something like
-# $ currency USD 1 AUD, but xe's cgi-script expects extremely
-# verbose options, the entirity of which we'd have copy here, and the
-# xe' interface isn't too bad
+list_currency_symbols () {
+
+cat <<EOT
+Symbol		Country and Currency
+
+AFA		Afghanistan, Afghani
+ALL		Albania, Lek
+DZD		Algeria, Dinar
+USD		America (United States), Dollar
+USD		American Samoa, United States Dollar
+EUR		Andorra, Euro
+AOA		Angola, Kwanza
+XCD		Anguilla, East Caribbean Dollar
+XCD		Antigua and Barbuda, East Caribbean Dollar
+ARS		Argentina, Peso
+AMD		Armenia, Dram
+AWG		Aruba, Guilder
+AUD		Ashmore and Cartier Islands, Australia Dollar
+AUD		Australia, Dollar
+EUR		Austria, Euro
+ATS		Austria, Schilling [obsolete]
+AZM		Azerbaijan, Manat
+EUR		Azores, Euro
+BSD		Bahamas, Dollar
+BHD		Bahrain, Dinar
+BBD		Bajan (Barbados), Dollar
+EUR		Balearic Islands, Euro
+BDT		Bangladesh, Taka
+BBD		Barbados, Dollar
+BYR		Belarus, Ruble
+EUR		Belgium, Euro
+BEF		Belgium, Franc [obsolete]
+BZD		Belize, Dollar
+XOF		Benin, CFA Franc BCEAO
+BMD		Bermuda, Dollar
+INR		Bhutan, India Rupee
+BTN		Bhutan, Ngultrum
+BOB		Bolivia, Boliviano
+ANG		Bonaire, Netherlands Antilles Guilder
+BAM		Bosnia and Herzegovina, Convertible Marka
+BWP		Botswana, Pula
+BRL		Brazil, Real
+GBP		Britain (United Kingdom), Pound
+GBP		British Indian Ocean Territory, United Kingdom Pound
+USD		British Indian Ocean Territory, United States Dollar
+USD		British Virgin Islands, United States Dollar
+BND		Brunei, Dollar
+SGD		Brunei, Singapore Dollar
+BGN		Bulgaria, Lev
+XOF		Burkina Faso, CFA Franc BCEAO
+MMK		Burma (Myanmar), Kyat
+BIF		Burundi, Franc
+KHR		Cambodia, Riel
+XAF		Cameroon, CFA Franc BEAC
+CAD		Canada, Dollar
+EUR		Canary Islands, Euro
+CVE		Cape Verde, Escudo
+KYD		Cayman Islands, Dollar
+XAF		Central African Republic, CFA Franc BEAC
+XAF		CFA Communauté Financière Africaine BEAC Franc
+XOF		CFA Communauté Financière Africaine BCEAO Franc
+XAF		Chad, CFA Franc BEAC
+CLP		Chile, Peso
+CNY		China, Yuan Renminbi
+AUD		Christmas Island, Australia Dollar
+AUD		Cocos (Keeling Islands, Australia Dollar
+COP		Colombia, Peso
+XAF		Communauté Financière Africaine BEAC Franc
+XOF		Communauté Financière Africaine BCEAO Franc
+KMF		Comoros, Franc
+XPF		Comptoirs Français du Pacifique Franc
+XAF		Congo/Brazzaville, CFA Franc BEAC
+CDF		Congo/Kinshasa, Franc
+NZD		Cook Islands, New Zealand Dollar
+AUD		Coral Sea Islands, Australia Dollar
+CRC		Costa Rica, Colon
+XOF		Côte d'Ivoire, CFA Franc BCEAO
+HRK		Croatia, Kuna
+CUC		Cuba, Convertible Peso
+CUP		Cuba, Peso
+ANG		Curaço, Netherlands Antilles Guilder
+CYP		Cyprus, Pound
+CZK		Czech Republic, Koruna
+DKK		Denmark, Krone
+DJF		Djibouti, Franc
+XCD		Dominica, East Caribbean Dollar
+DOP		Dominican Republic, Peso
+EUR		Dutch (Netherlands), Euro
+NLG		Dutch (Netherlands), Guilder [obsolete]
+XCD		East Caribbean Dollar
+USD		East Timor, United States Dollar
+USD		Ecuador, United States Dollar
+EGP		Egypt, Pound
+SVC		El Salvador, Colon
+GBP		England (United Kingdom), Pound
+XAF		Equatorial Guinea, CFA Franc BEAC
+ERN		Eritrea, Nakfa
+EEK		Estonia, Kroon
+ETB		Ethiopia, Birr
+EUR		Euro
+EUR		Europa Island, Euro
+FKP		Falkland Islands, Pound
+DKK		Faroe Islands, Denmark Krone
+FJD		Fiji, Dollar
+EUR		Finland, Euro
+FIM		Finland, Markka [obsolete]
+EUR		France, Euro
+FRF		France, Franc [obsolete]
+EUR		French Guiana, Euro
+XPF		French Polynesia, Comptoirs Français du Pacifique Franc
+EUR		French Polynesia, Euro
+EUR		French Southern and Antarctic Lands, Euro
+XAF		Gabon, CFA Franc BEAC
+GMD		Gambia, Dalasi
+ILS		Gaza Strip, Israel New Shekel
+GEL		Georgia, Lari
+DEM		Germany, Deutsche Mark [obsolete]
+EUR		Germany, Euro
+GHC		Ghana, Cedi
+GIP		Gibraltar, Pound
+XAU		Gold Ounce
+GBP		Great Britain (United Kingdom), Pound
+EUR		Greece, Euro
+GRD		Greece, Drachma [obsolete]
+DKK		Greenland, Denmark Krone
+XCD		Grenada, East Caribbean Dollar
+EUR		Guadeloupe, Euro
+USD		Guam, United States Dollar
+GTQ		Guatemala, Quetzal
+GGP		Guernsey, Pound
+GNF		Guinea, Franc
+XOF		Guinea-Bissau, CFA Franc BCEAO
+GYD		Guyana, Dollar
+HTG		Haiti, Gourde
+EUR		Holland (Netherlands), Euro
+NLG		Holland (Netherlands), Guilder [obsolete]
+EUR		Holy See (Vatican City), Euro
+VAL		Holy See (Vatican City), Lira [obsolete]
+HNL		Honduras, Lempira
+HKD		Hong Kong, Dollar
+HUF		Hungary, Forint
+ISK		Iceland, Krona
+INR		India, Rupee
+IDR		Indonesia, Rupiah
+XDR		International Monetary Fund Special Drawing Right
+IRR		Iran, Rial
+IQD		Iraq, Dinar
+EUR		Ireland, Euro
+IEP		Ireland, Pound [obsolete]
+FKP		Islas Malvinas (Falkland Islands), Pound
+IMP		Isle of Man, Pound
+ILS		Israel, New Shekel
+EUR		Italy, Euro
+ITL		Italy, Lira [obsolete]
+XOF		Ivory Coast (Côte d'Ivoire), CFA Franc BCEAO
+JMD		Jamaica, Dollar
+JPY		Japan, Yen
+JEP		Jersey, Pound
+USD		Johnson, United States Dollar
+JOD		Jordan, Dinar
+EUR		Juan de Nova, Euro
+KZT		Kazakhstan, Tenge
+KES		Kenya, Shilling
+AUD		Kiribati, Australia Dollar
+KWD		Kuwait, Dinar
+KGS		Kyrgyzstan, Som
+LAK		Laos, Kip
+LVL		Latvia, Lat
+LBP		Lebanon, Pound
+LSL		Lesotho, Loti
+LRD		Liberia, Dollar
+LYD		Libya, Dinar
+CHF		Liechtenstein, Switzerland Franc
+LTL		Lithuania, Litas
+EUR		Luxembourg, Euro
+LUF		Luxembourg, Franc [obsolete]
+MOP		Macau, Pataca
+MKD		Macedonia, Denar
+MGA		Madagascar, Ariary
+MGF		Madagascar, Franc [obsolete]
+EUR		Madeira Islands, Euro
+MWK		Malawi, Kwacha
+MYR		Malaysia, Ringgit
+MVR		Maldives, Rufiyaa
+XOF		Mali, CFA Franc BCEAO
+MTL		Malta, Lira
+FKP		Malvinas (Falkland Islands), Pound
+USD		Marshall Islands, United States Dollar
+EUR		Martinique, Euro
+MRO		Mauritania, Ouguiya
+MUR		Mauritius, Rupee
+EUR		Mayotte, Euro
+MXN		Mexico, Peso
+USD		Micronesia, United States Dollar
+USD		Midway Islands, United States Dollar
+MDL		Moldova, Leu
+EUR		Monaco, Euro
+MNT		Mongolia, Tughrik
+EUR		Montenegro, Euro
+XCD		Montserrat, East Caribbean Dollar
+MAD		Morocco, Dirham
+MZM		Mozambique, Metical
+MMK		Myanmar (Burma), Kyat
+NAD		Namibia, Dollar
+AUD		Nauru, Australia Dollar
+HTG		Navassa, Haiti Gourde
+USD		Navassa, United States Dollar
+CNY		Nepal, China Yuan Renminbi
+NPR		Nepal, Rupee
+ANG		Netherlands Antilles, Guilder
+EUR		Netherlands, Euro
+NLG		Netherlands, Guilder [obsolete]
+XPF		New Caledonia, Comptoirs Français du Pacifique Franc
+NZD		New Zealand, Dollar
+NIO		Nicaragua, Cordoba
+XOF		Niger, CFA Franc BCEAO
+NGN		Nigeria, Naira
+NZD		Niue, New Zealand Dollar
+AUD		Norfolk Island, Australia Dollar
+KPW		North Korea, Won
+USD		Northern Mariana Islands, United States Dollar
+NOK		Norway, Krone
+OMR		Oman, Rial
+PKR		Pakistan, Rupee
+USD		Palau, United States Dollar
+XPD		Palladium Ounce
+PAB		Panama, Balboa
+USD		Panama, United States Dollar
+PGK		Papua New Guinea, Kina
+CNY		Paracel Islands, China Yuan Renminbi
+VND		Paracel Islands, Vietnam Dong
+PYG		Paraguay, Guarani
+PEN		Peru, Nuevo Sol
+PHP		Philippines, Peso
+NZD		Pitcairn, New Zealand Dollar
+XPT		Platinum Ounce
+PLN		Poland, Zloty
+EUR		Portugal, Euro
+PTE		Portugal, Escudo [obsolete]
+USD		Puerto Rico, United States Dollar
+QAR		Qatar, Riyal
+EUR		Reunion, Euro
+ROL		Romania, Leu
+RUB		Russia, Ruble
+RWF		Rwanda, Franc
+ANG		Saba, Netherlands Antilles Guilder
+SHP		Saint Helena, Pound
+XCD		Saint Kitts and Nevis, East Caribbean Dollar
+XCD		Saint Lucia, East Caribbean Dollar
+EUR		Saint Pierre and Miquelon, Euro
+XCD		Saint Vincent and The Grenadines, East Caribbean Dollar
+EUR		Saint-Martin, Euro
+WST		Samoa, Tala
+EUR		San Marino, Euro
+STD		São Tome and Principe, Dobra
+SAR		Saudi Arabia, Riyal
+GBP		Scotland (United Kingdom), Pound
+SPL		Seborga, Luigino
+XOF		Senegal, CFA Franc BCEAO
+CSD		Serbia, Dinar
+SCR		Seychelles, Rupee
+SLL		Sierra Leone, Leone
+XAG		Silver Ounce
+SGD		Singapore, Dollar
+ANG		Sint Eustatius, Netherlands Antilles Guilder
+ANG		Sint Maarten, Netherlands Antilles Guilder
+SKK		Slovakia, Koruna
+SIT		Slovenia, Tolar
+SBD		Solomon Islands, Dollar
+SOS		Somalia, Shilling
+ZAR		South Africa, Rand
+GBP		South Georgia, United Kingdom Pound
+KRW		South Korea, Won
+GBP		South Sandwich Islands, United Kingdom Pound
+EUR		Spain, Euro
+ESP		Spain, Peseta [obsolete]
+LKR		Sri Lanka, Rupee
+SDD		Sudan, Dinar
+SRD		Suriname, Dollar
+SRG		Suriname, Guilder
+NOK		Svalbard and Jan Mayen, Norway Krone
+SZL		Swaziland, Lilangeni
+ZAR		Swaziland, South Africa Rand
+SEK		Sweden, Krona
+CHF		Switzerland, Franc
+SYP		Syria, Pound
+TWD		Taiwan, New Dollar
+TJS		Tajikistan, Somoni
+RUB		Tajikistan, Russia Ruble
+TZS		Tanzania, Shilling
+THB		Thailand, Baht
+XOF		Togo, CFA Franc BCEAO
+NZD		Tokelau, New Zealand Dollar
+TOP		Tonga, Pa'anga
+MDL		Transnistria, Moldova Leu
+TTD		Trinidad and Tobago, Dollar
+TND		Tunisia, Dinar
+TRY		Turkey, New Lira
+TRL		Turkey, Lira
+TMM		Turkmenistan, Manat
+USD		Turks and Caicos Islands, United States Dollar
+AUD		Tuvalu, Australia Dollar
+TVD		Tuvalu, Dollar
+UGX		Uganda, Shilling
+UAH		Ukraine, Hryvna
+AED		United Arab Emirates, Dirham
+GBP		United Kingdom, Pound
+USD		United States, Dollar
+UYU		Uruguay, Peso
+UZS		Uzbekistan, Som
+VUV		Vanuatu, Vatu
+EUR		Vatican City, Euro
+VAL		Vatican City, Lira [obsolete]
+VEB		Venezuela, Bolivar
+VND		Vietnam, Dong
+USD		Virgin Islands, United States Dollar
+USD		Wake Island, United States Dollar
+XPF		Wallis and Futuna Islands, Comptoirs Français du Pacifique Franc
+ILS		West Bank, Israel New Shekel
+JOD		West Bank, Jordan Dinar
+MAD		Western Sahara, Morocco Dirham
+WST		Western Samoa (Samoa), Tala
+YER		Yemen, Rial
+ZMK		Zambia, Kwacha 
+ZWD		Zimbabwe, Dollar
+EOT
+
+}
+
+w3_config_hook () {
+def   SURFRAW_currency_from USD
+def   SURFRAW_currency_to   EUR
+}
 
 w3_usage_hook () {
     cat <<EOF
-Usage: $w3_argv0 [options]
+Usage: $w3_argv0 [options] [search words]...
 Description:
-  Surfraw activate the Universeal Currency Converter (www.xe.net/ucc)
+  Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
+Local options:
+  -l                            List all known currency symbols.
+  -from=SYM                     Symbol for currency to convert from.
+                                Default: $SURFRAW_currency_from
+                                Environment: SURFRAW_currency_from
+  -to=SYM                       Symbol for currency to convert to.
+                                Default: $SURFRAW_currency_to
+                                Environment: SURFRAW_currency_to
+				Example currency symbols:
+	EUR (Euro), USD (US Dollars), GBP (UK Pounds), CAD (Canada Dollars),
+	AUD (Australia Dollars), JPY (Japan Yen), INR (India Rupees),
+	NZD (New Zealand Dollars), CHF (Switzerland Francs), ZAR (South Africa Rand)
+
 EOF
     w3_global_usage
 }
 
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -from=*) setopt   SURFRAW_currency_from $optarg ;;
+    -to=*)   setopt   SURFRAW_currency_to   $optarg ;;
+    -l)      list_currency_symbols; exit 0 ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
 w3_config
 w3_parse_args "$@"
-w3_browse_url "http://www.xe.net/ucc/"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.xe.net/ucc/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.xe.com/ucc/convert.cgi?Amount=${escaped_args}&From=${SURFRAW_currency_from}&To=${SURFRAW_currency_to}&submit=Perform+Currency+Conversion"
+fi

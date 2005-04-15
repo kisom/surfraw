@@ -111,19 +111,24 @@ elvi_SCRIPTS = \
 		  austlii \
 		  bbcnews \
 		  cddb \
+		  cia \
 		  cite \
 		  cnn \
 		  currency \
+		  cve \
 		  debbugs \
 		  debcontents \
 		  deblists \
+		  deblogs \
 		  debpackages \
 		  debpts \
 		  deja \
 		  dmoz \
 		  ebay \
+		  etym \
 		  excite \
 		  fast \
+		  foldoc \
 		  filesearching \
 		  freebsd \
 		  freedb \

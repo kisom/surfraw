@@ -20,5 +20,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://sunsolve.sun.com/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://sunsolve.Sun.COM/pub-cgi/search.pl?mode=results&origin=quick&zone_32=${escaped_args}"
+    w3_browse_url "http://sunsolve.sun.com/search/advsearchcoll.do?queryKey1=${escaped_args}&collection=all"
 fi

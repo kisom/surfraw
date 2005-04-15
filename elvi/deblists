@@ -224,30 +224,32 @@ Local options:
   -list=LIST		|	List to search
 	  			Default: $SURFRAW_deblists_lists
   				Environment: SURFRAW_deblists_lists
-				Lists (as of 2003-09-18):
+				Lists (as of 2005-04-15):
 	68k accessibility admintool alpha amd64 announce apache arm autobuild
 	beowulf books boot bsd cd cd-vendors cdwrite changes chinese
-	chinese-big5 chinese-gb commercial consultants ctte curiosa debbugs
-	deity devel devel-announce devel-changes devel-french devel-games
-	devel-italian devel-m68k-changes devel-portuguese
-	devel-powerpc-changes devel-spanish devel-sparc-changes doc dpkg edu
-	emacsen embedded esperanto events-eu events-na faq firewall french gcc
-	glibc gtk-gnome hams handheld hppa hurd i18n ia64 ipv6 isp italian
-	japanese java jr kde l10n-catalan l10n-danish l10n-dutch l10n-english
-	l10n-finnish l10n-french l10n-german l10n-greek l10n-hungarian
-	l10n-italian l10n-polish l10n-portuguese l10n-spanish l10n-turkish
-	laespiral laptop lcs-eng legal lex lint-maint lsb lsb-confcall
-	lsb-discuss lsb-impl lsb-spec lsb-test med mentors mips mirrors
-	multimedia newmaint newmaint-admin newmaint-discuss news news-french
-	news-german news-portuguese nonprofit ocaml-maint openoffice parisc
-	perl pilot policy pool powerpc project publicity python qa qa-packages
-	qa-private qt-kde release russian s390 s390-changes security
+	chinese-big5 chinese-gb commercial consultants ctte curiosa custom dak
+	debbugs deity desktop devel devel-announce devel-changes devel-french
+	devel-games devel-italian devel-m68k-changes devel-portuguese
+	devel-powerpc-changes devel-s390-changes devel-spanish
+	devel-sparc-changes doc dpkg edu emacsen embedded esperanto events-eu
+	events-na faq firewall french gcc glibc gtk-gnome hams handheld hppa
+	hurd i18n ia64 ipv6 isp italian japanese java jr kde kernel
+	l10n-arabic l10n-catalan l10n-czech l10n-danish l10n-dutch
+	l10n-english l10n-finnish l10n-french l10n-german l10n-greek
+	l10n-hungarian l10n-italian l10n-korean l10n-polish l10n-portuguese
+	l10n-romanian l10n-russian l10n-spanish l10n-turkish laespiral laptop
+	lcs-eng legal lex lint-maint lsb lsb-confcall lsb-discuss lsb-impl
+	lsb-spec lsb-test med mentors mips mirrors multimedia newmaint
+	newmaint-admin newmaint-discuss news news-french news-german
+	news-portuguese nonprofit ocaml-maint openoffice parisc perl pilot
+	policy pool powerpc project publicity python qa qa-packages qa-private
+	qt-kde release ruby russian s390 s390-changes security
 	security-announce sgml simplified-chinese snapshots sparc
 	sparc-changes spi-announce spi-general ssh superh testing tetex-maint
 	toolchain ultralinux user user-catalan user-danish user-de user-french
-	user-german user-indonesian user-polish user-portuguese user-spanish
-	user-swedish user-turkish user-ukrainian vgui-discuss vote win32 wnpp
-	www x
+	user-german user-icelandic user-indonesian user-polish user-portuguese
+	user-spanish user-swedish user-turkish user-ukrainian vgui-discuss
+	vote win32 wnpp women www x
 
 EOF
     w3_global_usage

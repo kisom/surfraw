@@ -2,8 +2,13 @@ surfraw (2.1.0-1) unstable; urgency=low
 
   * Ian Beckwith <ianb@nessie.mcc.ac.uk>:
     + New elvi: dmoz, w3html, w3link, w3css, w3rdf.
-    + New elvi: rae (by Ruben Pollan <meskio@terra.es>)
+    + New elvi: rae (by Ruben Pollan <meskio@terra.es>).
     + surfraw.IN:w3_url_escape: escaped `(' and `)'.
+    + Fixed elvi (Thanks to Justin B. Rye):
+        - sunsolve  (Closes: #289502).
+        - altavista (Closes: #289503).
+    + deblists: Updated list of debian mailing lists.
+    + currency: Now a proper elvis.
     + Added appendix 2 to HACKING on preparing a release.
   * Moritz Muehlenhoff <jmm@inutil.org>:
     + Switch rhymes search from Lycos to Rhymezone (by Justin B Rye)
@@ -17,7 +22,7 @@ surfraw (2.1.0-1) unstable; urgency=low
     + New cve elvi for CAN assignment searches
     + Rewrite debian/copyright properly
 
- -- Christian Surchi <csurchi@debian.org>  Sat,  2 Oct 2004 17:12:22 +0100
+ -- Christian Surchi <csurchi@debian.org>  Fri, 15 Apr 2005 13:45:15 +0100
 
 surfraw (2.0.2-2) unstable; urgency=low
 

@@ -1,6 +1,6 @@
 #!/bin/sh
 # jbr20050112
-# elvis: foldoc	-- The Free On-Line Dictionary Of Computing (foldoc.org)
+# elvis: foldoc		-- The Free On-Line Dictionary Of Computing (foldoc.org)
 . surfraw || exit 1
 
 w3_usage_hook () {
