@@ -1,4 +1,4 @@
-surfraw (2.1.0-1) unstable; urgency=low
+surfraw (2.1.0-1) unstable; urgency=medium
 
   * Ian Beckwith <ianb@nessie.mcc.ac.uk>:
     + New elvi: dmoz, w3html, w3link, w3css, w3rdf.
@@ -14,15 +14,15 @@ surfraw (2.1.0-1) unstable; urgency=low
     + Switch rhymes search from Lycos to Rhymezone (by Justin B Rye)
       (Closes: #289498)
     + Fix BBC News search (by Justin B Rye) (Closes: #289499)
-    + New elvis by by Justin B Rye (Closes: #290032)
+    + New elvi by by Justin B Rye (Closes: #290032)
       - cia      Search for CIA documents
       - deblogs  Debian changelogs
       - etym     Search for word origins
       - foldoc   Free online dictionary of computing
-    + New cve elvi for CAN assignment searches
+    + New cve elvis for CAN assignment searches
     + Rewrite debian/copyright properly
 
- -- Christian Surchi <csurchi@debian.org>  Fri, 15 Apr 2005 13:45:15 +0100
+ -- Thomas Smith <tgs@debian.org>  Wed, 20 Apr 2005 17:00:59 -0500
 
 surfraw (2.0.2-2) unstable; urgency=low
 
