@@ -1,0 +1,24 @@
+Previous releases placed the elvi (tools to search websites) in /usr/bin,
+which caused namespace problems.
+Surfraw has been rearranged so the elvi are in a separate directory
+(/usr/lib/surfraw) and no longer in your path. To run an elvis now, use:
+
+ surfraw elviname [options] searchterms
+
+sr is an alias for surfraw, so you could do, for example:
+
+ sr google -lucky my 200 monkeys
+
+If you wish to retain the old behaviour of running elvi directly, use
+surfraw-update-path(1) to append /usr/lib/surfraw to your shell's PATH (or
+optionally, all users and/or all known shells)
+
+If you ran surfaw-update-path when version 2.0-1 was installed, you will
+need to run it again, twice, to update your config files to the new
+location.
+
+First run it with -remove, to remove the existing path, then with -add to
+add the new path.
+
+Remember you will need source your config files (or log out and in again)
+for this to take effect.
