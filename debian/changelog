@@ -2,7 +2,9 @@ surfraw (2.1.0-2) unstable; urgency=low
 
   * Moritz Muehlenhoff <jmm@inutil.org>:
     + Removed debconf information about new elvi structure, now that
-      Sarge has been released with it. Move it into README.Debian.
+      Sarge has been released with it. Moved it to README.Debian.
+      (Closes: #313852, #312979)
+    + New elvis: yubnub (by Iain D Broadfoot) (Closes: #315188) 
 	
  -- Thomas Smith <tgs@debian.org>  Fri, 29 Apr 2005 16:20:39 +0200
 

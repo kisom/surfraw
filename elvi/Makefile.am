@@ -62,7 +62,8 @@ elvi_SCRIPTS	= \
 		  wikipedia \
 		  woffle \
 		  xxx \
-		  yahoo
+		  yahoo \
+                  yubnub
 sysconf_DATA	= surfraw_elvi.list
 
 EXTRA_DIST	= $(elvi_SCRIPTS)
