@@ -202,9 +202,6 @@ Global options:
                                 Default: yes
                                 Environment: SURFRAW_escape_url_args
   -g | -graphical               Get some windowed sin
-  -p0rn=yes|no                  Yes, yes, harder, deeper, faster, oh baybe
-                                Default: yes
-                                Environment: SURFRAW_p0rn
   -help                         What you're reading now, dude
   -quiet=yes|no                 I can't enjoy it with you talking all the time
                                 Default: no

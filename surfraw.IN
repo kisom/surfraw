@@ -203,9 +203,6 @@ Global options:
   -g | -graphical		Get some windowed sin
   				Default: $SURFRAW_graphical
 				Environment: SURFRAW_graphical
-  -p0rn=yes|no			Yes, yes, harder, deeper, faster, oh baybe
-				Default: $SURFRAW_p0rn
-				Environment: SURFRAW_p0rn
   -help				What you're reading now, dude
   -quiet=yes|no			I can't enjoy it with you talking all the time
 				Default: $SURFRAW_quiet
@@ -252,7 +249,6 @@ w3_parse_option () {
 	-elvi)		    cat "$SURFRAW_elvi_list"; exit 0            ;;
 	-escape-url-args=*) setoptyn SURFRAW_escape_url_args	$optarg ;;
 	-g | -graphical)    setoptyn SURFRAW_graphical		yes	;;
-	-p0rn=*)	    setoptyn SURFRAW_p0rn	    	$optarg ;;
 	-help | --help)     do_help=1					;;
 	-quiet=*)	    setoptyn SURFRAW_quiet	    	$optarg ;;
 	-q | -quote)	    setoptyn SURFRAW_quote_args	    	yes	;;

@@ -4,7 +4,7 @@ _surfraw()
 	local cur=${COMP_WORDS[COMP_CWORD]}
 	local prev=${COMP_WORDS[COMP_CWORD-1]}
 	local opts='-browser -elvi -escape-url-args -graphical \
-		-help -p0rn -q -quote -quiet -text -version'
+		-help -q -quote -quiet -text -version'
 	local elvi="$(cut -f1 /etc/surfraw.bookmarks ~/.surfraw.bookmarks 2>&-
 			cd /usr/lib/surfraw && echo * 2>&-)"
 	if      [[ $cur == -* ]]

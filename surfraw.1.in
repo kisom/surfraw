@@ -112,10 +112,6 @@ Display a list of other Surfraw mechanisms for conquering evil.
 Apply url escaping to arguments (default: yes)
 
 .TP
-.B \-p0rn=yes|no
-Yes, yes, harder, deeper, faster, oh baybe (default: yes)
-
-.TP
 .B \-q|\-quote
 Bracket all arguments with " characters (default: no).
 Note that putting quotes round arguments works now, so you can do,
@@ -262,15 +258,6 @@ for each text browser invocation?
 Default:
 
  defyn SURFRAW_new_screen no
-
-.TP
-.B SURFRAW_p0rn
-Some elvi support p0rn filters.
-Keep p0rning anyway?
-
-Default:
-
- defyn SURFRAW_p0rn yes
 
 .TP
 .B SURFRAW_quiet
