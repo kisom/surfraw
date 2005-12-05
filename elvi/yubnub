@@ -1,5 +1,5 @@
 #!/bin/sh
-# elvis: yubnub: yubnub is the url-line for everyone. yubnub.org
+# elvis: yubnub		-- Use the social command-line for the web (yubnub.org)
 # initial implementation by Iain D Broadfoot, ripped from the freshmeat elvi
 . surfraw || exit 1
 

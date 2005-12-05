@@ -1,3 +1,10 @@
+surfraw (2.1.0-3) unstable; urgency=low
+
+   * Moritz Muehlenhoff <jmm@inutil.org>
+     + Fix zsh completion for yubnub (Patch by Micah Anderson) (Closes: #341872)
+
+ -- Moritz Muehlenhoff <jmm@inutil.org>  Mon,  5 Dec 2005 12:22:55 +0100
+
 surfraw (2.1.0-2) unstable; urgency=low
 
   * Moritz Muehlenhoff <jmm@inutil.org>:
