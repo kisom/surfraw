@@ -2,6 +2,9 @@ surfraw (2.1.0-3) unstable; urgency=low
 
    * Moritz Muehlenhoff <jmm@inutil.org>
      + Fix zsh completion for yubnub (Patch by Micah Anderson) (Closes: #341872)
+     + Remove debian/po to prevent further translations in vain. Sorry for the
+       wasted work on the Swedish translation, Daniel Nylander!
+       (Closes: #338149, #336687)
 
  -- Moritz Muehlenhoff <jmm@inutil.org>  Mon,  5 Dec 2005 12:22:55 +0100
 
