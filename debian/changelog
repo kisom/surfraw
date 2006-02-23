@@ -1,4 +1,4 @@
-surfraw (2.1.0-3) unstable; urgency=low
+surfraw (2.1.2) unstable; urgency=low
 
    * Moritz Muehlenhoff <jmm@debian.org>:
      + Fix FTBFS due to make changes (Patch by Matt Kraai) (Closes: 353314)
@@ -10,9 +10,9 @@ surfraw (2.1.0-3) unstable; urgency=low
        Christian, Thomas and myself to uploaders
      + New elvis: debsec (for the Debian security tracker)
 
- -- Moritz Muehlenhoff <jmm@debian.org>  Mon,  23 Dec 2005 12:22:55 +0100
+ -- Moritz Muehlenhoff <jmm@debian.org>  Thu,  23 Feb 2006 16:49:55 +0100
 
-surfraw (2.1.0-2) unstable; urgency=low
+surfraw (2.1.1) unstable; urgency=low
 
   * Moritz Muehlenhoff <jmm@inutil.org>:
     + Removed debconf information about new elvi structure, now that

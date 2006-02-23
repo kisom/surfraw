@@ -1,9 +1,9 @@
 Source: surfraw
 Section: web
 Priority: optional
-Maintainer: Christian Surchi <csurchi@debian.org>
-Uploaders: Thomas Smith <tgs@debian.org>
-Standards-Version: 3.6.1
+Maintainer: Debian surfraw maintainers <surfraw-devel@lists.alioth.debian.org>
+Uploaders: Moritz Muehlenhoff <jmm@debian.org>,Thomas Smith <tgs@debian.org>,Christian Surchi <csurchi@debian.org>
+Standards-Version: 3.6.2
 Build-Depends-Indep: debhelper (>= 4.1.16), po-debconf
 
 Package: surfraw
