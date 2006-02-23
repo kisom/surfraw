@@ -1,0 +1,23 @@
+#!/bin/sh
+# elvis: debsec	-- Search the Debian Security Tracker for CVE ids or package names
+# Author: Moritz Muehlenhoff <jmm@debian.org>
+
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [search words]...
+Description:
+  Search the Debian Security Tracker for CVE ids or package names
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "http://idssi.enyo.de/tracker"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://idssi.enyo.de/tracker/${escaped_args}"
+fi
