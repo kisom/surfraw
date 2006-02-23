@@ -20,6 +20,7 @@ elvi_SCRIPTS	= \
 		  deblogs \
 		  debpackages \
 		  debpts \
+		  debsec \
 		  deja \
 		  dmoz \
 		  ebay \
