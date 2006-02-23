@@ -17,11 +17,14 @@ surfraw (2.1.1) unstable; urgency=low
   * Moritz Muehlenhoff <jmm@inutil.org>:
     + Removed debconf information about new elvi structure, now that
       Sarge has been released with it. Moved it to README.Debian.
-      (Closes: #313852, #312979)
+      (Closes: #313852, #312979, #319841, #319842)
     + New elvis: yubnub (by Iain D Broadfoot) (Closes: #315188) 
     + Removed unused SURFRAW_p0rn option (Closes: #324166)
+    + Bumped standards version (no changes required)
+    + Change to a native package, most of the elvis are now more or less
+      Debian specific anyway
 	
- -- Thomas Smith <tgs@debian.org>  Fri, 29 Apr 2005 16:20:39 +0200
+ -- Moritz Muehlenhoff <jmm@inutil.org>  Fri, 29 Apr 2005 16:20:39 +0200
 
 surfraw (2.1.0-1) unstable; urgency=medium
 
