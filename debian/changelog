@@ -1,3 +1,10 @@
+surfraw (2.1.3) unstable; urgency=high
+
+  * Urgency high, as it renders surfraw uninstallable
+  * Really, really remove debconfage (Closes: #354263)
+
+ -- Moritz Muehlenhoff <jmm@debian.org>  Fri, 24 Feb 2006 23:00:09 +0100
+
 surfraw (2.1.2) unstable; urgency=low
 
    * Moritz Muehlenhoff <jmm@debian.org>:
