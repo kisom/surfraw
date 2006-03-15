@@ -5,6 +5,8 @@
 
 w3_config_hook () {
 def    SURFRAW_debbugs_search     pkg
+def    SURFRAW_debbugs_version    ""
+def    SURFRAW_debbugs_dist       ""
 defyn  SURFRAW_debbugs_archive    0
 defyn  SURFRAW_debbugs_merge      0
 defyn  SURFRAW_debbugs_statussort 1
@@ -17,6 +19,8 @@ def    SURFRAW_debbugs_excsev     ""
 def    SURFRAW_debbugs_inctag     ""
 def    SURFRAW_debbugs_exctag     ""
 defyn  SURFRAW_debbugs_asmbox     0
+defyn  SURFRAW_debbugs_headers    0
+defyn  SURFRAW_debbugs_boring     0
 defyn  SURFRAW_debbugs_revstat    0
 defyn  SURFRAW_debbugs_revsev     0
 defyn  SURFRAW_debbugs_revbugs    0
@@ -43,17 +47,29 @@ Local options:
            bug          |       (bug number)
            maint        | 
            tag          |
-           submitter
+           submitter    |
+           severity     |
+           tag
+  -version=VERSION              Package version.
+  -dist=oldstable        |      Distribution
+        stable           |
+        proposed-updates |
+        testing          |
+        unstable         |
+        experimental     | 
+        testing-proposed-updates
   -arc                          Show archived bugs.
   -raw                          Do not sort by status or severity.
   -rb                           Reverse order of bugs shown.
   -rst                          Reverse order of statuses shown.
-  -rse                          Reverse order of severities show
+  -rse                          Reverse order of severities shown.
   -merge                        Display merged bugs only once.
   -nohead                       Do not show table of contents header.
   -nofoot                       Do not show statistics in the footer.
-  -mbox                         View results in mbox format 
-                                 (only when searching by bug number).
+  -mbox                         View results in mbox format. *
+  -sh                           Show headers. *
+  -boring                       Show boring messages. *
+                                (* = only when searching by bug number.)
   -incstat=stat1,stat2          Include given status list.
   -exstat=stat3,stat4           Exclude given status list.
                                 Available statuses:
@@ -66,11 +82,12 @@ Local options:
   -inctag=tag1,tag2             Include given tags.
   -extag=tag3,tag4              Exclude given tags.
                                 Available tags:
-                                 potato, woody, sarge, sarge-ignore, sid, 
-                                 experimental, confirmed, d-i, fixed, 
-                                 fixed-in-experimental, fixed-upstream, 
-                                 help, moreinfo, patch, pending, security, 
-                                 unreproducible, upstream, wontfix
+                                 potato, woody, sarge, sarge-ignore,
+								 etch, etch-ignore, sid, experimental,
+								 confirmed, d-i, fixed, fixed-in-experimental,
+								 fixed-upstream, help, l10n, moreinfo, patch,
+								 pending, security, unreproducible, upstream,
+								 wontfix, ipv6, lfs
 EOF
     w3_global_usage
 }
@@ -80,6 +97,8 @@ w3_parse_option_hook () {
     optarg="$2"
     case "$opt" in
 	-se*=*)      setopt   SURFRAW_debbugs_search     $optarg; setoptyn setsearch 1  ;;
+	-ve*=*)      setopt   SURFRAW_debbugs_version    $optarg ;;
+	-dis*=*)     setopt   SURFRAW_debbugs_dist       $optarg ;;
 	-arc*)       setoptyn SURFRAW_debbugs_archive    1;;  
 	-mer*)       setoptyn SURFRAW_debbugs_merge      1;;  
 	-raw*)       setoptyn SURFRAW_debbugs_statussort 0;;  
@@ -95,6 +114,8 @@ w3_parse_option_hook () {
 	-rst*)       setoptyn SURFRAW_debbugs_revstat    1;;
 	-rse*)       setoptyn SURFRAW_debbugs_revsev     1;;
 	-mb*)        setoptyn SURFRAW_debbugs_asmbox     1;;  
+	-sh*)        setoptyn SURFRAW_debbugs_headers    1;;  
+	-bo*)        setoptyn SURFRAW_debbugs_boring     1;;  
 	*) return 1 ;;
     esac
     return 0
@@ -133,11 +154,21 @@ else
 		then
 			url="$url&mbox=yes"
 		fi
+		if yesno SURFRAW_debbugs_headers
+		then
+			url="$url&trim=no"
+		fi
+		if yesno SURFRAW_debbugs_boring
+		then
+			url="$url&boring=yes"
+		fi
 	else
-		url="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=${SURFRAW_debbugs_search}&data=${escaped_args}"
+		url="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=${SURFRAW_debbugs_search}&version=${SURFRAW_debbugs_version}&dist=${SURFRAW_debbugs_dist}&data=${escaped_args}"
 		if yesno SURFRAW_debbugs_archive
 		then
 			url="$url&archive=yes"
+		else
+			url="$url&archive=no"
 		fi
 		if ifyes SURFRAW_debbugs_merge
 		then

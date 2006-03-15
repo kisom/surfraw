@@ -1,0 +1,72 @@
+#!/bin/sh
+# $Id$
+# elvis: gutenberg	-- Search for books on Project Gutenberg (gutenberg.org)
+. surfraw || exit 1
+
+w3_config_hook () {
+defyn SURFRAW_gutenberg_author 0
+defyn SURFRAW_gutenberg_title  0
+defyn SURFRAW_gutenberg_num    0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search for books on Project Gutenberg (gutenberg.org)
+Local options:
+  -title                        Search titles (default)
+  -author                       Search authors
+  -num                          Search etext numbers
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -a*)        setoptyn SURFRAW_gutenberg_author   1       ;;
+    -ti*)       setoptyn SURFRAW_gutenberg_title    1       ;;
+    -n*)        setoptyn SURFRAW_gutenberg_num      1       ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.gutenberg.org/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	if ifno SURFRAW_gutenberg_author &&
+	   ifno SURFRAW_gutenberg_title  &&
+	   ifno SURFRAW_gutenberg_num
+	then
+		SURFRAW_gutenberg_title=1
+	fi
+
+	url="http://www.gutenberg.org/catalog/world/results?"
+	if ifyes SURFRAW_gutenberg_author
+	then
+		url="$url&author=${escaped_args}"
+	else
+		url="$url&author="
+	fi
+	if ifyes SURFRAW_gutenberg_title
+	then
+		url="$url&title=${escaped_args}"
+	else
+		url="$url&title="
+	fi
+	if ifyes SURFRAW_gutenberg_num
+	then
+		url="$url&etextnr=${escaped_args}"
+	else
+		url="$url&etextnr="
+	fi
+
+	w3_browse_url "$url"
+fi

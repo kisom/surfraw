@@ -1,0 +1,165 @@
+#!/bin/sh
+# $Id$
+# elvis: wayback		-- Search The Internet Archive's Wayback Machine for a URL (archive.org)
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_wayback_syear     "00"
+def   SURFRAW_wayback_smonth    "00"
+def   SURFRAW_wayback_sday      "00"
+def   SURFRAW_wayback_eyear     "00"
+def   SURFRAW_wayback_emonth    "00"
+def   SURFRAW_wayback_eday      "00"
+def   SURFRAW_wayback_aliases   "yes" 
+def   SURFRAW_wayback_redirects "hide"
+def   SURFRAW_wayback_filetype  "all"
+defyn SURFRAW_wayback_list      0
+defyn SURFRAW_wayback_dups      0
+defyn SURFRAW_wayback_comp      0
+defyn SURFRAW_wayback_pdf       0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [URL]
+Description:
+  Search The Internet Archive's Wayback Machine for a URL (archive.org)
+Local options:
+  -syear=NUM                    Start search from this year
+  -smonth=jan|feb|mar|...       Start search from this month
+  -sday=NUM                     Start search from this day
+  -eyear=NUM                    End search in this year
+  -emonth=jan|feb|mar|...       End search in this month
+  -eday=NUM                     End search in this day
+  -list                         List all pages that match search criteria
+  -dups                         Show dups
+  -compare                      Compare pages
+  -pdf                          Show as PDF
+  -alias=                       How to handle site aliases
+          merge         |       (default)
+          show          |       
+          hide
+  -redir=                       How to handle redirections
+          hide          |       (default)
+          flag          |       Flag with 'r' on results page
+          show
+  -type=                        File type to search for
+          image         |       
+          audio         |       
+          video         |       
+          binary        |       
+          text          |       
+          pdf                   
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -sy*=*)  setopt   SURFRAW_wayback_syear      $optarg ;;
+    -sd*=*)  setopt   SURFRAW_wayback_sday       $optarg ;;
+    -ey*=*)  setopt   SURFRAW_wayback_eyear      $optarg ;;
+    -ed*=*)  setopt   SURFRAW_wayback_eday       $optarg ;;
+    -sm*=*)  setopt   SURFRAW_wayback_smonth     "`monthtonum "$optarg"`" ;;
+    -em*=*)  setopt   SURFRAW_wayback_emonth     "`monthtonum "$optarg"`" ;;
+    -ali*=*) setopt   SURFRAW_wayback_aliases    $optarg ;;
+    -re*=*)   setopt   SURFRAW_wayback_redirects  $optarg ;;
+    -ty*=*)   setopt   SURFRAW_wayback_filetype   $optarg ;;
+    -l*)     setoptyn SURFRAW_wayback_list       1       ;;
+    -d*)     setoptyn SURFRAW_wayback_dups       1       ;;
+    -c*)     setoptyn SURFRAW_wayback_comp       1       ;;
+    -p*)     setoptyn SURFRAW_wayback_pdf        1       ;;
+	*)       return 1 ;;
+    esac
+    return 0
+}
+
+monthtonum () {
+	case "$1" in
+		[Jj][Aa][Nn]*) echo "01" ;;
+		[Ff][Ee][Bb]*) echo "02" ;;
+		[Mm][Aa][Rr]*) echo "03" ;;
+		[Aa][Pp][Rr]*) echo "04" ;;
+		[Mm][Aa][Yy]*) echo "05" ;;
+		[Jj][Uu][Nn]*) echo "06" ;;
+		[Jj][Uu][Ll]*) echo "07" ;;
+		[Aa][Uu][Gg]*) echo "08" ;;
+		[Ss][Ee][Pp]*) echo "09" ;;
+		[Oo][Cc][Tt]*) echo "10" ;;
+		[Nn][Oo][Vv]*) echo "11" ;;
+		[Dd][Ee][Cc]*) echo "12" ;;
+		*) echo "00";;
+	esac
+}	
+
+padday () {
+	case "$1" in
+		[1-9]) echo "0$1" ;;
+		*)     echo "$1"  ;;
+	esac
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.archive.org/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	url="http://web.archive.org/archive_request_ng?collection=web"
+
+	ft="xx_"
+	case "$SURFRAW_wayback_filetype" in
+		"")        ft="xx_";;
+		[Aa][Ll]*) ft="xx_";;
+		[Ii]*)     ft="im_" ;;
+		[Aa][Uu]*) ft="au_" ;;
+		[Vv]*)     ft="vi_" ;;
+		[Bb]*)     ft="bi_" ;;
+		[Tt]*)     ft="tx_" ;;
+		[Pp]*)     ft="pd_" ;;
+		*)         ft="${SURFRAW_wayback_filetype}"
+	esac
+	url="${url}&mime=${ft}"
+	case "$SURFRAW_wayback_aliases" in
+		"")    ;;
+		[Mm]*) url="${url}&show_host=no" ;;
+		[Ss]*) url="${url}&show_host=yes" ;;
+		[Hh]*) url="${url}&show_host=host" ;;
+		*)     url="${url}&show_host=${SURFRAW_wayback_aliases}" ;; 
+	esac
+	case "$SURFRAW_wayback_redirects" in
+		"")    ;;
+		[Hh]*) url="${url}&redirect=re_" ;;
+		[Ff]*) url="${url}&redirect=ir_" ;;
+		[Ss]*) url="${url}&redirect=ignore" ;;
+		*)     url="${url}&redirect=${SURFRAW_wayback_redirects}" ;; 
+	esac
+	sday="`padday "${SURFRAW_wayback_sday}"`"
+	eday="`padday "${SURFRAW_wayback_eday}"`"
+	url="$url&year=${SURFRAW_wayback_syear}&month=${SURFRAW_wayback_smonth}&day=${sday}"
+	url="$url&year2=${SURFRAW_wayback_eyear}&month2=${SURFRAW_wayback_emonth}&day2=${eday}"
+
+	if ifyes SURFRAW_wayback_list 
+    then
+		url="$url&exact=no"
+	else
+		url="$url&exact=yes"
+	fi
+	if ifyes SURFRAW_wayback_dups 
+    then
+		url="$url&show_all=yes"
+	fi
+	if ifyes SURFRAW_wayback_comp
+    then
+		url="$url&show_compare=yes"
+	fi
+	if ifyes SURFRAW_wayback_pdf 
+    then
+		url="$url&show_convert=yes"
+	fi
+
+	w3_browse_url "${url}&url=${escaped_args}"
+fi

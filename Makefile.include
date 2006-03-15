@@ -2,12 +2,12 @@
 
 %: %.IN
 	-rm -f $@ $@.tmp
-	sed 's,@bindir\@,${bindir},g; '\
-'	     s,@mandir\@,${mandir},g; '\
-'	     s,@VERSION\@,${VERSION},g; '\
-'	     s,@prefix\@,${prefix},g; '\
-'	     s,@ELVIDIR\@,${ELVIDIR},g; '\
-'	     s,@sysconfdir\@,${sysconfdir},g' $< >$@.tmp
+	sed -e 's,@bindir\@,${bindir},g; '\
+	    -e 's,@mandir\@,${mandir},g; '\
+	    -e 's,@VERSION\@,${VERSION},g; '\
+	    -e 's,@prefix\@,${prefix},g; '\
+	    -e 's,@ELVIDIR\@,${ELVIDIR},g; '\
+	    -e 's,@sysconfdir\@,${sysconfdir},g' $< >$@.tmp
 	chmod +x $@.tmp
 	mv $@.tmp $@
 

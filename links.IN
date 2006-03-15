@@ -11,8 +11,9 @@ elvi.1sr.gz @mandir@/man1/cddb.1sr.gz
 elvi.1sr.gz @mandir@/man1/cite.1sr.gz
 elvi.1sr.gz @mandir@/man1/cia.1sr.gz
 elvi.1sr.gz @mandir@/man1/cnn.1sr.gz
-elvi.1sr.gz @mandir@/man1/cve.1sr.gz
+elvi.1sr.gz @mandir@/man1/ctan.1sr.gz
 elvi.1sr.gz @mandir@/man1/currency.1sr.gz
+elvi.1sr.gz @mandir@/man1/cve.1sr.gz
 elvi.1sr.gz @mandir@/man1/debbugs.1sr.gz
 elvi.1sr.gz @mandir@/man1/debcontents.1sr.gz
 elvi.1sr.gz @mandir@/man1/deblists.1sr.gz
@@ -31,9 +32,12 @@ elvi.1sr.gz @mandir@/man1/foldoc.1sr.gz
 elvi.1sr.gz @mandir@/man1/freebsd.1sr.gz
 elvi.1sr.gz @mandir@/man1/freedb.1sr.gz
 elvi.1sr.gz @mandir@/man1/freshmeat.1sr.gz
+elvi.1sr.gz @mandir@/man1/fsfdir.1sr.gz
 elvi.1sr.gz @mandir@/man1/google.1sr.gz
+elvi.1sr.gz @mandir@/man1/gutenberg.1sr.gz
 elvi.1sr.gz @mandir@/man1/happypenguin.1sr.gz
 elvi.1sr.gz @mandir@/man1/imdb.1sr.gz
+elvi.1sr.gz @mandir@/man1/ixquick.1sr.gz
 elvi.1sr.gz @mandir@/man1/jake.1sr.gz
 elvi.1sr.gz @mandir@/man1/leodict.1sr.gz
 elvi.1sr.gz @mandir@/man1/netbsd.1sr.gz
@@ -57,6 +61,7 @@ elvi.1sr.gz @mandir@/man1/w3css.1sr.gz
 elvi.1sr.gz @mandir@/man1/w3html.1sr.gz
 elvi.1sr.gz @mandir@/man1/w3link.1sr.gz
 elvi.1sr.gz @mandir@/man1/w3rdf.1sr.gz
+elvi.1sr.gz @mandir@/man1/wayback.1sr.gz
 elvi.1sr.gz @mandir@/man1/webster.1sr.gz
 elvi.1sr.gz @mandir@/man1/wetandwild.1sr.gz
 elvi.1sr.gz @mandir@/man1/wikipedia.1sr.gz

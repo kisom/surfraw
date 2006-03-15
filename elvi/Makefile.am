@@ -12,6 +12,7 @@ elvi_SCRIPTS	= \
 		  cia \
 		  cite \
 		  cnn \
+		  ctan \
 		  currency \
 		  cve \
 		  debbugs \
@@ -32,6 +33,9 @@ elvi_SCRIPTS	= \
 		  freebsd \
 		  freedb \
 		  freshmeat \
+		  fsfdir \
+		  gutenberg \
+		  ixquick \
 		  jake \
 		  google \
 		  happypenguin \
@@ -58,13 +62,15 @@ elvi_SCRIPTS	= \
 		  w3html \
 		  w3link \
 		  w3rdf \
+		  wayback \
 		  webster \
 		  wetandwild \
 		  wikipedia \
 		  woffle \
 		  xxx \
 		  yahoo \
-                  yubnub
+          yubnub
+
 sysconf_DATA	= surfraw_elvi.list
 
 EXTRA_DIST	= $(elvi_SCRIPTS)

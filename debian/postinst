@@ -1,2 +1,4 @@
 #!/bin/sh -e
 # Dummy script to cope with 2.1.2 breakage
+
+#DEBHELPER#

@@ -129,11 +129,11 @@ Or... How to Eat The CHEESE
 
     2: copy elviname to the elvi directory
 
-    3: add elviname to the bin_SCRIPTS list in elvi/Makefile.am
+    3: add elviname to the elvi_SCRIPTS list in elvi/Makefile.am
 
     4: add a link for the manpage in links.IN
     
-    5: run automake and autoconf
+    5: run automake (1.7) and autoconf (2.50+)
 
     6: rebuild the package (eg fakeroot debian/rules binary)
        (this recreates elvi/surfraw.list)

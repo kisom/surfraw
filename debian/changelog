@@ -1,3 +1,24 @@
+surfraw (2.1.4) unstable; urgency=low
+
+  * Ian Beckwith <ianb@nessie.mcc.ac.uk>:
+    + changed elvi:
+      - debsec: fix tabbing (Closes: #354737).
+      - debbugs: updated search options.
+    + new elvi:
+      - ixquick (Thanks to Aparna Jaitly).
+      - ctan.
+      - fsfdir.
+      - gutenberg.
+      - wayback.
+    + Makefile.include: change sed invocation to work with
+      both old and new make(1).
+    + debian/rules install: remove spurious mkdir.
+    + debian/{prerm,postinst}: add #DEBHELPER# tokens.
+    + Switch to debhelper compat level 4.
+    + HACKING: corrected appendix 1.
+
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Wed, 15 Mar 2006 22:52:49 +0000
+
 surfraw (2.1.3) unstable; urgency=high
 
   * Urgency high, as it renders surfraw uninstallable
