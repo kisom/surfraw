@@ -117,7 +117,7 @@ I can't enjoy it with you talking all the time (default: no)
  $ sr ask why is jeeves gay?
  $ surfraw google \-results=100 RMS, GNU, which is sinner, which is sin?
  $ sr austlii \-method=phrase dog like
- $ /usr/lib/surfraw/rhyme \-method=perfect Julian
+ $ @ELVIDIR@/rhyme \-method=perfect Julian
 
 .SH BUGS
 

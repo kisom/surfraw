@@ -5,18 +5,18 @@ _surfraw()
 	local prev=${COMP_WORDS[COMP_CWORD-1]}
 	local opts='-browser -elvi -escape-url-args -graphical \
 		-help -q -quote -quiet -text -version'
-	local elvi="$(cut -f1 /etc/surfraw.bookmarks ~/.surfraw.bookmarks 2>&-
-			cd /usr/lib/surfraw && echo * 2>&-)"
+	local elvi="$(cut -f1 @sysconfdir@/surfraw.bookmarks ~/.surfraw.bookmarks 2>&-
+			cd @ELVIDIR@ && echo * 2>&-)"
 	if      [[ $cur == -* ]]
 	then    COMPREPLY=( $( compgen -W "$opts" -- $cur ) )
 	# I can't see a way to get the =yes/=no parts to work...
-	elif    [ "$COMP_CWORD" -eq 1 ]
+	elif    [[ $COMP_CWORD -eq 1 ]]
 	then    COMPREPLY=( $( compgen -W "$elvi" -- $cur ) )
-		# "sr g<tab>" for google
-	elif    [[ $prev == @(alioth|deb@(bug|content|package|pt)s|freshmeat|sourceforge) ]]
+		# "sr go<tab>" for google
+	elif    [[ $prev == @(alioth|deb@(bugs|contents|packages|pts|sec)|freshmeat|fsfdir|sourceforge) ]]
 	then    COMPREPLY=( $(apt-cache --generate pkgnames $cur) )
 		# "sr debbugs 4<tab>" to check 44bsd-rdist bugs...
-	elif    test -x /usr/bin/look # in bsdmainutils, "important"
+	elif    [[ -x /usr/bin/look ]] # in bsdmainutils, "important"
 	then	COMPREPLY=( $(/usr/bin/look ${cur:-''}) )
 		# "sr l<tab> vy<tab>" to find the German for "vying"
 	else	COMPREPLY=( $( compgen -o default -- $cur) ) # copout

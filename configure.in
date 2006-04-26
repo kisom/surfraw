@@ -4,7 +4,7 @@ dnl Process this file with autoconf to produce a configure script.
 
 dnl This is the only place where the package version appears
 dnl (apart from debian/changelog)	
-AC_INIT(surfraw, 2.1.4)
+AC_INIT(surfraw, 2.1.5)
 AC_PREREQ(2.54)
 AC_CONFIG_SRCDIR([surfraw.IN])
 
@@ -33,6 +33,6 @@ AC_SUBST(sr_text_browser)
 AC_CHECK_PROGS(sr_graphical_browser, mozilla konqueror netscape opera kfm)
 AC_SUBST(sr_graphical_browser)
 
-AC_CONFIG_FILES([Makefile surfraw.conf surfraw.lsm surfraw.spec elvi/Makefile surfraw.1 elvi.1sr])
+AC_CONFIG_FILES([Makefile surfraw.lsm surfraw.spec elvi/Makefile])
 AC_OUTPUT
 

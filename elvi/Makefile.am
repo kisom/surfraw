@@ -34,6 +34,7 @@ elvi_SCRIPTS	= \
 		  freedb \
 		  freshmeat \
 		  fsfdir \
+		  genpkg \
 		  gutenberg \
 		  ixquick \
 		  jake \
