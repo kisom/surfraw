@@ -1,2 +1,4 @@
 Tag: usr-lib-in-arch-all
 Data: /usr/lib/surfraw/.*
+Tag: exec-not-elf-or-script
+Data: /usr/bin/surfraw

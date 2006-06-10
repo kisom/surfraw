@@ -35,7 +35,6 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-host_triplet = @host@
 ACLOCAL = @ACLOCAL@
 AMTAR = @AMTAR@
 AUTOCONF = @AUTOCONF@
@@ -68,35 +67,31 @@ SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
 VERSION = @VERSION@
-ac_ct_STRIP = @ac_ct_STRIP@
 am__leading_dot = @am__leading_dot@
 bindir = @bindir@
-build = @build@
 build_alias = @build_alias@
-build_cpu = @build_cpu@
-build_os = @build_os@
-build_vendor = @build_vendor@
 datadir = @datadir@
+datarootdir = @datarootdir@
+docdir = @docdir@
+dvidir = @dvidir@
 exec_prefix = @exec_prefix@
-host = @host@
 host_alias = @host_alias@
-host_cpu = @host_cpu@
-host_os = @host_os@
-host_vendor = @host_vendor@
+htmldir = @htmldir@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
 libdir = @libdir@
 libexecdir = @libexecdir@
+localedir = @localedir@
 localstatedir = @localstatedir@
 mandir = @mandir@
 oldincludedir = @oldincludedir@
+pdfdir = @pdfdir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
+psdir = @psdir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
-sr_graphical_browser = @sr_graphical_browser@
-sr_text_browser = @sr_text_browser@
 sysconfdir = @sysconfdir@
 target_alias = @target_alias@
 
@@ -104,6 +99,7 @@ target_alias = @target_alias@
 elvidir = $(ELVIDIR)
 
 elvi_SCRIPTS = \
+		  W \
 		  alioth \
 		  altavista \
 		  amazon \
@@ -174,12 +170,6 @@ elvi_SCRIPTS = \
 		  yahoo \
           yubnub
 
-
-sysconf_DATA = surfraw_elvi.list
-
-EXTRA_DIST = $(elvi_SCRIPTS)
-
-CLEANFILES = surfraw_elvi.list
 subdir = elvi
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
@@ -187,8 +177,6 @@ CONFIG_CLEAN_FILES =
 SCRIPTS = $(elvi_SCRIPTS)
 
 DIST_SOURCES =
-DATA = $(sysconf_DATA)
-
 DIST_COMMON = $(srcdir)/Makefile.in Makefile.am
 all: all-am
 
@@ -219,24 +207,6 @@ uninstall-elviSCRIPTS:
 	  rm -f $(DESTDIR)$(elvidir)/$$f; \
 	done
 uninstall-info-am:
-sysconfDATA_INSTALL = $(INSTALL_DATA)
-install-sysconfDATA: $(sysconf_DATA)
-	@$(NORMAL_INSTALL)
-	$(mkinstalldirs) $(DESTDIR)$(sysconfdir)
-	@list='$(sysconf_DATA)'; for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " $(sysconfDATA_INSTALL) $$d$$p $(DESTDIR)$(sysconfdir)/$$f"; \
-	  $(sysconfDATA_INSTALL) $$d$$p $(DESTDIR)$(sysconfdir)/$$f; \
-	done
-
-uninstall-sysconfDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(sysconf_DATA)'; for p in $$list; do \
-	  f="`echo $$p | sed -e 's|^.*/||'`"; \
-	  echo " rm -f $(DESTDIR)$(sysconfdir)/$$f"; \
-	  rm -f $(DESTDIR)$(sysconfdir)/$$f; \
-	done
 tags: TAGS
 TAGS:
 
@@ -277,10 +247,10 @@ distdir: $(DISTFILES)
 	done
 check-am: all-am
 check: check-am
-all-am: Makefile $(SCRIPTS) $(DATA)
+all-am: Makefile $(SCRIPTS)
 
 installdirs:
-	$(mkinstalldirs) $(DESTDIR)$(elvidir) $(DESTDIR)$(sysconfdir)
+	$(mkinstalldirs) $(DESTDIR)$(elvidir)
 install: install-am
 install-exec: install-exec-am
 install-data: install-data-am
@@ -298,7 +268,6 @@ install-strip:
 mostlyclean-generic:
 
 clean-generic:
-	-test -z "$(CLEANFILES)" || rm -f $(CLEANFILES)
 
 distclean-generic:
 	-rm -f $(CONFIG_CLEAN_FILES)
@@ -324,7 +293,7 @@ info-am:
 
 install-data-am: install-elviSCRIPTS
 
-install-exec-am: install-sysconfDATA
+install-exec-am:
 
 install-info: install-info-am
 
@@ -348,22 +317,17 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-elviSCRIPTS uninstall-info-am \
-	uninstall-sysconfDATA
+uninstall-am: uninstall-elviSCRIPTS uninstall-info-am
 
 .PHONY: all all-am check check-am clean clean-generic distclean \
 	distclean-generic distdir dvi dvi-am info info-am install \
 	install-am install-data install-data-am install-elviSCRIPTS \
 	install-exec install-exec-am install-info install-info-am \
-	install-man install-strip install-sysconfDATA installcheck \
-	installcheck-am installdirs maintainer-clean \
-	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
-	pdf-am ps ps-am uninstall uninstall-am uninstall-elviSCRIPTS \
-	uninstall-info-am uninstall-sysconfDATA
+	install-man install-strip installcheck installcheck-am \
+	installdirs maintainer-clean maintainer-clean-generic \
+	mostlyclean mostlyclean-generic pdf pdf-am ps ps-am uninstall \
+	uninstall-am uninstall-elviSCRIPTS uninstall-info-am
 
-
-surfraw_elvi.list: $(elvi_SCRIPTS)
-	cat $(elvi_SCRIPTS)|egrep '^#.*elvis:'|sed 's/^.*elvis: *//'|sort > $@
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:

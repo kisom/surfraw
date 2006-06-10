@@ -138,7 +138,7 @@ Or... How to Eat The CHEESE
     6: rebuild the package (eg fakeroot debian/rules binary)
        (this recreates elvi/surfraw.list)
 
-    7: update the elvi list in README from elvi/surfraw_elvi.list
+    7: update the elvi list in README
 
     8: add an entry to the changelog.
 

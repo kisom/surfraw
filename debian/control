@@ -3,7 +3,7 @@ Section: web
 Priority: optional
 Maintainer: Debian surfraw maintainers <surfraw-devel@lists.alioth.debian.org>
 Uploaders: Moritz Muehlenhoff <jmm@debian.org>,Thomas Smith <tgs@debian.org>,Christian Surchi <csurchi@debian.org>,Ian Beckwith <ianb@nessie.mcc.ac.uk>
-Standards-Version: 3.6.2
+Standards-Version: 3.7.2
 Build-Depends: debhelper (>= 4.1.16)
 
 Package: surfraw

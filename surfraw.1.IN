@@ -303,15 +303,6 @@ Default:
 
  defyn SURFRAW_escape_url_args yes
 
-.TP
-.B SURFRAW_elvi_list
-File containing list of elvi
-
-Default:
-
- def SURFRAW_elvi_list @sysconfdir@/surfraw_elvi.list
-
-
 .SH FILES
 
 .TP
@@ -334,10 +325,6 @@ System wide bookmarks file.
 .TP
 .B $HOME/.surfraw.bookmarks
 Per-user bookmarks file.
-
-.TP
-.B @sysconfdir@/surfraw_elvi.list
-List of all elvi.
 
 .SH BUGS
 
@@ -382,7 +369,7 @@ man page by Christian Surchi.
 
 .SH COPYRIGHT
 
-  Copyright (c) 2003, 2004 The Surfraw-Devel Team
+  Copyright (c) 2003-2006 The Surfraw-Devel Team
                            <surfraw-devel@lists.alioth.debian.org>
   Copyright (c) 2000-2001 Julian Assange <proff@iq.org>
   Copyright (c) 2001 Australian Institute for Collaborative Research

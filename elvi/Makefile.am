@@ -2,6 +2,7 @@
 elvidir=$(ELVIDIR)
 
 elvi_SCRIPTS	= \
+		  W \
 		  alioth \
 		  altavista \
 		  amazon \
@@ -71,13 +72,3 @@ elvi_SCRIPTS	= \
 		  xxx \
 		  yahoo \
           yubnub
-
-sysconf_DATA	= surfraw_elvi.list
-
-EXTRA_DIST	= $(elvi_SCRIPTS)
-
-CLEANFILES = surfraw_elvi.list
-
-surfraw_elvi.list: $(elvi_SCRIPTS)
-	cat $(elvi_SCRIPTS)|egrep '^#.*elvis:'|sed 's/^.*elvis: *//'|sort > $@
-

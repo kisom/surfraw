@@ -24,14 +24,8 @@ AC_SUBST(VERSION)
 ISODATE=`date +%Y-%m-%d`
 AC_SUBST(ISODATE)
 
-AC_CANONICAL_HOST
-
 dnl Checks for programs.
 AC_PROG_INSTALL
-AC_CHECK_PROGS(sr_text_browser, links w3m lynx)
-AC_SUBST(sr_text_browser)
-AC_CHECK_PROGS(sr_graphical_browser, mozilla konqueror netscape opera kfm)
-AC_SUBST(sr_graphical_browser)
 
 AC_CONFIG_FILES([Makefile surfraw.lsm surfraw.spec elvi/Makefile])
 AC_OUTPUT

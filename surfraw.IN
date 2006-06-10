@@ -246,7 +246,7 @@ w3_parse_option () {
     
     case "$opt" in
 	-browser=*)	    setopt   SURFRAW_browser		$optarg	;;
-	-elvi)		    cat "$SURFRAW_elvi_list"; exit 0            ;;
+	-elvi)		    sed -n 's/^.*elvis: \(.*\)$/\1/p' $elvidir/*; exit 0            ;;
 	-escape-url-args=*) setoptyn SURFRAW_escape_url_args	$optarg ;;
 	-g | -graphical)    setoptyn SURFRAW_graphical		yes	;;
 	-help | --help)     do_help=1					;;

@@ -1,18 +1,18 @@
 # $Id$
 SUBDIRS		= elvi
 
-bin_SCRIPTS	= surfraw surfraw-update-path W
+bin_SCRIPTS	= surfraw surfraw-update-path
 sysconf_DATA	= surfraw.conf surfraw.bookmarks
 devel_extra	= banner prebuild
 noinst_DATA	= surfraw-bash-completion
 man_MANS = surfraw-update-path.1 surfraw.1 elvi.1sr
 EXTRA_DIST	= surfraw.lsm.in surfraw.IN surfraw-update-path.IN\
                   surfraw.spec.in aclocal.m4 HACKING Makefile.include \
-				  surfraw.1.IN elvi.1sr.IN W surfraw.bookmarks links.IN \
-				  debian/changelog debian/config debian/control debian/copyright \
-				  debian/docs debian/linda.overrides debian/postinst \
-				  debian/prerm debian/rules debian/surfraw.dirs debian/templates \
-				  debian/po/POTFILES.in debian/po/templates.pot  \
+				  surfraw.1.IN elvi.1sr.IN surfraw.bookmarks links.IN \
+				  debian/README.Debian debian/changelog debian/compat \
+				  debian/control debian/copyright \
+				  debian/docs debian/linda.overrides \
+				  debian/rules debian/surfraw.dirs \
 				  $(devel_extra) surfraw-bash-completion.IN surfraw.conf.IN
 
 CLEANFILES = surfraw surfraw-update-path surfraw-update-path.1 surfraw.spec surfraw.lsm \
