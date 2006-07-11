@@ -3,7 +3,7 @@ surfraw (2.1.5) unstable; urgency=low
   * Added myself to Uploaders.
   * Ack not-really-NMU (Closes: #354737).
   * Applied bash completion fixes, thanks to Justin B. Rye (Closes: #361668).
-  * Disable requoting in wikipedia elvi.
+  * wikipedia: disable requoting; use Go rather than Search.
   * Fixes to ixquick elvi, thanks to Aparna Jaitly.
   * Thanks to James Rowe for the following patches:
     + Move W to /usr/lib/surfraw (see
