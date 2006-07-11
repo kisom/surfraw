@@ -3,6 +3,7 @@ surfraw (2.1.5) unstable; urgency=low
   * Added myself to Uploaders.
   * Ack not-really-NMU (Closes: #354737).
   * Applied bash completion fixes, thanks to Justin B. Rye (Closes: #361668).
+  * Disable requoting in wikipedia elvi.
   * Fixes to ixquick elvi, thanks to Aparna Jaitly.
   * Thanks to James Rowe for the following patches:
     + Move W to /usr/lib/surfraw (see
@@ -22,7 +23,7 @@ surfraw (2.1.5) unstable; urgency=low
   * Added linda override exec-not-elf-or-script for /usr/bin/surfraw
     due to erroneous file(1) output (See: #369977)  
 
- -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sat, 10 Jun 2006 02:37:45 +0100
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Tue, 11 Jul 2006 00:53:59 +0100
 
 surfraw (2.1.4) unstable; urgency=low
 
