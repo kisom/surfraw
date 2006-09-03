@@ -135,12 +135,11 @@ Or... How to Eat The CHEESE
     
     5: run automake (1.7) and autoconf (2.50+)
 
-    6: rebuild the package (eg fakeroot debian/rules binary)
-       (this recreates elvi/surfraw.list)
+    6: update the elvi list in README
 
-    7: update the elvi list in README
+    7: add an entry to the changelog
 
-    8: add an entry to the changelog.
+    8: test
 
     9: if using cvs, '(cd elvi;cvs add elviname)' then 'cvs commit'
 

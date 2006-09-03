@@ -1,0 +1,53 @@
+#!/bin/sh
+# elvis: discogs		-- Search the Discogs database of music information (www.discogs.com)
+# Patroklos Argyroudis, argp at domain cs.tcd.ie, 20060823
+
+. surfraw || exit 1
+
+w3_config_hook()
+{
+ def SURFRAW_discogs_category all
+}
+
+w3_usage_hook()
+{
+ cat << EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the Discogs database of music information (www.discogs.com)
+Local options:
+  -category=                    Category to search
+             all          |
+             artists      |
+             labels       |
+             releases     |
+             catno     
+                                Default: $SURFRAW_discogs_category
+                                Environment: SURFRAW_discogs_category
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook()
+{
+ opt="$1"
+ optarg="$2"
+ 
+ case "$opt" in
+  -category=*) setopt SURFRAW_discogs_category $optarg ;;
+  *) return 1 ;;
+ esac
+ return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.discogs.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.discogs.com/search?type=${SURFRAW_discogs_category}&q=${escaped_args}&btn=Search"
+fi
+
+# EOF

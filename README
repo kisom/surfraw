@@ -127,6 +127,7 @@ debpackages     -- Search debian packages (packages.debian.org)
 debpts          -- Search the Debian Package Tracking System (packages.qa.debian.org)
 debsec          -- Search the Debian Security Tracker for CVE ids or package names
 deja            -- Search usenet using Google Groups (groups.google.com)
+discogs         -- Search the Discogs database of music information (www.discogs.com)
 dmoz            -- Search the Open Directory Project web directory (dmoz.org)
 ebay            -- Search the Ebay auction site
 etym            -- Look up word origins at www.etymonline.com

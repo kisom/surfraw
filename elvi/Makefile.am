@@ -24,6 +24,7 @@ elvi_SCRIPTS	= \
 		  debpts \
 		  debsec \
 		  deja \
+		  discogs \
 		  dmoz \
 		  ebay \
 		  etym \

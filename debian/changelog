@@ -5,6 +5,7 @@ surfraw (2.1.5) unstable; urgency=low
   * Applied bash completion fixes, thanks to Justin B. Rye (Closes: #361668).
   * wikipedia: disable requoting; use Go rather than Search.
   * Fixes to ixquick elvi, thanks to Aparna Jaitly.
+  * New elvi: discogs, thanks to Patroklos Argyroudis.
   * Thanks to James Rowe for the following patches:
     + Move W to /usr/lib/surfraw (see
       http://bugs.gentoo.org/show_bug.cgi?id=58955).
@@ -12,18 +13,20 @@ surfraw (2.1.5) unstable; urgency=low
     + Generate elvi list on demand and eliminate surfraw_elvi.list
     + Make elvidir configurable.
     + Make sysconfdir configurable.
-    + Fix 'make dist' and 'make distcheck'
+    + Fix 'make dist' and 'make distcheck'.
     + Remove unused browser checks.
     + Drop AC_CANONICAL_HOST - not needed.
   * Remove config.guess and config.sub - not needed.
   * Remove config.{guess,sub} updating logic from debian/rules.
+  * postrm: remove /etc/surfraw_elvi.list if it exists.
   * Convert debhelper Build-Depends-Indep: to Build-Depends:.
   * Standards-Version: 3.7.2 (No changes).
   * Updated Copyright dates to 2006.
   * Added linda override exec-not-elf-or-script for /usr/bin/surfraw
-    due to erroneous file(1) output (See: #369977)  
+    due to erroneous file(1) output (See: #369977).
+  * Tweak HACKING appendix 1 to remove need to build surfraw_elvi.list.
 
- -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Tue, 11 Jul 2006 00:53:59 +0100
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sun,  3 Sep 2006 01:29:05 +0100
 
 surfraw (2.1.4) unstable; urgency=low
 
