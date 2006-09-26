@@ -204,6 +204,7 @@ Global options:
   				Default: $SURFRAW_graphical
 				Environment: SURFRAW_graphical
   -help				What you're reading now, dude
+  -p | -print			Just print search URL, don't pass to browser
   -quiet=yes|no			I can't enjoy it with you talking all the time
 				Default: $SURFRAW_quiet
 				Environment: SURFRAW_quiet
@@ -257,6 +258,7 @@ w3_parse_option () {
 	-t | -text)	    unset DISPLAY
 			    setoptyn SURFRAW_graphical 		no	;;
 	-version)	    echo $surfraw_version; exit 0	    	;;
+	-p | -print)    setoptyn SURFRAW_print  yes     ;;
 	--)		    return 1					;;
 	-*)		    w3_bad_option "$opt"		    	;;
 	*)		    return 1					;;
@@ -305,7 +307,9 @@ w3_browse_url () {
    else
    	screen=no
    fi
-    if ok screen; then
+    if ok SURFRAW_print; then
+		echo "$@"
+    elif ok screen; then
 	if test $SURFRAW_browser_args = "none"; then
 		$SURFRAW_screen $SURFRAW_browser "$@"
 	else

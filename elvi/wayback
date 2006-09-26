@@ -70,7 +70,7 @@ w3_parse_option_hook () {
     -l*)     setoptyn SURFRAW_wayback_list       1       ;;
     -d*)     setoptyn SURFRAW_wayback_dups       1       ;;
     -c*)     setoptyn SURFRAW_wayback_comp       1       ;;
-    -p*)     setoptyn SURFRAW_wayback_pdf        1       ;;
+    -pd*)    setoptyn SURFRAW_wayback_pdf        1       ;;
 	*)       return 1 ;;
     esac
     return 0

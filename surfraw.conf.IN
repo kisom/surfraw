@@ -81,3 +81,6 @@ def   SURFRAW_results		30
 # escape [% "@$%&+,/:;<=>?@@[\^{|}~'] characters in command line arguments
 # subsequently used to construct a url
 defyn SURFRAW_escape_url_args	yes
+
+# just print search url?
+defyn SURFRAW_print             no

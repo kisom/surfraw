@@ -1,35 +1,65 @@
 #!/bin/sh
 # $Id$
-# elvis: debpackages	-- Search debian packages (packages.debian.org)
+# elvis: debpackages	-- Search debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 . surfraw || exit 1
 
 w3_config_hook () {
-def   SURFRAW_debian_release all
-def   SURFRAW_debian_distro stable
-def   SURFRAW_debian_search cgi-bin/search_packages.pl
+def   SURFRAW_debian_release  all
+def   SURFRAW_debian_distro   all
+def   SURFRAW_debian_search   pkg
+defyn SURFRAW_debian_ubuntu   no
+defyn SURFRAW_debian_usecase  no
+defyn SURFRAW_debian_subwords yes
 }
 
 w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words]...
 Description:
-  Surfraw search debian packages (packages.debian.org)
+  Search debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 Local options:
-  -release=			Specialized search on release
-  	  all		|	all releases
-  	  main		|	main release
-  	  non-US	|	packages restricted in US
-  	  contrib	|	contrib
-  	  non-free	|	packages not meeting FSG
+  -u                            Search ubuntu packages instead of debian
+  -release=                     Specialized search on release
+    Debian:
+      all               |       all releases
+      main              |       main release
+      non-US            |       packages restricted in US
+      contrib           |       contrib
+      non-free          |       packages not meeting FSG
+    Ubuntu (-u):
+      all               |       all releases
+      main              |       
+      restricted        |       
+      universe          |       
+      multiverse        |       
+
                                 Default: $SURFRAW_debian_release
                                 Environment: SURFRAW_debian_release
   -distro=                      Specific distribution
-          all           |       All distributions
-          stable        |       Stable
-          testing       |       Testing
-          unstable      |       Unstable
+    Debian:
+      all               |       All distributions
+      stable            |       Stable
+      testing           |       Testing
+      unstable          |       Unstable
+      oldstable         |       Old Stable
+      experimental      |       Experimental
+    Ubuntu (-u):
+      all               |       All distributions
+      warty             |       
+      hoary             |       
+      hoary-backports   |       
+      breezy            |       
+      breezy-backports  |       
+      dapper            |       
+      edgy              |       
                                 Default: $SURFRAW_debian_distro
                                 Environment: SURFRAW_debian_distro
+  -search=                      Field to search
+          pkg           |       Package names only
+          desc          |       Descriptions
+          src           |       Source package names
+  -nosub                        Don't allow subword matches
+  -case                         Make searches case-sensitive
 EOF
     w3_global_usage
 }
@@ -38,8 +68,12 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-release=*) setopt   SURFRAW_debian_release $optarg	;;
-	-distro=*)  setopt   SURFRAW_debian_distro  $optarg	;;
+	-release=*) setopt   SURFRAW_debian_release  $optarg;;
+	-distro=*)  setopt   SURFRAW_debian_distro   $optarg;;
+	-search=*)  setopt   SURFRAW_debian_search   $optarg;;
+	-u*)        setoptyn SURFRAW_debian_ubuntu   yes	;;
+	-ca*)       setoptyn SURFRAW_debian_usecase  yes	;;
+	-nos*)      setoptyn SURFRAW_debian_subwords no		;;
 	*) return 1 ;;
     esac
     return 0
@@ -48,9 +82,37 @@ w3_parse_option_hook () {
 w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
+
+if ifyes SURFRAW_debian_ubuntu
+then
+	searchpage="http://packages.ubuntu.com/"
+	searchurl="http://packages.ubuntu.com/cgi-bin/search_packages.pl"
+else
+	searchpage="http://packages.debian.org/#search_packages"
+	searchurl="http://packages.debian.org/cgi-bin/search_packages.pl"
+fi
+
 if test -z "$w3_args"; then
-    w3_browse_url "http://packages.debian.org/#search_packages"
+    w3_browse_url "$searchpage"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://packages.debian.org/${SURFRAW_debian_search}?keywords=${escaped_args}&searchon=names&subword=1&version=${SURFRAW_debian_distro}&release=${SURFRAW_debian_release}"
+	url="$searchurl?keywords=${escaped_args}&version=${SURFRAW_debian_distro}&release=${SURFRAW_debian_release}"
+
+	case "$SURFRAW_debian_search" in
+		pkg*)  url="$url&searchon=names"        ;;
+		src*)  url="$url&searchon=sourcenames"  ;;
+		desc*) url="$url&searchon=all"          ;;
+		*)     err "Unknown search type"        ;;
+	esac
+
+	if ifyes SURFRAW_debian_usecase
+	then
+		url="$url&case=sensitive"
+	fi
+	if ifyes SURFRAW_debian_subwords
+	then
+		url="$url&subword=1"
+	fi
+		
+    w3_browse_url "$url"
 fi

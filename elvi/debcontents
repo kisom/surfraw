@@ -1,33 +1,59 @@
 #!/bin/sh
 # $Id$
-# elvis: debcontents	-- Search contents of debian packages (packages.debian.org)
+# elvis: debcontents	-- Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 . surfraw || exit 1
 
 w3_config_hook () {
-def   SURFRAW_debcontents_arch i386
-def   SURFRAW_debcontents_distro stable
-def   SURFRAW_debcontents_search cgi-bin/search_contents.pl
+def   SURFRAW_debcontents_arch    i386
+def   SURFRAW_debcontents_distro  stable
+def   SURFRAW_debcontents_search  files
+defyn SURFRAW_debcontents_usecase no
+defyn SURFRAW_debcontents_ubuntu  no
 }
 
 w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words]...
 Description:
-  Surfraw search debian packages (packages.debian.org)
+  Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 Local options:
-  -arch=			Specialized search on architecture
-	  i386		|	Intel 386
-	  m68k		|	M68k
-	  alpha		|	alpha
-	  sparc		|	sparc
-	  powerpc	|	PowerPC
-	  arm		|	ARM
+  -u                            Search ubuntu packages instead of debian
+  -case                         Make searches case-sensitive
+  -search=                      Type of search
+      files             |       Packages that contain files named like this
+      dirs              |       Packages that contain files or directories named like this
+      word              |       Packages that contain files or directories whose names contain the keyword
+      list                      List all files in this package
+                                Default: $SURFRAW_debcontents_search
+                                Environment: SURFRAW_debcontents_search
+  -arch=                        Specialized search on architecture
+      i386              |       Intel x86       (debian & ubuntu)
+      powerpc           |       PowerPC         (debian & ubuntu)
+      amd64             |       AMD64           (debian & ubuntu)
+      m68k              |       Motorola 680x0  (debian)
+      alpha             |       Alpha           (debian)
+      sparc             |       SPARC           (debian)
+      arm               |       ARM             (debian)
+      hppa              |       HP PA/RISC      (debian)
+      ia64              |       Intel IA-64     (debian)
+      mips              |       MIPS            (debian)
+      mipsel            |       MIPS (DEC)      (debian)
+      s390              |       IBM S/390       (debian)
+      hurd-i386                 Hurd (i386)     (debian)
                                 Default: $SURFRAW_debcontents_arch
                                 Environment: SURFRAW_debcontents_arch
   -distro=                      Specific distribution
+        Debian:
           stable        |       Stable
           testing       |       Testing
           unstable      |       Unstable
+          oldstable     |       Old Stable
+        Ubuntu (-u):
+          warty         |       Warty
+          hoary         |       Hoary
+          breezy        |       Breezy
+          dapper        |       Dapper
+          edgy          |       Edgy
                                 Default: $SURFRAW_debcontents_distro
                                 Environment: SURFRAW_debcontents_distro
 EOF
@@ -38,8 +64,11 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-arch=*) setopt   SURFRAW_debcontents_arch $optarg	;;
+	-arch=*)    setopt   SURFRAW_debcontents_arch 	 $optarg	;;
 	-distro=*)  setopt   SURFRAW_debcontents_distro  $optarg	;;
+	-search=*)  setopt   SURFRAW_debcontents_search  $optarg	;;
+	-u*)        setoptyn SURFRAW_debcontents_ubuntu  yes    	;;
+	-ca*)  		setoptyn SURFRAW_debcontents_usecase yes    	;;
 	*) return 1 ;;
     esac
     return 0
@@ -48,9 +77,42 @@ w3_parse_option_hook () {
 w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
+
+if ifyes SURFRAW_debcontents_ubuntu
+then
+	searchpage="http://packages.ubuntu.com/"
+	searchurl="http://packages.ubuntu.com/cgi-bin/search_contents.pl"
+else
+	searchpage="http://packages.debian.org/#search_contents"
+	searchurl="http://packages.debian.org/cgi-bin/search_contents.pl"
+fi
 if test -z "$w3_args"; then
-    w3_browse_url "http://packages.debian.org/#search_contents"
+    w3_browse_url "$searchpage"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://packages.debian.org/${SURFRAW_debcontents_search}?word=${escaped_args}&case=insensitive&version=${SURFRAW_debcontents_distro}&arch=${SURFRAW_debcontents_arch}&searchmode=searchfilesanddirs"
+
+	url="$searchurl?word=${escaped_args}&arch=${SURFRAW_debcontents_arch}"
+
+	if ifyes SURFRAW_debcontents_ubuntu && [ "$SURFRAW_debcontents_distro" = "stable" ]
+	then
+		SURFRAW_debcontents_distro=dapper
+	fi
+	url="$url&version=${SURFRAW_debcontents_distro}"
+
+	case "$SURFRAW_debcontents_search" in
+		f*)  url="$url&searchmode=searchfiles"        ;;
+		d*)  url="$url&searchmode=searchfilesanddirs" ;;
+		w*)  url="$url&searchmode=searchword"         ;;
+		l*)  url="$url&searchmode=filelist"           ;;
+		*)   err "Unknown search type"                ;;
+	esac
+
+	if ifyes SURFRAW_debcontents_usecase
+	then
+		url="$url&case=sensitive"
+	else
+		url="$url&case=insensitive"
+	fi
+
+    w3_browse_url "$url"
 fi

@@ -153,13 +153,13 @@ Or... How to Eat The CHEESE
 
     3: If you have made changes, cvs commit
 
-    4: cvs tag -c surfraw_version-number_debianversion
+    4: cvs tag -c surfraw_versionnumber_debianversion
 
     5: mkdir ../release
 
     6: cd ../release
 
-    7: cvs -d :ext:user@cvs.alioth.debian.org:/cvsroot/surfraw export -r surfraw_version-number_debianversion surfraw
+    7: cvs -d :ext:user@cvs.alioth.debian.org:/cvsroot/surfraw export -r surfraw_versionnumber_debianversion surfraw
 
     8: cd surfraw
 

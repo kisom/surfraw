@@ -53,6 +53,7 @@ elvi_SCRIPTS	= \
 		  rae \
 		  rfc \
 		  rhyme \
+		  scholar \
 		  slashdot \
 		  sundocs \
 		  sourceforge \

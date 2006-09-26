@@ -1,0 +1,24 @@
+#!/bin/sh
+# $Id$
+# elvis: scholar		-- Search Google Scholar (scholar.google.com)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search Google Scholar (scholar.google.com)
+EOF
+    w3_global_usage
+}
+
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://scholar.google.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	w3_browse_url "http://scholar.google.com/scholar?q=${escaped_args}"
+fi

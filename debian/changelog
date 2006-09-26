@@ -5,6 +5,8 @@ surfraw (2.1.5) unstable; urgency=low
   * Applied bash completion fixes, thanks to Justin B. Rye (Closes: #361668).
   * wikipedia: disable requoting; use Go rather than Search.
   * Fixes to ixquick elvi, thanks to Aparna Jaitly.
+  * debpackages/debcontents: new options + ubuntu support with -u.
+  * New elvi: scholar - search google scholar.
   * New elvi: discogs, thanks to Patroklos Argyroudis.
   * Thanks to James Rowe for the following patches:
     + Move W to /usr/lib/surfraw (see
@@ -16,6 +18,7 @@ surfraw (2.1.5) unstable; urgency=low
     + Fix 'make dist' and 'make distcheck'.
     + Remove unused browser checks.
     + Drop AC_CANONICAL_HOST - not needed.
+  * New global option: -p / -print: just print search url.
   * Remove config.guess and config.sub - not needed.
   * Remove config.{guess,sub} updating logic from debian/rules.
   * postrm: remove /etc/surfraw_elvi.list if it exists.
@@ -26,7 +29,7 @@ surfraw (2.1.5) unstable; urgency=low
     due to erroneous file(1) output (See: #369977).
   * Tweak HACKING appendix 1 to remove need to build surfraw_elvi.list.
 
- -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sun,  3 Sep 2006 01:29:05 +0100
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Mon, 25 Sep 2006 04:21:04 +0100
 
 surfraw (2.1.4) unstable; urgency=low
 
