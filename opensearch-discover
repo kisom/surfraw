@@ -1,0 +1,256 @@
+#!/usr/bin/perl -w
+# $Id$
+# Ian Beckwith <ianb@nessie.mcc.ac.uk>
+# 20060830
+
+use strict;
+use vars qw($me $url $title $all $verbose $found $foundnonmatching);
+$me=($0=~/(?:.*\/)?(.*)/)[0];
+
+use Getopt::Long;
+
+$found=0;
+$foundnonmatching=0;
+$all=0;
+$verbose=0;
+$title=undef;
+my $quiet=0;
+my $help=0;
+
+GetOptions('quiet'   => \$quiet,
+		   'verbose' => \$verbose,
+		   'title=s' => \$title,
+		   'all'     => \$all,
+		   '1|first' => sub { $all=0; },
+		   'help'    => \$help);
+
+if ($help || ($#ARGV!=0)) { usage(); }
+
+unless (eval {
+	require LWP::UserAgent;
+	require HTTP::Request;
+	require HTTP::Response;
+	require HTML::Parser;
+}) {
+	unless($quiet)
+	{
+		print STDERR "$me: Cannot find required modules, are libwww-perl and HTML::Parser installed?\n";
+	}
+	exit 3;
+}
+
+my $urlstr=shift;
+unless($urlstr=~/^http\:\/\//i)
+{
+	$urlstr="http://".$urlstr;
+}
+
+$url=URI->new($urlstr);
+
+my $ua=LWP::UserAgent->new;
+
+# FIXME: utf8 problem with weblabor.hu on next line
+# looks like a LWP::UserAgent problem, reported
+# as a comment to existing debian bug #296832
+# http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=296832
+my $response=$ua->get("$url");
+
+unless($response->is_success)
+{
+	unless($quiet)
+	{
+		print STDERR "$me: Error retriving $url: ",$response->status_line,"\n";
+	}
+	exit 1;
+}
+
+my $parser=HTML::Parser->new(api_version => 3,
+							 start_h => [ \&start_handler, "self,tagname,attr" ],
+							 end_h   => [ \&end_handler, "self,tagname" ],
+							 report_tags => [qw(head link)]);
+	
+$parser->parse($response->decoded_content);
+
+unless($found)
+{
+	unless($quiet)
+	{
+		print STDERR "$me: $url: No ";
+		if($foundnonmatching)
+		{
+			print STDERR "matching ";
+		}
+		print STDERR "OpenSearch link found\n";
+	}
+	exit 2;
+}
+
+exit 0;
+
+sub start_handler
+{
+	my($self,$tag,$attr)=@_;
+	if(($tag eq 'link')             &&
+	   (exists($attr->{rel}))       &&
+	   (defined($attr->{rel}))      &&
+	   ($attr->{rel} =~/^search$/i) &&
+	   (exists($attr->{type}))      &&
+	   (defined($attr->{type}))     &&
+	   ($attr->{type} eq 'application/opensearchdescription+xml') &&
+	   (exists($attr->{href}))      &&
+	   (defined($attr->{href})))
+	{
+		my $href=URI->new($attr->{href});
+		my $link=$href->abs($url)->canonical;
+			
+		if(defined($title))
+		{
+			if((exists($attr->{title})) &&
+			   (defined($attr->{title})))
+			{
+				unless($attr->{title} =~/$title/i)
+				{
+					$foundnonmatching=1;
+					return;
+				}
+			}
+			else
+			{
+				# title doesnt exist so can't match
+				$foundnonmatching=1;
+				return;
+			}
+		}
+
+		$found=1;
+		if(($verbose)               &&
+		   (exists($attr->{title})) &&
+		   (defined($attr->{title})))
+		{
+			print $attr->{title},": ";
+		}
+
+		print $link,"\n";
+
+		unless($all)
+		{
+			exit 0;
+		}
+	}
+}
+
+sub end_handler
+{
+	my($self,$tag)=@_;
+	# stop parsing at </head>
+	if($tag eq 'head')
+	{
+		$self->eof();
+	}
+}
+
+sub usage
+{
+	die("Usage: $me [-q] [-v] [-1|-a] [-t TITLE] [-h]  URL\n".
+		"Finds and displays OpenSearch links at a given URL.\n".
+		"Options:\n".
+		" -q\t\tQuiet: Don't display errors.\n".
+		" -v\t\tVerbose: display titles with links.\n".
+		" -t TITLE\tOnly display links matching TITLE, a case-insensitive perl regex.\n".
+		" -1\t\tOnly display first (matching) link (default).\n".
+		" -a\t\tDisplay all (matching) links.\n".
+		" -h\t\tThis help.\n".
+		"Return codes:\n".
+		" 0 - Success.\n".
+		" 1 - Cannot load URL.\n".
+		" 2 - Cannot find (matching) OpenSearch link at URL.\n".
+		" 3 - Cannot find required perl modules.\n");
+}
+		
+__END__
+
+
+=head1 NAME
+
+opensearch-discover - Find an OpenSearch link from a given URL.
+
+=head1 SYNOPSIS
+
+B<opensearch-discover> [B<-q>] [B<-v>] S<[B<-t TITLE>]> S<[B<-1>|B<-a>]> <[B<-h>]  [I<URL>]
+
+=head1 DESCRIPTION
+
+Loads the given URL, searches it for a link to an OpenSearch
+description URL, and prints that URL.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-q>, B<--quiet>
+
+Give no output on errors. In this case, consult the exit code to
+determine errors (See L</DIAGNOSTICS>).
+
+=item B<-v>, B<--verbose>
+
+Verbose: display titles with links. Combine with B<-a> to see all
+available searches
+
+=item S<B<-t> I<TITLE>>, S<B<--title>=I<TITLE>>
+
+Only display links matching B<TITLE>, a case-insensitive perl regular
+expression. For example, B<-t book> would match I<Book Search>, and
+B<-t b.*k> would match I<Book Search> or I<Baby Springbok>.	
+
+=item B<-1>, B<--first>
+
+Only display first (matching) link. This is the default.
+
+=item B<-a>, B<--all>
+
+Display all (matching) links.
+
+=item B<-h>, B<--help>
+
+Display a short help message.
+
+=back
+
+=head1 DIAGNOSTICS
+
+On success, prints the address of the OpenSearch description file and
+returns 0.
+
+If it cannot load the given URL, it returns 1.
+
+If the given URL does not contain a link to an OpenSearch description
+file, it returns 2.
+
+If required perl modules are missing, it returns 3.
+
+=head1 DEPENDENCIES
+
+Requires modules from libwww-perl and HTML::Parser (Debian package
+libhtml-parser-perl).
+
+=head1 BUGS
+
+None known. Please report any found to ianb@nessie.mcc.ac.uk	
+
+=head1 SEE ALSO    
+
+L<opensearch(1)>, L<opensearch-genquery(1)>, L<surfraw(1)>,
+L<WWW::OpenSearch(3pm)>, L<http://www.opensearch.org/>
+
+=head1 AUTHOR
+
+Ian Beckwith <ianb@nessie.mcc.ac.uk>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2006 Ian Beckwith <ianb@nessie.mcc.ac.uk>
+
+Licensed under the same terms as surfraw.
+
+=cut

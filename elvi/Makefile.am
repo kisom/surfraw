@@ -48,6 +48,7 @@ elvi_SCRIPTS	= \
 		  leodict \
 		  netbsd \
 		  openbsd \
+		  opensearch \
 		  pgpkeys \
 		  pubmed \
 		  rae \

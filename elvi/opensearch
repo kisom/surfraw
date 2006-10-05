@@ -1,0 +1,159 @@
+#!/bin/sh
+# $Id$
+# elvis: opensearch	-- Search an OpenSearch-enabled website
+# ianb@nessie.mcc.ac.uk 20060903
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_opensearch_title          ""
+def   SURFRAW_opensearch_count          $SURFRAW_results
+def   SURFRAW_opensearch_startindex     ""
+def   SURFRAW_opensearch_pageindex      ""
+def   SURFRAW_opensearch_language       ""
+def   SURFRAW_opensearch_inputencoding  ""
+def   SURFRAW_opensearch_outputencoding ""
+defyn SURFRAW_opensearch_list           0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [url] [search words]...
+Description:
+  Surfraw search an OpenSearch-enabled website.
+Local options:
+  -l                            List OpenSearch searches at url.
+  -title=TITLE                  Use search with title matching TITLE.
+                                TITLE is case-insensitive.
+                                Example: -t book matches "Book Search"
+Many sites do not implement all (or any) of the following
+parameters, in which case they will be silently ignored.
+  -count=NUM                    Number of search results returned.
+                                Default: $SURFRAW_opensearch_count.
+                                Environment: SURFRAW_opensearch_count.
+                                If not set, defaults to value of SURFRAW_results
+  -index=NUM                    Offset of first result.
+  -page=NUM                     Which page of results to show.
+  -language=LANG                Language to display results in.
+                                LANG should be a 2-letter ISO country code.
+                                Examples: -l=en or -lang=de.
+  -inputencoding=ENC            Specify how search terms are encoded.
+  -outputencoding=ENC           Request output encoded as ENC.
+                                Environment: SURFRAW_opensearch_search
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -t*=*)  setopt   SURFRAW_opensearch_title          "$optarg" ;;
+    -c*=*)  setopt   SURFRAW_opensearch_count          "$optarg" ;;
+    -i*=*)  setopt   SURFRAW_opensearch_startindex     "$optarg" ;;
+    -p*=*)  setopt   SURFRAW_opensearch_pageindex      "$optarg" ;;
+    -la*=*) setopt   SURFRAW_opensearch_language       "$optarg" ;;
+    -in*=*) setopt   SURFRAW_opensearch_inputencoding  "$optarg" ;;
+    -o*=*)  setopt   SURFRAW_opensearch_outputencoding "$optarg" ;;
+    -l*)    setoptyn SURFRAW_opensearch_list            1        ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+	w3_usage_hook
+	exit 0
+fi
+
+if ! which opensearch-discover > /dev/null 2>&1; then
+	err opensearch-discover not found
+fi
+
+
+# Clobbers command line, but we've already parsed it
+set $w3_args
+siteurl="$1"
+shift
+w3_args="$*"
+# w3_args now contains a list of arguments
+
+if ifyes SURFRAW_opensearch_list; then
+	opensearch-discover -q -v -a $siteurl
+	case "$?" in
+		0) ;; # OK
+		1) err "Cannot access $siteurl" ;;
+		2) err "Cannot find ${matching}OpenSearch link at $siteurl"  ;;
+		3) err "opensearch-discover: required perl module not found"  ;;
+		*) err "Unknown error from opensearch-discover" ;;
+	esac
+	
+elif test -z "$w3_args"; then
+	w3_browse_url "$siteurl"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+
+if ! which opensearch-genquery > /dev/null 2>&1; then
+	err opensearch-genquery not found
+fi
+
+
+	discover_args="-q"
+	matching="" # for error message below
+	if [ -n "$SURFRAW_opensearch_title" ]; then
+		discover_args="-q -t $SURFRAW_opensearch_title"
+		matching="matching "
+	fi
+	
+	opensearchurl=`opensearch-discover $discover_args $siteurl`
+
+	case "$?" in
+		0) ;; # OK
+		1) err "Cannot access $siteurl" ;;
+		2) err "Cannot find ${matching}OpenSearch link at $siteurl"  ;;
+		3) err "opensearch-discover: required perl module not found"  ;;
+		*) err "Unknown error from opensearch-discover" ;;
+	esac
+
+	queryargs="-q -H"
+
+	if [ -n "$SURFRAW_opensearch_count" ]; then
+		queryargs="$queryargs -c $SURFRAW_opensearch_count"
+	fi
+
+	if [ -n "$SURFRAW_opensearch_startindex" ]; then
+		queryargs="$queryargs -i $SURFRAW_opensearch_startindex"
+	fi
+
+	if [ -n "$SURFRAW_opensearch_pageindex" ]; then
+		queryargs="$queryargs -p $SURFRAW_opensearch_pageindex"
+	fi
+
+	if [ -n "$SURFRAW_opensearch_language" ]; then
+		queryargs="$queryargs -l $SURFRAW_opensearch_language"
+	fi
+
+	if [ -n "$SURFRAW_opensearch_inputencoding" ]; then
+		queryargs="$queryargs -I $SURFRAW_opensearch_inputencoding"
+	fi
+
+	if [ -n "$SURFRAW_opensearch_outputencoding" ]; then
+		queryargs="$queryargs -O $SURFRAW_opensearch_outputencoding"
+	fi
+
+	query=`opensearch-genquery $queryargs $opensearchurl $w3_args`
+	
+	case "$?" in
+		0) ;; # OK
+		1) err "Cannot access OpenSearch description $opensearchurl" ;;
+		2) err "Error parsing OpenSearch Description at $opensearchurl"  ;;
+		3) err "No HTML search specified in $opensearchurl" ;;
+		4) err "opensearch-genquery: cannot find required perl module WWW::OpenSearch" ;;
+		*) err "Unknown error from opensearch-genquery" ;;
+	esac
+
+	w3_browse_url "$query"
+
+fi

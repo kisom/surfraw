@@ -1,11 +1,11 @@
 # $Id$
 SUBDIRS		= elvi
 
-bin_SCRIPTS	= surfraw surfraw-update-path
+bin_SCRIPTS	= surfraw surfraw-update-path opensearch-discover opensearch-genquery
 sysconf_DATA	= surfraw.conf surfraw.bookmarks
 devel_extra	= banner prebuild
 noinst_DATA	= surfraw-bash-completion
-man_MANS = surfraw-update-path.1 surfraw.1 elvi.1sr
+man_MANS = surfraw-update-path.1 surfraw.1 elvi.1sr opensearch-discover.1 opensearch-genquery.1
 EXTRA_DIST	= surfraw.lsm.in surfraw.IN surfraw-update-path.IN\
                   surfraw.spec.in aclocal.m4 HACKING Makefile.include \
 				  surfraw.1.IN elvi.1sr.IN surfraw.bookmarks links.IN \
@@ -17,7 +17,7 @@ EXTRA_DIST	= surfraw.lsm.in surfraw.IN surfraw-update-path.IN\
 
 CLEANFILES = surfraw surfraw-update-path surfraw-update-path.1 surfraw.spec surfraw.lsm \
 			surfraw.1 elvi.1sr links surfraw-bash-completion surfraw.conf surfraw.1 \
-			elvi.1sr
+			elvi.1sr opensearch-discover.1 opensearch-genquery.1
 
 surfraw: surfraw.IN
 
@@ -27,13 +27,13 @@ surfraw-update-path: surfraw-update-path.IN
 
 surfraw-bash-completion: surfraw-bash-completion.IN
 
-surfraw-update-path.1: surfraw-update-path
-	-rm -f $@
-	pod2man $< > $@
-
 elvi.1sr: elvi.1sr.IN
 
 surfraw.1: surfraw.1.IN
+
+surfraw-update-path.1 opensearch-discover.1 opensearch-genquery.1: %.1: %
+	-rm -f $@
+	pod2man $< > $@
 
 links: links.IN
 

@@ -149,6 +149,7 @@ jake            -- Search journal/databases in jake (jake.med.yale.edu)
 leodict         -- Search Leo's German <-> English dictionary (dict.leo.org)
 netbsd          -- Search NetBSD related information (www.netbsd.org)
 openbsd         -- Search OpenBSD related information (www.openbsd.org)
+opensearch      -- Search an OpenSearch-enabled website
 pgpkeys         -- Search the PGP key database
 pubmed          -- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
 rae             -- Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)

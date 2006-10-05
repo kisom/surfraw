@@ -1,0 +1,328 @@
+#!/usr/bin/perl -w
+# $Id$
+# Ian Beckwith <ianb@nessie.mcc.ac.uk>
+# 20060830
+
+use Getopt::Long;
+
+use strict;
+use vars qw($me);
+$me=($0=~/(?:.*\/)?(.*)/)[0];
+
+use vars qw(@wantedtypes $htmlmime $atommime $rssmime);
+@wantedtypes=();
+$htmlmime="text/html";
+$atommime="application/atom+xml";
+$rssmime ="application/rss+xml";
+
+my $quiet=0;
+my $count=undef;
+my $startindex=undef;
+my $startpage=undef;
+my $language=undef;
+my $inputencoding=undef;
+my $outputencoding=undef;
+my $help=0;
+
+Getopt::Long::Configure("no_ignore_case");
+
+GetOptions("quiet"              => \$quiet,
+		   "H|html"             => sub { push(@wantedtypes,$htmlmime); },
+		   "A|atom"             => sub { push(@wantedtypes,$atommime); },
+		   "R|rss"              => sub { push(@wantedtypes,$rssmime);  },
+		   "count=i"            => \$count,
+		   "language=s"         => \$language,
+		   "i|startindex=i"     => \$startindex,
+		   "p|startpage=i"      => \$startpage,
+		   "O|outputencoding=s" => \$outputencoding,
+		   "I|inputencoding=s"  => \$inputencoding,
+		   "h|help"             => \$help);
+
+if ($help || ($#ARGV<1)) { usage(); }
+
+my $url=shift;
+my $searchterms=join(' ',@ARGV);
+
+unless($url=~/^http\:\/\//i)
+{
+	$url="http://".$url;
+}
+
+unless (eval { require WWW::OpenSearch; })
+{
+	unless($quiet)
+	{
+		print STDERR "$me: Cannot find WWW::OpenSearch, is it installed?\n";
+	}
+	exit 4;
+}
+
+my $engine;
+eval { $engine=WWW::OpenSearch->new($url); };
+if($@)
+{
+	my $errstr="";
+	my $exitcode=0;
+	if($@ =~/fetching/i)
+	{
+		$errstr="Error fetching $url";
+		$exitcode=1;
+	}
+	elsif(($@ =~/parsing/i) ||
+		  ($@ =~/node\s+should/i))
+	{
+		$errstr="Error parsing OpenSearch Description at $url"; 
+		$exitcode=2;
+	}
+	else
+	{
+		# Some other error, probably because WWW::OpenSearch has changed
+		$errstr=$@;
+		$exitcode=5;
+	}
+	unless($quiet)
+	{
+		print STDERR "$me: $errstr\n";
+	}
+	exit $exitcode;
+}
+
+my $desc=$engine->description();
+
+# copy options to hash, translating from option name to OpenSearch param
+my %options=();
+$options{searchTerms} = $searchterms;
+if(defined($count))          { $options{count}          = $count;          }
+if(defined($startindex))     { $options{startIndex}     = $startindex;     }
+if(defined($startpage))      { $options{startPage}      = $startpage;      }
+if(defined($language))       { $options{language}       = $language;       }
+if(defined($inputencoding))  { $options{inputEncoding}  = $inputencoding;  }
+if(defined($outputencoding)) { $options{outputEncoding} = $outputencoding; }
+
+
+my @urls=();
+for (@{$desc->url()})
+{
+	if($_->method() =~ /^get$/i)
+	{
+		push(@urls,$_);
+	}
+}
+
+my $besturl=undef;
+
+# if no preferred type specified use first Url.
+if($#wantedtypes<0)
+{
+	$besturl=$urls[0];
+}
+else # find best match against @wantedtypes
+{
+	my $bestindex=undef;
+	for my $urlindex (0..$#urls)
+	{
+		for(my $typeindex=0;$typeindex<=$#wantedtypes;$typeindex++)
+		{
+			if($urls[$urlindex]->type() eq $wantedtypes[$typeindex])
+			{
+				if((!defined($bestindex)) || ($typeindex < $bestindex))
+				{
+					$bestindex=$typeindex;
+					$besturl=$urls[$urlindex];
+				}
+			}
+		}
+	}
+}
+
+if(!defined($besturl))
+{
+	unless($quiet)
+	{
+		print STDERR "$me: No matching search type found\n";
+	}
+	exit 3;
+}
+	
+print $besturl->prepare_query(\%options),"\n";
+
+exit 0;
+
+
+sub usage
+{
+	die("Usage: $me [OPTIONS] URL SEARCH TERMS...\n".
+		" Outputs the url of a query generated from an OpenSearch Description\n".
+		" at URL with SEARCH TERMS filled in.\n".
+		"Options:\n".
+		" -q\t\tQuiet: Don't display errors.\n".
+		"   -H, -A, -R can be ordered to express response type priority.\n".
+		" -H\t\tRequest HTML response.\n".
+		" -A\t\tRequest Atom response.\n".
+		" -R\t\tRequest RSS response.\n".
+		"   Not all sites implement all (or any) of the following options.\n".
+		"   Unimplemented options will be silently ignored.\n".
+		" -c COUNT\tRequest COUNT results (OpenSearch param: count).\n".
+		" -i INDEX\tRequest results start at NUM (OpenSearch param: startIndex).\n".
+		" -p PAGENUM\tRequest results page PAGENUM (OpenSearch param: pageIndex).\n".
+		" -l LANG\tRequest results in LANG (2-letter ISO country code) (OpenSearch param: language).\n".
+		" -I ENC\t\tSpecify search terms are encoded in ENC (OpenSearch param: inputEncoding).\n".
+		" -O ENC\t\tRequest results encoded in ENC (OpenSearch param: outputEncoding).\n".
+		"Return codes:\n".
+		" 0 - Success.\n".
+		" 1 - Error fetching OpenSearch Description URL.\n".
+		" 2 - Error parsing OpenSearch Description.\n".
+		" 3 - No matching search type found.\n".
+		" 4 - Cannot find perl module WWW::OpenSearch.\n".
+		" 5 - Unhandled error from WWW::OpenSearch.\n");
+}
+
+__END__
+
+
+=head1 NAME
+
+opensearch-genquery - Output the URL of a query generated from an OpenSearch Description
+
+=head1 SYNOPSIS
+
+B<opensearch-genquery> [B<-q>] [B<-H>] [B<-A>] [B<-R>]
+S<[B<-c> I<COUNT>]> S<[B<-i> I<INDEX>]>
+S<[B<-p> I<PAGENUM>]> S<[B<-l> I<LANG>]>
+S<[B<-O> I<ENC>]> S<[B<-I> I<ENC>]>
+I<URL> S<I<SEARCH TERMS...>>
+
+=head1 DESCRIPTION
+
+Output the URL of a query generated from an OpenSearch Description
+file at I<URL>, with the specified S<I<SEARCH TERMS>> and other
+options filled in. 
+
+If multiple search types are available, B<-H>,
+B<-A> and B<-R> can be used to specify which type is wanted. For
+example, S<B<-A -R>> can be used to request an Atom response, or
+failing that fall back to RSS. By default the first URL found in the
+description file is used.
+
+Not all web sites implement all (or any) of the optional OpenSearch
+parameters. When used with those sites, the corresponding options will
+be silently ignored.
+
+=head1 OPTIONS
+
+=over 4
+
+=item B<-q>
+
+Give no output on errors. In this case, consult the exit code to
+determine errors (See L</DIAGNOSTICS>).
+
+=item B<-H>
+
+Request HTML response.
+
+=item B<-A>
+
+Request Atom response.
+
+=item B<-R>
+
+Request RSS response.
+
+B<-H>, B<-A>, and B<-R> can be combined to express response type
+priority and specify fallback types.
+
+=item B<-c COUNT>, B<--count=COUNT>
+
+Request COUNT results.
+
+OpenSearch parameter: I<count>.
+
+=item B<-i INDEX>, B<--startindex=INDEX>
+
+Request results start at offset NUM.
+
+OpenSearch parameter: I<startIndex>.
+
+=item B<-p PAGENUM>, B<--startpage=PAGENUM>
+
+Request results page PAGENUM.
+
+OpenSearch parameter: I<pageIndex>.
+
+=item B<-l LANG>, B<--language=LANG>
+
+Request results in LANG. LANG should be a 2-letter ISO country code
+(e.g. B<en> or B<de>).
+
+OpenSearch parameter: I<language>.
+
+=item B<-O ENC>, B<--outputencoding=ENC>
+
+Request results encoded in ENC (default: UTF-8).
+
+OpenSearch parameter: I<outputEncoding>.
+
+=item B<-I ENC>, B<--inputencoding=ENC>
+
+Specify search terms are encoded in ENC (default: UTF-8).
+
+OpenSearch parameter: I<inputEncoding>.
+
+=item B<-h>, B<--help>
+
+Show a short help message.
+
+=item B<-->
+
+End of options.
+
+=back
+
+=head1 DIAGNOSTICS
+
+The exit code can be consulted to determine errors, as follows:
+
+=over 4
+
+=item B<0> - Success.
+
+=item B<1> - Error fetching OpenSearch Description URL.
+
+=item B<2> - Error parsing OpenSearch Description.
+
+=item B<3> - No matching search type found.
+
+=item B<4> - Cannot find perl module WWW::OpenSearch.
+
+=item B<5> - Unhandled error from WWW::OpenSearch.
+
+=back
+
+=head1 DEPENDENCIES
+
+Requires the module WWW::OpenSearch (Debian package
+libwww-opensearch-perl).
+
+=head1 BUGS
+
+Only supports GET queries.
+
+Please report any bugs found to ianb@nessie.mcc.ac.uk	
+
+=head1 SEE ALSO
+
+L<opensearch(1)>, L<opensearch-discover(1)>, L<surfraw(1)>,
+L<WWW::OpenSearch(3pm)>, L<http://www.opensearch.org/>
+
+=head1 AUTHOR
+
+Ian Beckwith <ianb@nessie.mcc.ac.uk>
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright 2006 Ian Beckwith <ianb@nessie.mcc.ac.uk>
+
+Licensed under the same terms as surfraw.
+
+=cut

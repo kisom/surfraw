@@ -8,7 +8,7 @@ Build-Depends: debhelper (>= 4.1.16)
 
 Package: surfraw
 Architecture: all
-Depends: lynx | www-browser 
+Depends: lynx | www-browser, libwww-opensearch-perl, libwww-perl, libhtml-parser-perl
 Recommends: links | w3m | w3m-ssl | lynx-cur
 Suggests: screen
 Conflicts: surfaw
