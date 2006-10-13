@@ -116,6 +116,7 @@ cddb            -- Search for cd track listings in CDDB (www.gracenote.com)
 cia             -- Search CIA documents at www.cia.gov
 cite            -- Search computer science papers (www.researchindex.com)
 cnn             -- Search on CNN (cnn.com)
+codesearch      -- Search source code using Google Code Search (www.google.com/codesearch)
 ctan            -- Search the Comprehensive TeX Archive Network (ctan.org)
 currency        -- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
 cve             -- Search for CAN assignments in CVE

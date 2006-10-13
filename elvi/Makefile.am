@@ -13,6 +13,7 @@ elvi_SCRIPTS	= \
 		  cia \
 		  cite \
 		  cnn \
+		  codesearch \
 		  ctan \
 		  currency \
 		  cve \
