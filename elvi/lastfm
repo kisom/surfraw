@@ -1,0 +1,44 @@
+#!/bin/sh
+# $Id$
+# elvis: lastfm		-- Search last.fm
+. surfraw || exit 1
+
+w3_config_hook () {
+defyn SURFRAW_lastfm_redirect 1
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search last.fm
+Local options:
+  -l                            Show list even if exact match.
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -l)        setoptyn SURFRAW_lastfm_redirect   0       ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://last.fm/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    url="http://last.fm/music/?q=${escaped_args}"
+    if ifno SURFRAW_lastfm_redirect
+    then
+	url="${url}&noredirect=1"
+    fi
+    w3_browse_url "${url}"
+fi

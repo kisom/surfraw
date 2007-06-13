@@ -1,15 +1,21 @@
 surfraw (2.1.6) unstable; urgency=low
 
-  * New elvi: codesearch - search google code search.
-  * New elvi: opensearch - search sites that provide an OpenSearch description.
-    + Install helper scripts opensearch-discover and
-      opensearch-genquery to /usr/bin.
-    + Add Dependencies on libwww-opensearch-perl, libwww-perl
-      and libhtml-parser-perl
-    + Makefile.am: replaced explicit rule for surfraw-update-path.1
-      with a static pattern rule for making man pages from perl scripts.
+  * New elvi:
+    + codesearch  - search google code search.
+    + debwiki     - search wiki.debian.org and women.debian.org/wiki.
+    + lastfm      - search last.fm.
+    + musicbrainz - search musicbrainz.org.
+    + opensearch  - search sites that provide an OpenSearch description:
+      -  Install helper scripts opensearch-discover and
+         opensearch-genquery to /usr/bin.
+      -  Add Dependencies on libwww-opensearch-perl, libwww-perl
+         and libhtml-parser-perl.
+      -  Makefile.am: replaced explicit rule for surfraw-update-path.1
+         with a static pattern rule for making man pages from perl scripts.
+  * debpackages/debcontents: updated ubuntu distro names.
+  * Add Vcs-Cvs and Vcs-Browser fields to debian/control.
 
- -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Fri, 13 Oct 2006 03:46:22 +0100
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Wed, 13 Jun 2007 03:31:04 +0100
 
 surfraw (2.1.5) unstable; urgency=low
 

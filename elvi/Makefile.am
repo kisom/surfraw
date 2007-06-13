@@ -24,6 +24,7 @@ elvi_SCRIPTS	= \
 		  debpackages \
 		  debpts \
 		  debsec \
+		  debwiki \
 		  deja \
 		  discogs \
 		  dmoz \
@@ -46,7 +47,9 @@ elvi_SCRIPTS	= \
 		  imdb \
 		  scpan \
 		  slinuxdoc \
+		  lastfm \
 		  leodict \
+		  musicbrainz \
 		  netbsd \
 		  openbsd \
 		  opensearch \

@@ -1,0 +1,111 @@
+#!/bin/sh
+# $Id$
+# elvis: musicbrainz	-- Search MusicBrainz (musicbrainz.org)
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_musicbrainz_limit       $SURFRAW_results
+def   SURFRAW_musicbrainz_search      artist
+def   SURFRAW_musicbrainz_tagrelease  ""
+def   SURFRAW_musicbrainz_tagtrack    ""
+def   SURFRAW_musicbrainz_tagnum      ""
+def   SURFRAW_musicbrainz_taglen      ""
+defyn SURFRAW_musicbrainz_advanced    0
+defyn SURFRAW_musicbrainz_direct      0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search MusicBrainz (musicbrainz.org)
+Local options:
+  -d                            Direct (old) search.
+  -a                            Enable advanced query syntax. <*> See:
+                                 http://musicbrainz.org/popup/TextSearchSyntax
+  -results=NUM                  Number of search results returned
+                                Default: $SURFRAW_musicbrainz_results
+                                Environment: SURFRAW_musicbrainz_results
+				0 means all results.
+  -search=                      Search type:
+          artist        |       Artist [default]
+          release       |       Release (album)
+          track         |       Track (song)
+          label         |       Label
+          annotation    |       Annotation  <*>
+          freedb        |       FreeDB      <*>
+	  discid        |       Disc ID     <*>
+	  freedbid      |       FreeDB ID   <*>
+	  puid          |       PUID        <*>
+	  trmid         |       TRM ID      <*>
+	  tag                   Tag Search  <*>
+	                         With Tag Search, [search words] are treated
+	                         as artist name, use -tag* below to specify
+				 other fields.
+			        <*> = not available with direct search (-d)
+                                Environment: SURFRAW_musicbrainz_search
+  -tagrelease=ALBUM             Album tag search        (with -search=tag)
+  -tagtrack=SONG                Track tag search        (with -search=tag)
+  -tagnum=TRACKNUM              Track number tag search (with -search=tag)
+  -taglen=DURATION              Duration tag search     (with -search=tag)
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -results=*) setopt   SURFRAW_musicbrainz_results    $optarg ;;
+    -search=*)  setopt   SURFRAW_musicbrainz_search     $optarg ;;
+    -tagrel*=*) setopt   SURFRAW_musicbrainz_tagrelease $optarg ;;
+    -tagtra*=*) setopt   SURFRAW_musicbrainz_tagtrack   $optarg ;;
+    -tagnu*=*)  setopt   SURFRAW_musicbrainz_tagnum     $optarg ;;
+    -tagle*=*)  setopt   SURFRAW_musicbrainz_taglen     $optarg ;;
+    -a)         setoptyn SURFRAW_musicbrainz_advanced   1       ;;
+    -d)         setoptyn SURFRAW_musicbrainz_direct     1       ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://musicbrainz.org/search.html"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    url="http://musicbrainz.org"
+    if ifyes SURFRAW_musicbrainz_direct
+    then
+        case "$SURFRAW_musicbrainz_search" in
+	    artist|release|track|label)
+	        url="${url}/search/oldsearch.html?query=${escaped_args}&type=${SURFRAW_musicbrainz_search}&limit=${SURFAW_musicbrainz_results}&handlearguments=1" ;;
+	    *) err "Search type $SURFRAW_musicbrainz_search not supported by Direct Search (-d)" ;;
+	esac
+    else
+	case "$SURFRAW_musicbrainz_search" in
+	    discid)
+	        url="${url}/bare/cdlookup.html?discid=${escaped_args}" ;;
+	    freedbid)
+	        url="${url}/bare/cdlookup.html?freedbid=${escaped_args}" ;;
+	    puid)
+	        url="${url}/show/puid/?puid=${escaped_args}" ;;
+	    trmid)
+	        url="${url}/show/trm/?trm=${escaped_args}" ;;
+	    artist|release|track|label|annotation|freedb)
+	        url="${url}/search/textsearch.html?query=${escaped_args}&type=${SURFRAW_musicbrainz_search}&limit=${SURFRAW_musicbrainz_results}&handlearguments=1"
+		if ifyes SURFRAW_musicbrainz_advanced
+		then
+		    url="${url}&adv=on"
+		fi ;;
+	    tag)
+	        url="${url}/taglookup.html?artist=${escaped_args}&album=${SURFRAW_musicbrainz_tagrelease}&track=${SURFRAW_musicbrainz_tagtrack}&tracknum=${SURFRAW_musicbrainz_tagnum}&duration=${SURFRAW_musicbrainz_taglen}" ;;
+	    *)
+	        err Unknown search type "${SURFRAW_musicbrainz_search}" ;;
+	esac
+    fi
+
+    w3_browse_url "$url"
+fi

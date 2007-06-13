@@ -106,6 +106,7 @@ Options
   For example:
 
   $ surfraw -elvi
+W               -- Activate Surfraw defined web-browser
 alioth          -- Search Alioth (alioth.debian.org)
 altavista       -- Search the web using Altavista (www.altavista.com)
 amazon          -- Search the amazon.com bookstore
@@ -121,12 +122,13 @@ ctan            -- Search the Comprehensive TeX Archive Network (ctan.org)
 currency        -- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
 cve             -- Search for CAN assignments in CVE
 debbugs         -- Search the debian BTS (bugs.debian.org)
-debcontents     -- Search contents of debian packages (packages.debian.org)
+debcontents     -- Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 deblists        -- Search debian mailing lists (lists.debian.org/search.html)
 deblogs         -- Show changelogs for a package in Debian main (changelogs.debian.net)
-debpackages     -- Search debian packages (packages.debian.org)
+debpackages     -- Search debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 debpts          -- Search the Debian Package Tracking System (packages.qa.debian.org)
 debsec          -- Search the Debian Security Tracker for CVE ids or package names
+debwiki         -- Search the Debian Wikis (wiki.debian.org & women.debian.org/wiki)
 deja            -- Search usenet using Google Groups (groups.google.com)
 discogs         -- Search the Discogs database of music information (www.discogs.com)
 dmoz            -- Search the Open Directory Project web directory (dmoz.org)
@@ -147,7 +149,9 @@ happypenguin    -- Search the Linux Game Tome (www.happypenguin.org)
 imdb            -- Search the Internet Movie Database (www.imdb.com)
 ixquick         -- Search the web using ixquick (www.ixquick.com)
 jake            -- Search journal/databases in jake (jake.med.yale.edu)
+lastfm          -- Search last.fm
 leodict         -- Search Leo's German <-> English dictionary (dict.leo.org)
+musicbrainz     -- Search MusicBrainz (musicbrainz.org)
 netbsd          -- Search NetBSD related information (www.netbsd.org)
 openbsd         -- Search OpenBSD related information (www.openbsd.org)
 opensearch      -- Search an OpenSearch-enabled website
@@ -157,6 +161,7 @@ rae             -- Busca en el diccionario de la Real Academia de la Lengua Espa
 rfc             -- Search RFCs (internet standards documents)
 rhyme           -- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
 scaleplus       -- Search Australian Law using ScalePlus (scaleplus.law.gov.au)
+scholar         -- Search Google Scholar (scholar.google.com)
 scpan           -- Search the Comprehensive Perl Archive Network (search.cpan.org)
 slashdot        -- Search stories on Slashdot (www.slashdot.org)
 slinuxdoc       -- Search entries in LDP (www.linuxdoc.org)

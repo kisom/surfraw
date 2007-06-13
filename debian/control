@@ -5,6 +5,8 @@ Maintainer: Debian surfraw maintainers <surfraw-devel@lists.alioth.debian.org>
 Uploaders: Moritz Muehlenhoff <jmm@debian.org>,Thomas Smith <tgs@debian.org>,Christian Surchi <csurchi@debian.org>,Ian Beckwith <ianb@nessie.mcc.ac.uk>
 Standards-Version: 3.7.2
 Build-Depends: debhelper (>= 4.1.16)
+XS-Vcs-Cvs: -d :pserver:anonymous@cvs.alioth.debian.org:/cvsroot/surfraw
+XS-Vcs-Browser: http://alioth.debian.org/plugins/scmcvs/cvsweb.php/surfraw/?cvsroot=surfraw
 
 Package: surfraw
 Architecture: all

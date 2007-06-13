@@ -51,7 +51,11 @@ Local options:
       breezy            |       
       breezy-backports  |       
       dapper            |       
+      dapper-backports  |       
       edgy              |       
+      edgy-backports    |       
+      feisty            |
+      gutsy
                                 Default: $SURFRAW_debian_distro
                                 Environment: SURFRAW_debian_distro
   -search=                      Field to search

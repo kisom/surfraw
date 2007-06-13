@@ -1,0 +1,78 @@
+#!/bin/sh
+# $Id$
+# elvis: debwiki		-- Search the Debian Wikis (wiki.debian.org & women.debian.org/wiki)
+# by Ian Beckwith <ianb@nessie.mcc.ac.uk>
+. surfraw || exit 1
+
+w3_config_hook () {
+defyn SURFRAW_debwiki_women   0
+defyn SURFRAW_debwiki_title   0
+defyn SURFRAW_debwiki_context 1
+defyn SURFRAW_debwiki_case    0
+defyn SURFRAW_debwiki_direct  0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the Debian Wikis (wiki.debian.org & women.debian.org/wiki)
+Local options:
+  -w                            Search the Debian Women wiki.
+  -c                            Make search case-sensitive.
+  -n                            Don't show context of search result.
+  -t                            Limit search to title.
+  -d                            Go direct to page (or create it).
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -w)        setoptyn SURFRAW_debwiki_women   1       ;;
+    -c)        setoptyn SURFRAW_debwiki_case    1       ;;
+    -n)        setoptyn SURFRAW_debwiki_context 0       ;;
+    -d)        setoptyn SURFRAW_debwiki_direct  1       ;;
+    -t)        setoptyn SURFRAW_debwiki_title   1       ;;
+     *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+url="http://wiki.debian.org"
+if ifyes SURFRAW_debwiki_women
+then
+    url="http://women.debian.org/wiki"
+fi
+
+if test -z "$w3_args"
+then
+    w3_browse_url "$url"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    url="${url}/FindPage?"
+    if ifyes SURFRAW_debwiki_direct
+    then
+	url="${url}goto=${escaped_args}&submit=Go+To+Page"
+    elif ifyes SURFRAW_debwiki_title
+    then
+	url="${url}action=fullsearch&titlesearch=1&value=${escaped_args}&submit=Search+Titles"
+    else
+	url="${url}action=fullsearch&titlesearch=0&value=${escaped_args}&submit=Search+Text"
+	if ifyes SURFRAW_debwiki_context
+	then
+	    url="${url}&context=160"
+	fi
+	if ifyes SURFRAW_debwiki_case
+	then
+	    url="${url}&case=1"
+	fi
+    fi
+    w3_browse_url "$url"
+fi

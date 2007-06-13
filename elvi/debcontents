@@ -54,6 +54,8 @@ Local options:
           breezy        |       Breezy
           dapper        |       Dapper
           edgy          |       Edgy
+          feisty        |       Feisty
+          gutsy         |       Gutsy
                                 Default: $SURFRAW_debcontents_distro
                                 Environment: SURFRAW_debcontents_distro
 EOF
