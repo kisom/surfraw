@@ -1,0 +1,45 @@
+			  Surfraw Test Suite
+			  ------------------
+
+To test the elvi, run
+
+make test
+
+in either the root of the source tree or the test/ directory.
+
+To run individual test(s), change into the test/ directory and run
+
+./runtests test1.test test2.test...
+
+Some tests may fail temporarily, for instance if there are network
+problems or the site is overloaded, it is worth waiting and retrying
+before filing a bug.
+
+Notes
+-----
+
+To run the test suite, perl and libwww-perl (lwp) must be installed.
+
+To run woffle.test successfully:
+
+1. wwwoffle must be running on localhost:8080
+2. wget must be installed (for preloading the wwwoffle cache)
+3. htdig must be installed (for generating the search indexes)
+3. the user running the tests must be able to run
+   sudo /usr/share/wwwoffle/search/htdig/wwwoffle-htdig-incr
+   to update the htdig index
+
+
+Writing tests
+-------------
+
+Tests should be called elviname.test and be placed in the test/ directory
+
+Test files consist of pairs of lines. The first line is the command to
+run, and the second line is a perl regular expression (which can be
+just plain text) to match against the resulting web page.
+
+Multiple tests can be implemented per elvi, feel free to submit more!
+
+When new test files have been written, add them to EXTRA_DIST in
+test/Makefile.am, rerun autotools, and 'cvs add' them too.

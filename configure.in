@@ -3,8 +3,8 @@ dnl $Id$
 dnl Process this file with autoconf to produce a configure script.
 
 dnl This is the only place where the package version appears
-dnl (apart from debian/changelog)	
-AC_INIT(surfraw, 2.1.5)
+dnl (apart from debian/changelog)
+AC_INIT(surfraw, 2.1.6)
 AC_PREREQ(2.54)
 AC_CONFIG_SRCDIR([surfraw.IN])
 
@@ -18,7 +18,6 @@ AC_ARG_WITH([elvidir],
 	[if test -n "$withval" && test "$withval" != "no" ; then ELVIDIR="$withval";fi])
 
 AC_SUBST(ELVIDIR)
-						  
 AC_SUBST(VERSION)
 
 ISODATE=`date +%Y-%m-%d`
@@ -27,6 +26,6 @@ AC_SUBST(ISODATE)
 dnl Checks for programs.
 AC_PROG_INSTALL
 
-AC_CONFIG_FILES([Makefile surfraw.lsm surfraw.spec elvi/Makefile])
+AC_CONFIG_FILES([Makefile surfraw.lsm surfraw.spec elvi/Makefile test/Makefile])
 AC_OUTPUT
 

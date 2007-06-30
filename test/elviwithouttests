@@ -1,0 +1,21 @@
+#!/usr/bin/perl -w
+# $Id$
+# Ian Beckwith <ianb@nessie.mcc.ac.uk>
+
+use strict;
+
+my @elvi=<../elvi/*>;
+@elvi = map  { s/.*\///; $_;} @elvi;
+@elvi = grep { $_ ne "CVS"  && $_ !~ /^Makefile/ } @elvi;
+
+my %tests = map  { s/.test$//; $_=>1;} <*.test>;
+
+my @elviwithouttests=grep { !exists($tests{$_}) } @elvi;
+
+if(@elviwithouttests)
+{
+    print "Elvi without tests:\n";
+    print join(" ",@elviwithouttests),"\n";
+}
+
+

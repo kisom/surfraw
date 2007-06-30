@@ -1,7 +1,7 @@
 # $Id$
-SUBDIRS		= elvi
+SUBDIRS		= elvi test
 
-bin_SCRIPTS	= surfraw surfraw-update-path opensearch-discover opensearch-genquery
+dist_bin_SCRIPTS = surfraw surfraw-update-path opensearch-discover opensearch-genquery
 sysconf_DATA	= surfraw.conf surfraw.bookmarks
 devel_extra	= banner prebuild
 noinst_DATA	= surfraw-bash-completion
@@ -44,6 +44,12 @@ install-data-hook: links
 	do \
 		ln -sf $$target  $(DESTDIR)/$$link ;\
 	done < links
+
+test:
+	make -C test test
+
+.PHONY: test
+
 
 #htdocs: index.html
 #	scp index.html surfraw.sourceforge.net:/home/groups/s/su/surfraw/htdocs/index.html

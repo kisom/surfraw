@@ -1,0 +1,4 @@
+debpackages surfraw
+Found <em>\d+</em> matching package
+debpackages -u surfraw
+Found <em>\d+</em> matching package

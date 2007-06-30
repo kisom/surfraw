@@ -217,7 +217,7 @@ Global options:
 				Environment: SURFRAW_quote_args
   -version			Display Surfraw version ($surfraw_version)
 Copyright:
-  Copyright (c) 2003-2006 The Surfraw-Devel Team
+  Copyright (c) 2003-2007 The Surfraw-Devel Team
                            <surfraw-devel@lists.alioth.debian.org>
   Copyright (c) 2000-2001 Julian Assange <proff@iq.org>
   Copyright (c) 2001 Australian Institute for Collaborative Research

@@ -1,0 +1,2 @@
+http_proxy=http://localhost:8080/ wget --delete-after -q http://www.debian.org/ && sudo /usr/share/wwwoffle/search/htdig/wwwoffle-htdig-incr && ../elvi/woffle -p debian
+Universal

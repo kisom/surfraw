@@ -1,0 +1,2 @@
+ask foo
+Showing <span.*>1</span>-<span.*>10</span> of \d+

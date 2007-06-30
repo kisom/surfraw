@@ -41,7 +41,7 @@ Local options:
 				Environment: SURFRAW_amazon_search
 
 Examples:
-  $w3_argv0 -books -country=uk -q The Lotus and The Robot
+  $w3_argv0 -search=books -country=uk -q The Lotus and The Robot
 EOF
     w3_global_usage
 }

@@ -1,0 +1,170 @@
+#!/usr/bin/perl -w
+# $Id$
+# Ian Beckwith <ianb@nessie.mcc.ac.uk>
+#
+
+use LWP::UserAgent;
+use strict;
+use vars qw($me);
+$me=($0=~/(?:.*\/)?(.*)/)[0];
+
+our($OK,$FAIL)=(0,1);
+our $ua;
+
+my @testfiles;
+if(@ARGV) {
+    @testfiles=@ARGV;
+} else {
+    @testfiles=<*.test>;
+}
+
+die("No tests found\n") unless(@testfiles);
+
+$ua=LWP::UserAgent->new;
+#$ua->env_proxy;
+# Google & CNN dont like LWP::UserAgent's UserAgent string, nicking iceweasel's
+$ua->agent("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.4) Gecko/20070508 Iceweasel/2.0.0.4 (Debian-2.0.0.4-1)");
+
+my %results;
+
+my @testnamelengths= map { length($_); } @testfiles;
+my $longestname=(sort { $a <=> $b } @testnamelengths)[$#testnamelengths];
+$longestname -= length ".test";
+
+for my $testfile (@testfiles)
+{
+    my ($elvi)=($testfile=~/(.*)\.test/);
+    unless(defined($elvi)) { $elvi=$testfile; }
+    print $elvi;
+    my $space=($longestname+1)-(length $elvi);
+    if($space<1) { $space=1; }
+    print " " x $space;
+    $results{$elvi}=[  runtests($testfile) ];
+}
+
+my @failedelvi=grep { grep { $_ != 0; } @{$results{$_}};  } sort keys %results;
+if(@failedelvi)
+{
+    print "Failed elvi: ";
+    for my $badelvis (@failedelvi)
+    {
+	my @thisresults=@{$results{$badelvis}};
+	if($#thisresults)
+	{
+	    my $first=1;
+	    print "${badelvis}[";
+	    for(my $i=0;$i<=$#thisresults;$i++)
+	    {
+		if($thisresults[$i] != $OK)
+		{
+		    if(!$first) { print ","; }
+		    $first=0;
+		    print $i+1;
+		}
+	    }
+	    print "] ";
+	}
+	else
+	{
+	    print "$badelvis ";
+	}
+    }
+    print "\n";
+}
+else
+{
+    print "All tests passed.\n";
+}
+
+sub runtests
+{
+    my $testfile=shift;
+    my $testnum=0;
+    my @results=();
+    unless(open(TEST,$testfile))
+    {
+	print "FAIL: cannot open $testfile: $!\n";
+	return $FAIL;
+    }
+    my($cmd,$match);
+    my @tests;
+    my $count=0;
+    while($cmd=<TEST>)
+    {
+	$testnum++;
+	chomp($cmd);
+	next if($cmd=~/^\s*$/); # ignore blank lines
+	$count++;
+	$match=<TEST>;
+	unless(defined($match))
+	{
+	    print "FAIL: no match string defined for test $count\n";
+	    close TEST;
+	    return $FAIL;
+	}
+	chomp($match);
+	push(@tests, { $cmd => $match });
+    }
+    close(TEST);
+    my @ret=testelvis(@tests);
+    print "\n";
+    return @ret;
+}
+
+
+sub testelvis
+{
+    my(@tests)=@_;
+    my @results=();
+    for(my $count=0; $count <= $#tests; $count++)
+    {
+	if($count)  { print " "; }
+	if($#tests) { print($count+1,": "); }
+	my $hash=$tests[$count];
+	my $cmd  =(keys  (%$hash))[0];
+	my $match=(values(%$hash))[0];
+	unless(open(ELVI,"SURFRAW_browser=echo PATH=\"../elvi:\$PATH\"  $cmd|"))
+	{
+	    print "FAIL: cannot execute \"$cmd\": $!";
+	    push(@results,$FAIL);
+	    next;
+	}
+	my $url=<ELVI>;
+	unless(defined($url))
+	{
+	    print "FAIL: elvi \"$cmd\"did not produce a URL";
+	    push(@results,$FAIL);
+	    close ELVI;
+	    next;
+	}
+	close ELVI;
+	chomp $url;
+
+	my $response=$ua->get($url);
+	unless($response->is_success)
+	{
+	    print "FAIL: Get failed: ",$response->status_line;
+	    if($response->code =~/^[45]/)
+	    {
+		push(@results,$FAIL);
+	    }
+	    else
+	    {
+		print "Internal Error: Code ",$response->code," not handled";
+		push(@results,$FAIL);
+	    }
+	    next;
+	}
+	if($response->content =~ /$match/)
+	{
+	    print "OK";
+	    push(@results,$OK);
+	}
+	else
+	{
+	    print "FAIL: No Match";
+	    push(@results,$FAIL);
+	}
+    }
+    return @results;
+}

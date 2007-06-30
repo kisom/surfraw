@@ -1,0 +1,4 @@
+debwiki LowThresholdNMU
+LowThresholdNMU.* \. \. \. \d+ match
+debwiki -w MaintainerScripts
+English/MaintainerScripts.* \. \. \.

@@ -1,7 +1,7 @@
 # $Id$
 elvidir=$(ELVIDIR)
 
-elvi_SCRIPTS	= \
+dist_elvi_SCRIPTS	= \
 		  W \
 		  alioth \
 		  altavista \
@@ -41,7 +41,6 @@ elvi_SCRIPTS	= \
 		  genpkg \
 		  gutenberg \
 		  ixquick \
-		  jake \
 		  google \
 		  happypenguin \
 		  imdb \
@@ -78,4 +77,5 @@ elvi_SCRIPTS	= \
 		  woffle \
 		  xxx \
 		  yahoo \
-          yubnub
+		  yubnub
+

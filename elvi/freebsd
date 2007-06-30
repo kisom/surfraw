@@ -20,46 +20,46 @@ Usage: $w3_argv0 [options] [search-string | PR-number]
 Description:
   Surfraw search FreeBSD related information
 Local options:
-  -mail[=(yes|no)]		Search FreeBSD mailinglists
-  				Default: $SURFRAW_freebsd_mail
-  				Environment: SURFRAW_freebsd_mail
-  -gg[=(yes|no)]		Search FreeBSD mailinglists at Google Groups
-  				Default: $SURFRAW_freebsd_mail
-  				Environment: SURFRAW_freebsd_mail
-  -pr[=(yes|no)]		Query Problem Reports
-  				Default: $SURFRAW_freebsd_pr
-  				Environment: SURFRAW_freebsd_pr
-  -cvs[=(yes|no)]		Query cvsweb
-  				Default: $SURFRAW_freebsd_cvs
-  				Environment: SURFRAW_freebsd_cvs
-  -mid[=(yes|no)]		Query mailing lists by Message-ID
-  				Default: $SURFRAW_freebsd_mid
-  				Environment: SURFRAW_freebsd_mid
-  -ps[=(yes|no)]		Teleport to the Port Survey Page
-  				Default: $SURFRAW_freebsd_ps
-  				Environment: SURFRAW_freebsd_ps
-  -prs[=(yes|no)]		Teleport to the Problem Report Survey Page
-  				Default: $SURFRAW_freebsd_prs
-  				Environment: SURFRAW_freebsd_prs
-  -elogs[=(yes|no)]		Teleport to the Build Error Logs Page
-  				Default: $SURFRAW_freebsd_elogs
-  				Environment: SURFRAW_freebsd_elogs
+  -mail[=(yes|no)]              Search FreeBSD mailinglists
+                                Default: $SURFRAW_freebsd_mail
+                                Environment: SURFRAW_freebsd_mail
+  -gg[=(yes|no)]                Search FreeBSD mailinglists at Google Groups
+                                Default: $SURFRAW_freebsd_mail
+                                Environment: SURFRAW_freebsd_mail
+  -pr[=(yes|no)]                Query Problem Reports
+                                Default: $SURFRAW_freebsd_pr
+                                Environment: SURFRAW_freebsd_pr
+  -cvs[=(yes|no)]               Query cvsweb
+                                Default: $SURFRAW_freebsd_cvs
+                                Environment: SURFRAW_freebsd_cvs
+  -mid[=(yes|no)]               Query mailing lists by Message-ID
+                                Default: $SURFRAW_freebsd_mid
+                                Environment: SURFRAW_freebsd_mid
+  -ps[=(yes|no)]                Teleport to the Port Survey Page
+                                Default: $SURFRAW_freebsd_ps
+                                Environment: SURFRAW_freebsd_ps
+  -prs[=(yes|no)]               Teleport to the Problem Report Survey Page
+                                Default: $SURFRAW_freebsd_prs
+                                Environment: SURFRAW_freebsd_prs
+  -elogs[=(yes|no)]             Teleport to the Build Error Logs Page
+                                Default: $SURFRAW_freebsd_elogs
+                                Environment: SURFRAW_freebsd_elogs
 Examples:
-  $w3_argv0 			Teleport to the FreeBSD website
-  $w3_argv0 mycroft		Search FreeBSD website for odeur de mycroft
-  $w3_argv0 -mail  		Teleport to the mail-index Query form
-  $w3_argv0 -mail proff		Search mailing-list archives for odeur de proff
-  $w3_argv0 -gg  		Teleport to FreeBSD mailinglists at Google
-  $w3_argv0 -gg proff		Search Google archives for odeur de proff
-  $w3_argv0 -pr			Query Problem Report form
-  $w3_argv0 -pr 666		Display PR 666
-  $w3_argv0 -cvs		Query cvsweb
-  $w3_argv0 -cvs ports/		Display cvsweb tree for ports/
-  $w3_argv0 -mid		Query mailing lists by Message-ID
-  $w3_argv0 -mid <x>		Display message with ID <x>
-  $w3_argv0 -ps			Teleport to the Port Survey page
-  $w3_argv0 -prs		Teleport to the Port Report Survey page
-  $w3_argv0 -elogs		Teleport to the Build Error Logs page
+  $w3_argv0                       Teleport to the FreeBSD website
+  $w3_argv0 mycroft               Search FreeBSD website for odeur de mycroft
+  $w3_argv0 -mail                 Teleport to the mail-index Query form
+  $w3_argv0 -mail proff           Search mailing-list archives for odeur de proff
+  $w3_argv0 -gg                   Teleport to FreeBSD mailinglists at Google
+  $w3_argv0 -gg proff             Search Google archives for odeur de proff
+  $w3_argv0 -pr                   Query Problem Report form
+  $w3_argv0 -pr 666               Display PR 666
+  $w3_argv0 -cvs                  Query cvsweb
+  $w3_argv0 -cvs ports/           Display cvsweb tree for ports/
+  $w3_argv0 -mid                  Query mailing lists by Message-ID
+  $w3_argv0 -mid <x>              Display message with ID <x>
+  $w3_argv0 -ps                   Teleport to the Port Survey page
+  $w3_argv0 -prs                  Teleport to the Port Report Survey page
+  $w3_argv0 -elogs                Teleport to the Build Error Logs page
 EOF
     w3_global_usage
 }

@@ -12,10 +12,26 @@ surfraw (2.1.6) unstable; urgency=low
          and libhtml-parser-perl.
       -  Makefile.am: replaced explicit rule for surfraw-update-path.1
          with a static pattern rule for making man pages from perl scripts.
-  * debpackages/debcontents: updated ubuntu distro names.
+  * Fixed elvi:
+    + amazon      - fixed example usage.
+    + cia         - switched to https.
+    + cite        - fixed URL and options.
+    + debpackages - updated ubuntu distro names.
+    + debcontents - updated ubuntu distro names.
+    + freebsd     - fixed help formatting.
+    + netbsd      - fixed mailing list searches.
+    + openbsd     - fixed PR search URL.
+    + slinuxdoc   - fixed URLs.
+    + sundocs     - fixed URLs.
+    + woffle      - updated URLs to match woffle 2.9a.
+  * Removed elvi: jake - site shut down January 2007.
+  * Implemented test suite - 'make test' or see test/README.
+  * Fixed make distcheck
+  * Updated to automake 1.10.
+  * Updated Copyright dates to 2007.
   * Add Vcs-Cvs and Vcs-Browser fields to debian/control.
 
- -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Wed, 13 Jun 2007 03:31:04 +0100
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sat, 30 Jun 2007 03:32:23 +0100
 
 surfraw (2.1.5) unstable; urgency=low
 

@@ -51,9 +51,9 @@ test -z "$w3_args" || escaped_args=`w3_url_of_arg $w3_args`
 
 if ok SURFRAW_openbsd_pr; then
     if test -z "$escaped_args"; then
-        w3_browse_url "http://cvs.openbsd.org/cgi-bin/wwwgnats.pl"
+        w3_browse_url "http://www.openbsd.org/query-pr.html"
     else
-        w3_browse_url "http://cvs.openbsd.org/cgi-bin/wwwgnats.pl/full?pr=${escaped_args}"
+        w3_browse_url "http://cvs.openbsd.org/cgi-bin/query-pr-wrapper?full=yes&numbers=${escaped_args}"
     fi
     exit $?
 fi
