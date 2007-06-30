@@ -26,12 +26,13 @@ surfraw (2.1.6) unstable; urgency=low
     + woffle      - updated URLs to match woffle 2.9a.
   * Removed elvi: jake - site shut down January 2007.
   * Implemented test suite - 'make test' or see test/README.
-  * Fixed make distcheck
+  * Fixed make distcheck.
   * Updated to automake 1.10.
+  * debian/rules: stopped ignoring return code of 'make distclean'.
   * Updated Copyright dates to 2007.
   * Add Vcs-Cvs and Vcs-Browser fields to debian/control.
 
- -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sat, 30 Jun 2007 03:32:23 +0100
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sat, 30 Jun 2007 22:15:14 +0100
 
 surfraw (2.1.5) unstable; urgency=low
 
