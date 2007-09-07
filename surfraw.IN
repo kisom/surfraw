@@ -363,6 +363,7 @@ if [ "$w3_argv0" = "surfraw" -o "$w3_argv0" = "sr" ]
 then
 	w3_config
 	opts=""
+	unquoted_opts=""
 	elvi=""
 	searchterms=""
 	for arg in "$@"
@@ -382,8 +383,10 @@ then
 		  if  [ -z "$opts" ]
 		  then
 			  opts="`quote "$arg"`"
+			  unquoted_opts="$arg"
 		  else
 			  opts="$opts `quote "$arg"`"
+			  unquoted_opts="$unquoted_opts $arg"
 		  fi
 	  elif [ -z "$elvi" ]
 	  then
@@ -409,7 +412,7 @@ then
 			bookmark=`bookmark_lookup $elvi`
 			if [ -n "$bookmark" ]
 			then
-				w3_parse_args "$opts"
+				w3_parse_args $unquoted_opts
 				w3_browse_url "$bookmark"
 			else
 				echo "`basename $0`: $elvi: No elvis or bookmark with that name"

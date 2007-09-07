@@ -4,6 +4,7 @@ elvi.1sr.gz @mandir@/man1/W.1.gz
 elvi.1sr.gz @mandir@/man1/alioth.1sr.gz
 elvi.1sr.gz @mandir@/man1/altavista.1sr.gz
 elvi.1sr.gz @mandir@/man1/amazon.1sr.gz
+elvi.1sr.gz @mandir@/man1/archpkg.1sr.gz
 elvi.1sr.gz @mandir@/man1/ask.1sr.gz
 elvi.1sr.gz @mandir@/man1/austlii.1sr.gz
 elvi.1sr.gz @mandir@/man1/bbcnews.1sr.gz
@@ -49,6 +50,7 @@ elvi.1sr.gz @mandir@/man1/netbsd.1sr.gz
 elvi.1sr.gz @mandir@/man1/openbsd.1sr.gz
 elvi.1sr.gz @mandir@/man1/opensearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/pgpkeys.1sr.gz
+elvi.1sr.gz @mandir@/man1/port.1sr.gz
 elvi.1sr.gz @mandir@/man1/pubmed.1sr.gz
 elvi.1sr.gz @mandir@/man1/rae.1sr.gz
 elvi.1sr.gz @mandir@/man1/rfc.1sr.gz

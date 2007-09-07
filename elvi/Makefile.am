@@ -6,6 +6,7 @@ dist_elvi_SCRIPTS	= \
 		  alioth \
 		  altavista \
 		  amazon \
+		  archpkg \
 		  ask \
 		  austlii \
 		  bbcnews \
@@ -53,6 +54,7 @@ dist_elvi_SCRIPTS	= \
 		  openbsd \
 		  opensearch \
 		  pgpkeys \
+		  port \
 		  pubmed \
 		  rae \
 		  rfc \

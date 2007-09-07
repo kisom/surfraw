@@ -1,3 +1,2 @@
-deblists -list=security-announce SECURITY
-DSA
-
+deblists -list=devel Work-needing
+Work-needing packages report for

@@ -1,0 +1,32 @@
+#!/bin/sh
+# $Id$
+# elvis: port		-- Look up a TCP/UDP port number on seifried.org/security/ports/
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [portnumber]
+Description:
+  Look up a TCP/UDP port number at seifried.org/security/ports/
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.seifried.org/security/ports/"
+else
+    port=`w3_url_of_arg $w3_args`
+    if echo "$port"| egrep -q '^[0-9]{1,5}$' && expr "$port" \< 65536 >/dev/null ; then
+        if expr $port '<' 1000 > /dev/null; then
+	    path=0
+	else
+	    path="$( expr $port / 1000 )000"
+	fi
+	w3_browse_url "http://seifried.org/security/ports/$path/$port.html"
+    else
+	err "$port: not a port number"
+    fi
+fi

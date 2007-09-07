@@ -3,12 +3,12 @@
 # Ian Beckwith <ianb@nessie.mcc.ac.uk>
 #
 
-use LWP::UserAgent;
+eval "require LWP::UserAgent" or die("runtests: libwww-perl not found, aborting tests.\n");
 use strict;
 use vars qw($me);
 $me=($0=~/(?:.*\/)?(.*)/)[0];
 
-our($OK,$FAIL)=(0,1);
+our($OK,$FAIL,$SKIP)=(0,1,2);
 our $ua;
 
 my @testfiles;
@@ -22,6 +22,7 @@ die("No tests found\n") unless(@testfiles);
 
 $ua=LWP::UserAgent->new;
 #$ua->env_proxy;
+$ua->cookie_jar({file => "COOKIES", autosave => 0});
 # Google & CNN dont like LWP::UserAgent's UserAgent string, nicking iceweasel's
 $ua->agent("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.4) Gecko/20070508 Iceweasel/2.0.0.4 (Debian-2.0.0.4-1)");
 
@@ -42,10 +43,12 @@ for my $testfile (@testfiles)
     $results{$elvi}=[  runtests($testfile) ];
 }
 
-my @failedelvi=grep { grep { $_ != 0; } @{$results{$_}};  } sort keys %results;
+my @failedelvi=grep { grep { $_ == $FAIL; } @{$results{$_}};  } sort keys %results;
 if(@failedelvi)
 {
-    print "Failed elvi: ";
+    my $total=keys %results;
+    my $failed=@failedelvi;
+    printf "Failed $failed/$total (%d%%) elvi: ", ($failed/$total) * 100;
     for my $badelvis (@failedelvi)
     {
 	my @thisresults=@{$results{$badelvis}};
@@ -55,7 +58,7 @@ if(@failedelvi)
 	    print "${badelvis}[";
 	    for(my $i=0;$i<=$#thisresults;$i++)
 	    {
-		if($thisresults[$i] != $OK)
+		if($thisresults[$i] == $FAIL)
 		{
 		    if(!$first) { print ","; }
 		    $first=0;
@@ -94,6 +97,16 @@ sub runtests
 	$testnum++;
 	chomp($cmd);
 	next if($cmd=~/^\s*$/); # ignore blank lines
+	if($cmd=~/^SKIP\s*(.*)/)
+	{
+	    print "Test manually (see test/README)";
+	    if(defined($1) && $1 ne "")
+	    {
+		print ": $1";
+	    }
+	    print "\n";
+	    return $SKIP;
+	}
 	$count++;
 	$match=<TEST>;
 	unless(defined($match))
@@ -123,7 +136,7 @@ sub testelvis
 	my $hash=$tests[$count];
 	my $cmd  =(keys  (%$hash))[0];
 	my $match=(values(%$hash))[0];
-	unless(open(ELVI,"SURFRAW_browser=echo PATH=\"../elvi:\$PATH\"  $cmd|"))
+	unless(open(ELVI,"SURFRAW_browser=echo PATH=\"../elvi:..:\$PATH\"  $cmd|"))
 	{
 	    print "FAIL: cannot execute \"$cmd\": $!";
 	    push(@results,$FAIL);

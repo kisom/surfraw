@@ -133,7 +133,7 @@ Or... How to Eat The CHEESE
 
     4: add a link for the manpage in links.IN
 
-    5: run automake (1.7) and autoconf (2.50+)
+    5: run aclocal (1.10), automake (1.10) and autoconf (2.50+)
 
     6: update the elvi list in README
 
@@ -143,7 +143,11 @@ Or... How to Eat The CHEESE
 
     9: add tests to test suite, see test/README
 
-    10: if using cvs, '(cd elvi;cvs add elviname)' then 'cvs commit'
+    10: if the elvi has heavy dependencies, consider moving it
+        to the surfraw-extra package by adding its files to
+	debian/surfraw-extra.files
+
+    11: if using cvs, '(cd elvi;cvs add elviname)' then 'cvs commit'
 
  APPENDIX 2
 
@@ -171,7 +175,7 @@ Or... How to Eat The CHEESE
 
     11: mv surfraw-version.tar.gz ..
 
-    12: fakeroot dpkg-buildpackage -sa
+    12: dpkg-buildpackage -rfakeroot -sa
 
     13: cd ..
 

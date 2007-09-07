@@ -6,7 +6,7 @@
 w3_config_hook () {
 def   SURFRAW_debcontents_arch    i386
 def   SURFRAW_debcontents_distro  stable
-def   SURFRAW_debcontents_search  files
+def   SURFRAW_debcontents_search  ""
 defyn SURFRAW_debcontents_usecase no
 defyn SURFRAW_debcontents_ubuntu  no
 }
@@ -18,12 +18,15 @@ Description:
   Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 Local options:
   -u                            Search ubuntu packages instead of debian
-  -case                         Make searches case-sensitive
+  -case                         Make searches case-sensitive (ubuntu only)
   -search=                      Type of search
-      files             |       Packages that contain files named like this
-      dirs              |       Packages that contain files or directories named like this
-      word              |       Packages that contain files or directories whose names contain the keyword
-      list                      List all files in this package
+      files             |       Packages that contain files named like this (debian, ubuntu)
+      path              |       Paths ending with the keyword (debian)
+      dirs              |       Packages that contain files or directories
+                                named like this (ubuntu)
+      word              |       Packages that contain files or directories
+                                whose names contain the keyword (debian, ubuntu)
+      list                      List all files in this package (ubuntu)
                                 Default: $SURFRAW_debcontents_search
                                 Environment: SURFRAW_debcontents_search
   -arch=                        Specialized search on architecture
@@ -70,7 +73,7 @@ w3_parse_option_hook () {
 	-distro=*)  setopt   SURFRAW_debcontents_distro  $optarg	;;
 	-search=*)  setopt   SURFRAW_debcontents_search  $optarg	;;
 	-u*)        setoptyn SURFRAW_debcontents_ubuntu  yes    	;;
-	-ca*)  		setoptyn SURFRAW_debcontents_usecase yes    	;;
+	-ca*) 	    setoptyn SURFRAW_debcontents_usecase yes    	;;
 	*) return 1 ;;
     esac
     return 0
@@ -86,22 +89,26 @@ then
 	searchurl="http://packages.ubuntu.com/cgi-bin/search_contents.pl"
 else
 	searchpage="http://packages.debian.org/#search_contents"
-	searchurl="http://packages.debian.org/cgi-bin/search_contents.pl"
+	searchurl="http://packages.debian.org/search"
 fi
 if test -z "$w3_args"; then
     w3_browse_url "$searchpage"
 else
     escaped_args=`w3_url_of_arg $w3_args`
 
+    if ifyes SURFRAW_debcontents_ubuntu
+    then
+	# old style still used by ubuntu
 	url="$searchurl?word=${escaped_args}&arch=${SURFRAW_debcontents_arch}"
 
-	if ifyes SURFRAW_debcontents_ubuntu && [ "$SURFRAW_debcontents_distro" = "stable" ]
+	if [ "$SURFRAW_debcontents_distro" = "stable" ]
 	then
 		SURFRAW_debcontents_distro=dapper
 	fi
 	url="$url&version=${SURFRAW_debcontents_distro}"
 
 	case "$SURFRAW_debcontents_search" in
+	        "")  url="$url&searchmode=searchfiles"        ;;
 		f*)  url="$url&searchmode=searchfiles"        ;;
 		d*)  url="$url&searchmode=searchfilesanddirs" ;;
 		w*)  url="$url&searchmode=searchword"         ;;
@@ -115,6 +122,20 @@ else
 	else
 		url="$url&case=insensitive"
 	fi
+    else # new style as used on p.d.o
+	url="$searchurl?keywords=${escaped_args}&searchon=contents"
+
+	url="$url&arch=${SURFRAW_debcontents_arch}"
+	url="$url&suite=${SURFRAW_debcontents_distro}"
+
+	case "$SURFRAW_debcontents_search" in
+		"")  url="$url&mode=path"           ;;
+		p*)  url="$url&mode=path"           ;;
+		f*)  url="$url&mode=exactfilename"  ;;
+		w*)  url="$url&mode=filename"       ;;
+		*)   err "Unknown search type"      ;;
+	esac
+    fi
 
     w3_browse_url "$url"
 fi

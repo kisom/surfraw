@@ -15,6 +15,40 @@
 
 				  N E W S
 
+Thu Sep  6 21:59:35 BST 2007 - surfraw 2.1.7
+
+  * Resumed making upstream releases.
+    Surfraw is now maintained by the Debian Surfraw-Devel Team. Please
+    report bugs to <surfraw-devel@lists.alioth.debian.org>, and feel
+    free to join us on the list.
+
+    There have been many changes since the last official release.
+
+    New elvi: alioth archpkg bbcnews cddb cia codesearch ctan cve
+    	      deblists deblogs debpts debsec debwiki discogs dmoz ebay
+    	      etym foldoc freedb fsfdir genpkg gutenberg happypenguin
+    	      imdb ixquick lastfm leodict musicbrainz opensearch
+    	      pgpkeys port rae rfc scholar scpan w3css w3html w3link
+    	      w3rdf wayback wikipedia yubnub
+
+    Removed elvi: appwatch britannica ftpfind ftpsearch jake
+    	    	  raging swhois
+
+    Elvi now live in /usr/lib/surfraw (or /usr/local/lib/surfraw)
+    Use surfraw-update-path to add this directory to your path or
+    prefix elvi with sr or surfraw, eg "sr google foo bar".
+
+    Bookmarks can be defined in /etc/surfraw.bookmarks or
+    ~/.surfraw.bookmarks. See /etc/surfraw.bookmarks for the format.
+    Bookmarks can be used with "sr [options] bookmarkname".
+
+    There is now a test suite. "make test" to run it or
+    see test/README.
+
+    For a full list of changes since the last release, see
+    debian/changelog. From this release onwards, changes will be
+    logged in ./ChangeLog as normal.
+
 Tur Mar 30 01:21:03 CEST 2004 - surfraw 2.0.2
 
   * Added bash completion support by Justin B Rye

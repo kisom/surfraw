@@ -4,14 +4,14 @@ Priority: optional
 Maintainer: Debian surfraw maintainers <surfraw-devel@lists.alioth.debian.org>
 Uploaders: Moritz Muehlenhoff <jmm@debian.org>,Thomas Smith <tgs@debian.org>,Christian Surchi <csurchi@debian.org>,Ian Beckwith <ianb@nessie.mcc.ac.uk>
 Standards-Version: 3.7.2
-Build-Depends: debhelper (>= 4.1.16)
+Build-Depends: debhelper (>= 5)
 XS-Vcs-Cvs: -d :pserver:anonymous@cvs.alioth.debian.org:/cvsroot/surfraw
 XS-Vcs-Browser: http://alioth.debian.org/plugins/scmcvs/cvsweb.php/surfraw/?cvsroot=surfraw
 
 Package: surfraw
 Architecture: all
-Depends: lynx | www-browser, libwww-opensearch-perl, libwww-perl, libhtml-parser-perl
-Recommends: links | w3m | w3m-ssl | lynx-cur
+Depends: lynx | www-browser
+Recommends: surfraw-extra, links | w3m | w3m-ssl | lynx-cur
 Suggests: screen
 Conflicts: surfaw
 Replaces: surfaw
@@ -32,3 +32,31 @@ Description: a fast unix command line interface to WWW
  as links, w3m (or even lynx), and screen(1), or netscape-remote
  a Surfraw liberateur is capable of research speeds that leave
  GUI tainted idolaters agape with fear and wonder.
+
+Package: surfraw-extra
+Architecture: all
+Depends: surfraw, lynx | www-browser, libwww-opensearch-perl, libwww-perl, libhtml-parser-perl
+Recommends: links | w3m | w3m-ssl | lynx-cur
+Suggests: screen
+Conflicts: surfraw (<< 2.1.7)
+Description: extra surfraw elvi with heavy dependencies
+ surfraw-extra contains extra elvi for surfraw that have large
+ dependency trees.
+ .
+ Surfraw - Shell Users' Revolutionary Front Rage Against the World Wide Web
+ .
+ Surfraw provides a fast unix command line interface to a variety of
+ popular WWW search engines and other artifacts of power. It reclaims
+ google, altavista, dejanews, freshmeat, research index, slashdot
+ and many others from the false-prophet, pox-infested heathen lands of
+ html-forms, placing these wonders where they belong, deep in unix
+ heartland, as god loving extensions to the shell.
+ .
+ Surfraw abstracts the browser away from input. Doing so lets it get
+ on with what it's good at. Browsing. Interpretation of linguistic
+ forms is handed back to the shell, which is what it, and human
+ beings are good at. Combined with incremental text browsers, such
+ as links, w3m (or even lynx), and screen(1), or netscape-remote
+ a Surfraw liberateur is capable of research speeds that leave
+ GUI tainted idolaters agape with fear and wonder.
+

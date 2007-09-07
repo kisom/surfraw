@@ -1,3 +1,38 @@
+surfraw (2.1.7-1) unstable; urgency=low
+
+  * First proper upstream release of the surfraw-devel
+    version. After this release non-debian changes will be logged
+    in the upstream changelog.gz.
+  * Split off opensearch into new package: surfraw-extra
+    as it has a huge dependency tree that not everyone will want
+    to install.
+  * Fixed "sr -options bookmark" (excessive quoting).
+  * New elvi:
+    + archpkg - search Arch Linux packages. Thanks to Simon Ernst.
+    + port - look up a TCP/UDP port on seifried.org/security/ports.
+  * Fixed elvi
+    + debbugs: fixed help formatting.
+    + debcontents - new options
+  * Fixed tests:
+    + austlii - (since when does a legal db not contain "tort"?).
+    + deblists - -security-announce not indexed (#440347), so we search for
+      WNPP posts on -devel.
+    + debpackages.
+    + sunsolve - added cookie to accept license.
+    + w3html - validator will not validate itself.
+  * runtests (see test/README):
+    + Added cookie support.
+    + Added support for skipping tests with SKIP.
+    + Abort if libwww-perl not installed.
+    + Documented changes in test/README.
+  * Makefile.am: removed debian/ files from EXTRA_DIST, they should
+    be in the debian patch not the main tarball.
+  * Bumped debhelper compat level to 5.
+  * Really updated to automake-1.10.
+  * Updated AUTHORS, NEWS, README, HACKING, ChangeLog, NEWS.Debian.
+
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Fri, 07 Sep 2007 00:18:38 +0100
+
 surfraw (2.1.6) unstable; urgency=low
 
   * New elvi:

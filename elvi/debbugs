@@ -83,11 +83,11 @@ Local options:
   -extag=tag3,tag4              Exclude given tags.
                                 Available tags:
                                  potato, woody, sarge, sarge-ignore,
-								 etch, etch-ignore, sid, experimental,
-								 confirmed, d-i, fixed, fixed-in-experimental,
-								 fixed-upstream, help, l10n, moreinfo, patch,
-								 pending, security, unreproducible, upstream,
-								 wontfix, ipv6, lfs
+				 etch, etch-ignore, sid, experimental,
+				 confirmed, d-i, fixed, fixed-in-experimental,
+				 fixed-upstream, help, l10n, moreinfo, patch,
+				 pending, security, unreproducible, upstream,
+				 wontfix, ipv6, lfs
 EOF
     w3_global_usage
 }

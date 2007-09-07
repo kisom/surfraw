@@ -1,2 +1,10 @@
-See NEWS for a list of high level changes and the cvs
-repository for a list of low level changes
+2007-09-06  Ian Beckwith   <ianb@nessie.mcc.ac.uk>
+
+	* Surfraw 2.1.7
+	* First official upstream release by the debian surfraw-devel
+	team. For previous detailed changelog entries, see the debian
+ 	changelog in debian/changelog. For a user-level summary of
+	changes, see NEWS.
+
+
+

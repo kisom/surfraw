@@ -171,10 +171,6 @@ man_MANS = surfraw-update-path.1 surfraw.1 elvi.1sr opensearch-discover.1 opense
 EXTRA_DIST = surfraw.lsm.in surfraw.IN surfraw-update-path.IN\
                   surfraw.spec.in aclocal.m4 HACKING Makefile.include \
 				  surfraw.1.IN elvi.1sr.IN surfraw.bookmarks links.IN \
-				  debian/README.Debian debian/changelog debian/compat \
-				  debian/control debian/copyright \
-				  debian/docs debian/linda.overrides \
-				  debian/rules debian/surfraw.dirs \
 				  $(devel_extra) surfraw-bash-completion.IN surfraw.conf.IN
 
 CLEANFILES = surfraw surfraw-update-path surfraw-update-path.1 surfraw.spec surfraw.lsm \
@@ -728,7 +724,7 @@ install-data-hook: links
 		ln -sf $$target  $(DESTDIR)/$$link ;\
 	done < links
 
-test:
+test: all
 	make -C test test
 
 .PHONY: test

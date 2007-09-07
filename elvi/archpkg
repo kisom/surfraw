@@ -1,0 +1,22 @@
+#!/bin/sh
+# elvis: archpkg		-- Search Arch Linux packages (www.archlinux.org)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search Arch Linux packages (www.archlinux.org)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.archlinux.org"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.archlinux.org/packages/search/?q=${escaped_args}"
+fi

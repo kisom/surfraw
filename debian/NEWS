@@ -1,0 +1,9 @@
+surfraw (2.1.7) unstable; urgency=low
+
+  The opensearch elvis has been split off into a new package: surfraw-extra.
+
+  This is because it depends on packages that pull in a large tree of
+  dependencies that not all users will want to install.
+
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sun, 02 Sep 2007 00:06:07 +0100
+

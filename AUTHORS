@@ -10,11 +10,15 @@ Christian Surchi <csurchi@debian.org>
 	elvi: debcontents, debbugs, debpackages
 
 Ian Beckwith <ianb@nessie.mcc.ac.uk>
-	elvi: alioth, bbcnews, cddb, deblists, freedb, imdb, scpan
+	elvi: alioth, bbcnews, cddb, deblists, freedb, imdb, scpan,
+	      port, codesearch, debwiki, lastfm, musicbrainz,
+	      opensearch, scholar, ctan, fsfdir, gutenberg, wayback,
+	      dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc
 	plus various tweaks/bugfixes/features.
 
 Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
-	elvi: ebay, leodict, wikipedia, sharereactor, pgpkeys, happypenguin
+	elvi: debsec, ebay, leodict, wikipedia, sharereactor,
+	      pgpkeys, happypenguin
 
 Thomas Smith <tgs@debian.org>
 	Bugfixes, uploading.
@@ -28,10 +32,33 @@ Kevin Kreamer <kkreamer@etherhogz.org>
 OTHER ELVI AUTHORS
 
 Christian Weisgerber <naddy@mips.inka.de>
-	elvi: fast, thesaurus, webster
+        elvi: fast, thesaurus, webster
 
 Jason Harris <jharris@widowmaker.com>
-	elvi: freebsd, openbsd, filesearching, ftpfind
+        elvi: freebsd, openbsd, filesearching, ftpfind
+
+Ruben Pollan <meskio@terra.es>
+        elvi: rae
+
+Ian Broadfoot <ibroadfo@cis.strath.ac.uk>
+        elvi: yubnub
+
+James Rowe <jnrowe@ukfsn.org>
+        elvi: genpkg
+        plus useful patches.
+
+Aparna Jaitly <aparnajaitly@hotmail.com>
+        elvi: ixquick
+
+Justin B. Rye <jbr@edlug.org.uk>
+        elvi: cia, deblogs, etym, foldoc
+        plus useful patches.
+
+Patroklos Argyroudis <argp@cs.tcd.ie>
+        elvi: discogs
+
+Simon Ernst <se@netmute.org>
+        elvi: archpkg
 
 
 OTHER CONTRIBUTORS
@@ -42,7 +69,10 @@ Hector Blanco          <hector.blanko@hispalinux.es>
 Jeff Bailey            <jbailey@nisa.net>
 Mark W. Eichin         <eichin@thok.org>
 Teófilo Ruiz Suárez  <teo@debian.org>
-
+Maru Dubshinki         <marudubshinki@gmail.com>
+Micah Anderson         <micah@debian.org>
+Matt Kraai             <kraai@ftbfs.org>
+Brian Mcdonald         <weifgvjlpmvr@spammotel.com>
 
 If we've missed anyone, let us know.
 
