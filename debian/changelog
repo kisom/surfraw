@@ -1,3 +1,12 @@
+surfraw (2.2.0-1) unstable; urgency=low
+
+  * Actual first new upstream release.
+    See changelog.gz for upstream changes, like a normal package.
+  * debian/rules: Use $(CURDIR) instead of `pwd`.
+  * debian/copyright: updated copyright dates.
+
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Tue, 11 Sep 2007 03:41:09 +0100
+
 surfraw (2.1.7-1) unstable; urgency=low
 
   * First proper upstream release of the surfraw-devel

@@ -23,5 +23,5 @@ if test -z "$w3_args"; then
     w3_browse_url "https://www.cia.gov/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "https://www.cia.gov/search?NS-collection=Entire+Site&NS-search-page=results&NS-query=${escaped_args}"
+    w3_browse_url "https://www.cia.gov/search?NS-collection=Everything&NS-search-page=results&NS-query=${escaped_args}"
 fi

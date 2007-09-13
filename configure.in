@@ -4,17 +4,24 @@ dnl Process this file with autoconf to produce a configure script.
 
 dnl This is the only place where the package version appears
 dnl (apart from debian/changelog)
-AC_INIT(surfraw, 2.1.7)
+AC_INIT(surfraw, 2.2.0)
 AC_PREREQ(2.54)
 AC_CONFIG_SRCDIR([surfraw.IN])
 
 dnl minimum automake version, not surfraw version
 AM_INIT_AUTOMAKE([1.10])
 
+AC_MSG_CHECKING([whether to enable OpenSearch support])
+AC_ARG_ENABLE([opensearch],
+	[AS_HELP_STRING([--disable-opensearch], [disable OpenSearch support])],,
+	[enable_opensearch=yes])
+AC_MSG_RESULT([$enable_opensearch])
+AM_CONDITIONAL(OPENSEARCH, test "$enable_opensearch" = "yes")
+
 ELVIDIR="\$(libdir)/surfraw"
 
 AC_ARG_WITH([elvidir],
-	[  --with-elvidir=ELVIDIR  specify location of elvi],
+	[AS_HELP_STRING([--with-elvidir=ELVIDIR], [specify location of elvi])],
 	[if test -n "$withval" && test "$withval" != "no" ; then ELVIDIR="$withval";fi])
 
 AC_SUBST(ELVIDIR)

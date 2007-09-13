@@ -153,36 +153,34 @@ Or... How to Eat The CHEESE
 
     Preparing a release of surfraw:
 
-    1: Change into the surfraw source directory.
+    1: cvs -d :ext:user@cvs.alioth.debian.org:/cvsroot/surfraw checkout surfraw web
 
-    2: cvs update
+    2: cd surfraw
 
-    3: If you have made changes, cvs commit
+    3: cvs tag -c surfraw_versionnumber_debianversion
 
-    4: cvs tag -c surfraw_versionnumber_debianversion
+    4: mkdir -p  ../release/upload ; cd ../release
 
-    5: mkdir ../release
+    5: cvs -d :ext:user@cvs.alioth.debian.org:/cvsroot/surfraw export -r surfraw_versionnumber_debianversion surfraw
 
-    6: cd ../release
+    6: cd surfraw
 
-    7: cvs -d :ext:user@cvs.alioth.debian.org:/cvsroot/surfraw export -r surfraw_versionnumber_debianversion surfraw
+    7: fakeroot make distcheck
 
-    8: cd surfraw
+    8: cp surfraw-version.tar.gz ../surfraw_version.orig.tar.gz
 
-    9: fakeroot make distcheck
+    9: mv surfraw-version.tar.gz ../upload
 
-    10: cp surfraw-version.tar.gz ../surfraw_version.orig.tar.gz
+    10: pdebuild --buildresult ../upload --auto-debsign
 
-    11: mv surfraw-version.tar.gz ..
+    11: cd ../upload
 
-    12: dpkg-buildpackage -rfakeroot -sa
+    12: upload the debian packages
 
-    13: cd ..
+    13: cp * ../../web
 
-    14: upload the debian packages
+    14: cd ../../web
 
-    15: copy the .tar.gz, .orig.tar.gz, .dsc, .deb, .diff.gz files to the webspace
-
-    16: see the README.WEB file in the website tree for how to update the website.
+    15: make install # see README.WEB for more info
 
 $Id$

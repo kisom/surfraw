@@ -3,9 +3,6 @@
 
 Original Home Page: http://surfraw.sourceforge.net/
 
-Original Distribution:
- ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/surfraw-1.0.7.tar.gz
-
 New project home page: http://surfraw.alioth.debian.org
 
         ______  _     _  ______   _______  ______   _______  _  _  _
@@ -68,7 +65,7 @@ New project home page: http://surfraw.alioth.debian.org
   and the quoting is passed on to the search engine.
 
 Adding the elvi to your path
-  
+
   If you are a regular user of surfraw, you will probably get sick
   of typing sr or surfraw each time. You can regain the old
   behaviour of running the elvi directly by adding the elvi
@@ -92,10 +89,18 @@ Bookmarks
 
   There are some example bookmarks in /etc/surfraw.bookmarks
 
+Installation
+
+  Surfraw is installed with the standard ./configure; make; make install
+  procedure. See INSTALL for more details. Note that the opensearch elvis
+  depends on the perl libraries WWW::OpenSearch, HTML::Parser and
+  LWP (libwww-perl). If you don't want to install opensearch, use
+  ./configure --disable-opensearch.
+
 Examples
 
-         $ sr ask why is jeeves gay?
          $ surfraw google -results=100 RMS, GNU, which is sinner, which is sin?
+         $ sr wikipedia surfraw
          $ sr austlii -method=phrase dog like
          $ /usr/lib/surfraw/rhyme -method=perfect Julian
 
@@ -231,7 +236,7 @@ Global options:
                                 Environment: SURFRAW_quote_args
   -version                      Display Surfraw version (1.0.4)
 Copyright:
-  Copyright (c) 2003-2006 The Surfraw-Devel Team
+  Copyright (c) 2003-2007 The Surfraw-Devel Team
                            <surfraw-devel@lists.alioth.debian.org>
   Copyright (c) 2000-2001 Julian Assange
   Copyright (c) 2001 Australian Institute for Collaborative Research
@@ -271,5 +276,3 @@ See NEWS, ChangeLog or debian/changelog for a more detailed summary of changes.
 
   $Id$
      _________________________________________________________________
-   
-

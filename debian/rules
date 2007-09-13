@@ -53,8 +53,7 @@ install: build
 	dh_installdirs
 
 	# Add here commands to install the package into debian/surfraw.
-	# $(MAKE) install prefix=$(CURDIR)/debian/surfraw/usr
-	$(MAKE) install DESTDIR=`pwd`/debian/surfraw/ # sysconfdir=`pwd`/debian/surfraw/etc
+	$(MAKE) install DESTDIR=$(CURDIR)/debian/surfraw/
 
 # Build architecture-independent files here.
 binary-indep: build install

@@ -52,7 +52,6 @@ dist_elvi_SCRIPTS	= \
 		  musicbrainz \
 		  netbsd \
 		  openbsd \
-		  opensearch \
 		  pgpkeys \
 		  port \
 		  pubmed \
@@ -81,3 +80,6 @@ dist_elvi_SCRIPTS	= \
 		  yahoo \
 		  yubnub
 
+if OPENSEARCH
+dist_elvi_SCRIPTS	+= opensearch
+endif

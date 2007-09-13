@@ -1,10 +1,29 @@
+2007-09-13  Ian Beckwith  <ianb@nessie.mcc.ac.uk>
+
+	* Actual new upstream release.
+	* Bumped version to 2.2.0.
+	* configure now supports --disable-opensearch.
+	  improved help macro syntax.
+	  Patches from James Rowe, thanks!
+	* cia elvi fixed, thanks to Charles Twardy.
+	  Evidently I was wrong about there being a LWP problem
+	  with the cia test, test reenabled.
+	* Fixed discogs test.
+	* Moved surfraw and surfraw-update-path from dist_bin_SCRIPTS
+	  to bin_SCRIPTS so they are built rather than shipped.
+	* Updated LSM entry.
+	* Added new make target: make submit-lsm
+	  Mails updated LSM entry to LSM@qqx.org.
+	* Updated copyright dates.
+	* Updated README.
+
 2007-09-06  Ian Beckwith   <ianb@nessie.mcc.ac.uk>
 
 	* Surfraw 2.1.7
 	* First official upstream release by the debian surfraw-devel
-	team. For previous detailed changelog entries, see the debian
- 	changelog in debian/changelog. For a user-level summary of
-	changes, see NEWS.
+	  team. For previous detailed changelog entries, see the debian
+ 	  changelog in debian/changelog. For a user-level summary of
+	  changes, see NEWS.
 
 
 

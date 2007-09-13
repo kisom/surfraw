@@ -30,8 +30,9 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
+@OPENSEARCH_TRUE@am__append_1 = opensearch
 subdir = elvi
-DIST_COMMON = $(dist_elvi_SCRIPTS) $(srcdir)/Makefile.am \
+DIST_COMMON = $(am__dist_elvi_SCRIPTS_DIST) $(srcdir)/Makefile.am \
 	$(srcdir)/Makefile.in
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.in
@@ -39,6 +40,17 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES =
+am__dist_elvi_SCRIPTS_DIST = W alioth altavista amazon archpkg ask \
+	austlii bbcnews cddb cia cite cnn codesearch ctan currency cve \
+	debbugs debcontents deblists deblogs debpackages debpts debsec \
+	debwiki deja discogs dmoz ebay etym excite fast foldoc \
+	filesearching freebsd freedb freshmeat fsfdir genpkg gutenberg \
+	ixquick google happypenguin imdb scpan slinuxdoc lastfm \
+	leodict musicbrainz netbsd openbsd pgpkeys port pubmed rae rfc \
+	rhyme scholar slashdot sundocs sourceforge stockquote \
+	scaleplus sunsolve thesaurus translate w3css w3html w3link \
+	w3rdf wayback webster wetandwild wikipedia woffle xxx yahoo \
+	yubnub opensearch
 am__installdirs = "$(DESTDIR)$(elvidir)"
 dist_elviSCRIPT_INSTALL = $(INSTALL_SCRIPT)
 SCRIPTS = $(dist_elvi_SCRIPTS)
@@ -120,86 +132,17 @@ top_srcdir = @top_srcdir@
 
 # $Id$
 elvidir = $(ELVIDIR)
-dist_elvi_SCRIPTS = \
-		  W \
-		  alioth \
-		  altavista \
-		  amazon \
-		  archpkg \
-		  ask \
-		  austlii \
-		  bbcnews \
-		  cddb \
-		  cia \
-		  cite \
-		  cnn \
-		  codesearch \
-		  ctan \
-		  currency \
-		  cve \
-		  debbugs \
-		  debcontents \
-		  deblists \
-		  deblogs \
-		  debpackages \
-		  debpts \
-		  debsec \
-		  debwiki \
-		  deja \
-		  discogs \
-		  dmoz \
-		  ebay \
-		  etym \
-		  excite \
-		  fast \
-		  foldoc \
-		  filesearching \
-		  freebsd \
-		  freedb \
-		  freshmeat \
-		  fsfdir \
-		  genpkg \
-		  gutenberg \
-		  ixquick \
-		  google \
-		  happypenguin \
-		  imdb \
-		  scpan \
-		  slinuxdoc \
-		  lastfm \
-		  leodict \
-		  musicbrainz \
-		  netbsd \
-		  openbsd \
-		  opensearch \
-		  pgpkeys \
-		  port \
-		  pubmed \
-		  rae \
-		  rfc \
-		  rhyme \
-		  scholar \
-		  slashdot \
-		  sundocs \
-		  sourceforge \
-		  stockquote \
-		  scaleplus \
-		  sunsolve \
-		  thesaurus \
-		  translate \
-		  w3css \
-		  w3html \
-		  w3link \
-		  w3rdf \
-		  wayback \
-		  webster \
-		  wetandwild \
-		  wikipedia \
-		  woffle \
-		  xxx \
-		  yahoo \
-		  yubnub
-
+dist_elvi_SCRIPTS = W alioth altavista amazon archpkg ask austlii \
+	bbcnews cddb cia cite cnn codesearch ctan currency cve debbugs \
+	debcontents deblists deblogs debpackages debpts debsec debwiki \
+	deja discogs dmoz ebay etym excite fast foldoc filesearching \
+	freebsd freedb freshmeat fsfdir genpkg gutenberg ixquick \
+	google happypenguin imdb scpan slinuxdoc lastfm leodict \
+	musicbrainz netbsd openbsd pgpkeys port pubmed rae rfc rhyme \
+	scholar slashdot sundocs sourceforge stockquote scaleplus \
+	sunsolve thesaurus translate w3css w3html w3link w3rdf wayback \
+	webster wetandwild wikipedia woffle xxx yahoo yubnub \
+	$(am__append_1)
 all: all-am
 
 .SUFFIXES:
