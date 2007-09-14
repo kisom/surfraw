@@ -29,13 +29,6 @@ To run woffle.test successfully:
    sudo /usr/share/wwwoffle/search/htdig/wwwoffle-htdig-incr
    to update the htdig index
 
-Manual tests
-------------
-
-Some elvi cannot be tested automatically, they are currently:
-
-cia: test fails using libwww-perl, but search works with iceweasel.
-
 Writing tests
 -------------
 
@@ -50,8 +43,8 @@ Multiple tests can be implemented per elvi, feel free to submit more!
 When new test files have been written, add them to EXTRA_DIST in
 test/Makefile.am, rerun autotools, and 'cvs add' them too.
 
-Some elvi cannot be tested automatically. To avoid cluttering up the
-elviwithouttests output, they can be marked as such by starting the
-first line of the .test file with SKIP followed by an optional reason.
+If an elvis cannot be tested automatically, it can be marked as such
+by starting the first line of the .test file with SKIP followed by an
+optional reason.
 
 If a cookie is needed (eg with sunsolve), add it to test/COOKIES.
