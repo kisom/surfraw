@@ -4,7 +4,7 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-def   SURFRAW_ebay_country	com
+def   SURFRAW_ebay_country	"$SURFRAW_lang"
 def   SURFRAW_ebay_results	50
 }
 
@@ -14,17 +14,39 @@ Usage: $w3_argv0 [options] [search-string]
 Description:
   Search the Ebay auction site
 Local options:
-  -country= | -c=  
-	com	    eBay.com
-	de          eBay.de
-	uk          eBay.co.uk
-	fr          eBay.fr
-		    Default: com
-		    Environment: SURFRAW_ebay_country
-  -results= | -r  
-	            Amount of results per page
-		    Default: 50
-		    Environment: SURFRAW_ebay_results
+  -country= | -c=
+                 com        |   Main eBay site (default)
+		 ar         |   Argentina
+                 at         |   Austria
+                 au         |   Australia
+                 nl_BE      |   Belgium (Flemish)
+                 fr_BE      |   Belgium (French)
+                 br         |   Brazil
+                 ca         |   Canada
+                 ch         |   Switzerland
+                 cn         |   China
+                 de         |   Germany
+                 es         |   Spain
+                 fr         |   France
+                 hk         |   Hong Kong
+                 ie         |   Ireland
+                 in         |   India
+		 kr         |   Korea
+		 my         |   Malaysia
+		 mx         |   Mexico
+                 nl         |   Netherlands
+                 nz         |   New Zealand
+                 ph         |   Philippines
+                 pl         |   Poland
+                 sg         |   Singapore
+		 se         |   Sweden
+		 tw         |   Taiwan
+                 uk             UK
+                                Environment: SURFRAW_ebay_country, SURFRAW_lang
+  -results= | -r
+                                Amount of results per page
+                                Default: 50
+                                Environment: SURFRAW_ebay_results
 
 Examples:
   $w3_argv0 -c=de sauerkraut
@@ -48,30 +70,53 @@ w3_parse_option_hook () {
 w3_config
 w3_parse_args "$@"
 
-# This can be trimmed
-
-if [ $SURFRAW_ebay_country = de ]; then
-	country="http://search.ebay.de/search/search.dll?MfcISAPICommand=GetResult&krd=1&ht=1&shortcut=4&SoftProperty=MetaEndSort&cgiurl=http%3A%2F%2Fcgi.ebay.de%2Fws%2F&maxRecordsPerPage=$SURFRAW_ebay_results&st=2&ebaytag1code=77&query="
-fi
-
-if [ $SURFRAW_ebay_country = com ]; then
-	country="http://search.ebay.com/search/search.dll?MfcISAPICommand=GetResult&krd=1&ht=1&shortcut=4&SoftProperty=MetaEndSort&cgiurl=http%3A%2F%2Fcgi.ebay.com%2Fws%2F&maxRecordsPerPage=$SURFRAW_ebay_results&st=2&ebaytag1code=77&query="
-fi
-
-if [ $SURFRAW_ebay_country = uk ]; then
-	country="http://search.ebay.co.uk/search/search.dll?MfcISAPICommand=GetResult&krd=1&ht=1&shortcut=4&SoftProperty=MetaEndSort&cgiurl=http%3A%2F%2Fcgi.ebay.co.uk%2Fws%2F&maxRecordsPerPage=$SURFRAW_ebay_results&st=2&ebaytag1code=77&query="
-fi
-
-if [ $SURFRAW_ebay_country = fr ]; then
-	country="http://search.ebay.fr/search/search.dll?MfcISAPICommand=GetResult&krd=1&ht=1&shortcut=4&SoftProperty=MetaEndSort&cgiurl=http%3A%2F%2Fcgi.ebay.fr%2Fws%2F&maxRecordsPerPage=$SURFRAW_ebay_results&st=2&ebaytag1code=77&query="
-fi
+case "$SURFRAW_ebay_country" in
+    com|ar|at|be|br|ca|ch|\
+     de|es|fr|fr_BE|\
+     nl_BE|ie|in|kr|\
+     mx|nl|ph|pl) TLD="${SURFRAW_ebay_country}"       ;;
+    uk|nz)        TLD="co.${SURFRAW_ebay_country}"    ;;
+    au|hk|sg|my)  TLD="com.${SURFRAW_ebay_country}"   ;;
+    cn|zh|zt)     TLD="com.cn"                        ;;
+    # tw uses hk for searches
+    tw)           TLD="com.hk"                        ;;
+    *)            TLD="com"                           ;;
+esac
 
 if null "$w3_args"; then
-    w3_browse_url "http://www.ebay.com"
+    case "$SURFRAW_ebay_country" in
+	br)       url="http://www.mercadolivre.com.${TLD}" ;;
+	ar|mx)    url="http://www.mercadolibre.com.${TLD}" ;;
+	kr)       url="http://www.auction.co.kr"           ;;
+	fr_BE)    url="http://www.befr.ebay.be"            ;;
+	nl_BE)    url="http://www.benl.ebay.be"            ;;
+	se|sv)    url="http://www.tradera.com"             ;;
+	tw)       url="http://twexport.ebay.com"           ;;
+	*)        url="http://www.ebay.${TLD}"             ;;
+    esac
+    w3_browse_url "$url"
 else
+    if [ "$SURFRAW_ebay_country" = "nz" ] ; then
+        # nz uses ebay.com, presumably using referrer to tell it is .nz
+	# we can't affect referrer without getting browser-specific, so
+	# just use ebay.com
+	TLD=com
+    fi
+
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "${country}${escaped_args}"
+    host="http://search.ebay.${TLD}"
+    pathstart="search/search.dll?MfcISAPICommand=GetResult&krd=1&ht=1&shortcut=4&SoftProperty=MetaEndSort&cgiurl=http%3A%2F%2Fcgi"
+    pathend="%2Fws%2F&maxRecordsPerPage=$SURFRAW_ebay_results&st=2&ebaytag1code=77&query=${escaped_args}"
+
+    case "$SURFRAW_ebay_country" in
+	cn|zh|zt) url="http://search.eachnet.com/search/basicsearch.do?satitle=${escaped_args}&sacat=0"  ;;
+	br)       url="http://www.mercadolivre.com.${TLD}/jm/search?as_pr_categ_id=&as_word=${escaped_args}" ;;
+	ar|mx)       url="http://www.mercadolibre.com.${TLD}/jm/search?as_pr_categ_id=&as_word=${escaped_args}" ;;
+	kr)       url="http://search.auction.co.kr/search/search.aspx?keyword=${escaped_args}&itemno=&seller=&dom=auction&isSuggestion=No&optSection=%C5%EB%C7%D5%B0%CB%BB%F6&txtKeyword=${escaped_args}&x=0&y=0" ;;
+	se|sv)    url="http://www.tradera.com/search/search_firstpage.aspx?search=${escaped_args}&search_category=-1" ;;
+	nl_BE)    url="http://search.benl.ebay.be/${pathstart}.benl.ebay.be${pathend}" ;;
+	be|fr_BE) url="http://search.befr.ebay.be/${pathstart}.befr.ebay.be${pathend}" ;;
+	*)        url="${host}/${pathstart}.ebay.${TLD}${pathend}"  ;;
+    esac
+    w3_browse_url "${url}"
 fi
-
-
-

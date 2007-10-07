@@ -1,2 +1,14 @@
 amazon -search=books philip pullman
 subtle knife
+amazon -country=ca philip pullman
+His Dark Materials
+amazon -country=cn philip pullman
+His Dark Materials
+amazon -country=de philip pullman
+His Dark Materials
+amazon -country=fr philip pullman
+His Dark Materials
+amazon -country=jp philip pullman
+His Dark Materials
+amazon -country=uk philip pullman
+His Dark Materials

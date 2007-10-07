@@ -136,7 +136,7 @@ sub testelvis
 	my $hash=$tests[$count];
 	my $cmd  =(keys  (%$hash))[0];
 	my $match=(values(%$hash))[0];
-	unless(open(ELVI,"SURFRAW_browser=echo PATH=\"../elvi:..:\$PATH\"  $cmd|"))
+	unless(open(ELVI,"SURFRAW_lang= SURFRAW_browser=echo PATH=\"../elvi:..:\$PATH\"  $cmd|"))
 	{
 	    print "FAIL: cannot execute \"$cmd\": $!";
 	    push(@results,$FAIL);

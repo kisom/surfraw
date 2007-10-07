@@ -7,7 +7,7 @@
 # (c) 2000 Melbourne Institute for Advanced Study, all rights reserved.
 #
 # see the file COPYING for further copyright details
-# 
+#
 # this file is shell script
 #
 # defintion commands:
@@ -84,3 +84,7 @@ defyn SURFRAW_escape_url_args	yes
 
 # just print search url?
 defyn SURFRAW_print             no
+
+# Language/country (for elvi that support it)
+# Should be a 2-letter iso country code
+def SURFRAW_lang     	  	""

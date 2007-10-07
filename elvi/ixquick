@@ -5,7 +5,7 @@
 
 w3_config_hook () {
 def   SURFRAW_ixquick_search 'do/metasearch.pl'
-def   SURFRAW_ixquick_lang 'english'
+def   SURFRAW_ixquick_lang "$SURFRAW_lang"
 }
 
 w3_usage_hook () {
@@ -37,7 +37,8 @@ Local options:
 	nihongo
 	fantizhengwen
 	hangul
-                                Environment: SURFRAW_ixquick_lang
+                                Default: english
+                                Environment: SURFRAW_ixquick_lang, SURFRAW_lang
 EOF
     w3_global_usage
 }
@@ -59,8 +60,26 @@ w3_parse_args "$@"
 if test -z "$w3_args"; then
     w3_browse_url "http://www.ixquick.com/"
 else
+    case "$SURFRAW_ixquick_lang" in
+	en|english)           SURFRAW_ixquick_lang="english"        ;;
+	dk|dansk)             SURFRAW_ixquick_lang="dansk"          ;;
+	de|deutsch)           SURFRAW_ixquick_lang="deutsch"        ;;
+	es|espanol)           SURFRAW_ixquick_lang="espanol"        ;;
+	fr|francais)          SURFRAW_ixquick_lang="francais"       ;;
+	it|italiano)          SURFRAW_ixquick_lang="italiano"       ;;
+	nl|nederlands)        SURFRAW_ixquick_lang="nederlands"     ;;
+	no|nb|nn|norsk)       SURFRAW_ixquick_lang="norsk"          ;;
+	pl|polski)            SURFRAW_ixquick_lang="polski"         ;;
+	pt|portugues)         SURFRAW_ixquick_lang="portugues"      ;;
+	fi|suomi)             SURFRAW_ixquick_lang="suomi"          ;;
+	sv|svenska)           SURFRAW_ixquick_lang="svenska"        ;;
+	tr|turkce)            SURFRAW_ixquick_lang="turkce"         ;;
+	cn|zh|jiantizhongwen) SURFRAW_ixquick_lang="jiantizhongwen" ;;
+	ja|jp|nihongo)        SURFRAW_ixquick_lang="nihongo"        ;;
+	zt|fantizhengwen)     SURFRAW_ixquick_lang="fantizhengwen"  ;;
+	ko|kr|kp|hangul)      SURFRAW_ixquick_lang="hangul"         ;;
+	*)                    SURFRAW_ixquick_lang="english"        ;;
+    esac
     escaped_args=`w3_url_of_arg $w3_args`
     w3_browse_url "http://www.ixquick.com/do/metasearch.pl?cat=${SURFRAW_ixquick_search}&cmd=process_search&language=${SURFRAW_ixquick_lang}&query=${escaped_args}"
 fi
-
-

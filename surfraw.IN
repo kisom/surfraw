@@ -165,7 +165,7 @@ w3_url_escape () {
 		     s/|/%7C/g;
 		     s/}/%7D/g;
 		     s/~/%7E/g;
-		   '"s/'/%60/g"
+		   '"s/'/%27/g"
 }
 
 w3_url_of_arg () {
@@ -244,7 +244,7 @@ w3_parse_option () {
 	    -*=*) optarg=`echo "$opt" | sed 's/[-_a-zA-Z0-9]*=//'`
     esac
     w3_parse_option_hook "$opt" "$optarg" && return 0
-    
+
     case "$opt" in
 	-browser=*)	    setopt   SURFRAW_browser		$optarg	;;
 	-elvi)		    sed -n 's/^.*elvis: \(.*\)$/\1/p' $elvidir/*; exit 0            ;;

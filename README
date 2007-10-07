@@ -155,6 +155,7 @@ imdb		-- Search the Internet Movie Database (www.imdb.com)
 ixquick		-- Search the web using ixquick (www.ixquick.com)
 lastfm		-- Search last.fm
 leodict		-- Search Leo's German <-> English dictionary (dict.leo.org)
+lsm             -- Search the Linux Software Map
 musicbrainz	-- Search MusicBrainz (musicbrainz.org)
 netbsd		-- Search NetBSD related information (www.netbsd.org)
 openbsd		-- Search OpenBSD related information (www.openbsd.org)

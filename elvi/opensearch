@@ -10,7 +10,7 @@ def   SURFRAW_opensearch_title          ""
 def   SURFRAW_opensearch_count          $SURFRAW_results
 def   SURFRAW_opensearch_startindex     ""
 def   SURFRAW_opensearch_pageindex      ""
-def   SURFRAW_opensearch_language       ""
+def   SURFRAW_opensearch_language       "$SURFRAW_lang"
 def   SURFRAW_opensearch_inputencoding  ""
 def   SURFRAW_opensearch_outputencoding ""
 defyn SURFRAW_opensearch_list           0
@@ -37,6 +37,7 @@ parameters, in which case they will be silently ignored.
   -language=LANG                Language to display results in.
                                 LANG should be a 2-letter ISO country code.
                                 Examples: -l=en or -lang=de.
+				Environment: SURFRAW_opensearch_lang, SURFRAW_lang
   -inputencoding=ENC            Specify how search terms are encoded.
   -outputencoding=ENC           Request output encoded as ENC.
                                 Environment: SURFRAW_opensearch_search

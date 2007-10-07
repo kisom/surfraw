@@ -46,8 +46,8 @@ am__dist_elvi_SCRIPTS_DIST = W alioth altavista amazon archpkg ask \
 	debwiki deja discogs dmoz ebay etym excite fast foldoc \
 	filesearching freebsd freedb freshmeat fsfdir genpkg gutenberg \
 	ixquick google happypenguin imdb scpan slinuxdoc lastfm \
-	leodict musicbrainz netbsd openbsd pgpkeys port pubmed rae rfc \
-	rhyme scholar slashdot sundocs sourceforge stockquote \
+	leodict lsm musicbrainz netbsd openbsd pgpkeys port pubmed rae \
+	rfc rhyme scholar slashdot sundocs sourceforge stockquote \
 	scaleplus sunsolve thesaurus translate w3css w3html w3link \
 	w3rdf wayback webster wetandwild wikipedia woffle xxx yahoo \
 	yubnub opensearch
@@ -137,7 +137,7 @@ dist_elvi_SCRIPTS = W alioth altavista amazon archpkg ask austlii \
 	debcontents deblists deblogs debpackages debpts debsec debwiki \
 	deja discogs dmoz ebay etym excite fast foldoc filesearching \
 	freebsd freedb freshmeat fsfdir genpkg gutenberg ixquick \
-	google happypenguin imdb scpan slinuxdoc lastfm leodict \
+	google happypenguin imdb scpan slinuxdoc lastfm leodict lsm \
 	musicbrainz netbsd openbsd pgpkeys port pubmed rae rfc rhyme \
 	scholar slashdot sundocs sourceforge stockquote scaleplus \
 	sunsolve thesaurus translate w3css w3html w3link w3rdf wayback \

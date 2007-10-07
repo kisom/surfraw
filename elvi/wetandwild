@@ -8,7 +8,7 @@ w3_config_hook () {
 def   SURFRAW_weather_provider  yahoo
 def   SURFRAW_weather_city	melbourne
 def   SURFRAW_weather_state	vic
-def   SURFRAW_weather_country	au
+def   SURFRAW_weather_country	"$SURFRAW_lang"
 }
 
 w3_usage_hook () {
@@ -21,8 +21,9 @@ Local options:
 				Default: $SURFRAW_weather_city
 				Environment: SURFRAW_weather_city
   -country=COUNTRY		Two letter domain-style country code
-				Default: $SURFRAW_weather_country
-				Environment: SURFRAW_weather_country
+				Default: au
+				Environment: SURFRAW_weather_country,
+				             SURFRAW_lang
   -provider=yahoo		Weather provision service
 				Default: $SURFRAW_weather_provider
                                 Environment: SURFRAW_weather_provider
@@ -61,6 +62,9 @@ w3_parse_option_hook () {
 w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
+if test -z "$SURFRAW_weather_country" ; then
+    SURFRAW_weather_country="au"
+fi
 if test "$SURFRAW_weather_provider" = "yahoo"; then
     if test -z "$w3_args"; then
     	q="$SURFRAW_weather_city"

@@ -1,3 +1,14 @@
+2007-10-06  Ian Beckwith  <ianb@nessie.mcc.ac.uk>
+
+	* Added SURFRAW_lang variable to set default country/language.
+	  Affected elvi: amazon, bbcnews, ebay, ixquick, leodict,
+	  opensearch, translate, wetandwild, wikipedia.
+	* surfraw.IN (w3_url_escape): fix quoting of single quote.
+	* New elvis: lsm - search the Linux Software Map.
+	* fsfdir: fixed search URL.
+	* amazon, ebay, translate: expanded language/country list.
+	* surfraw.lsm.in: fixed syntax of Primary-site.
+
 2007-09-13  Ian Beckwith  <ianb@nessie.mcc.ac.uk>
 
 	* Actual new upstream release.

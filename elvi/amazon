@@ -4,7 +4,7 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-def   SURFRAW_amazon_country	us
+def   SURFRAW_amazon_country	"$SURFRAW_lang"
 def   SURFRAW_amazon_search	all
 }
 
@@ -15,9 +15,15 @@ Description:
   Search amazon
 Local options:
   -country=COUNTRY		Two letter domain-style country code
-				Default: $SURFRAW_amazon_country
-				Environment: SURFRAW_amazon_country
-  -search=			Sepecialised search on topic
+           com              |   Main amazon.com site (default)
+           ca               |   Canada
+           cn               |   China
+           de               |   Germany
+           fr               |   France
+           jp               |   Japan
+           uk                   UK
+				Environment: SURFRAW_amazon_country, SURFRAW_lang
+  -search=			Specialised search on topic
           all		    |   All products
 	  auctions	    |   Auctions
 	  books             |	Books
@@ -62,30 +68,23 @@ w3_parse_args "$@"
 # w3_args now contains a list of arguments
 
 case "$SURFRAW_amazon_country" in
-    uk)	host=www.amazon.co.uk	;;
-    de) host=www.amazon.de	;;
-    fr) host=www.amazon.fr	;;
-    jp) host=www.amazon.co.jp	;;
-    *)  host=www.amazon.com	;;
+    uk) host=www.amazon.co.uk	      ;;
+    de) host=www.amazon.de	      ;;
+    fr) host=www.amazon.fr	      ;;
+    jp) host=www.amazon.co.jp	      ;;
+    ca) host=www.amazon.ca	      ;;
+    cn|zh|zt) host=www.amazon.cn      ;;
+    *)  host=www.amazon.com	      ;;
 esac
-
-# repair amazon brain-damage
-p="$SURFRAW_amazon_search"
-case "$p" in
-    all)	p=blended		;;
-    auctions)	p=auction-redirect	;;
-    cars)	p=greenlight		;;
-    classical)  p=classical-music	;;
-    mobiles)	p=wireless-phones	;;
-    tools)	p=universal		;;
-    zshops)	p=fixed-price-redirect	;;
-esac
-
-pre_url="http://${host}/exec/obidos"
 
 if null "$w3_args"; then
     w3_browse_url "http://${host}/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "${pre_url}/external-search?index=${SURFRAW_amazon_search}&keyword=${escaped_args}"
+    if [ $host = "www.amazon.cn" ] ; then
+	url="http://${host}/search/search.asp?searchType=&searchWord=${escaped_args}&Go.x=0&Go.y=0&bestSaleNum=0"
+    else
+	url="http://${host}/exec/obidos/external-search?index=${SURFRAW_amazon_search}&keyword=${escaped_args}"
+    fi
+    w3_browse_url "${url}"
 fi

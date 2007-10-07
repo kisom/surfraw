@@ -5,8 +5,8 @@
 
 w3_config_hook () {
 def   SURFRAW_translate_provider	babelfish
-def   SURFRAW_translate_from		fr
-def   SURFRAW_translate_to		en
+def   SURFRAW_translate_from		"$SURFRAW_lang"
+def   SURFRAW_translate_to		"$SURFRAW_lang"
 }
 
 w3_usage_hook () {
@@ -15,12 +15,10 @@ Usage: $w3_argv0 [options] [words-to-translate]...
 Description:
   Surfraw translate human language
 Local options:
-  -from=LANGUAGE		Souce language
-  				Default: $SURFRAW_translate_from
-				Environment: SURFRAW_translate_from
+  -from=LANGUAGE		Source language
+				Environment: SURFRAW_translate_from, SURFRAW_lang
   -to=LANGUAGE			Destination language
-  				Default: $SURFRAW_translate_to
-				Environment: SURFRAW_translate_to
+				Environment: SURFRAW_translate_to, SURFRAW_lang
   -provider=	                Translation service provider
             babelfish		babelfish.altavista.com (systrans)
 	    raging		babelfish.altavista.com/raging (systrans)
@@ -32,11 +30,14 @@ Languages:
   es				Spanish
   fr				French
   it				Italian
+  nl                            Dutch
+  el                            Greek
   ja				Japanese
   ko				Korean
   pt				Portuguese
   ru				Russian
-  zh				Chinese
+  zh				Simplified Chinese
+  zt                            Traditional Chinese
 
 Examples:
   $w3_argv0 			Provider's standard translation page
@@ -87,6 +88,14 @@ if test -z "$w3_args"
 then
 	w3_browse_url "http://babelfish.altavista.com/"
 else
+        if [ -z "$SURFRAW_translate_to" ];
+	then
+	    SURFRAW_translate_to="en"
+	fi
+        if [ -z "$SURFRAW_translate_from" ];
+	then
+	    SURFRAW_translate_from="fr"
+	fi
 	escaped_args=`w3_url_of_arg $w3_args`
 	case "$escaped_args" in
 		http*) w3_browse_url "http://babelfish.altavista.com/babelfish/urltrurl?tt=url&url=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"

@@ -13,7 +13,7 @@ defyn SURFRAW_leodict_grid  yes
 def   SURFRAW_leodict_to    "either"
 def   SURFRAW_leodict_spell "standard"
 def   SURFRAW_leodict_tol   "standard"
-def   SURFRAW_leodict_lang  `perl -e 'if((exists($ENV{LANG})) && ($ENV{LANG}=~/de/i)) { print "de\n"; } else { print "en\n"; }'`
+def   SURFRAW_leodict_lang  "$SURFRAW_lang"
 }
 
 w3_parse_option_hook () {
@@ -42,8 +42,9 @@ Local options:
                                 Default: $SURFRAW_leodict_to
                                 Environment: SURFRAW_leodict_to
   -lang=en | de                 Language web page is in.
-                                Default: en, unless \$LANG is set and contains "de"
-                                Environment: SURFRAW_leodict_lang, LANG
+                                Environment: SURFRAW_leodict_lang, SURFRAW_lang
+				If above variables are not set, defaults to en,
+				unless \$LANG is set and contains "de".
   -link=on | off                Link results.
                                 Default: $SURFRAW_leodict_link
                                 Environment: SURFRAW_leodict_link
@@ -70,6 +71,11 @@ if test -z "$w3_args"; then
 else
     escaped_args=`w3_url_of_arg $w3_args`
     url="http://dict.leo.org/?search=${escaped_args}"
+
+    case "$SURFRAW_leodict_lang" in
+	en|de)           ;;
+	*) SURFRAW_leodict_lang=`perl -e 'if((exists($ENV{LANG})) && ($ENV{LANG}=~/de/i)) { print "de\n"; } else { print "en\n"; }'` ;;
+    esac
 
     if yesno SURFRAW_leodict_link ; then url="$url&relink=on"
     else                                 url="$url&relink=off";fi

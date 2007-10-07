@@ -5,7 +5,7 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-def   SURFRAW_wikipedia_language	en
+def   SURFRAW_wikipedia_language	"$SURFRAW_lang"
 }
 
 w3_usage_hook () {
@@ -15,8 +15,8 @@ Description:
   Search the Wikipedia online encyclopedia
 Local options:
   -language=ISOCODE | -l=ISOCODE  Two letter language code (resembles ISO country codes)
-				  Default: $SURFRAW_wikipedia_language
-				  Environment: SURFRAW_wikipedia_language
+				  Default: en
+				  Environment: SURFRAW_wikipedia_language, SURFRAW_lang
 
 Examples:
   $w3_argv0 -language=de Richard Stallman
@@ -39,6 +39,10 @@ w3_config
 # disable requoting, doesn't work with this elvi.
 SURFRAW_quote_ifs=0
 w3_parse_args "$@"
+
+if [ -z "$SURFRAW_wikipedia_language" ]; then
+    SURFRAW_wikipedia_language="en"
+fi
 
 prefix="http://${SURFRAW_wikipedia_language}.wikipedia.org/w/wiki.phtml?search="
 suffix="&go=Go"

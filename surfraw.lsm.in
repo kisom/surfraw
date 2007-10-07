@@ -9,8 +9,8 @@ Keywords:	surfraw, www, web, search
 Author: 	proff@iq.org (Julian Assange)
 		surfraw-devel@lists.alioth.debian.org (Current surfraw developers)
 Maintained-by:	surfraw-devel@lists.alioth.debian.org
-Primary-site:   surfraw.alioth.debian.org /dist
-		surfraw-@VERSION@.tar.gz
+Primary-site:   http://surfraw.alioth.debian.org
+		136kB dist/surfraw-@VERSION@.tar.gz
 Original-site:  surfraw.sourceforge.net
 Platforms: shell, perl and sed script
 Copying-policy:	Public Domain

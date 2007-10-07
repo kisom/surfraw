@@ -49,6 +49,7 @@ dist_elvi_SCRIPTS	= \
 		  slinuxdoc \
 		  lastfm \
 		  leodict \
+		  lsm \
 		  musicbrainz \
 		  netbsd \
 		  openbsd \

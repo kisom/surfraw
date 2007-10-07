@@ -6,7 +6,12 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-def SURFRAW_bbcnews_scope world
+if [ "$SURFRAW_lang" = "uk" ];
+then
+    def SURFRAW_bbcnews_scope uk
+else
+    def SURFRAW_bbcnews_scope world
+fi
 }
 
 w3_usage_hook () {
