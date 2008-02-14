@@ -11,6 +11,7 @@
 	* yubnub: disable requoting (thanks to Nathaniel Heinrichs).
 	* sunsolve: removed, replaced by sunonesearch.
 	* cddb, freebsd, pgpkeys, w3link, webster, ebay(cn): fixed tests.
+	* surfraw.1.IN, elvi.1sr.IN: properly quote hyphens.
 	* Updated my email address.
 
 2007-10-06  Ian Beckwith  <ianb@nessie.mcc.ac.uk>

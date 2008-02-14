@@ -27,10 +27,10 @@ elvi \- surfraw(1) search tools
 .br
 .B sr
 .I elviname
--help
+\-help
 .br
 .B sr
--elvi
+\-elvi
 .br
 
 .SH DESCRIPTION
@@ -41,8 +41,8 @@ form part of \fBsurfraw(1)\fP.
 Surfraw provides a fast unix command line interface to a variety
 of popular WWW search engines and other artifacts of power. It
 reclaims google, altavista, dejanews, freshmeat, research index,
-slashdot and many others from the false-prophet, pox-infested
-heathen lands of html-forms, placing these wonders where they
+slashdot and many others from the false\(hyprophet, pox\(hyinfested
+heathen lands of html\(hyforms, placing these wonders where they
 belong, deep in unix heartland, as god loving extensions to the
 shell.
 
@@ -70,17 +70,17 @@ If you are a regular user of surfraw, you will probably get sick
 of typing sr or surfraw each time. You can regain the old
 behaviour of running the elvi directly by adding the elvi
 directory (\%@ELVIDIR@) to your path, either manually or using
-\fBsurfraw-update-path(1)\fP.
+\fBsurfraw\-update\-path(1)\fP.
 
 .SH OPTIONS
 
-Use	\fB\%sr elviname \-help\fP for elvi-specific options.
+Use	\fB\%sr elviname \-help\fP for elvi\(hyspecific options.
 
 The following options work with all elvi.
 
 .TP
 .B \-help
-Show summary of options (including elvi-specific options).
+Show summary of options (including elvi\(hyspecific options).
 
 .TP
 .B \-version
@@ -88,14 +88,14 @@ Show version of program.
 
 .TP
 \fB\-browser=\fP\fIEXECUTABLE\fP
-Set browser (default: sensible-browser).
+Set browser (default: sensible\-browser).
 
 .TP
 .B \-elvi
 Display a list of other Surfraw mechanisms for conquering evil.
 
 .TP
-.B \-escape-url-args=yes|no
+.B \-escape\-url\-args=yes|no
 Apply url escaping to arguments (default: yes)
 
 .TP
@@ -123,7 +123,7 @@ I can't enjoy it with you talking all the time (default: no)
 
 Please report any bugs found (or any web sites in need of surfrawizing)
 either via the debian bug tracking system (\%http://bugs.debian.org/) or
-to the surfraw-devel list (\%surfraw-devel@lists.alioth.debian.org).
+to the surfraw\-devel list (\%surfraw\-devel@lists.alioth.debian.org).
 
 .SH SEE ALSO
 
@@ -146,14 +146,14 @@ Reclaim heathen lands.
 Bear witness to the truth.
 Its love will set you free.
 
-Join us on surfraw-devel@lists.alioth.debian.org
+Join us on surfraw\-devel@lists.alioth.debian.org
 
 .SH AUTHORS
 
 Originally written by Julian Assange.
 
-Now maintained by the surfraw-devel team
-<\%surfraw-devel@lists.alioth.debian.org>.
+Now maintained by the surfraw\-devel team
+<\%surfraw\-devel@lists.alioth.debian.org>.
 
 See the file AUTHORS for the full list of contributors.
 
@@ -162,9 +162,9 @@ man page for surfraw(1) by Christian Surchi.
 
 .SH COPYRIGHT
 
-  Copyright (c) 2003-2007 The Surfraw-Devel Team
-                           <surfraw-devel@lists.alioth.debian.org>
-  Copyright (c) 2000-2001 Julian Assange <proff@iq.org>
+  Copyright (c) 2003\(hy2008 The Surfraw\-Devel Team
+                           <surfraw\-devel@lists.alioth.debian.org>
+  Copyright (c) 2000\(hy2001 Julian Assange <proff@iq.org>
   Copyright (c) 2001 Australian Institute for Collaborative Research
   Copyright (c) 2000 Melbourne Institute for Advanced Study
 

@@ -24,7 +24,7 @@ surfraw \- a fast unix command line interface to WWW services
 .B sr
 .I elviname  [options]  search words ...
 .br
-.B sr -elvi
+.B sr \-elvi
 .br
 .B sr
 .I bookmark
@@ -35,8 +35,8 @@ surfraw \- a fast unix command line interface to WWW services
 Surfraw provides a fast unix command line interface to a variety of
 popular WWW search engines and other artifacts of power.
 It reclaims google, altavista, dejanews, freshmeat, research index,
-slashdot and many others from the false-prophet, pox-infested heathen
-lands of html-forms, placing these wonders where they belong, deep in
+slashdot and many others from the false\(hyprophet, pox\(hyinfested heathen
+lands of html\(hyforms, placing these wonders where they belong, deep in
 unix heartland, as god loving extensions to the shell.
 
 .PP
@@ -65,7 +65,7 @@ If you are a regular user of surfraw, you will probably get sick
 of typing sr or surfraw each time. You can regain the old
 behaviour of running the elvi directly by adding the elvi
 directory (\%@ELVIDIR@) to your path, either manually or using
-\fB\%surfraw-update-path(1)\fP.
+\fB\%surfraw\-update\-path(1)\fP.
 
 .SS Bookmarks
 
@@ -87,13 +87,13 @@ There are some example bookmarks in \%@sysconfdir@/surfraw.bookmarks
 
 .SH OPTIONS
 
-Use	\fB\%sr elviname \-help\fP for elvi-specific options.
+Use	\fB\%sr elviname \-help\fP for elvi\(hyspecific options.
 
 The following options work with all elvi.
 
 .TP
 .B \-help
-Show summary of options (including elvi-specific options).
+Show summary of options (including elvi\(hyspecific options).
 
 .TP
 .B \-version
@@ -101,14 +101,14 @@ Show version of program.
 
 .TP
 \fB\-browser=\fP\fIEXECUTABLE\fP
-Set browser (default: sensible-browser).
+Set browser (default: sensible\-browser).
 
 .TP
 .B \-elvi
 Display a list of other Surfraw mechanisms for conquering evil.
 
 .TP
-.B \-escape-url-args=yes|no
+.B \-escape\-url\-args=yes|no
 Apply url escaping to arguments (default: yes)
 
 .TP
@@ -146,7 +146,7 @@ Environment variables
 .PP
 
 @sysconfdir@/surfraw.conf and $HOME/.surfraw.conf are both fragments of
-bourne-shell style shell script.
+bourne\(hyshell style shell script.
 
 @sysconfdir@/surfraw.conf should use def and defyn to define variables.
 These functions set variables unless they are already set by the
@@ -157,7 +157,7 @@ all others. For instance:
  def     SURFRAW_text_browser	/usr/bin/lynx
  defyn   SURFRAW_graphical		no
 
-$HOME/.surfraw.conf should use sh-style entries, eg:
+$HOME/.surfraw.conf should use sh\(hystyle entries, eg:
 
  SURFRAW_text_browser=/usr/bin/lynx
  SURFRAW_graphical=no
@@ -177,7 +177,7 @@ Default:
 
 .TP
 .B SURFRAW_conf
-Location of per-user configuration file.
+Location of per\(hyuser configuration file.
 
 Default:
 
@@ -198,7 +198,7 @@ e.g. links, lynx, w3m
 
 Default:
 
-def SURFRAW_text_browser sensible-browser
+def SURFRAW_text_browser sensible\-browser
 
 .TP
 .B SURFRAW_graphical_browser
@@ -207,7 +207,7 @@ e.g mozilla, netscape etc.
 
 Default:
 
- def SURFRAW_graphical_browser sensible-browser
+ def SURFRAW_graphical_browser sensible\-browser
 
 .TP
 .B SURFRAW_text_browser_args
@@ -227,7 +227,7 @@ Default:
 
 .TP
 .B SURFRAW_graphical_remote
-Whether to use "\fB-remote openURL\fP" for graphical browser.
+Whether to use "\fB\-remote openURL\fP" for graphical browser.
 
 Default:
 
@@ -277,7 +277,7 @@ Default:
 
 .TP
 .B SURFRAW_quote_ifs
-Whether to re-quote arguments if they have spaces in, ie so:
+Whether to re\(hyquote arguments if they have spaces in, ie so:
  sr google foo "bar baz" bam
 .br
 works as expected.
@@ -316,7 +316,7 @@ Default system wide configuration file.
 
 .TP
 .B $HOME/.surfraw.conf
-Default per-user config file
+Default per\(hyuser config file
 
 .TP
 .B @sysconfdir@/surfraw.bookmarks
@@ -324,13 +324,13 @@ System wide bookmarks file.
 
 .TP
 .B $HOME/.surfraw.bookmarks
-Per-user bookmarks file.
+Per\(hyuser bookmarks file.
 
 .SH BUGS
 
 Please report any bugs found (or any web sites in need of surfrawizing)
 either via the debian bug tracking system (\%http://bugs.debian.org/) or
-to the surfraw-devel list (\%surfraw-devel@lists.alioth.debian.org).
+to the surfraw\-devel list (\%surfraw\-devel@lists.alioth.debian.org).
 
 .SH SEE ALSO
 
@@ -353,14 +353,14 @@ Reclaim heathen lands.
 Bear witness to the truth.
 Its love will set you free.
 
-Join us on surfraw-devel@lists.alioth.debian.org
+Join us on surfraw\-devel@lists.alioth.debian.org
 
 .SH AUTHORS
 
 Originally written by Julian Assange.
 
-Now maintained by the surfraw-devel team
-<\%surfraw-devel@lists.alioth.debian.org>.
+Now maintained by the surfraw\-devel team
+<\%surfraw\-devel@lists.alioth.debian.org>.
 
 See the file AUTHORS for the full list of contributors.
 
@@ -369,8 +369,8 @@ man page by Christian Surchi.
 
 .SH COPYRIGHT
 
-  Copyright (c) 2003-2007 The Surfraw-Devel Team
-                           <surfraw-devel@lists.alioth.debian.org>
+  Copyright (c) 2003-2008 The Surfraw\-Devel Team
+                           <surfraw\-devel@lists.alioth.debian.org>
   Copyright (c) 2000-2001 Julian Assange <proff@iq.org>
   Copyright (c) 2001 Australian Institute for Collaborative Research
   Copyright (c) 2000 Melbourne Institute for Advanced Study

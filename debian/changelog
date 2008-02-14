@@ -2,6 +2,7 @@ surfraw (2.2.1-1) unstable; urgency=low
 
   * New upstream release.
     + bashisms removed (Closes: #465361).
+  * debian/rules: move .deb building to binary-indep: target.
   * debian/compat: bump to 6.
   * debian/control:
     + DM-Upload-Allowed: yes merged from Debian-only 2.1.7-1 (see below)
@@ -13,7 +14,7 @@ surfraw (2.2.1-1) unstable; urgency=low
     + Homepage: added.
   * debian/changelog: merged Moritz's debian-only 2.1.7 release changelog.
 
- -- Ian Beckwith <ianb@erislabs.net>  Tue, 12 Feb 2008 02:14:15 +0000
+ -- Ian Beckwith <ianb@erislabs.net>  Thu, 14 Feb 2008 04:36:35 +0000
 
 surfraw (2.2.0-1) UNRELEASED; urgency=low
 

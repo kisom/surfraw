@@ -55,12 +55,11 @@ install: build
 	# Add here commands to install the package into debian/surfraw.
 	$(MAKE) install DESTDIR=$(CURDIR)/debian/surfraw/
 
-# Build architecture-independent files here.
-binary-indep: build install
-# We have nothing to do by default.
-
 # Build architecture-dependent files here.
 binary-arch: build install
+
+# Build architecture-independent files here.
+binary-indep: build install
 	dh_testdir
 	dh_testroot
 	install -m 644 debian/linda.overrides debian/surfraw/usr/share/linda/overrides/surfraw
