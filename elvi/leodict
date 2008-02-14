@@ -3,7 +3,7 @@
 # $Id$
 # surfraw plugin for the biggest English/German dictionary on
 # the WWW: dict.leo.org          jmm@informatik.uni-bremen.de
-# options added by Ian Beckwith <ianb@nessie.mcc.ac.uk>
+# options added by Ian Beckwith <ianb@erislabs.net>
 . surfraw || exit 1
 
 w3_config_hook () {

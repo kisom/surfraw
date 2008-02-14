@@ -103,7 +103,7 @@ else
 
 	if [ "$SURFRAW_debcontents_distro" = "stable" ]
 	then
-		SURFRAW_debcontents_distro=dapper
+		SURFRAW_debcontents_distro=gutsy
 	fi
 	url="$url&version=${SURFRAW_debcontents_distro}"
 

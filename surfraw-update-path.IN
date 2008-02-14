@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # $Id$
-# Ian Beckwith <ianb@nessie.mcc.ac.uk> 20030927
+# Ian Beckwith <ianb@erislabs.net> 20030927
 # adds surfraw's elvi directory to your PATH in your shell's config file
 # see end of file for POD documentation
 
@@ -492,6 +492,6 @@ pdksh(1), zsh(1), rc(1), es(1)
 
 =head1 AUTHOR
 
-Ian Beckwith <ianb@nessie.mcc.ac.uk>
+Ian Beckwith <ianb@erislabs.net>
 
 =cut

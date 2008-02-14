@@ -1,7 +1,7 @@
 #!/bin/sh
 # $Id$
 # elvis: opensearch	-- Search an OpenSearch-enabled website
-# ianb@nessie.mcc.ac.uk 20060903
+# ianb@erislabs.net 20060903
 
 . surfraw || exit 1
 

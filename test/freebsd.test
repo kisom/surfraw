@@ -1,6 +1,6 @@
 freebsd contributing
 contributing-ports
-freebsd -mail current
-CURRENT
+freebsd -mail bsd
+Archive:\s+<em>
 freebsd -pr 666
 ldconfig

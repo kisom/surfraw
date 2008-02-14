@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # $Id$
-# Ian Beckwith <ianb@nessie.mcc.ac.uk>
+# Ian Beckwith <ianb@erislabs.net>
 # 20060830
 
 use Getopt::Long;
@@ -308,7 +308,7 @@ libwww-opensearch-perl).
 
 Only supports GET queries.
 
-Please report any bugs found to ianb@nessie.mcc.ac.uk	
+Please report any bugs found to ianb@erislabs.net
 
 =head1 SEE ALSO
 
@@ -317,11 +317,11 @@ L<WWW::OpenSearch(3pm)>, L<http://www.opensearch.org/>
 
 =head1 AUTHOR
 
-Ian Beckwith <ianb@nessie.mcc.ac.uk>
+Ian Beckwith <ianb@erislabs.net>
 
 =head1 COPYRIGHT AND LICENSE
 
-Copyright 2006 Ian Beckwith <ianb@nessie.mcc.ac.uk>
+Copyright 2006 Ian Beckwith <ianb@erislabs.net>
 
 Licensed under the same terms as surfraw.
 

@@ -93,7 +93,7 @@ then
 	searchurl="http://packages.ubuntu.com/cgi-bin/search_packages.pl"
 else
 	searchpage="http://packages.debian.org/#search_packages"
-	searchurl="http://packages.debian.org/cgi-bin/search_packages.pl"
+	searchurl="http://packages.debian.org/search"
 fi
 
 if test -z "$w3_args"; then
@@ -117,6 +117,6 @@ else
 	then
 		url="$url&subword=1"
 	fi
-		
+
     w3_browse_url "$url"
 fi

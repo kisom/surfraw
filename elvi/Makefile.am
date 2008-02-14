@@ -59,13 +59,13 @@ dist_elvi_SCRIPTS	= \
 		  rae \
 		  rfc \
 		  rhyme \
+		  scaleplus \
 		  scholar \
 		  slashdot \
-		  sundocs \
 		  sourceforge \
 		  stockquote \
-		  scaleplus \
-		  sunsolve \
+		  sundocs \
+		  sunonesearch \
 		  thesaurus \
 		  translate \
 		  w3css \

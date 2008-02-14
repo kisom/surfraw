@@ -1,2 +1,3 @@
 cnn president
-Results 1 - 10 of \d+
+Results <b><label id="resultStartLabel">1</label>-<label id="resultEndLabel">10</label>
+

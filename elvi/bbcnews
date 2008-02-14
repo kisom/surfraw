@@ -1,7 +1,7 @@
 #!/bin/sh
 # $Id$
 # elvis: bbcnews		-- Search BBC News (news.bbc.co.uk)
-# ianb@nessie.mcc.ac.uk 20030209
+# ianb@erislabs.net 20030209
 
 . surfraw || exit 1
 

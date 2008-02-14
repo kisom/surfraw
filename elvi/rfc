@@ -1,7 +1,7 @@
 #!/bin/sh
 # $Id$
 # elvis: rfc		-- Search RFCs (internet standards documents)
-# ianb@nessie.mcc.ac.uk 20031220
+# ianb@erislabs.net 20031220
 . surfraw || exit 1
 
 w3_config_hook () {
@@ -85,7 +85,7 @@ else
 
     # Is cmdline numeric?
     nodirect=0
-    if echo "$escaped_args" |grep  '^[0-9]*$' &>/dev/null
+    if echo "$escaped_args" |grep  '^[0-9]*$' >/dev/null 2>&1
     then
         isnum=1
         if ifyes SURFRAW_rfc_nodirect

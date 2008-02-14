@@ -13,6 +13,9 @@ EOF
 }
 
 w3_config
+# disable requoting, yubnub commands often need protecting from
+# the shell with quotes but without those quotes passed on to yubnub
+SURFRAW_quote_ifs=0
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then

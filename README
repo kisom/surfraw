@@ -111,10 +111,10 @@ Options
   For example:
 
   $ surfraw -elvi
-W		-- Activate Surfraw defined web-browser
 alioth		-- Search Alioth (alioth.debian.org)
 altavista	-- Search the web using Altavista (www.altavista.com)
 amazon		-- Search the amazon.com bookstore
+archpkg		-- Search Arch Linux packages (www.archlinux.org)
 ask		-- Question the web using Ask Jeeves (www.ask.com)
 austlii		-- Search Australian Law docs (www.austlii.edu.au)
 bbcnews		-- Search BBC News (news.bbc.co.uk)
@@ -155,7 +155,7 @@ imdb		-- Search the Internet Movie Database (www.imdb.com)
 ixquick		-- Search the web using ixquick (www.ixquick.com)
 lastfm		-- Search last.fm
 leodict		-- Search Leo's German <-> English dictionary (dict.leo.org)
-lsm             -- Search the Linux Software Map
+lsm		-- Search the Linux Software Map
 musicbrainz	-- Search MusicBrainz (musicbrainz.org)
 netbsd		-- Search NetBSD related information (www.netbsd.org)
 openbsd		-- Search OpenBSD related information (www.openbsd.org)
@@ -163,7 +163,6 @@ opensearch	-- Search an OpenSearch-enabled website
 pgpkeys		-- Search the PGP key database
 port		-- Look up a TCP/UDP port number on seifried.org/security/ports/
 pubmed		-- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
-rae		-- Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)
 rfc		-- Search RFCs (internet standards documents)
 rhyme		-- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
 scaleplus	-- Search Australian Law using ScalePlus (scaleplus.law.gov.au)
@@ -174,9 +173,10 @@ slinuxdoc	-- Search entries in LDP (www.linuxdoc.org)
 sourceforge	-- Search SourceForge (www.sourceforge.net)
 stockquote	-- Get a single stock quote (multiple providers)
 sundocs		-- Search docs on Sun.com (docs.sun.com)
-sunsolve	-- Search public docs on Sunsolve (sunsolve.sun.com)
+sunonesearch	-- Search Sun One Search (onesearch.sun.com)
 thesaurus	-- Look up word in Merriam-Webster's Thesaurus (www.m-w.com)
 translate	-- Translate human languages (various providers)
+W		-- Activate Surfraw defined web-browser
 w3css		-- Validate a CSS URL with the w3c CSS validator (jigsaw.w3.org/css-validator)
 w3html		-- Validate a web page URL with the w3c validator (validator.w3.org)
 w3link		-- Check web page links with the w3c linkchecker (validator.w3.org/checklink)
@@ -269,7 +269,7 @@ Copyright:
      _________________________________________________________________
 
 README originally by Julian Assange
-Updated 2004-02-03 by Ian Beckwith
+Updated by Ian Beckwith
      _________________________________________________________________
 
 See NEWS, ChangeLog or debian/changelog for a more detailed summary of changes.

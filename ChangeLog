@@ -1,3 +1,18 @@
+2008-02-11  Ian Beckwith  <ianb@erislabs.net>
+
+	* New elvis: sunonesearch (replaces sunsolve).
+	* surfraw.IN, rfc: remove bashisms.
+	* cnn: fixed url.
+	* debcontents: updated ubuntu distribution.
+	* deblists: rewrote for new search interface.
+	* debpackages: updated debian url.
+	* genpkg: as straight search has gone, we now go to
+	  packages.gentoo.org/packages/<arg>.
+	* yubnub: disable requoting (thanks to Nathaniel Heinrichs).
+	* sunsolve: removed, replaced by sunonesearch.
+	* cddb, freebsd, pgpkeys, w3link, webster, ebay(cn): fixed tests.
+	* Updated my email address.
+
 2007-10-06  Ian Beckwith  <ianb@nessie.mcc.ac.uk>
 
 	* Added SURFRAW_lang variable to set default country/language.

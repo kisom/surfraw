@@ -2,16 +2,18 @@ Source: surfraw
 Section: web
 Priority: optional
 Maintainer: Debian surfraw maintainers <surfraw-devel@lists.alioth.debian.org>
-Uploaders: Moritz Muehlenhoff <jmm@debian.org>,Thomas Smith <tgs@debian.org>,Christian Surchi <csurchi@debian.org>,Ian Beckwith <ianb@nessie.mcc.ac.uk>
-Standards-Version: 3.7.2
-Build-Depends: debhelper (>= 5)
-XS-Vcs-Cvs: -d :pserver:anonymous@cvs.alioth.debian.org:/cvsroot/surfraw
-XS-Vcs-Browser: http://alioth.debian.org/plugins/scmcvs/cvsweb.php/surfraw/?cvsroot=surfraw
+Uploaders: Moritz Muehlenhoff <jmm@debian.org>,Thomas Smith <tgs@debian.org>,Christian Surchi <csurchi@debian.org>,Ian Beckwith <ianb@erislabs.net>
+Standards-Version: 3.7.3
+Build-Depends: debhelper (>= 6)
+Vcs-Cvs: :pserver:anonymous@cvs.alioth.debian.org:/cvsroot/surfraw
+Vcs-Browser: http://alioth.debian.org/plugins/scmcvs/cvsweb.php/surfraw/?cvsroot=surfraw
+Homepage: http://surfraw.alioth.debian.org
+XS-DM-Upload-Allowed: yes
 
 Package: surfraw
 Architecture: all
 Depends: lynx | www-browser
-Recommends: surfraw-extra, links | w3m | w3m-ssl | lynx-cur
+Recommends: surfraw-extra, links | elinks | elinks-lite | w3m | w3m-ssl | lynx-cur
 Suggests: screen
 Conflicts: surfaw
 Replaces: surfaw
@@ -36,7 +38,7 @@ Description: a fast unix command line interface to WWW
 Package: surfraw-extra
 Architecture: all
 Depends: surfraw, lynx | www-browser, libwww-opensearch-perl, libwww-perl, libhtml-parser-perl
-Recommends: links | w3m | w3m-ssl | lynx-cur
+Recommends: links | elinks | elinks-lite | w3m | w3m-ssl | lynx-cur
 Suggests: screen
 Conflicts: surfraw (<< 2.1.7)
 Description: extra surfraw elvi with heavy dependencies

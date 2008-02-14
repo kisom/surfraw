@@ -1,7 +1,7 @@
 #!/bin/sh
 # $Id$
 # elvis: cddb		-- Search for cd track listings in CDDB (www.gracenote.com)
-# ianb@nessie.mcc.ac.uk 20030124
+# ianb@erislabs.net 20030124
 
 . surfraw || exit 1
 

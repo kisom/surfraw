@@ -1,6 +1,6 @@
 #!/usr/bin/perl -w
 # $Id$
-# Ian Beckwith <ianb@nessie.mcc.ac.uk>
+# Ian Beckwith <ianb@erislabs.net>
 
 use strict;
 

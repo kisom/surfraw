@@ -47,8 +47,8 @@ am__dist_elvi_SCRIPTS_DIST = W alioth altavista amazon archpkg ask \
 	filesearching freebsd freedb freshmeat fsfdir genpkg gutenberg \
 	ixquick google happypenguin imdb scpan slinuxdoc lastfm \
 	leodict lsm musicbrainz netbsd openbsd pgpkeys port pubmed rae \
-	rfc rhyme scholar slashdot sundocs sourceforge stockquote \
-	scaleplus sunsolve thesaurus translate w3css w3html w3link \
+	rfc rhyme scaleplus scholar slashdot sourceforge stockquote \
+	sundocs sunonesearch thesaurus translate w3css w3html w3link \
 	w3rdf wayback webster wetandwild wikipedia woffle xxx yahoo \
 	yubnub opensearch
 am__installdirs = "$(DESTDIR)$(elvidir)"
@@ -139,9 +139,9 @@ dist_elvi_SCRIPTS = W alioth altavista amazon archpkg ask austlii \
 	freebsd freedb freshmeat fsfdir genpkg gutenberg ixquick \
 	google happypenguin imdb scpan slinuxdoc lastfm leodict lsm \
 	musicbrainz netbsd openbsd pgpkeys port pubmed rae rfc rhyme \
-	scholar slashdot sundocs sourceforge stockquote scaleplus \
-	sunsolve thesaurus translate w3css w3html w3link w3rdf wayback \
-	webster wetandwild wikipedia woffle xxx yahoo yubnub \
+	scaleplus scholar slashdot sourceforge stockquote sundocs \
+	sunonesearch thesaurus translate w3css w3html w3link w3rdf \
+	wayback webster wetandwild wikipedia woffle xxx yahoo yubnub \
 	$(am__append_1)
 all: all-am
 

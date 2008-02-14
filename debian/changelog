@@ -1,10 +1,21 @@
 surfraw (2.2.1-1) unstable; urgency=low
 
   * New upstream release.
+    + bashisms removed (Closes: #465361).
+  * debian/compat: bump to 6.
+  * debian/control:
+    + DM-Upload-Allowed: yes merged from Debian-only 2.1.7-1 (see below)
+    + Recommends: add elinks | elinks-lite to existing browser alternatives.
+    + Uploaders: update my email address.
+    + Standards-Version: 3.7.3 (no changes).
+    + Build-Depends: Bump debhelper version to >= 6.
+    + Vcs-Cvs/Vcs-Browser: remove XS- prefix and -d workaround.
+    + Homepage: added.
+  * debian/changelog: merged Moritz's debian-only 2.1.7 release changelog.
 
- -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sat, 06 Oct 2007 01:12:23 +0100
+ -- Ian Beckwith <ianb@erislabs.net>  Tue, 12 Feb 2008 02:14:15 +0000
 
-surfraw (2.2.0-1) unstable; urgency=low
+surfraw (2.2.0-1) UNRELEASED; urgency=low
 
   * Actual first new upstream release.
     See changelog.gz for upstream changes, like a normal package.
@@ -13,7 +24,7 @@ surfraw (2.2.0-1) unstable; urgency=low
 
  -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Tue, 11 Sep 2007 03:41:09 +0100
 
-surfraw (2.1.7-1) unstable; urgency=low
+surfraw (2.1.8-1) UNRELEASED; urgency=low
 
   * First proper upstream release of the surfraw-devel
     version. After this release non-debian changes will be logged
@@ -47,6 +58,13 @@ surfraw (2.1.7-1) unstable; urgency=low
   * Updated AUTHORS, NEWS, README, HACKING, ChangeLog, NEWS.Debian.
 
  -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Fri, 07 Sep 2007 00:18:38 +0100
+
+surfraw (2.1.7) unstable; urgency=low
+
+  * Add "XS-DM-Upload-Allowed: yes", so that Ian can upload further
+    updates on his own.
+
+ -- Moritz Muehlenhoff <jmm@debian.org>  Sun, 13 Jan 2008 23:23:30 +0100
 
 surfraw (2.1.6) unstable; urgency=low
 

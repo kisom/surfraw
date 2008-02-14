@@ -1,7 +1,7 @@
 #!/bin/sh
 # $Id$
 # elvis: alioth		-- Search Alioth (alioth.debian.org)
-# ianb@nessie.mcc.ac.uk 20030910
+# ianb@erislabs.net 20030910
 # adapted from sourceforge elvi
 
 . surfraw || exit 1

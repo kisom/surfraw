@@ -3,7 +3,7 @@
 # $Id$
 . surfraw || exit 1
 
-# version 0.2 ianb@nessie.mcc.ac.uk 20030910
+# version 0.2 ianb@erislabs.net 20030910
 # added -exact and -type
 
 # version 0.1

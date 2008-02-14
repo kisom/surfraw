@@ -1,7 +1,7 @@
 #!/bin/sh
 # $Id$
 # elvis: w3html		-- Validate a web page URL with the w3c validator (validator.w3.org)
-# ianb@nessie.mcc.ac.uk 20040906
+# ianb@erislabs.net 20040906
 . surfraw || exit 1
 
 w3_config_hook () {

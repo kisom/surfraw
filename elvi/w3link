@@ -1,7 +1,7 @@
 #!/bin/sh
 # $Id$
 # elvis: w3link		-- Check web page links with the w3c linkchecker (validator.w3.org/checklink)
-# ianb@nessie.mcc.ac.uk 20040908
+# ianb@erislabs.net 20040908
 . surfraw || exit 1
 
 w3_config_hook () {
