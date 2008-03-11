@@ -161,8 +161,9 @@ netbsd		-- Search NetBSD related information (www.netbsd.org)
 openbsd		-- Search OpenBSD related information (www.openbsd.org)
 opensearch	-- Search an OpenSearch-enabled website
 pgpkeys		-- Search the PGP key database
-port		-- Look up a TCP/UDP port number on seifried.org/security/ports/
+port		-- Look up a TCP/UDP port number
 pubmed		-- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
+rae		-- Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)
 rfc		-- Search RFCs (internet standards documents)
 rhyme		-- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
 scaleplus	-- Search Australian Law using ScalePlus (scaleplus.law.gov.au)

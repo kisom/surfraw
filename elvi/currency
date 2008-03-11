@@ -62,28 +62,28 @@ EUR		Canary Islands, Euro
 CVE		Cape Verde, Escudo
 KYD		Cayman Islands, Dollar
 XAF		Central African Republic, CFA Franc BEAC
-XAF		CFA Communauté Financière Africaine BEAC Franc
-XOF		CFA Communauté Financière Africaine BCEAO Franc
+XAF		CFA CommunautÃ© FinanciÃ¨re Africaine BEAC Franc
+XOF		CFA CommunautÃ© FinanciÃ¨re Africaine BCEAO Franc
 XAF		Chad, CFA Franc BEAC
 CLP		Chile, Peso
 CNY		China, Yuan Renminbi
 AUD		Christmas Island, Australia Dollar
 AUD		Cocos (Keeling Islands, Australia Dollar
 COP		Colombia, Peso
-XAF		Communauté Financière Africaine BEAC Franc
-XOF		Communauté Financière Africaine BCEAO Franc
+XAF		CommunautÃ© FinanciÃ¨re Africaine BEAC Franc
+XOF		CommunautÃ© FinanciÃ¨re Africaine BCEAO Franc
 KMF		Comoros, Franc
-XPF		Comptoirs Français du Pacifique Franc
+XPF		Comptoirs FranÃ§ais du Pacifique Franc
 XAF		Congo/Brazzaville, CFA Franc BEAC
 CDF		Congo/Kinshasa, Franc
 NZD		Cook Islands, New Zealand Dollar
 AUD		Coral Sea Islands, Australia Dollar
 CRC		Costa Rica, Colon
-XOF		Côte d'Ivoire, CFA Franc BCEAO
+XOF		CÃ´te d'Ivoire, CFA Franc BCEAO
 HRK		Croatia, Kuna
 CUC		Cuba, Convertible Peso
 CUP		Cuba, Peso
-ANG		Curaço, Netherlands Antilles Guilder
+ANG		CuraÃ§o, Netherlands Antilles Guilder
 CYP		Cyprus, Pound
 CZK		Czech Republic, Koruna
 DKK		Denmark, Krone
@@ -112,7 +112,7 @@ FIM		Finland, Markka [obsolete]
 EUR		France, Euro
 FRF		France, Franc [obsolete]
 EUR		French Guiana, Euro
-XPF		French Polynesia, Comptoirs Français du Pacifique Franc
+XPF		French Polynesia, Comptoirs FranÃ§ais du Pacifique Franc
 EUR		French Polynesia, Euro
 EUR		French Southern and Antarctic Lands, Euro
 XAF		Gabon, CFA Franc BEAC
@@ -157,7 +157,7 @@ IMP		Isle of Man, Pound
 ILS		Israel, New Shekel
 EUR		Italy, Euro
 ITL		Italy, Lira [obsolete]
-XOF		Ivory Coast (Côte d'Ivoire), CFA Franc BCEAO
+XOF		Ivory Coast (CÃ´te d'Ivoire), CFA Franc BCEAO
 JMD		Jamaica, Dollar
 JPY		Japan, Yen
 JEP		Jersey, Pound
@@ -215,7 +215,7 @@ NPR		Nepal, Rupee
 ANG		Netherlands Antilles, Guilder
 EUR		Netherlands, Euro
 NLG		Netherlands, Guilder [obsolete]
-XPF		New Caledonia, Comptoirs Français du Pacifique Franc
+XPF		New Caledonia, Comptoirs FranÃ§ais du Pacifique Franc
 NZD		New Zealand, Dollar
 NIO		Nicaragua, Cordoba
 XOF		Niger, CFA Franc BCEAO
@@ -257,7 +257,7 @@ XCD		Saint Vincent and The Grenadines, East Caribbean Dollar
 EUR		Saint-Martin, Euro
 WST		Samoa, Tala
 EUR		San Marino, Euro
-STD		São Tome and Principe, Dobra
+STD		SÃ£o Tome and Principe, Dobra
 SAR		Saudi Arabia, Riyal
 GBP		Scotland (United Kingdom), Pound
 SPL		Seborga, Luigino
@@ -320,7 +320,7 @@ VEB		Venezuela, Bolivar
 VND		Vietnam, Dong
 USD		Virgin Islands, United States Dollar
 USD		Wake Island, United States Dollar
-XPF		Wallis and Futuna Islands, Comptoirs Français du Pacifique Franc
+XPF		Wallis and Futuna Islands, Comptoirs FranÃ§ais du Pacifique Franc
 ILS		West Bank, Israel New Shekel
 JOD		West Bank, Jordan Dinar
 MAD		Western Sahara, Morocco Dirham

@@ -1,4 +1,4 @@
 debcontents surfraw
 usr/bin.*surfraw
 debcontents -u surfraw
-usr/bin/surfraw
+usr/bin.*surfraw

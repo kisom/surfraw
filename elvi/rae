@@ -1,6 +1,6 @@
 #!/bin/sh
 # $Id$
-# elvis: rae		-- Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)
+# elvis: rae		-- Busca en el diccionario de la Real Academia de la Lengua EspaÃ±ola (Spanish Dictionary)
 # Author: Ruben Pollan <meskio@terra.es>
 . surfraw || exit 1
 
@@ -12,7 +12,7 @@ w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words]...
 Description:
-  Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)
+  Busca en el diccionario de la Real Academia de la Lengua EspaÃ±ola (Spanish Dictionary)
 Local options:
   -tipo=                        Tipo de busqueda
           0             |       Busqueda exacta

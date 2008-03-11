@@ -1,3 +1,12 @@
+2008-03-11  Ian Beckwith  <ianb@erislabs.net>
+
+	* debpackages/debcontents: updated ubuntu search.
+	* freedb/cddb: updated options.
+	* debbugs: fixed indentation.
+	* port: point to what will hopefully be new site.
+	* README, rae, currency: convert to utf-8.
+	* austlii: fixed test.
+
 2008-02-11  Ian Beckwith  <ianb@erislabs.net>
 
 	* New elvis: sunonesearch (replaces sunsolve).

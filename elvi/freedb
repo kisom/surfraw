@@ -13,15 +13,17 @@ w3_config_hook () {
     defyn SURFRAW_freedb_songs 0
     defyn SURFRAW_freedb_rest 0
     defyn SURFRAW_freedb_all 0
+    defyn SURFRAW_freedb_id 0
 
     defyn SURFRAW_freedb_allfields  0
     defyn SURFRAW_freedb_allcats    1
     defyn SURFRAW_freedb_bycat      0
 
     def SURFRAW_freedb_cats         ""
-    
+
+    def SURFRAW_freedb_page         1
     # internal
-    SURFRAW_freedb_default=1 
+    SURFRAW_freedb_default=1
 }
 
 w3_usage_hook () {
@@ -41,11 +43,11 @@ Local options:
   -all                          Search all fields
                                 Environment: SURFRAW_cddb_all
                                 Default: search artists and albums
-
+  -id                           Search by CDDB ID.
   -bycat                        Sort results by category
   -cat=CATEGORY                 Category to search, repeat as needed
                                 Options:
-                                    all     
+                                    all
                                     blues
                                     classical
                                     country
@@ -58,6 +60,8 @@ Local options:
                                     rock
                                     soundtrack
                                 Default: all
+  -page=PAGENUM                 Start at page PAGENUM
+                                Default: 1
 EOF
     w3_global_usage
 }
@@ -71,7 +75,9 @@ w3_parse_option_hook () {
     -so*)  setoptyn SURFRAW_freedb_songs  1;setoptyn SURFRAW_freedb_default 0;;
     -r*)   setoptyn SURFRAW_freedb_rest   1;setoptyn SURFRAW_freedb_default 0;;
     -all)  setoptyn SURFRAW_freedb_all    1;setoptyn SURFRAW_freedb_default 0;;
+    -id)   setoptyn SURFRAW_freedb_id     1;;
 
+    -pag*=*) setopt SURFRAW_freedb_page    $optarg ;;
     -bycat) setoptyn SURFRAW_freedb_bycat  1 ;;
 
     -cat*=*) if [ "$optarg" = "all" ]; then
@@ -79,7 +85,7 @@ w3_parse_option_hook () {
             SURFRAW_freedb_cats=""
         else 
             setoptyn SURFRAW_freedb_allcats 0
-            SURFRAW_freedb_cats="${SURFRAW_freedb_cats}&cats=$optarg"
+            SURFRAW_freedb_cats="${SURFRAW_freedb_cats}&cats%5B%5D=$optarg"
         fi
         ;;
 
@@ -97,54 +103,57 @@ if test -z "$w3_args"; then
     w3_browse_url http://www.freedb.org/
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    SURFRAW_freedb_queryopts='' 
+    SURFRAW_freedb_queryopts="page=${SURFRAW_freedb_page}&"
 
-    if [ $SURFRAW_freedb_albums  -eq 1 -o \
-         $SURFRAW_freedb_all     -eq 1 -o \
-         $SURFRAW_freedb_default -eq 1 ]
-    then
-        SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}fields=title&"
-    fi
-
-    if [ $SURFRAW_freedb_artists -eq 1 -o \
-         $SURFRAW_freedb_all     -eq 1 -o \
-         $SURFRAW_freedb_default -eq 1 ]
-    then
-        SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}fields=artist&"
-    fi
-
-    if [ $SURFRAW_freedb_songs -eq 1 -o \
-         $SURFRAW_freedb_all   -eq 1 ]
-    then
-        SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}fields=track&"
-    fi
-    
-    if [ $SURFRAW_freedb_rest -eq 1 -o \
-         $SURFRAW_freedb_all  -eq 1 ]
-    then
-        SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}fields=rest&"
-    fi
-
-    if [ $SURFRAW_freedb_bycat = 1 ]; then
-        SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}grouping=cats&"
+    if ifyes SURFRAW_freedb_id; then
+	w3_browse_url "http://www.freedb.org/freedb_discid_check.php?discid=${escaped_args}&${SURFRAW_freedb_queryopts}"
     else
-        SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}grouping=none&"
+	if [ $SURFRAW_freedb_albums  -eq 1 -o \
+             $SURFRAW_freedb_all     -eq 1 -o \
+             $SURFRAW_freedb_default -eq 1 ]
+	then
+            SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}fields%5B%5D=title&"
+	fi
+
+	if [ $SURFRAW_freedb_artists -eq 1 -o \
+             $SURFRAW_freedb_all     -eq 1 -o \
+             $SURFRAW_freedb_default -eq 1 ]
+	then
+            SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}fields%5B%5D=artist&"
+	fi
+
+	if [ $SURFRAW_freedb_songs -eq 1 -o \
+             $SURFRAW_freedb_all   -eq 1 ]
+	then
+            SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}fields%5B%5D=track&"
+	fi
+
+	if [ $SURFRAW_freedb_rest -eq 1 -o \
+             $SURFRAW_freedb_all  -eq 1 ]
+	then
+            SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}fields%5B%5D=rest&"
+	fi
+
+	if [ $SURFRAW_freedb_bycat = 1 ]; then
+            SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}grouping=category&"
+	else
+            SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}grouping=none&"
+	fi
+
+	if [ $SURFRAW_freedb_allcats = 1 ]; then
+            SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}allcats=YES&"
+	else
+            SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}allcats=NO${SURFRAW_freedb_cats}"
+	fi
+
+	if [ $SURFRAW_freedb_all = 1 ]; then
+            SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}allfields=YES&"
+	else
+            SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}allfields=NO&"
+	fi
+
+	w3_browse_url "http://www.freedb.org/freedb_search.php?${SURFRAW_freedb_queryopts}words=${escaped_args}"
     fi
-
-    if [ $SURFRAW_freedb_allcats = 1 ]; then
-        SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}allcats=YES&"
-    else
-        SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}allcats=NO${SURFRAW_freedb_cats}"
-    fi
-
-    if [ $SURFRAW_freedb_all = 1 ]; then
-        SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}&allfields=YES&"
-    else
-        SURFRAW_freedb_queryopts="${SURFRAW_freedb_queryopts}&allfields=NO&"
-    fi
-
-    w3_browse_url "http://www.freedb.org/freedb_search.php?${SURFRAW_freedb_queryopts}words=${escaped_args}"
-
 fi
 
 #eg: http://www.freedb.org/freedb_search.php?words=swans&allfields=NO&fields=artist&fields=title&fields=track&fields=rest&allcats=NO&cats=blues&cats=classical&cats=country&cats=data&cats=folk&cats=jazz&cats=misc&cats=newage&cats=reggae&cats=rock&cats=soundtrack&grouping=cats

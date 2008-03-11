@@ -1,11 +1,12 @@
 surfraw (2.2.1-1) unstable; urgency=low
 
   * New upstream release.
-    + bashisms removed (Closes: #465361).
+    + bashisms removed (Closes: #465361, #468139).
   * debian/rules: move .deb building to binary-indep: target.
   * debian/compat: bump to 6.
   * debian/control:
-    + DM-Upload-Allowed: yes merged from Debian-only 2.1.7-1 (see below)
+    + DM-Upload-Allowed: yes merged from Debian-only 2.1.7-1 (see below).
+      Dropped XS- prefix, no longer needed.
     + Recommends: add elinks | elinks-lite to existing browser alternatives.
     + Uploaders: update my email address.
     + Standards-Version: 3.7.3 (no changes).
@@ -13,8 +14,11 @@ surfraw (2.2.1-1) unstable; urgency=low
     + Vcs-Cvs/Vcs-Browser: remove XS- prefix and -d workaround.
     + Homepage: added.
   * debian/changelog: merged Moritz's debian-only 2.1.7 release changelog.
+  * debian/linda.overrides: remove exec-not-elf-or-script tag now file(1)
+    is fixed.
+  * debian/copyright: update, use machine-interpretable format.
 
- -- Ian Beckwith <ianb@erislabs.net>  Thu, 14 Feb 2008 04:36:35 +0000
+ -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sat, 08 Mar 2008 17:14:22 +0000
 
 surfraw (2.2.0-1) UNRELEASED; urgency=low
 

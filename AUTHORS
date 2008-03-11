@@ -13,7 +13,8 @@ Ian Beckwith <ianb@erislabs.net>
 	elvi: alioth, bbcnews, cddb, deblists, freedb, imdb, scpan,
 	      port, codesearch, debwiki, lastfm, musicbrainz,
 	      opensearch, scholar, ctan, fsfdir, gutenberg, wayback,
-	      dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc
+	      dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc,
+	      sunonesearch, lsm
 	plus various tweaks/bugfixes/features.
 
 Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
@@ -68,7 +69,7 @@ Christian Garbs        <mitch@yggdrasil.mitch.h.shuttle.de>
 Hector Blanco          <hector.blanko@hispalinux.es>
 Jeff Bailey            <jbailey@nisa.net>
 Mark W. Eichin         <eichin@thok.org>
-Teófilo Ruiz Suárez  <teo@debian.org>
+Teófilo Ruiz Suárez    <teo@debian.org>
 Maru Dubshinki         <marudubshinki@gmail.com>
 Micah Anderson         <micah@debian.org>
 Matt Kraai             <kraai@ftbfs.org>

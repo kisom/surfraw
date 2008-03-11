@@ -6,13 +6,7 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-	# options
-	defyn SURFRAW_cddb_artists 0
-	defyn SURFRAW_cddb_albums 0
-	defyn SURFRAW_cddb_songs 0
-	defyn SURFRAW_cddb_all 0
-	# internal
-	SURFRAW_cddb_default=1 
+	def SURFRAW_cddb_search "artist" 
 }
 
 w3_usage_hook () {
@@ -21,15 +15,9 @@ Usage: $w3_argv0 [options] [search words]...
 Description:
   Surfraw search CDDB (www.gracenote.com) for cd track listings
 Local options:
-  -artists                      Search artists
-                                Environment: SURFRAW_cddb_artists
+  -artists                      Search artists (Default)
   -albums                       Search albums
-                                Environment: SURFRAW_cddb_songs
   -songs                        Search songs
-                                Environment: SURFRAW_cddb_songs
-  -all                          Search all three
-                                Environment: SURFRAW_cddb_all
-                                Default: search artists and albums
 EOF
     w3_global_usage
 }
@@ -38,10 +26,9 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-ar*)  setopt SURFRAW_cddb_artists 1 ; setopt SURFRAW_cddb_default 0 ;;
-	-alb*) setopt SURFRAW_cddb_albums  1 ; setopt SURFRAW_cddb_default 0 ;;
-	-so*)  setopt SURFRAW_cddb_songs   1 ; setopt SURFRAW_cddb_default 0 ;;
-	-all)  setopt SURFRAW_cddb_all     1 ; setopt SURFRAW_cddb_default 0 ;; 
+	-ar*)  setopt SURFRAW_cddb_search  "artist" ;;
+	-alb*) setopt SURFRAW_cddb_search  "album"  ;;
+	-so*)  setopt SURFRAW_cddb_search  "track"  ;;
 	*) return 1 ;;
     esac
     return 0
@@ -51,19 +38,8 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-    w3_browse_url "http://www.gracenote.com/"
+    w3_browse_url "http://www.gracenote.com/search/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-	SURFRAW_cddb_queryopts='' 
-   	if [ $SURFRAW_cddb_albums = 1 -o $SURFRAW_cddb_all -eq 1 -o $SURFRAW_cddb_default -eq 1 ];then
-		SURFRAW_cddb_queryopts="${SURFRAW_cddb_queryopts}f=disc&"
-	fi
-   	if [ $SURFRAW_cddb_artists = 1 -o $SURFRAW_cddb_all -eq 1 -o $SURFRAW_cddb_default -eq 1 ];then
-		SURFRAW_cddb_queryopts="${SURFRAW_cddb_queryopts}f=artist&"
-	fi
-   	if [ $SURFRAW_cddb_songs = 1 -o $SURFRAW_cddb_all -eq 1 ];then
-		SURFRAW_cddb_queryopts="${SURFRAW_cddb_queryopts}f=track&"
-	fi
-		
-    w3_browse_url "http://www.gracenote.com/music/search.html?${SURFRAW_cddb_queryopts}q=${escaped_args}"
+    w3_browse_url "http://www.gracenote.com/search/?query=${escaped_args}&search_type=${SURFRAW_cddb_search}"
 fi

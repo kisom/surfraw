@@ -7,7 +7,6 @@ w3_config_hook () {
 def   SURFRAW_debcontents_arch    i386
 def   SURFRAW_debcontents_distro  stable
 def   SURFRAW_debcontents_search  ""
-defyn SURFRAW_debcontents_usecase no
 defyn SURFRAW_debcontents_ubuntu  no
 }
 
@@ -18,7 +17,6 @@ Description:
   Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 Local options:
   -u                            Search ubuntu packages instead of debian
-  -case                         Make searches case-sensitive (ubuntu only)
   -search=                      Type of search
       files             |       Packages that contain files named like this (debian, ubuntu)
       path              |       Paths ending with the keyword (debian)
@@ -46,19 +44,27 @@ Local options:
                                 Default: $SURFRAW_debcontents_arch
                                 Environment: SURFRAW_debcontents_arch
   -distro=                      Specific distribution
-        Debian:
-          stable        |       Stable
-          testing       |       Testing
-          unstable      |       Unstable
-          oldstable     |       Old Stable
-        Ubuntu (-u):
-          warty         |       Warty
-          hoary         |       Hoary
-          breezy        |       Breezy
-          dapper        |       Dapper
-          edgy          |       Edgy
-          feisty        |       Feisty
-          gutsy         |       Gutsy
+     Debian:
+       stable           |       Stable
+       testing          |       Testing
+       unstable         |       Unstable
+       oldstable        |       Old Stable
+     Ubuntu (-u):
+       dapper           |       Dapper
+       dapper-updates   |       Dapper Updates
+       dapper-backports |       Dapper Backports
+       edgy             |       Edgy
+       edgy-updates     |       Edgy Updates
+       edgy-backports   |       Edgy Backports
+       feisty           |       Feisty
+       feisty-updates   |       Feisty Updates
+       feisty-backports |       Feisty Backports
+       gutsy            |       Gutsy
+       gutsy-updates    |       Gutsy Updates
+       gutsy-backports  |       Gutsy Backports
+       hardy            |       Hardy
+       hardy-updates    |       Hardy Updates
+       hardy-backports  |       Hardy Backports
                                 Default: $SURFRAW_debcontents_distro
                                 Environment: SURFRAW_debcontents_distro
 EOF
@@ -85,8 +91,8 @@ w3_parse_args "$@"
 
 if ifyes SURFRAW_debcontents_ubuntu
 then
-	searchpage="http://packages.ubuntu.com/"
-	searchurl="http://packages.ubuntu.com/cgi-bin/search_contents.pl"
+	searchpage="http://packages.ubuntu.com/#search_contents"
+	searchurl="http://packages.ubuntu.com/search"
 else
 	searchpage="http://packages.debian.org/#search_contents"
 	searchurl="http://packages.debian.org/search"
@@ -98,44 +104,23 @@ else
 
     if ifyes SURFRAW_debcontents_ubuntu
     then
-	# old style still used by ubuntu
-	url="$searchurl?word=${escaped_args}&arch=${SURFRAW_debcontents_arch}"
-
 	if [ "$SURFRAW_debcontents_distro" = "stable" ]
 	then
 		SURFRAW_debcontents_distro=gutsy
 	fi
-	url="$url&version=${SURFRAW_debcontents_distro}"
-
-	case "$SURFRAW_debcontents_search" in
-	        "")  url="$url&searchmode=searchfiles"        ;;
-		f*)  url="$url&searchmode=searchfiles"        ;;
-		d*)  url="$url&searchmode=searchfilesanddirs" ;;
-		w*)  url="$url&searchmode=searchword"         ;;
-		l*)  url="$url&searchmode=filelist"           ;;
-		*)   err "Unknown search type"                ;;
-	esac
-
-	if ifyes SURFRAW_debcontents_usecase
-	then
-		url="$url&case=sensitive"
-	else
-		url="$url&case=insensitive"
-	fi
-    else # new style as used on p.d.o
-	url="$searchurl?keywords=${escaped_args}&searchon=contents"
-
-	url="$url&arch=${SURFRAW_debcontents_arch}"
-	url="$url&suite=${SURFRAW_debcontents_distro}"
-
-	case "$SURFRAW_debcontents_search" in
-		"")  url="$url&mode=path"           ;;
-		p*)  url="$url&mode=path"           ;;
-		f*)  url="$url&mode=exactfilename"  ;;
-		w*)  url="$url&mode=filename"       ;;
-		*)   err "Unknown search type"      ;;
-	esac
     fi
+    url="$searchurl?keywords=${escaped_args}&searchon=contents"
+
+    url="$url&arch=${SURFRAW_debcontents_arch}"
+    url="$url&suite=${SURFRAW_debcontents_distro}"
+
+    case "$SURFRAW_debcontents_search" in
+	"")  url="$url&mode=path"           ;;
+	p*)  url="$url&mode=path"           ;;
+	f*)  url="$url&mode=exactfilename"  ;;
+	w*)  url="$url&mode=filename"       ;;
+	*)   err "Unknown search type"      ;;
+    esac
 
     w3_browse_url "$url"
 fi

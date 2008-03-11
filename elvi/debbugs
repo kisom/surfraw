@@ -128,106 +128,106 @@ if test -z "$w3_args"; then
     w3_browse_url "http://bugs.debian.org/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-	setoptyn donum 0
-	setoptyn domaint 0
+    setoptyn donum 0
+    setoptyn domaint 0
 
-	case "$SURFRAW_debbugs_search" in
-		bug*) setoptyn donum 1;;
-	esac
+    case "$SURFRAW_debbugs_search" in
+	bug*) setoptyn donum 1;;
+    esac
 	# default search unless searchtype set on cmdline
-	if ifno setsearch
-	then
-	    export escaped_args
-		if perl -e 'if($ENV{escaped_args} =~/^((\#|\%23)(\s|\%20)*)?\d+$/) { exit 0; } exit 1;'
-		then # %23 = uri escaped '#', %20=' '
-			setoptyn donum 1
-		elif perl -e 'if($ENV{escaped_args} =~/\%40|@/) { exit 0; } exit 1;'
-		then # %40 = uri escaped '@'
-			setopt SURFRAW_debbugs_search "maint"
-		fi
+    if ifno setsearch
+    then
+	export escaped_args
+	if perl -e 'if($ENV{escaped_args} =~/^((\#|\%23)(\s|\%20)*)?\d+$/) { exit 0; } exit 1;'
+	then # %23 = uri escaped '#', %20=' '
+	    setoptyn donum 1
+	elif perl -e 'if($ENV{escaped_args} =~/\%40|@/) { exit 0; } exit 1;'
+	then # %40 = uri escaped '@'
+	    setopt SURFRAW_debbugs_search "maint"
 	fi
-	
-	if ifyes donum
+    fi
+    
+    if ifyes donum
+    then
+	url="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=${escaped_args}"
+	if yesno SURFRAW_debbugs_asmbox
 	then
-		url="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=${escaped_args}"
-		if yesno SURFRAW_debbugs_asmbox
-		then
-			url="$url&mbox=yes"
-		fi
-		if yesno SURFRAW_debbugs_headers
-		then
-			url="$url&trim=no"
-		fi
-		if yesno SURFRAW_debbugs_boring
-		then
-			url="$url&boring=yes"
-		fi
+	    url="$url&mbox=yes"
+	fi
+	if yesno SURFRAW_debbugs_headers
+	then
+	    url="$url&trim=no"
+	fi
+	if yesno SURFRAW_debbugs_boring
+	then
+	    url="$url&boring=yes"
+	fi
+    else
+	url="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=${SURFRAW_debbugs_search}&version=${SURFRAW_debbugs_version}&dist=${SURFRAW_debbugs_dist}&data=${escaped_args}"
+	if yesno SURFRAW_debbugs_archive
+	then
+	    url="$url&archive=yes"
 	else
-		url="http://bugs.debian.org/cgi-bin/pkgreport.cgi?which=${SURFRAW_debbugs_search}&version=${SURFRAW_debbugs_version}&dist=${SURFRAW_debbugs_dist}&data=${escaped_args}"
-		if yesno SURFRAW_debbugs_archive
-		then
-			url="$url&archive=yes"
-		else
-			url="$url&archive=no"
-		fi
-		if ifyes SURFRAW_debbugs_merge
-		then
-			url="$url&repeatmerged=no"
-		fi
-		if ifno SURFRAW_debbugs_statussort
-		then
-			url="$url&raw=yes"
-		fi
-		if ifno SURFRAW_debbugs_head
-		then
-			url="$url&show_list_header=no"
-		fi
-		if ifno SURFRAW_debbugs_foot
-		then
-			url="$url&show_list_footer=no"
-		fi
-		if ifyes SURFRAW_debbugs_revstat
-		then
-			url="$url&pend-rev=yes"
-		fi
-		if ifyes SURFRAW_debbugs_revsev
-		then
-			url="$url&sev-rev=yes"
-		fi
-		if ifyes SURFRAW_debbugs_revbugs
-		then
-			url="$url&bug-rev=yes"
-		fi
-		if [ "$SURFRAW_debbugs_incstatus" != "" ]
-		then
-			add=`echo "$SURFRAW_debbugs_incstatus"|perl -ne 's/pending/pending-fixed/g;s/open/pending/g;print(join("&pend-inc=","",split(/\s*,\s*/,$_)));'`
-			url="${url}${add}"
-		fi
-		if [ "$SURFRAW_debbugs_excstatus" != "" ]
-		then
-			add=`echo "$SURFRAW_debbugs_excstatus"|perl -ne 'print(join("&pend-exc=","",split(/\s*,\s*/,$_)));'`
-			url="${url}${add}"
-		fi
-		if [ "$SURFRAW_debbugs_incsev" != "" ]
-		then
-			add=`echo "$SURFRAW_debbugs_incsev"|perl -ne 'print(join("&sev-inc=","",split(/\s*,\s*/,$_)));'`
-			url="${url}${add}"
-		fi
-		if [ "$SURFRAW_debbugs_excsev" != "" ]
-		then
-			add=`echo "$SURFRAW_debbugs_excsev"|perl -ne 'print(join("&sev-exc=","",split(/\s*,\s*/,$_)));'`
-			url="${url}${add}"
-		fi
-		if [ "$SURFRAW_debbugs_inctag" != "" ]
-		then
-			add=`echo "$SURFRAW_debbugs_inctag"|perl -ne 'print(join("&include=","",split(/\s*,\s*/,$_)));'`
-			url="${url}${add}"
-		fi
-		if [ "$SURFRAW_debbugs_exctag" != "" ]
-		then
-			add=`echo "$SURFRAW_debbugs_exctag"|perl -ne 'print(join("&exclude=","",split(/\s*,\s*/,$_)));'`
-			url="${url}${add}"
-		fi
+	    url="$url&archive=no"
 	fi
+	if ifyes SURFRAW_debbugs_merge
+	then
+	    url="$url&repeatmerged=no"
+	fi
+	if ifno SURFRAW_debbugs_statussort
+	then
+	    url="$url&raw=yes"
+	fi
+	if ifno SURFRAW_debbugs_head
+	then
+	    url="$url&show_list_header=no"
+	fi
+	if ifno SURFRAW_debbugs_foot
+	then
+	    url="$url&show_list_footer=no"
+	fi
+	if ifyes SURFRAW_debbugs_revstat
+	then
+	    url="$url&pend-rev=yes"
+	fi
+	if ifyes SURFRAW_debbugs_revsev
+	then
+	    url="$url&sev-rev=yes"
+	fi
+	if ifyes SURFRAW_debbugs_revbugs
+	then
+	    url="$url&bug-rev=yes"
+	fi
+	if [ "$SURFRAW_debbugs_incstatus" != "" ]
+	then
+	    add=`echo "$SURFRAW_debbugs_incstatus"|perl -ne 's/pending/pending-fixed/g;s/open/pending/g;print(join("&pend-inc=","",split(/\s*,\s*/,$_)));'`
+	    url="${url}${add}"
+	fi
+	if [ "$SURFRAW_debbugs_excstatus" != "" ]
+	then
+	    add=`echo "$SURFRAW_debbugs_excstatus"|perl -ne 'print(join("&pend-exc=","",split(/\s*,\s*/,$_)));'`
+	    url="${url}${add}"
+	fi
+	if [ "$SURFRAW_debbugs_incsev" != "" ]
+	then
+	    add=`echo "$SURFRAW_debbugs_incsev"|perl -ne 'print(join("&sev-inc=","",split(/\s*,\s*/,$_)));'`
+	    url="${url}${add}"
+	fi
+	if [ "$SURFRAW_debbugs_excsev" != "" ]
+	then
+	    add=`echo "$SURFRAW_debbugs_excsev"|perl -ne 'print(join("&sev-exc=","",split(/\s*,\s*/,$_)));'`
+	    url="${url}${add}"
+	fi
+	if [ "$SURFRAW_debbugs_inctag" != "" ]
+	then
+	    add=`echo "$SURFRAW_debbugs_inctag"|perl -ne 'print(join("&include=","",split(/\s*,\s*/,$_)));'`
+	    url="${url}${add}"
+	fi
+	if [ "$SURFRAW_debbugs_exctag" != "" ]
+	then
+	    add=`echo "$SURFRAW_debbugs_exctag"|perl -ne 'print(join("&exclude=","",split(/\s*,\s*/,$_)));'`
+	    url="${url}${add}"
+	fi
+    fi
     w3_browse_url "$url"
 fi
