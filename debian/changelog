@@ -1,3 +1,9 @@
+surfraw (2.2.1-2) unstable; urgency=low
+
+  * Remove my old email address from Uploaders.
+
+ -- Ian Beckwith <ianb@erislabs.net>  Tue, 11 Mar 2008 14:07:35 +0000
+
 surfraw (2.2.1-1) unstable; urgency=low
 
   * New upstream release.
@@ -18,7 +24,7 @@ surfraw (2.2.1-1) unstable; urgency=low
     is fixed.
   * debian/copyright: update, use machine-interpretable format.
 
- -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sat, 08 Mar 2008 17:14:22 +0000
+ -- Ian Beckwith <ianb@erislabs.net>  Tue, 11 Mar 2008 14:07:08 +0000
 
 surfraw (2.2.0-1) UNRELEASED; urgency=low
 
