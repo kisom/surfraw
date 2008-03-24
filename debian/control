@@ -13,7 +13,7 @@ XS-DM-Upload-Allowed: yes
 Package: surfraw
 Architecture: all
 Depends: lynx | www-browser
-Recommends: surfraw-extra, links | elinks | elinks-lite | w3m | w3m-ssl | lynx-cur
+Recommends: surfraw-extra, links | elinks | elinks-lite | w3m
 Suggests: screen
 Conflicts: surfaw
 Replaces: surfaw
@@ -41,9 +41,11 @@ Depends: surfraw, lynx | www-browser, libwww-opensearch-perl, libwww-perl, libht
 Recommends: links | elinks | elinks-lite | w3m | w3m-ssl | lynx-cur
 Suggests: screen
 Conflicts: surfraw (<< 2.1.7)
-Description: extra surfraw elvi with heavy dependencies
- surfraw-extra contains extra elvi for surfraw that have large
- dependency trees.
+Description: extra surfraw search tools with heavy dependencies
+ surfraw-extra contains extra website search tools for surfraw that
+ have large dependency trees. Currently surfraw-extra only contains:
+ .
+ opensearch -- Search an OpenSearch-enabled website
  .
  Surfraw - Shell Users' Revolutionary Front Rage Against the World Wide Web
  .

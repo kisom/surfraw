@@ -1,3 +1,10 @@
+2008-03-24  Ian Beckwith  <ianb@erislabs.net>
+
+	* Thanks to James TD Smith for the following:
+	  + New elvis: javasun - search Java API Docs.
+	  + google: -country option to specify country.
+	    Also respects SURFRAW_lang variable.
+
 2008-03-11  Ian Beckwith  <ianb@erislabs.net>
 
 	* debpackages/debcontents: updated ubuntu search.

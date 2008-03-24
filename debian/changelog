@@ -1,3 +1,12 @@
+surfraw (2.2.2-1) unstable; urgency=low
+
+  * New upstream version.
+  * Recommends: Drop w3m-ssl (folded into w3m) and
+    lynx-cur (not in lenny) (Closes: #471359).
+  * surfraw-extra: improve long description (Closes: #471321).
+
+ -- Ian Beckwith <ianb@erislabs.net>  Mon, 24 Mar 2008 00:20:24 +0000
+
 surfraw (2.2.1-2) unstable; urgency=low
 
   * Remove my old email address from Uploaders.

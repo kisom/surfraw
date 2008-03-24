@@ -45,6 +45,7 @@ dist_elvi_SCRIPTS	= \
 		  google \
 		  happypenguin \
 		  imdb \
+		  javasun \
 		  scpan \
 		  slinuxdoc \
 		  lastfm \
