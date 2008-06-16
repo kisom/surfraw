@@ -20,8 +20,8 @@ Local options:
   -to=LANGUAGE			Destination language
 				Environment: SURFRAW_translate_to, SURFRAW_lang
   -provider=	                Translation service provider
-            babelfish		babelfish.altavista.com (systrans)
-	    raging		babelfish.altavista.com/raging (systrans)
+            babelfish		babelfish.yahoo.com (systrans)
+	    raging		babelfish.yahoo.com/raging (systrans)
                                 Default: $SURFRAW_translate_provider
 				Environment: SURFRAW_translate_provider
 Languages:
@@ -86,7 +86,7 @@ w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"
 then
-	w3_browse_url "http://babelfish.altavista.com/"
+	w3_browse_url "http://babelfish.yahoo.com/"
 else
         if [ -z "$SURFRAW_translate_to" ];
 	then
@@ -98,9 +98,9 @@ else
 	fi
 	escaped_args=`w3_url_of_arg $w3_args`
 	case "$escaped_args" in
-		http*) w3_browse_url "http://babelfish.altavista.com/babelfish/urltrurl?tt=url&url=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
+		http*) w3_browse_url "http://babelfish.yahoo.com/translate_url?tt=url&url=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
 		;;
-		*) w3_browse_url "http://babelfish.altavista.com/babelfish/tr?doit=done&tt=urltext&intl=1&urltext=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
+		*) w3_browse_url "http://babelfish.yahoo.com/translate_txt?doit=done&tt=urltext&intl=1&urltext=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
         ;;
     esac
 fi

@@ -1,0 +1,139 @@
+#!/bin/sh
+#
+# $Id$
+#
+# elvis: arxiv -- Search arXiv E-Print Archive for articles
+#
+# 2008-June-03 - By John Gruenenfelder (johng@as.arizona.edu)
+#                Rewrote 'xxx' script to allow searching arXiv site by various
+#                means.
+#
+
+. surfraw || exit 1
+
+
+w3_config_hook () {
+    def SURFRAW_arxiv_scope all
+}
+
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search terms]
+Description:
+  Surfraw the Los Alamos Science E-Print Archive (arXiv)
+Local options:
+  -scope=                       Limit scope of arXiv search
+         all        |           Search all fields
+         title      |           Search article titles
+         author     |           Search article authors
+         abstract   |           Search article abstracts
+         fulltext               Search the full text of articles
+                                Default: $SURFRAW_arxiv_scope
+                                Environment: SURFRAW_arxiv_scope
+EOF
+    w3_global_usage
+}
+
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-scope=*) setopt   SURFRAW_arxiv_scope $optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+
+
+
+# Parse config
+w3_config
+
+# Parse search terms
+SURFRAW_quote_ifs=0
+w3_parse_args "$@"
+
+
+# Mangle search terms into something useable
+terms=""
+cnt=0
+if [ ! -z "$w3_args" ]; then
+    case $SURFRAW_arxiv_scope in
+	all | title | abstract)
+	    for w in $w3_args ; do
+		terms=$terms"+"`w3_url_of_arg $w`
+		cnt=$((cnt + 1))
+	    done
+	    if [ $cnt -gt 1 ]; then
+		terms="+AND"$terms
+	    fi
+	    ;;
+	author)
+	    # Names without commas need to be reversed
+	    echo "$w3_args" | grep -q ","
+	    if [ $? -eq 0 ]; then
+	        # Name already in last, first format.
+		terms=`echo "$w3_args" | sed -e "s/,/_/g" -e "s/ //g"`
+		terms="+"`w3_url_of_arg $terms`
+	    else
+	        # Name in first last format.  Need to reverse.
+		first=""
+		last=""
+		for n in $w3_args ; do
+		    if [ -z $first ]; then
+			first=$n
+		    elif [ -z $last ]; then
+			last=$n
+		    fi
+		done
+		terms=$last"_"$first
+		terms="+"`w3_url_of_arg $terms`
+	    fi
+	    ;;
+	fulltext)
+	    # Need to remove leading/trailing spaces and quotes
+	    for w in $w3_args ; do
+		if [ -z $terms ]; then
+		    terms=`w3_url_of_arg $w`
+		else
+		    terms="$terms "`w3_url_of_arg $w`
+		fi
+	    done
+	    ;;
+	*)
+	    return 1 ;;
+    esac
+fi
+
+
+
+# Form URL
+if [ -z "$w3_args" ]; then
+    url="http://arXiv.org/"
+else
+    case $SURFRAW_arxiv_scope in
+	all)
+	    url="http://arXiv.org/find/all/1/all:"$terms"/0/1/0/all/0/1"
+	    ;;
+	title)
+	    url="http://arXiv.org/find/all/1/ti:"$terms"/0/1/0/all/0/1"
+	    ;;
+	abstract)
+	    url="http://arXiv.org/find/all/1/abs:"$terms"/0/1/0/all/0/1"
+	    ;;
+	author)
+	    url="http://arXiv.org/find/all/1/au:"$terms"/0/1/0/all/0/1"
+	    ;;
+	fulltext)
+	    url="http://search.arXiv.org:8081/?query="$terms"&in="
+	    ;;
+	*)
+	    return 1 ;;
+    esac
+fi
+
+
+w3_browse_url $url

@@ -168,7 +168,13 @@ sub testelvis
 	    }
 	    next;
 	}
-	if($response->content =~ /$match/)
+	my $content=$response->decoded_content || $response->content;
+	if(!defined($content))
+	{
+	    print "FAIL: Result Page Empty\n";
+	    push(@results,$FAIL);
+	}
+	elsif($content =~ /$match/)
 	{
 	    print "OK";
 	    push(@results,$OK);

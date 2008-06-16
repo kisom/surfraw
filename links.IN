@@ -5,6 +5,7 @@ elvi.1sr.gz @mandir@/man1/alioth.1sr.gz
 elvi.1sr.gz @mandir@/man1/altavista.1sr.gz
 elvi.1sr.gz @mandir@/man1/amazon.1sr.gz
 elvi.1sr.gz @mandir@/man1/archpkg.1sr.gz
+elvi.1sr.gz @mandir@/man1/arxiv.1sr.gz
 elvi.1sr.gz @mandir@/man1/ask.1sr.gz
 elvi.1sr.gz @mandir@/man1/austlii.1sr.gz
 elvi.1sr.gz @mandir@/man1/bbcnews.1sr.gz
@@ -63,7 +64,6 @@ elvi.1sr.gz @mandir@/man1/slashdot.1sr.gz
 elvi.1sr.gz @mandir@/man1/slinuxdoc.1sr.gz
 elvi.1sr.gz @mandir@/man1/sourceforge.1sr.gz
 elvi.1sr.gz @mandir@/man1/stockquote.1sr.gz
-elvi.1sr.gz @mandir@/man1/sundocs.1sr.gz
 elvi.1sr.gz @mandir@/man1/sunonesearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/thesaurus.1sr.gz
 elvi.1sr.gz @mandir@/man1/translate.1sr.gz
@@ -76,6 +76,5 @@ elvi.1sr.gz @mandir@/man1/webster.1sr.gz
 elvi.1sr.gz @mandir@/man1/wetandwild.1sr.gz
 elvi.1sr.gz @mandir@/man1/wikipedia.1sr.gz
 elvi.1sr.gz @mandir@/man1/woffle.1sr.gz
-elvi.1sr.gz @mandir@/man1/xxx.1sr.gz
 elvi.1sr.gz @mandir@/man1/yahoo.1sr.gz
 elvi.1sr.gz @mandir@/man1/yubnub.1sr.gz

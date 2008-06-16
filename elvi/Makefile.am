@@ -7,6 +7,7 @@ dist_elvi_SCRIPTS	= \
 		  altavista \
 		  amazon \
 		  archpkg \
+		  arxiv \
 		  ask \
 		  austlii \
 		  bbcnews \
@@ -65,7 +66,6 @@ dist_elvi_SCRIPTS	= \
 		  slashdot \
 		  sourceforge \
 		  stockquote \
-		  sundocs \
 		  sunonesearch \
 		  thesaurus \
 		  translate \
@@ -78,7 +78,6 @@ dist_elvi_SCRIPTS	= \
 		  wetandwild \
 		  wikipedia \
 		  woffle \
-		  xxx \
 		  yahoo \
 		  yubnub
 

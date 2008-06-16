@@ -49,7 +49,7 @@ $RC    = 2;
 
 @syntax=();
 $syntax[$POSIX]="\texport PATH=\$PATH:$elvidir\n";
-$syntax[$CSH]="\tset path=(\$PATH $elvidir)\n";
+$syntax[$CSH]="\tsetenv PATH \"\${PATH}:$elvidir\"\n";
 $syntax[$RC]="\tpath=(\$path $elvidir)\n";
 
 my $sys=0;

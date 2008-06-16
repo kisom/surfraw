@@ -5,7 +5,7 @@
 
 w3_config_hook () {
 def   SURFRAW_austlii_results $SURFRAW_results
-def   SURFRAW_austlii_method  phrase
+def   SURFRAW_austlii_method  auto
 }
 
 w3_usage_hook () {
@@ -16,7 +16,13 @@ Description:
   at Austlii (www.austlii.edu.au), the Australian Legal Information
   Institute
 Local options:
-  -method=any|all|phrase|title|boolean
+  -method=auto    |
+          boolean |
+	  any     |
+	  all     |
+	  phrase  |
+	  legis   |
+	  title
 				Define search method
 				Default: $SURFRAW_austlii_method
 				Environment: SURFRAW_austlii_method
@@ -37,7 +43,6 @@ w3_parse_option_hook () {
     esac
     return 0
 }
-
 w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
@@ -45,5 +50,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://www.austlii.edu.au/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.austlii.edu.au/cgi-bin/sinocgi.cgi?method=${SURFRAW_austlii_method}&meta=%2Fall&query=${escaped_args}&results=${SURFRAW_austlii_results}&submit=Search&rank=on&callback=on"
+    w3_browse_url "http://www.austlii.edu.au/cgi-bin/sinosrch.cgi?method=${SURFRAW_austlii_method}&meta=%2Fau&query=${escaped_args}&results=${SURFRAW_austlii_results}&submit=Search&callback=on&mask_world=&mask_path="
 fi

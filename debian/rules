@@ -62,8 +62,6 @@ binary-arch: build install
 binary-indep: build install
 	dh_testdir
 	dh_testroot
-	install -m 644 debian/linda.overrides debian/surfraw/usr/share/linda/overrides/surfraw
-	install -m 644 debian/linda.overrides debian/surfraw-extra/usr/share/linda/overrides/surfraw-extra
 	mkdir debian/surfraw/etc/bash_completion.d/
 	install -m 644 surfraw-bash-completion debian/surfraw/etc/bash_completion.d/surfraw
 	dh_installdocs

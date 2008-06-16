@@ -1,3 +1,20 @@
+2008-06-16  Ian Beckwith  <ianb@erislabs.net>
+
+	* Thanks to John Gruenenfelder for:
+	  + New elvi: arxiv.
+	  + surfraw-update-path: fix csh syntax.
+	* wetandwild: switched to weather.com, as yahoo now uses AJAX.
+	  Command line options and SURFRAW_weather_* variables no
+	  longer supported.
+	* port: fixed, original site is back.
+	* austlii: fixed search URL and test.
+	  Method now defaults to 'auto'.
+	* translate: fixed URLs.
+	* w3css: fixed test.
+	* sundocs: removed, use sunonesearch.
+	* xxx: removed, use arxiv.
+	* test/runtests: prefer decoded_content if available.
+
 2008-03-24  Ian Beckwith  <ianb@erislabs.net>
 
 	* Thanks to James TD Smith for the following:
