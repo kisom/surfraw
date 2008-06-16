@@ -1,0 +1,2 @@
+version=3
+http://surfraw.alioth.debian.org/ dist/surfraw-(.*)\.tar\.gz

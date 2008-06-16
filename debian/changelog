@@ -7,8 +7,9 @@ surfraw (2.2.2-1) unstable; urgency=low
   * surfraw-extra: improve long description (Closes: #471321).
   * Standards-Version: 3.8.0 (no changes).
   * Remove linda override.
+  * Add watch file.
 
- -- Ian Beckwith <ianb@erislabs.net>  Sun, 15 Jun 2008 18:13:31 +0100
+ -- Ian Beckwith <ianb@erislabs.net>  Mon, 16 Jun 2008 14:26:33 +0100
 
 surfraw (2.2.1-2) unstable; urgency=low
 
