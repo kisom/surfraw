@@ -115,6 +115,7 @@ alioth		-- Search Alioth (alioth.debian.org)
 altavista	-- Search the web using Altavista (www.altavista.com)
 amazon		-- Search the amazon.com bookstore
 archpkg		-- Search Arch Linux packages (www.archlinux.org)
+arxiv 		-- Search arXiv E-Print Archive for articles
 ask		-- Question the web using Ask Jeeves (www.ask.com)
 austlii		-- Search Australian Law docs (www.austlii.edu.au)
 bbcnews		-- Search BBC News (news.bbc.co.uk)
@@ -162,7 +163,7 @@ netbsd		-- Search NetBSD related information (www.netbsd.org)
 openbsd		-- Search OpenBSD related information (www.openbsd.org)
 opensearch	-- Search an OpenSearch-enabled website
 pgpkeys		-- Search the PGP key database
-port		-- Look up a TCP/UDP port number
+port		-- Look up a TCP/UDP port number on seifried.org/security/ports/
 pubmed		-- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
 rae		-- Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)
 rfc		-- Search RFCs (internet standards documents)
@@ -174,7 +175,6 @@ slashdot	-- Search stories on Slashdot (www.slashdot.org)
 slinuxdoc	-- Search entries in LDP (www.linuxdoc.org)
 sourceforge	-- Search SourceForge (www.sourceforge.net)
 stockquote	-- Get a single stock quote (multiple providers)
-sundocs		-- Search docs on Sun.com (docs.sun.com)
 sunonesearch	-- Search Sun One Search (onesearch.sun.com)
 thesaurus	-- Look up word in Merriam-Webster's Thesaurus (www.m-w.com)
 translate	-- Translate human languages (various providers)
@@ -188,7 +188,6 @@ webster		-- Look up word in Merriam-Webster's Dictionary (www.m-w.com)
 wetandwild	-- Real time weather information (many sources)
 wikipedia	-- Search the free encyclopedia wikipedia
 woffle		-- Search the web using Woffle (localhost:8080)
-xxx		-- Superior XXX, hot and ready to press (arXiv.org)
 yahoo		-- Search Yahoo categories (www.yahoo.com)
 yubnub		-- Use the social command-line for the web (yubnub.org)
 
