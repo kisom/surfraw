@@ -1,3 +1,12 @@
+2008-07-02  Ian Beckwith  <ianb@erislabs.net>
+
+	* surfraw.IN:w3_url_escape: escape "`", stop escaping ".".
+	  (Thanks to Micah Anderson).
+	* debpackages/debcontents:
+	  + update options and distributions,
+	  + add -a option to use archive.debian.net
+	* Fix javasun test.
+
 2008-06-16  Ian Beckwith  <ianb@erislabs.net>
 
 	* Thanks to John Gruenenfelder for:

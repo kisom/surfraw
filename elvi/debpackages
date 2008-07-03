@@ -9,6 +9,7 @@ def   SURFRAW_debian_distro   any
 def   SURFRAW_debian_search   pkg
 defyn SURFRAW_debian_ubuntu   no
 defyn SURFRAW_debian_subwords yes
+defyn SURFRAW_debian_archive  no
 }
 
 w3_usage_hook () {
@@ -17,13 +18,14 @@ Usage: $w3_argv0 [options] [search words]...
 Description:
   Search debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 Local options:
+  -a                            Search archived debian distributions
   -u                            Search ubuntu packages instead of debian
   -release=                     Specialized search on release
     Debian:
       any               |       all releases
       main              |       main release
       contrib           |       contrib
-      non-free          |       packages not meeting FSG
+      non-free          |       packages not meeting DFSG
     Ubuntu (-u):
       any               |       all releases
       main              |       
@@ -41,6 +43,12 @@ Local options:
       unstable          |       Unstable
       oldstable         |       Old Stable
       experimental      |       Experimental
+    Archived Debian (-a):
+      bo                |       1.3.1
+      hamm              |       2.0
+      slink             |       2.1
+      potato            |       2.2
+      woody             |       3.0
     Ubuntu (-u):
       any               |       All distributions
       dapper            |       
@@ -55,7 +63,10 @@ Local options:
       gutsy             |       
       gutsy-updates     |       
       gutsy-backports   |       
-      hardy
+      hardy             |       
+      hardy-updates     |       
+      hardy-backports   |       
+      intrepid
 
                                 Default: $SURFRAW_debian_distro
                                 Environment: SURFRAW_debian_distro
@@ -72,11 +83,12 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-release=*) setopt   SURFRAW_debian_release  $optarg;;
-	-distro=*)  setopt   SURFRAW_debian_distro   $optarg;;
-	-search=*)  setopt   SURFRAW_debian_search   $optarg;;
-	-u*)        setoptyn SURFRAW_debian_ubuntu   yes	;;
-	-nos*)      setoptyn SURFRAW_debian_subwords no		;;
+	-release=*) setopt   SURFRAW_debian_release  $optarg ;;
+	-distro=*)  setopt   SURFRAW_debian_distro   $optarg ;;
+	-search=*)  setopt   SURFRAW_debian_search   $optarg ;;
+	-a*)        setoptyn SURFRAW_debian_archive  yes     ;;
+	-u*)        setoptyn SURFRAW_debian_ubuntu   yes     ;;
+	-nos*)      setoptyn SURFRAW_debian_subwords no	     ;;
 	*) return 1 ;;
     esac
     return 0
@@ -86,10 +98,14 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 
-if ifyes SURFRAW_debian_ubuntu
+if   ifyes SURFRAW_debian_ubuntu
 then
 	searchpage="http://packages.ubuntu.com/"
 	searchurl="http://packages.ubuntu.com/search"
+elif ifyes SURFRAW_debian_archive
+then
+	searchpage="http://archive.debian.net/"
+	searchurl="http://archive.debian.net/search"
 else
 	searchpage="http://packages.debian.org/#search_packages"
 	searchurl="http://packages.debian.org/search"
@@ -105,7 +121,7 @@ else
     if [ "${SURFRAW_debian_release}" = "any" ]; then
 	SURFRAW_debian_release="all"
     fi
-    url="$searchurl?keywords=${escaped_args}&version=${SURFRAW_debian_distro}&release=${SURFRAW_debian_release}"
+    url="$searchurl?keywords=${escaped_args}&suite=${SURFRAW_debian_distro}&section=${SURFRAW_debian_release}"
 
     case "$SURFRAW_debian_search" in
 	pkg*)  url="$url&searchon=names"        ;;

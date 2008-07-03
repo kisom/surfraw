@@ -1,6 +1,7 @@
 surfraw (2.2.2-1~rc1) unstable; urgency=low
 
   * New upstream version:
+    + fix url escaping (Closes: #487430).
     + surfraw-update-path: fix csh support (Closes: #484871).
   * Recommends: Drop w3m-ssl (folded into w3m) and
     lynx-cur (not in lenny) (Closes: #471359).
@@ -9,7 +10,7 @@ surfraw (2.2.2-1~rc1) unstable; urgency=low
   * Remove linda override.
   * Add watch file.
 
- -- Ian Beckwith <ianb@erislabs.net>  Mon, 16 Jun 2008 14:26:33 +0100
+ -- Ian Beckwith <ianb@erislabs.net>  Thu, 03 Jul 2008 01:22:36 +0100
 
 surfraw (2.2.1-2) unstable; urgency=low
 

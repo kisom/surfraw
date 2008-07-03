@@ -6,8 +6,9 @@
 w3_config_hook () {
 def   SURFRAW_debcontents_arch    i386
 def   SURFRAW_debcontents_distro  stable
-def   SURFRAW_debcontents_search  ""
+def   SURFRAW_debcontents_search  "files"
 defyn SURFRAW_debcontents_ubuntu  no
+defyn SURFRAW_debcontents_archive no
 }
 
 w3_usage_hook () {
@@ -16,15 +17,13 @@ Usage: $w3_argv0 [options] [search words]...
 Description:
   Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 Local options:
+  -a                            Search archived debian releases
   -u                            Search ubuntu packages instead of debian
   -search=                      Type of search
-      files             |       Packages that contain files named like this (debian, ubuntu)
-      path              |       Paths ending with the keyword (debian)
-      dirs              |       Packages that contain files or directories
-                                named like this (ubuntu)
+      files             |       Packages that contain files named like this
+      path              |       Paths ending with the keyword
       word              |       Packages that contain files or directories
-                                whose names contain the keyword (debian, ubuntu)
-      list                      List all files in this package (ubuntu)
+                                whose names contain the keyword
                                 Default: $SURFRAW_debcontents_search
                                 Environment: SURFRAW_debcontents_search
   -arch=                        Specialized search on architecture
@@ -49,13 +48,16 @@ Local options:
        testing          |       Testing
        unstable         |       Unstable
        oldstable        |       Old Stable
+     Archived Debian (-a):
+      bo                |       1.3.1
+      hamm              |       2.0
+      slink             |       2.1
+      potato            |       2.2
+      woody             |       3.0
      Ubuntu (-u):
        dapper           |       Dapper
        dapper-updates   |       Dapper Updates
        dapper-backports |       Dapper Backports
-       edgy             |       Edgy
-       edgy-updates     |       Edgy Updates
-       edgy-backports   |       Edgy Backports
        feisty           |       Feisty
        feisty-updates   |       Feisty Updates
        feisty-backports |       Feisty Backports
@@ -65,6 +67,7 @@ Local options:
        hardy            |       Hardy
        hardy-updates    |       Hardy Updates
        hardy-backports  |       Hardy Backports
+       intrepid         |       Intrepid
                                 Default: $SURFRAW_debcontents_distro
                                 Environment: SURFRAW_debcontents_distro
 EOF
@@ -79,6 +82,7 @@ w3_parse_option_hook () {
 	-distro=*)  setopt   SURFRAW_debcontents_distro  $optarg	;;
 	-search=*)  setopt   SURFRAW_debcontents_search  $optarg	;;
 	-u*)        setoptyn SURFRAW_debcontents_ubuntu  yes    	;;
+	-a*)        setoptyn SURFRAW_debcontents_archive yes    	;;
 	-ca*) 	    setoptyn SURFRAW_debcontents_usecase yes    	;;
 	*) return 1 ;;
     esac
@@ -89,10 +93,14 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 
-if ifyes SURFRAW_debcontents_ubuntu
+if   ifyes SURFRAW_debcontents_ubuntu
 then
 	searchpage="http://packages.ubuntu.com/#search_contents"
 	searchurl="http://packages.ubuntu.com/search"
+elif ifyes SURFRAW_debcontents_archive
+then
+	searchpage="http://archive.debian.net/#search_contents"
+	searchurl="http://archive.debian.net/search"
 else
 	searchpage="http://packages.debian.org/#search_contents"
 	searchurl="http://packages.debian.org/search"
@@ -115,12 +123,18 @@ else
     url="$url&suite=${SURFRAW_debcontents_distro}"
 
     case "$SURFRAW_debcontents_search" in
-	"")  url="$url&mode=path"           ;;
-	p*)  url="$url&mode=path"           ;;
-	f*)  url="$url&mode=exactfilename"  ;;
-	w*)  url="$url&mode=filename"       ;;
-	*)   err "Unknown search type"      ;;
+	p*)      if ifyes SURFRAW_debcontents_ubuntu ||
+	            ifyes SURFRAW_debcontents_archive
+                 then
+                    searchmode=""
+		 else
+		    searchmode=path
+                 fi;;
+	f*)      searchmode=exactfilename  ;;
+	w*)      searchmode=filename       ;;
+	*)       err "Unknown search type" ;;
     esac
 
+    url="${url}&mode=${searchmode}"
     w3_browse_url "$url"
 fi

@@ -22,6 +22,8 @@ Mon Jun 16 11:52:41 BST 2008  - surfraw 2.2.2
       replaces xxx which was just a stub (thanks to John Gruenenfelder).
     + javasun - search Java API Docs (thanks to James TD Smith)
   * Fixed elvis:
+    + debpackages/debcontents: update options and distributions,
+      add -a options to use archive.debian.net.
     + wetandwild: switched to weather.com, as yahoo now uses AJAX.
       Command line options and SURFRAW_weather_* variables no
       longer supported.
@@ -31,6 +33,7 @@ Mon Jun 16 11:52:41 BST 2008  - surfraw 2.2.2
   * Removed elvis:
     + sundocs: use sunonesearch.
     + xxx: replaced by arxiv.
+  * surfraw: fix w3_url_escape quoting (thanks Micah Anderson)
   * surfraw-update-path: fix csh syntax (thanks John Gruenenfelder)
   * google: Add -country option to specify country. Respects
     SURFRAW_lang variable (Thanks to James TD Smith).
