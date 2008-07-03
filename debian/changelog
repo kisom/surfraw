@@ -1,4 +1,4 @@
-surfraw (2.2.2-1~rc1) unstable; urgency=low
+surfraw (2.2.2-1) unstable; urgency=low
 
   * New upstream version:
     + fix url escaping (Closes: #487430).
