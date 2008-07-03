@@ -122,10 +122,10 @@ EXTRA_DIST = runtests elviwithouttests README COOKIES W.test		\
 	etym.test excite.test fast.test filesearching.test foldoc.test	\
 	freebsd.test freedb.test freshmeat.test fsfdir.test		\
 	genpkg.test google.test gutenberg.test happypenguin.test	\
-	imdb.test ixquick.test lastfm.test leodict.test			\
-	musicbrainz.test netbsd.test openbsd.test opensearch.test	\
-	port.test pgpkeys.test pubmed.test rae.test rfc.test		\
-	rhyme.test scaleplus.test scholar.test scpan.test		\
+	imdb.test ixquick.test javasun.test lastfm.test leodict.test	\
+	lsm.test musicbrainz.test netbsd.test openbsd.test		\
+	opensearch.test port.test pgpkeys.test pubmed.test rae.test	\
+	rfc.test rhyme.test scaleplus.test scholar.test scpan.test	\
 	slashdot.test slinuxdoc.test sourceforge.test stockquote.test	\
 	sunonesearch.test thesaurus.test translate.test w3css.test	\
 	w3html.test w3link.test w3rdf.test wayback.test webster.test	\

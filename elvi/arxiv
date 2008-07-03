@@ -2,7 +2,7 @@
 #
 # $Id$
 #
-# elvis: arxiv		 -- Search arXiv E-Print Archive for articles
+# elvis: arxiv		-- Search arXiv E-Print Archive for articles
 #
 # 2008-June-03 - By John Gruenenfelder (johng@as.arizona.edu)
 #                Rewrote 'xxx' script to allow searching arXiv site by various

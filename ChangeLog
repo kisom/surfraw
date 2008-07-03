@@ -6,6 +6,7 @@
 	  + update options and distributions,
 	  + add -a option to use archive.debian.net
 	* Fix javasun test.
+	* Add javasun.test and lsm.test to EXTRA_DIST.
 
 2008-06-16  Ian Beckwith  <ianb@erislabs.net>
 
