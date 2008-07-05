@@ -179,7 +179,7 @@ Or... How to Eat The CHEESE
 
     13: # test and upload the debian packages
 
-    14: cp * ../../web
+    14: cp * ../../web/dist
 
     15: cd ../../web
 
