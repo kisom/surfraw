@@ -1,3 +1,7 @@
+2008-07-08  Ian Beckwith  <ianb@erislabs.net>
+
+	* google: fix bashism (thanks to Philip Armstrong).
+
 2008-07-02  Ian Beckwith  <ianb@erislabs.net>
 
 	* surfraw.IN:w3_url_escape: escape "`", stop escaping ".".

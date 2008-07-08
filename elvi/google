@@ -53,7 +53,7 @@ w3_parse_args "$@"
 # w3_args now contains a list of arguments
 
 # Use SURFRAW_lang if present and the country has not been changed
-if test -n "$SURFRAW_lang" -a "$SURFRAW_google_country" == "us"; then
+if test -n "$SURFRAW_lang" -a "$SURFRAW_google_country" = "us"; then
     SURFRAW_google_country=$SURFRAW_lang;
 fi
 
