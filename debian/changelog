@@ -1,9 +1,9 @@
-surfraw (2.2.2-2) unstable; urgency=low
+surfraw (2.2.2-2) unstable; urgency=medium
 
-  * Fix bashism in google (Closes: #489902)
-    Thanks to Philip Armstrong.
+  * google: fix bashism and quote more variable expansions (Closes: #489902).
+    Thanks to Philip Armstrong and John Briggs.
 
- -- Ian Beckwith <ianb@erislabs.net>  Tue, 08 Jul 2008 17:50:52 +0100
+ -- Ian Beckwith <ianb@erislabs.net>  Sat, 19 Jul 2008 00:39:25 +0100
 
 surfraw (2.2.2-1) unstable; urgency=low
 

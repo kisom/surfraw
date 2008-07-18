@@ -4,7 +4,7 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-    def   SURFRAW_google_results $SURFRAW_results
+    def   SURFRAW_google_results "$SURFRAW_results"
     def   SURFRAW_google_search search
     defyn SURFRAW_google_lucky 0
     def   SURFRAW_google_country us
@@ -39,10 +39,10 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-    -results=*) setopt   SURFRAW_google_results $optarg ;;
-    -search=*)  setopt   SURFRAW_google_search  $optarg ;;
-    -l*)        setoptyn SURFRAW_google_lucky   1       ;;
-    -country=*) setopt	 SURFRAW_google_country $optarg ;;
+    -results=*) setopt   SURFRAW_google_results "$optarg" ;;
+    -search=*)  setopt   SURFRAW_google_search  "$optarg" ;;
+    -l*)        setoptyn SURFRAW_google_lucky   1         ;;
+    -country=*) setopt	 SURFRAW_google_country "$optarg" ;;
     *) return 1 ;;
     esac
     return 0
@@ -54,21 +54,21 @@ w3_parse_args "$@"
 
 # Use SURFRAW_lang if present and the country has not been changed
 if test -n "$SURFRAW_lang" -a "$SURFRAW_google_country" = "us"; then
-    SURFRAW_google_country=$SURFRAW_lang;
+    SURFRAW_google_country="$SURFRAW_lang";
 fi
 
 case "$SURFRAW_google_country" in
   af|ag|ai|ar|au|bd|bn|bo|br|bs|bw|by|bz|co|cu|do|ec|eg|et|fj|gi|gt|hk|jm|ly|mt|mx|my|na|nf|ng|ni|np|nz|om|pa|pe|ph|pk|pr|py|qa|sa|sb|sg|sv|tj|tr|tw|ua|ug|uy|vn) domain="com.${SURFRAW_google_country}" ;;
   cr|id|il|in|jp|ke|kh|kr|ls|ma|th|uk|uz|vc|ve|vg|vi|ck|yu|za|zm|zw) domain="co.${SURFRAW_google_country}" ;;
   us) domain="com";;
-  *)  domain=$SURFRAW_google_country ;;
+  *)  domain="$SURFRAW_google_country" ;;
 esac
 
 if test -z "$w3_args"; then
     w3_browse_url "http://www.google.${domain}/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-	if [ $SURFRAW_google_lucky = 1 ]; then
+	if [ "$SURFRAW_google_lucky" = 1 ]; then
 		button=`w3_url_escape "I'm Feeling Lucky"`
 		w3_browse_url "http://www.google.${domain}/${SURFRAW_google_search}?q=${escaped_args}&btnI=$button&num=${SURFRAW_google_results}"	
 	else
