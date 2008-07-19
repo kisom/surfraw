@@ -694,7 +694,7 @@ ps: ps-recursive
 ps-am:
 
 uninstall-am: uninstall-binSCRIPTS uninstall-dist_binSCRIPTS \
-	uninstall-man uninstall-sysconfDATA
+	uninstall-local uninstall-man uninstall-sysconfDATA
 
 uninstall-man: uninstall-man1
 
@@ -716,8 +716,8 @@ uninstall-man: uninstall-man1
 	installcheck-am installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
 	pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
-	uninstall-binSCRIPTS uninstall-dist_binSCRIPTS uninstall-man \
-	uninstall-man1 uninstall-sysconfDATA
+	uninstall-binSCRIPTS uninstall-dist_binSCRIPTS uninstall-local \
+	uninstall-man uninstall-man1 uninstall-sysconfDATA
 
 
 surfraw: surfraw.IN
@@ -758,6 +758,13 @@ install-data-hook: links
 		ln -sf $$target  $(DESTDIR)/$$link ;\
 	done < links
 @OPENSEARCH_TRUE@	ln -sf elvi.1sr.gz $(DESTDIR)/@mandir@/man1/opensearch.1sr.gz
+
+uninstall-local: links
+	while read target link ;\
+	do \
+		rm -f $(DESTDIR)/$$link ;\
+	done < links
+@OPENSEARCH_TRUE@	rm -f $(DESTDIR)/@mandir@/man1/opensearch.1sr.gz
 
 submit-lsm: surfraw.lsm
 	mail -s add LSM@qqx.org < $<

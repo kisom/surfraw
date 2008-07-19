@@ -50,6 +50,15 @@ if OPENSEARCH
 	ln -sf elvi.1sr.gz $(DESTDIR)/@mandir@/man1/opensearch.1sr.gz
 endif
 
+uninstall-local: links
+	while read target link ;\
+	do \
+		rm -f $(DESTDIR)/$$link ;\
+	done < links
+if OPENSEARCH
+	rm -f $(DESTDIR)/@mandir@/man1/opensearch.1sr.gz
+endif
+
 
 submit-lsm: surfraw.lsm
 	mail -s add LSM@qqx.org < $<

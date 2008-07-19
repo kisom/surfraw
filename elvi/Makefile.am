@@ -84,3 +84,6 @@ dist_elvi_SCRIPTS	= \
 if OPENSEARCH
 dist_elvi_SCRIPTS	+= opensearch
 endif
+
+uninstall-local:
+	-rmdir ${PREFIX}/$(ELVIDIR)

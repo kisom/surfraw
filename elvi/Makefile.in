@@ -312,7 +312,7 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-dist_elviSCRIPTS
+uninstall-am: uninstall-dist_elviSCRIPTS uninstall-local
 
 .MAKE: install-am install-strip
 
@@ -326,8 +326,11 @@ uninstall-am: uninstall-dist_elviSCRIPTS
 	installcheck installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
 	pdf-am ps ps-am uninstall uninstall-am \
-	uninstall-dist_elviSCRIPTS
+	uninstall-dist_elviSCRIPTS uninstall-local
 
+
+uninstall-local:
+	-rmdir ${PREFIX}/$(ELVIDIR)
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
 .NOEXPORT:
