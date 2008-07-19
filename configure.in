@@ -19,19 +19,31 @@ AC_MSG_RESULT([$enable_opensearch])
 AM_CONDITIONAL(OPENSEARCH, test "$enable_opensearch" = "yes")
 
 ELVIDIR="\$(libdir)/surfraw"
+AC_CHECK_PROGS(TEXTBROWSER, lynx links elinks w3m netrik)
+AC_CHECK_PROGS(GRAPHICALBROWSER, iceweasel firefox mozilla safari epiphany-browser konqueror galeon kazenhakase conkeror dillo netscape)
 
 AC_ARG_WITH([elvidir],
 	[AS_HELP_STRING([--with-elvidir=ELVIDIR], [specify location of elvi])],
 	[if test -n "$withval" && test "$withval" != "no" ; then ELVIDIR="$withval";fi])
 
+AC_ARG_WITH([text-browser],
+	[AS_HELP_STRING([--with-text-browser=BROWSER], [specify default text browser])],
+	[if test -n "$withval" && test "$withval" != "no" ; then TEXTBROWSER="$withval";fi])
+AC_ARG_WITH([graphical-browser],
+	[AS_HELP_STRING([--with-graphical-browser=BROWSER], [specify default graphical browser])],
+	[if test -n "$withval" && test "$withval" != "no" ; then GRAPHICALBROWSER="$withval";fi])
+
 AC_SUBST(ELVIDIR)
 AC_SUBST(VERSION)
+AC_SUBST(TEXTBROWSER)
+AC_SUBST(GRAPHICALBROWSER)
 
 ISODATE=`date +%Y-%m-%d`
 AC_SUBST(ISODATE)
 
 dnl Checks for programs.
 AC_PROG_INSTALL
+AC_PROG_AWK
 
 AC_CONFIG_FILES([Makefile surfraw.lsm surfraw.spec elvi/Makefile test/Makefile])
 AC_OUTPUT

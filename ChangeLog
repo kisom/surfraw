@@ -1,6 +1,17 @@
+2008-07-19  Ian Beckwith  <ianb@erislabs.net>
+
+	* Search for default browsers at configure time.
+	  Can be overridden with ./configure --with-text-browser=BROWSER
+	  --with-graphical-browser=BROWSER.
+	* Use AC_PROG_AWK to detect which awk implementation to use.
+	* slinuxdoc: switch to test on main page, google thinks
+	  search on search page is spyware shenanigans.
+	* openbsd: fix test.
+
 2008-07-08  Ian Beckwith  <ianb@erislabs.net>
 
-	* google: fix bashism (thanks to Philip Armstrong).
+	* google: fix bashism, quote variable expansions (thanks to
+	  Philip Armstrong and John Briggs).
 
 2008-07-02  Ian Beckwith  <ianb@erislabs.net>
 

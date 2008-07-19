@@ -102,7 +102,7 @@ bookmark_file_search () {
 	file="$2"
 	if [ -f "$file" ]
 	then
-		awk -v search="$search" '$1 ~ search { print $2; }'  $file
+		@AWK@ -v search="$search" '$1 ~ search { print $2; }'  $file
 	fi
 }
 

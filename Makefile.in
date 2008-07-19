@@ -103,6 +103,7 @@ ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
 ELVIDIR = @ELVIDIR@
+GRAPHICALBROWSER = @GRAPHICALBROWSER@
 INSTALL = @INSTALL@
 INSTALL_DATA = @INSTALL_DATA@
 INSTALL_PROGRAM = @INSTALL_PROGRAM@
@@ -124,6 +125,7 @@ PATH_SEPARATOR = @PATH_SEPARATOR@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
+TEXTBROWSER = @TEXTBROWSER@
 VERSION = @VERSION@
 abs_builddir = @abs_builddir@
 abs_srcdir = @abs_srcdir@
@@ -743,6 +745,9 @@ links: links.IN
 	    -e 's,@VERSION\@,${VERSION},g; '\
 	    -e 's,@prefix\@,${prefix},g; '\
 	    -e 's,@ELVIDIR\@,${ELVIDIR},g; '\
+	    -e 's,@AWK\@,${AWK},g; '\
+	    -e 's,@TEXTBROWSER\@,${TEXTBROWSER},g; '\
+	    -e 's,@GRAPHICALBROWSER\@,${GRAPHICALBROWSER},g; '\
 	    -e 's,@sysconfdir\@,${sysconfdir},g' $< >$@.tmp
 	chmod +x $@.tmp
 	mv $@.tmp $@
