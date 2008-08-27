@@ -18,6 +18,13 @@ AC_ARG_ENABLE([opensearch],
 AC_MSG_RESULT([$enable_opensearch])
 AM_CONDITIONAL(OPENSEARCH, test "$enable_opensearch" = "yes")
 
+AC_MSG_CHECKING([whether to install sr alias])
+AC_ARG_ENABLE([sr],
+	[AS_HELP_STRING([--disable-sr], [disable sr alias])],,
+	[enable_sr=yes])
+AC_MSG_RESULT([$enable_sr])
+AM_CONDITIONAL(INSTALLSR, test "$enable_sr" = "yes")
+
 ELVIDIR="\$(libdir)/surfraw"
 AC_CHECK_PROGS(TEXTBROWSER, lynx links elinks w3m netrik)
 AC_CHECK_PROGS(GRAPHICALBROWSER, iceweasel firefox mozilla safari epiphany-browser konqueror galeon kazenhakase conkeror dillo netscape)

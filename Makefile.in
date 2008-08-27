@@ -758,6 +758,8 @@ install-data-hook: links
 		ln -sf $$target  $(DESTDIR)/$$link ;\
 	done < links
 @OPENSEARCH_TRUE@	ln -sf elvi.1sr.gz $(DESTDIR)/@mandir@/man1/opensearch.1sr.gz
+@INSTALLSR_TRUE@	ln -sf surfraw $(DESTDIR)/@bindir@/sr
+@INSTALLSR_TRUE@	ln -sf surfraw.1.gz $(DESTDIR)/@mandir@/man1/sr.1.gz
 
 uninstall-local: links
 	while read target link ;\
@@ -765,6 +767,8 @@ uninstall-local: links
 		rm -f $(DESTDIR)/$$link ;\
 	done < links
 @OPENSEARCH_TRUE@	rm -f $(DESTDIR)/@mandir@/man1/opensearch.1sr.gz
+@INSTALLSR_TRUE@	rm -f $(DESTDIR)/@bindir@/sr
+@INSTALLSR_TRUE@	rm -f $(DESTDIR)/@mandir@/man1/sr.1.gz
 
 submit-lsm: surfraw.lsm
 	mail -s add LSM@qqx.org < $<

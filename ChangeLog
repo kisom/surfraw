@@ -1,3 +1,10 @@
+2008-08-26  Ian Beckwith  <ianb@erislabs.net>
+
+	* Fixed tests: amazon, debbugs, yahoo.
+	* Added --disable-sr option to ./configure to disable
+	  installing the 'sr' symbolic link pointing to surfraw,
+	  to avoid clashes with the SR programming language.
+
 2008-07-19  Ian Beckwith  <ianb@erislabs.net>
 
 	* Search for default browsers at configure time.

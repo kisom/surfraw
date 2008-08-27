@@ -1,10 +1,16 @@
 surfraw (2.2.3-1) unstable; urgency=low
 
   * New upstream version.
-    + Change default text browser to www-browser and default
-      graphical browser to sensible-browser.
+  * Change default text browser to www-browser and default
+    graphical browser to sensible-browser. 
 
- -- Ian Beckwith <ianb@erislabs.net>  Sat, 19 Jul 2008 02:44:14 +0100
+ -- Ian Beckwith <ianb@erislabs.net>  Tue, 26 Aug 2008 22:36:24 +0100
+
+surfraw (2.2.2-3) unstable; urgency=low
+
+  * Backport slinuxdoc fix from 2.2.3 prerelease.
+
+ -- Ian Beckwith <ianb@erislabs.net>  Fri, 25 Jul 2008 05:14:30 +0100
 
 surfraw (2.2.2-2) unstable; urgency=medium
 

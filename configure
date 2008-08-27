@@ -638,6 +638,8 @@ am__tar
 am__untar
 OPENSEARCH_TRUE
 OPENSEARCH_FALSE
+INSTALLSR_TRUE
+INSTALLSR_FALSE
 TEXTBROWSER
 GRAPHICALBROWSER
 ELVIDIR
@@ -1224,6 +1226,7 @@ Optional Features:
   --disable-FEATURE       do not include FEATURE (same as --enable-FEATURE=no)
   --enable-FEATURE[=ARG]  include FEATURE [ARG=yes]
   --disable-opensearch    disable OpenSearch support
+  --disable-sr            disable sr alias
 
 Optional Packages:
   --with-PACKAGE[=ARG]    use PACKAGE [ARG=yes]
@@ -2168,6 +2171,26 @@ else
 fi
 
 
+{ echo "$as_me:$LINENO: checking whether to install sr alias" >&5
+echo $ECHO_N "checking whether to install sr alias... $ECHO_C" >&6; }
+# Check whether --enable-sr was given.
+if test "${enable_sr+set}" = set; then
+  enableval=$enable_sr;
+else
+  enable_sr=yes
+fi
+
+{ echo "$as_me:$LINENO: result: $enable_sr" >&5
+echo "${ECHO_T}$enable_sr" >&6; }
+ if test "$enable_sr" = "yes"; then
+  INSTALLSR_TRUE=
+  INSTALLSR_FALSE='#'
+else
+  INSTALLSR_TRUE='#'
+  INSTALLSR_FALSE=
+fi
+
+
 ELVIDIR="\$(libdir)/surfraw"
 for ac_prog in lynx links elinks w3m netrik
 do
@@ -2537,6 +2560,13 @@ if test -z "${OPENSEARCH_TRUE}" && test -z "${OPENSEARCH_FALSE}"; then
   { { echo "$as_me:$LINENO: error: conditional \"OPENSEARCH\" was never defined.
 Usually this means the macro was only invoked conditionally." >&5
 echo "$as_me: error: conditional \"OPENSEARCH\" was never defined.
+Usually this means the macro was only invoked conditionally." >&2;}
+   { (exit 1); exit 1; }; }
+fi
+if test -z "${INSTALLSR_TRUE}" && test -z "${INSTALLSR_FALSE}"; then
+  { { echo "$as_me:$LINENO: error: conditional \"INSTALLSR\" was never defined.
+Usually this means the macro was only invoked conditionally." >&5
+echo "$as_me: error: conditional \"INSTALLSR\" was never defined.
 Usually this means the macro was only invoked conditionally." >&2;}
    { (exit 1); exit 1; }; }
 fi
@@ -3109,6 +3139,8 @@ am__tar!$am__tar$ac_delim
 am__untar!$am__untar$ac_delim
 OPENSEARCH_TRUE!$OPENSEARCH_TRUE$ac_delim
 OPENSEARCH_FALSE!$OPENSEARCH_FALSE$ac_delim
+INSTALLSR_TRUE!$INSTALLSR_TRUE$ac_delim
+INSTALLSR_FALSE!$INSTALLSR_FALSE$ac_delim
 TEXTBROWSER!$TEXTBROWSER$ac_delim
 GRAPHICALBROWSER!$GRAPHICALBROWSER$ac_delim
 ELVIDIR!$ELVIDIR$ac_delim
@@ -3117,7 +3149,7 @@ LIBOBJS!$LIBOBJS$ac_delim
 LTLIBOBJS!$LTLIBOBJS$ac_delim
 _ACEOF
 
-  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 67; then
+  if test `sed -n "s/.*$ac_delim\$/X/p" conf$$subs.sed | grep -c X` = 69; then
     break
   elif $ac_last_try; then
     { { echo "$as_me:$LINENO: error: could not make $CONFIG_STATUS" >&5
