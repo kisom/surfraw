@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# AUTHOR: J.R. Mauro
+#
+# DATE: Mon Sep  1 12:18:12 EDT 2008
+#
+# DESC: Elvi to search The Pirate Bay
+# elvis: piratebay	-- Search thepiratebay.org for torrents
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search thepiratebay.org for torrents
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://thepiratebay.org"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://thepiratebay.org/search/${escaped_args}"
+fi

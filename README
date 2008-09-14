@@ -92,10 +92,23 @@ Bookmarks
 Installation
 
   Surfraw is installed with the standard ./configure; make; make install
-  procedure. See INSTALL for more details. Note that the opensearch elvis
-  depends on the perl libraries WWW::OpenSearch, HTML::Parser and
-  LWP (libwww-perl). If you don't want to install opensearch, use
-  ./configure --disable-opensearch.
+  procedure. See INSTALL for more details. 
+
+  Note that the opensearch elvis depends on the perl libraries
+  WWW::OpenSearch, HTML::Parser and LWP (libwww-perl). If you don't
+  want to install opensearch, use ./configure --disable-opensearch.
+
+  Surfraw supports the following options to ./configure:
+
+    --with-text-browser=BROWSER       Use BROWSER as text-mode browser
+    --with-graphical-browser=BROWSER  Use BROWSER as graphical-mode browser
+    --with-elvidir=DIR                Use DIR as location for storing elvi
+    --disable-opensearch              Disable OpenSearch support
+    --disable-sr                      Disable installing sr alias
+
+    By default, the text and graphical browsers are detected from a
+    list of installed browsers at configure time. elvidir defaults
+    to $(libdir)/surfraw (probably /usr/local/lib/surfraw).
 
 Examples
 
@@ -111,85 +124,87 @@ Options
   For example:
 
   $ surfraw -elvi
-alioth		-- Search Alioth (alioth.debian.org)
-altavista	-- Search the web using Altavista (www.altavista.com)
-amazon		-- Search the amazon.com bookstore
-archpkg		-- Search Arch Linux packages (www.archlinux.org)
-arxiv 		-- Search arXiv E-Print Archive for articles
-ask		-- Question the web using Ask Jeeves (www.ask.com)
-austlii		-- Search Australian Law docs (www.austlii.edu.au)
-bbcnews		-- Search BBC News (news.bbc.co.uk)
-cddb		-- Search for cd track listings in CDDB (www.gracenote.com)
-cia		-- Search CIA documents at www.cia.gov
-cite		-- Search computer science papers (www.researchindex.com)
-cnn		-- Search on CNN (cnn.com)
-codesearch	-- Search source code using Google Code Search (www.google.com/codesearch)
-ctan		-- Search the Comprehensive TeX Archive Network (ctan.org)
-currency	-- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
-cve		-- Search for CAN assignments in CVE
-debbugs		-- Search the debian BTS (bugs.debian.org)
-debcontents	-- Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
-deblists	-- Search debian mailing lists (lists.debian.org/search.html)
-deblogs		-- Show changelogs for a package in Debian main (changelogs.debian.net)
-debpackages	-- Search debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
-debpts		-- Search the Debian Package Tracking System (packages.qa.debian.org)
-debsec		-- Search the Debian Security Tracker for CVE ids or package names
-debwiki		-- Search the Debian Wikis (wiki.debian.org & women.debian.org/wiki)
-deja		-- Search usenet using Google Groups (groups.google.com)
-discogs		-- Search the Discogs database of music information (www.discogs.com)
-dmoz		-- Search the Open Directory Project web directory (dmoz.org)
-ebay		-- Search the Ebay auction site
-etym		-- Look up word origins at www.etymonline.com
-excite		-- Search on Excite (www.excite.com)
-fast		-- Search the web using FAST Search (www.alltheweb.com)
-filesearching	-- Search files on filesearching (www.filesearching.com)
-foldoc		-- The Free On-Line Dictionary Of Computing (foldoc.org)
-freebsd		-- Search FreeBSD related information (www.freebsd.org)
-freedb		-- Search for cd track listings in FreeDB (www.freedb.org)
-freshmeat	-- Search Freshmeat (www.freshmeat.net)
-fsfdir		-- Search the FSF/UNESCO Free Software Directory (directory.fsf.org)
-genpkg		-- Search Gentoo packages (packages.gentoo.org)
-google		-- Search the web using Google (www.google.com)
-gutenberg	-- Search for books on Project Gutenberg (gutenberg.org)
-happypenguin	-- Search the Linux Game Tome (www.happypenguin.org)
-imdb		-- Search the Internet Movie Database (www.imdb.com)
-ixquick		-- Search the web using ixquick (www.ixquick.com)
-javasun		-- Search Java API docs (java.sun.com)
-lastfm		-- Search last.fm
-leodict		-- Search Leo's German <-> English dictionary (dict.leo.org)
-lsm		-- Search the Linux Software Map
-musicbrainz	-- Search MusicBrainz (musicbrainz.org)
-netbsd		-- Search NetBSD related information (www.netbsd.org)
-openbsd		-- Search OpenBSD related information (www.openbsd.org)
-opensearch	-- Search an OpenSearch-enabled website
-pgpkeys		-- Search the PGP key database
-port		-- Look up a TCP/UDP port number on seifried.org/security/ports/
-pubmed		-- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
-rae		-- Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)
-rfc		-- Search RFCs (internet standards documents)
-rhyme		-- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
-scaleplus	-- Search Australian Law using ScalePlus (scaleplus.law.gov.au)
-scholar		-- Search Google Scholar (scholar.google.com)
-scpan		-- Search the Comprehensive Perl Archive Network (search.cpan.org)
-slashdot	-- Search stories on Slashdot (www.slashdot.org)
-slinuxdoc	-- Search entries in LDP (www.linuxdoc.org)
-sourceforge	-- Search SourceForge (www.sourceforge.net)
-stockquote	-- Get a single stock quote (multiple providers)
-sunonesearch	-- Search Sun One Search (onesearch.sun.com)
-thesaurus	-- Look up word in Merriam-Webster's Thesaurus (www.m-w.com)
-translate	-- Translate human languages (various providers)
-W		-- Activate Surfraw defined web-browser
-w3css		-- Validate a CSS URL with the w3c CSS validator (jigsaw.w3.org/css-validator)
-w3html		-- Validate a web page URL with the w3c validator (validator.w3.org)
-w3link		-- Check web page links with the w3c linkchecker (validator.w3.org/checklink)
-w3rdf		-- Validate a RDF URL with the w3c RDF validator (validator.w3.org)
-wayback		-- Search The Internet Archive's Wayback Machine for a URL (archive.org)
-webster		-- Look up word in Merriam-Webster's Dictionary (www.m-w.com)
-wetandwild	-- Real time weather information (many sources)
-wikipedia	-- Search the free encyclopedia wikipedia
-woffle		-- Search the web using Woffle (localhost:8080)
-yahoo		-- Search Yahoo categories (www.yahoo.com)
-yubnub		-- Use the social command-line for the web (yubnub.org)
+alioth          -- Search Alioth (alioth.debian.org)
+altavista       -- Search the web using Altavista (www.altavista.com)
+amazon          -- Search the amazon.com bookstore
+archpkg         -- Search Arch Linux packages (www.archlinux.org)
+arxiv           -- Search arXiv E-Print Archive for articles
+ask             -- Question the web using Ask Jeeves (www.ask.com)
+austlii         -- Search Australian Law docs (www.austlii.edu.au)
+bbcnews         -- Search BBC News (news.bbc.co.uk)
+cddb            -- Search for cd track listings in CDDB (www.gracenote.com)
+cia             -- Search CIA documents at www.cia.gov
+cite            -- Search computer science papers (www.researchindex.com)
+cnn             -- Search on CNN (cnn.com)
+codesearch      -- Search source code using Google Code Search (www.google.com/codesearch)
+ctan            -- Search the Comprehensive TeX Archive Network (ctan.org)
+currency        -- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
+cve             -- Search for CAN assignments in CVE
+debbugs         -- Search the debian BTS (bugs.debian.org)
+debcontents     -- Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
+deblists        -- Search debian mailing lists (lists.debian.org/search.html)
+deblogs         -- Show changelogs for a package in Debian main (changelogs.debian.net)
+debpackages     -- Search debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
+debpts          -- Search the Debian Package Tracking System (packages.qa.debian.org)
+debsec          -- Search the Debian Security Tracker for CVE ids or package names
+debwiki         -- Search the Debian Wikis (wiki.debian.org & women.debian.org/wiki)
+deja            -- Search usenet using Google Groups (groups.google.com)
+discogs         -- Search the Discogs database of music information (www.discogs.com)
+dmoz            -- Search the Open Directory Project web directory (dmoz.org)
+ebay            -- Search the Ebay auction site
+etym            -- Look up word origins at www.etymonline.com
+excite          -- Search on Excite (www.excite.com)
+fast            -- Search the web using FAST Search (www.alltheweb.com)
+filesearching   -- Search files on filesearching (www.filesearching.com)
+foldoc          -- The Free On-Line Dictionary Of Computing (foldoc.org)
+freebsd         -- Search FreeBSD related information (www.freebsd.org)
+freedb          -- Search for cd track listings in FreeDB (www.freedb.org)
+freshmeat       -- Search Freshmeat (www.freshmeat.net)
+fsfdir          -- Search the FSF/UNESCO Free Software Directory (directory.fsf.org)
+genpkg          -- Search Gentoo packages (packages.gentoo.org)
+genportage      -- Search gentoo-portage.com for packages
+google          -- Search the web using Google (www.google.com)
+gutenberg       -- Search for books on Project Gutenberg (gutenberg.org)
+happypenguin    -- Search the Linux Game Tome (www.happypenguin.org)
+imdb            -- Search the Internet Movie Database (www.imdb.com)
+ixquick         -- Search the web using ixquick (www.ixquick.com)
+javasun         -- Search Java API docs (java.sun.com)
+lastfm          -- Search last.fm
+leodict         -- Search Leo's German <-> English dictionary (dict.leo.org)
+lsm             -- Search the Linux Software Map
+musicbrainz     -- Search MusicBrainz (musicbrainz.org)
+netbsd          -- Search NetBSD related information (www.netbsd.org)
+openbsd         -- Search OpenBSD related information (www.openbsd.org)
+opensearch      -- Search an OpenSearch-enabled website
+pgpkeys         -- Search the PGP key database
+piratebay       -- Search thepiratebay.org for torrents
+port            -- Look up a TCP/UDP port number on seifried.org/security/ports/
+pubmed          -- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
+rae             -- Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)
+rfc             -- Search RFCs (internet standards documents)
+rhyme           -- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
+scaleplus       -- Search Australian Law using ScalePlus (scaleplus.law.gov.au)
+scholar         -- Search Google Scholar (scholar.google.com)
+scpan           -- Search the Comprehensive Perl Archive Network (search.cpan.org)
+slashdot        -- Search stories on Slashdot (www.slashdot.org)
+slinuxdoc       -- Search entries in LDP (www.linuxdoc.org)
+sourceforge     -- Search SourceForge (www.sourceforge.net)
+stockquote      -- Get a single stock quote (multiple providers)
+sunonesearch    -- Search Sun One Search (onesearch.sun.com)
+thesaurus       -- Look up word in Merriam-Webster's Thesaurus (www.m-w.com)
+translate       -- Translate human languages (various providers)
+W               -- Activate Surfraw defined web-browser
+w3css           -- Validate a CSS URL with the w3c CSS validator (jigsaw.w3.org/css-validator)
+w3html          -- Validate a web page URL with the w3c validator (validator.w3.org)
+w3link          -- Check web page links with the w3c linkchecker (validator.w3.org/checklink)
+w3rdf           -- Validate a RDF URL with the w3c RDF validator (validator.w3.org)
+wayback         -- Search The Internet Archive's Wayback Machine for a URL (archive.org)
+webster         -- Look up word in Merriam-Webster's Dictionary (www.m-w.com)
+wetandwild      -- Real time weather information (many sources)
+wikipedia       -- Search the free encyclopedia wikipedia
+woffle          -- Search the web using Woffle (localhost:8080)
+yahoo           -- Search Yahoo categories (www.yahoo.com)
+yubnub          -- Use the social command-line for the web (yubnub.org)
 
   All elvi have useful low calorie help, for example:
 
@@ -238,7 +253,7 @@ Global options:
                                 Environment: SURFRAW_quote_args
   -version                      Display Surfraw version (1.0.4)
 Copyright:
-  Copyright (c) 2003-2007 The Surfraw-Devel Team
+  Copyright (c) 2003-2008 The Surfraw-Devel Team
                            <surfraw-devel@lists.alioth.debian.org>
   Copyright (c) 2000-2001 Julian Assange
   Copyright (c) 2001 Australian Institute for Collaborative Research
@@ -273,7 +288,7 @@ README originally by Julian Assange
 Updated by Ian Beckwith
      _________________________________________________________________
 
-See NEWS, ChangeLog or debian/changelog for a more detailed summary of changes.
+See NEWS, and ChangeLog for a summary of changes.
      _________________________________________________________________
 
   $Id$

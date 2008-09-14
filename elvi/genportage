@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# AUTHOR: J.R. Mauro
+#
+# DATE: Mon Sep  1 13:16:16 EDT 2008
+#
+# DESC: Elvi to search gentoo-portage.com
+# elvis: genportage	-- Search gentoo-portage.com for packages
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search gentoo-portage for packages
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.gentoo-portage.com"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.gentoo-portage.com/Search?search=${escaped_args}"
+fi

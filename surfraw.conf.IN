@@ -34,7 +34,7 @@ def   SURFRAW_conf		$HOME/.surfraw.conf
 
 # graphical browser? defaults to yes for meatminds. text browser users can
 # work it out how to change it.
-defyn   SURFRAW_graphical		no
+defyn   SURFRAW_graphical		yes
 
 # name/path of text browser executable
 # e.g links, lynx, w3m

@@ -1,3 +1,12 @@
+2008-09-13  Ian Beckwith  <ianb@erislabs.net>
+
+	* Default to graphical mode. See surfraw(1) for how to change it back.
+	* New elvis: piratebay, genportage. Thanks to J.R. Mauro.
+	* Add tests for piratebay and genportage.
+	* Fix webster.
+	* Fix test for ebay china.
+	* README: document ./configure options
+
 2008-08-26  Ian Beckwith  <ianb@erislabs.net>
 
 	* Fixed tests: amazon, debbugs, yahoo.

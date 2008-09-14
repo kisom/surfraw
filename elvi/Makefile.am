@@ -41,6 +41,7 @@ dist_elvi_SCRIPTS	= \
 		  freshmeat \
 		  fsfdir \
 		  genpkg \
+		  genportage \
 		  gutenberg \
 		  ixquick \
 		  google \
@@ -55,6 +56,7 @@ dist_elvi_SCRIPTS	= \
 		  musicbrainz \
 		  netbsd \
 		  openbsd \
+		  piratebay \
 		  pgpkeys \
 		  port \
 		  pubmed \

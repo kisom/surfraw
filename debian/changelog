@@ -1,6 +1,7 @@
 surfraw (2.2.3-1) unstable; urgency=low
 
   * New upstream version.
+    + Now defaults to graphical mode, see surfraw(1) for how to change it back.
   * Change default text browser to www-browser and default
     graphical browser to sensible-browser. 
 
