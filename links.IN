@@ -49,6 +49,7 @@ elvi.1sr.gz @mandir@/man1/leodict.1sr.gz
 elvi.1sr.gz @mandir@/man1/lsm.1sr.gz
 elvi.1sr.gz @mandir@/man1/musicbrainz.1sr.gz
 elvi.1sr.gz @mandir@/man1/netbsd.1sr.gz
+elvi.1sr.gz @mandir@/man1/ntrs.1sr.gz
 elvi.1sr.gz @mandir@/man1/openbsd.1sr.gz
 elvi.1sr.gz @mandir@/man1/piratebay.1sr.gz
 elvi.1sr.gz @mandir@/man1/pgpkeys.1sr.gz
@@ -59,10 +60,12 @@ elvi.1sr.gz @mandir@/man1/rfc.1sr.gz
 elvi.1sr.gz @mandir@/man1/rhyme.1sr.gz
 elvi.1sr.gz @mandir@/man1/scaleplus.1sr.gz
 elvi.1sr.gz @mandir@/man1/scholar.1sr.gz
+elvi.1sr.gz @mandir@/man1/scicom.1sr.gz
 elvi.1sr.gz @mandir@/man1/scpan.1sr.gz
 elvi.1sr.gz @mandir@/man1/slashdot.1sr.gz
 elvi.1sr.gz @mandir@/man1/slinuxdoc.1sr.gz
 elvi.1sr.gz @mandir@/man1/sourceforge.1sr.gz
+elvi.1sr.gz @mandir@/man1/springer.1sr.gz
 elvi.1sr.gz @mandir@/man1/stockquote.1sr.gz
 elvi.1sr.gz @mandir@/man1/sunonesearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/thesaurus.1sr.gz

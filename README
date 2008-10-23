@@ -174,6 +174,7 @@ leodict         -- Search Leo's German <-> English dictionary (dict.leo.org)
 lsm             -- Search the Linux Software Map
 musicbrainz     -- Search MusicBrainz (musicbrainz.org)
 netbsd          -- Search NetBSD related information (www.netbsd.org)
+ntrs            -- Search the NASA Technical Report Server
 openbsd         -- Search OpenBSD related information (www.openbsd.org)
 opensearch      -- Search an OpenSearch-enabled website
 pgpkeys         -- Search the PGP key database
@@ -185,10 +186,12 @@ rfc             -- Search RFCs (internet standards documents)
 rhyme           -- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
 scaleplus       -- Search Australian Law using ScalePlus (scaleplus.law.gov.au)
 scholar         -- Search Google Scholar (scholar.google.com)
+scicom          -- Search Scientific Commons
 scpan           -- Search the Comprehensive Perl Archive Network (search.cpan.org)
 slashdot        -- Search stories on Slashdot (www.slashdot.org)
 slinuxdoc       -- Search entries in LDP (www.linuxdoc.org)
 sourceforge     -- Search SourceForge (www.sourceforge.net)
+springer        -- Search Springer for Books and Articles
 stockquote      -- Get a single stock quote (multiple providers)
 sunonesearch    -- Search Sun One Search (onesearch.sun.com)
 thesaurus       -- Look up word in Merriam-Webster's Thesaurus (www.m-w.com)

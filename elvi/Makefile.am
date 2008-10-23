@@ -55,6 +55,7 @@ dist_elvi_SCRIPTS	= \
 		  lsm \
 		  musicbrainz \
 		  netbsd \
+		  ntrs \
 		  openbsd \
 		  piratebay \
 		  pgpkeys \
@@ -65,8 +66,10 @@ dist_elvi_SCRIPTS	= \
 		  rhyme \
 		  scaleplus \
 		  scholar \
+		  scicom \
 		  slashdot \
 		  sourceforge \
+		  springer \
 		  stockquote \
 		  sunonesearch \
 		  thesaurus \

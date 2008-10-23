@@ -1,0 +1,86 @@
+#!/bin/sh
+#
+# author: Wim Van Hoydonck 
+#
+# elvis: ntrs		-- Search the NASA Technical Report Server
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_ntrs_fields	Abstract
+def   SURFRAW_ntrs_results	matchall
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string]
+Description:
+  Search ntrs
+Local options:
+  -fields=FIELD			Subject field to search
+           all              |   Seach all fields
+           abstract         |   Words in abstract (default)
+           accession        |   Accession number
+           center           |   NASA Center
+           author           |   Author name
+           docID            |   Document ID
+           keywords         |   Keywords
+           date             |   Publication date
+           title            |   Title
+  -results=RESULT		Find Results with
+           all              |   All of the words
+           any              |   At least one of the words
+
+Examples:
+  $w3_argv0 -fields=abstract -results=all free wake
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-fields=*)	setopt	SURFRAW_ntrs_fields	$optarg ;;
+	-results=*)	setopt	SURFRAW_ntrs_results	$optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+case "$SURFRAW_ntrs_fields" in
+    all)       field=All ;;
+    abstract)  field=Abstract ;;
+    accession) field=AccessionNum ;;
+    center)    field=ArchiveName ;;
+    author)    field=AuthorList ;;
+    docID)     field=DocumentID ;;
+    keyword)   field=Keywords ;;
+    date)      field=PublicationDate ;;
+    title)     field=Title ;;
+    *)         field=Abstract ;;
+esac
+
+case "$SURFRAW_ntrs_results" in
+    all)       result=matchall ;;
+    any)       result=matchany ;;
+    *)         result=matchall ;;
+esac
+
+if null "$w3_args"; then
+    w3_browse_url "http://ntrs.nasa.gov/search.jsp"
+else
+    # TODO: combine multiple searches, e.g.
+    # first search the abstract for certain keywords, 
+    # then search the authors of those results
+    # this gives urls that look like this:
+    #http://ntrs.nasa.gov/search.jsp?N=0&Ntk=Abstract|AuthorList&Ntx=mode%20matchall|mode%20matchall&Ntt=free%20wake|wachspress
+    escaped_args=`w3_url_of_arg $w3_args`
+    url="http://ntrs.nasa.gov/search.jsp?N=0&Ntk=${field}&Ntx=mode%20${result}&Ntt=${escaped_args}"
+    w3_browse_url "${url}"
+fi
+

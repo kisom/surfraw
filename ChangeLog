@@ -1,3 +1,11 @@
+2008-10-23  Ian Beckwith  <ianb@erislabs.net>
+
+	* Bumped version to 2.2.4.
+	* New elvi: ntrs, scicom, springer.
+	  Thanks to Wim Van Hoydonck.
+	* Added tests for ntrs and springer
+	  Scicom cannot be tested as it needs javascript.
+
 2008-09-13  Ian Beckwith  <ianb@erislabs.net>
 
 	* Default to graphical mode. See surfraw(1) for how to change it back.

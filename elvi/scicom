@@ -1,0 +1,32 @@
+#!/bin/sh
+#
+# author: Wim Van Hoydonck 
+#
+# elvis: scicom		-- Search Scientific Commons
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string]
+Description:
+  Search Scientific Commons
+Examples:
+  $w3_argv0 vortex pairs
+EOF
+    w3_global_usage
+}
+
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+if null "$w3_args"; then
+    w3_browse_url "http://www.scientificcommons.org"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    url="http://www.scientificcommons.org/#search_string=${escaped_args}"
+    w3_browse_url "${url}"
+fi
+
+

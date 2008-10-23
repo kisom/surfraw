@@ -1,0 +1,62 @@
+#!/bin/sh
+#
+# author: Wim Van Hoydonck 
+#
+# elvis: springer	-- Search Springer for Books and Articles
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_spinger_fields	All
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string]
+Description:
+  Search springer
+Local options:
+  -fields=FIELD			Subject field to search
+           all              |   Seach all fields (default)
+           author           |   Author name
+           title            |   Title
+           series           |   Series
+           isbn             |   ISBN/ISSN
+
+Examples:
+  $w3_argv0 -fields=author featherstone
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-fields=*)	setopt	SURFRAW_springer_fields	$optarg ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+case "$SURFRAW_springer_fields" in
+    all)       field=all ;;
+    author)    field=authorEditor ;;
+    title)     field=title ;;
+    series)    field=bookSeries ;;
+    isbn)      field=all ;;
+    *)         field=all ;;
+esac
+
+if null "$w3_args"; then
+    w3_browse_url "http://www.springer.com"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    url="http://www.springer.com/?searchKey=easySearchKey&searchType=easy&visited=true&propagate=false&resultStart=1&resultCount=10&SGWID=5-102-14-0-0&queryText=${escaped_args}&easySearchOption=${field}&go.x=8&go.y=7"
+    w3_browse_url "${url}"
+fi
+
