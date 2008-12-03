@@ -74,6 +74,7 @@ dist_elvi_SCRIPTS	= \
 		  sunonesearch \
 		  thesaurus \
 		  translate \
+		  urban \
 		  w3css \
 		  w3html \
 		  w3link \
