@@ -1,0 +1,28 @@
+#!/bin/sh
+#
+# AUTHOR: René Reigel based on piratebay by J.R. Mauro
+#
+# DATE: Tue, 20 Jan 2009 05:48:21 +0100
+#
+# DESC: Elvi to search the Arch User Repository
+# elvis: aur		-- Search aur.archlinux.org for PKGBUILDS
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search aur.archlinux.org for PKGBUILDS
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://aur.archlinux.org/packages"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://aur.archlinux.org/packages.php?O=0&L=0&C=0&K=${escaped_args}&SeB=nd&SB=a&SO=d&PP=100&do_Search=Go"
+fi

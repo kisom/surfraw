@@ -130,6 +130,7 @@ amazon		-- Search the amazon.com bookstore
 archpkg		-- Search Arch Linux packages (www.archlinux.org)
 arxiv		-- Search arXiv E-Print Archive for articles
 ask		-- Question the web using Ask Jeeves (www.ask.com)
+aur		-- Search aur.archlinux.org for PKGBUILDS
 austlii		-- Search Australian Law docs (www.austlii.edu.au)
 bbcnews		-- Search BBC News (news.bbc.co.uk)
 cddb		-- Search for cd track listings in CDDB (www.gracenote.com)

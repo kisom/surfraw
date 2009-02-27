@@ -41,10 +41,10 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES =
 am__dist_elvi_SCRIPTS_DIST = W alioth altavista amazon archpkg arxiv \
-	ask austlii bbcnews cddb cia cite cnn codesearch ctan currency \
-	cve debbugs debcontents deblists deblogs debpackages debpts \
-	debsec debwiki deja discogs dmoz ebay etym excite fast foldoc \
-	filesearching freebsd freedb freshmeat fsfdir genpkg \
+	ask aur austlii bbcnews cddb cia cite cnn codesearch ctan \
+	currency cve debbugs debcontents deblists deblogs debpackages \
+	debpts debsec debwiki deja discogs dmoz ebay etym excite fast \
+	foldoc filesearching freebsd freedb freshmeat fsfdir genpkg \
 	genportage gutenberg ixquick google happypenguin imdb javasun \
 	scpan slinuxdoc lastfm leodict lsm musicbrainz netbsd ntrs \
 	openbsd piratebay pgpkeys port pubmed rae rfc rhyme scaleplus \
@@ -135,7 +135,7 @@ top_srcdir = @top_srcdir@
 
 # $Id$
 elvidir = $(ELVIDIR)
-dist_elvi_SCRIPTS = W alioth altavista amazon archpkg arxiv ask \
+dist_elvi_SCRIPTS = W alioth altavista amazon archpkg arxiv ask aur \
 	austlii bbcnews cddb cia cite cnn codesearch ctan currency cve \
 	debbugs debcontents deblists deblogs debpackages debpts debsec \
 	debwiki deja discogs dmoz ebay etym excite fast foldoc \

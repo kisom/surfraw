@@ -9,6 +9,7 @@ dist_elvi_SCRIPTS	= \
 		  archpkg \
 		  arxiv \
 		  ask \
+		  aur \
 		  austlii \
 		  bbcnews \
 		  cddb \
