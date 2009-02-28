@@ -22,6 +22,8 @@ Fri Feb 27 03:49:43 GMT 2009  - surfraw 2.2.4
     + urban - Thanks to J. R. Mauro.
     + aur - Thanks to René Reigel.
   * Fixed excite elvis.
+  * Changed cite to use citeseerx.ist.psu.edu, the old
+    citeseer is no longer being updated.
 
 Sat Sep 13 20:40:01 BST 2008  - surfraw 2.2.3
 

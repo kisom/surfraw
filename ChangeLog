@@ -1,3 +1,9 @@
+2009-02-28  Ian Beckwith  <ianb@erislabs.net>
+
+	* Changed cite to use citeseerx.ist.psu.edu, the old
+	  site is no longer being updated. Modified
+	  command line options to match new site.
+
 2009-02-27  Ian Beckwith  <ianb@erislabs.net>
 
 	* New elvis: aur. Thanks to René Reigel.

@@ -1,24 +1,26 @@
 #!/bin/sh
 # $Id$
-# elvis: cite		-- Search computer science papers (www.researchindex.com)
+# elvis: cite		-- Search computer science papers (citeseerx.ist.psu.edu)
 . surfraw || exit 1
 
 w3_config_hook () {
 defyn   SURFRAW_cite_citations 0
+defyn   SURFRAW_cite_authors 0
 }
 
 w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words]...
 Description:
-   Surfraw search CiteSeer (www.researchindex.com)
+   Surfraw search CiteSeer^X (citeseerx.ist.psu.edu)
 
-   Research Index is a scientific literature digital library that
+   CiteSeer is a scientific literature digital library that
    indexes the full text of spidered PDF and PS documents and performes
    sophisticated clustering and citation analysis on the results.
 
 Local options:
-  -cite                         Search citations rather than documents.
+  -cite                         Include citations.
+  -author                       Search authors instead of documents.
 EOF
     w3_global_usage
 }
@@ -27,7 +29,8 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-cite) setoptyn   SURFRAW_cite_citations 1	;;
+	-cit*)  setoptyn   SURFRAW_cite_citations 1	;;
+	-auth*) setoptyn   SURFRAW_cite_authors 1	;;
 	*) return 1 ;;
     esac
     return 0
@@ -37,12 +40,15 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-    w3_browse_url "http://citeseer.ist.psu.edu/"
+    w3_browse_url "http://citeseerx.ist.psu.edu/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    url="http://citeseer.ist.psu.edu/cis?q=${escaped_args}&cs=1"
+    url="http://citeseerx.ist.psu.edu/search?q=${escaped_args}&Submit=Search&sort=rel"
     if ifyes SURFRAW_cite_citations; then
-	url="${url}&submit=Search+Citations"
+	url="${url}&ic=1"
+    fi
+    if ifyes SURFRAW_cite_authors; then
+	url="${url}&t=auth"
     fi
     w3_browse_url "$url"
 fi

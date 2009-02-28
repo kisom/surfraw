@@ -1,2 +1,4 @@
 cite functional
-(\d+ documents found|More than 10000 results)
+\d+ documents found
+cite -auth knuth
+\d+ documents found
