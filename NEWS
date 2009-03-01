@@ -15,7 +15,7 @@
 
 				  N E W S
 
-Fri Feb 27 03:49:43 GMT 2009  - surfraw 2.2.4
+Sun Mar  1 00:23:33 GMT 2009  - surfraw 2.2.4
 
   * New elvi:
     + ntrs, scicom, springer - Thanks to Wim Van Hoydonck.
@@ -24,6 +24,7 @@ Fri Feb 27 03:49:43 GMT 2009  - surfraw 2.2.4
   * Fixed excite elvis.
   * Changed cite to use citeseerx.ist.psu.edu, the old
     citeseer is no longer being updated.
+  * Fixed amazon uk.
 
 Sat Sep 13 20:40:01 BST 2008  - surfraw 2.2.3
 

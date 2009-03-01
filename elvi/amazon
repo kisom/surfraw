@@ -83,6 +83,8 @@ else
     escaped_args=`w3_url_of_arg $w3_args`
     if [ $host = "www.amazon.cn" ] ; then
 	url="http://${host}/search/search.asp?searchType=&searchWord=${escaped_args}&Go.x=0&Go.y=0&bestSaleNum=0"
+    elif [ $host = "www.amazon.co.uk" ] ; then
+	url="http://${host}/s/ref=nb_ss_w_h_?url=search-alias%3Daps&field-keywords=${escaped_args}"
     else
 	url="http://${host}/exec/obidos/external-search?index=${SURFRAW_amazon_search}&keyword=${escaped_args}"
     fi
