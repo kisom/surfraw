@@ -14,7 +14,7 @@ Usage: $w3_argv0 [options] [search-string]
 Description:
   Search amazon
 Local options:
-  -country=COUNTRY		Two letter domain-style country code
+  -country=COUNTRY              Two letter domain-style country code
            com              |   Main amazon.com site (default)
            ca               |   Canada
            cn               |   China
@@ -22,29 +22,151 @@ Local options:
            fr               |   France
            jp               |   Japan
            uk                   UK
-				Environment: SURFRAW_amazon_country, SURFRAW_lang
-  -search=			Specialised search on topic
-          all		    |   All products
-	  auctions	    |   Auctions
-	  books             |	Books
-	  cars		    |   New Cars
-	  classical         |	Classical Music
-	  dvd		    |	DVD
-	  electronics       |	Electronics
-	  garden            |	Lawn & Patio
-	  kitchen           |	Kitchen
-	  music             |	Popular Music
-	  outlet	    |   Outlet
-	  photo 	    |	Camera & Photo
-	  software          |	Software
-	  toys		    |	Toys & Games
-	  tools		    |	Tools & Hardware
-	  vhs		    |	Video
-	  videogames	    |   Video Games
-	  zshops	    |   zShops
-	  wireless	       	Mobile & Wireless
-				Default: $SURFRAW_amazon_search
-				Environment: SURFRAW_amazon_search
+                                Environment: SURFRAW_amazon_country, SURFRAW_lang
+                                Default: $SURFRAW_amazon_country
+  -search=                      Specialised search on topic
+            all                 All Departments.
+      amazon.com:
+            apparel             Apparel & Accessories
+            automotive          Automotive
+            baby-products       Baby
+            beauty              Beauty
+            books               Books
+            wireless-aps        Cell Phones & Service
+            electronics         Electronics
+            misc                Everything Else
+            gourmet             Gourmet Food
+            grocery             Grocery
+            hpc                 Health & Personal Care
+            garden              Home & Garden
+            tools               Home Improvement
+            industrial          Industrial & Scientific
+            jewelry             Jewelry
+            digital-text        Kindle Store
+            magazines           Magazines
+            dvd                 Movies & TV
+            digital-music       MP3 Downloads
+            popular             Music
+            mi                  Musical Instruments
+            office-products     Office Products & Supplies
+            shoes               Shoes
+            software            Software
+            sporting            Sports & Outdoors
+            toys-and-games      Toys & Games
+            vhs                 VHS
+            videogames          Video Games
+            amazontv            Video On Demand
+            watches             Watches
+    uk:
+            books               Books
+            electronics         Electronics
+            popular             Music
+            classical           Classical Music
+            digital-music       MP3 Downloads
+            dvd                 DVD
+            vhs                 VHS
+            software            Software
+            videogames          Video Games
+            software-videogames Software & Games
+            diy                 DIY & Tools
+            outdoor             Garden & Outdoors
+            kitchen             Kitchen & Home
+            drugstore           Health & Beauty
+            beauty              Beauty
+            toys                Toys & Games
+            sports              Sports & Leisure
+            jewelry-watches     Jewellery & Watches
+            clothing            Clothing
+            shoes               Shoes & Accessories
+            baby                Baby
+    fr:
+            books               Livres en français
+            english-books       Livres en anglais
+            electronics         High-tech
+            popular             Musique
+            classical           Musique classique
+            dvd                 DVD & Vidéo
+            blu-ray             Blu-ray
+            software            Logiciels
+            videogames          Jeux vidéo
+            toys                Jeux et Jouets
+            kitchen             Cuisine & Maison
+            jewelry-watches     Montres & Bijoux
+    de:
+            books               Bücher
+            english-books       Englische Bücher
+            magazines           Zeitschriften
+            popular             Musik
+            classical           Klassische Musik
+            dvd                 DVD
+            blu-ray             Blu-ray
+            electronics         Elektronik & Foto
+            computer            Computer
+            photo               Kamera & Foto
+            kitchen             Küche & Haushalt
+            diy                 Baumarkt
+            automotive          Auto & Motorrad
+            outdoor             Garten & Freizeit
+            drugstore           Drogerie & Bad
+            beauty              Parfümerie & Kosmetik
+            software            Software
+            videogames          Games
+            toys                Spielzeug
+            sports              Sport & Freizeit
+            jewelry-watches     Uhren & Schmuck
+            baby                Babyausstattung
+            clothing            Bekleidung
+            shoes               Schuhe & Handtaschen
+    ca:
+            books               Books
+            popular             Music
+            classical           Classical Music
+            dvd                 DVD
+            vhs                 VHS
+            electronics         Electronics
+            software            Software
+            videogames          Video Games
+    jp:
+            books               a書
+            english-books       m酪
+            electronics         痩d&塔Jメラ
+            kitchen             zメ[ム&Lャb\`ャ
+            popular             塔~ュ[＜WbャN
+            classical           Nャ宴VbャN音y
+            dvd                 DVD
+            software            PC潟\tャg
+            videogames          Qメ[ム
+            toys                おもちゃ&zャr[
+            sporting            ＜X|メ[c&ャAEャghャA
+            hpc                 wャ泣X&rャ[eャB[
+            beauty              ＜RXャ
+            food-beverage       ＄Hi&譜料
+            watch               時v
+            baby                激xrメ[&}ャ^jャeB
+            apparel             ャApャ激&泣t@ャbVャ梼G貨
+    cn:
+            1                   图书
+            2                   音乐
+            3                   影视
+            5                   手机
+            6                   家电
+            7                   化妆
+            8                   厨具
+            9                   家居
+            10                  运动健康
+            11                  玩具
+            12                  钟表首饰
+            14                  个人护理
+            15                  软件
+            16                  游戏/娱乐
+            17                  礼品箱包
+            20                  摄影摄像
+            21                  Mp3/Mp4
+            22                  视听设备
+            23                  电脑配件
+            25                  教育音像
+                                Default: $SURFRAW_amazon_search
+                                Environment: SURFRAW_amazon_search
 
 Examples:
   $w3_argv0 -search=books -country=uk -q The Lotus and The Robot
@@ -81,12 +203,39 @@ if null "$w3_args"; then
     w3_browse_url "http://${host}/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    if [ $host = "www.amazon.cn" ] ; then
-	url="http://${host}/search/search.asp?searchType=&searchWord=${escaped_args}&Go.x=0&Go.y=0&bestSaleNum=0"
-    elif [ $host = "www.amazon.co.uk" ] ; then
-	url="http://${host}/s/ref=nb_ss_w_h_?url=search-alias%3Daps&field-keywords=${escaped_args}"
-    else
-	url="http://${host}/exec/obidos/external-search?index=${SURFRAW_amazon_search}&keyword=${escaped_args}"
+    if [ "$SURFRAW_amazon_search" = books ] ; then
+	SURFRAW_amazon_search=stripbooks
+    elif [ "$SURFRAW_amazon_search" = all ] ; then
+	SURFRAW_amazon_search=aps
     fi
-    w3_browse_url "${url}"
+    case "$host" in
+    www.amazon.cn)
+    	path="mn/searchApp"
+	args="ix=sunray&pageletid=headsearch&searchType=${SURFRAW_amazon_search}&keywords=${escaped_args}&Go.x=0&Go.y=0&bestSaleNum=0"
+	 break;;
+    www.amazon.co.jp)
+    	path="s/ref=nb_ss_gw"
+    	args="__mk_ja_JP=%83J%83%5E%83J%83i&url=search-alias%3D${SURFRAW_amazon_search}&field-keywords=${escaped_args}"
+	break;;
+    www.amazon.co.uk)
+    	path="s/ref=nb_ss_w_h_"
+    	args="url=search-alias%3D${SURFRAW_amazon_search}&field-keywords=${escaped_args}"
+	break;;
+    www.amazon.fr)
+        path="s/ref=nb_ss_w"
+	args="__mk_fr_FR=%C5M%C5Z%D5%D1&url=search-alias%3D${SURFRAW_amazon_search}&field-keywords=${escaped_args}"
+	break;;
+    www.amazon.de)
+        path="s/ref=nb_ss_w"
+	args="__mk_de_DE=%C5M%C5Z%D5%D1&url=search-alias%3D${SURFRAW_amazon_search}&field-keywords=${escaped_args}"
+	break;;
+    www.amazon.ca)
+	path="s/ref=nb_ss_gw"
+	args="url=search-alias%3D${SURFRAW_amazon_search}&field-keywords=${escaped_args}"
+	break;;
+    *)
+        path="s/ref=nb_ss_gw"
+	args="url=search-alias%3D${SURFRAW_amazon_search}&field-keywords=${escaped_args}"
+    esac
+    w3_browse_url "http://${host}/${path}?${args}"
 fi

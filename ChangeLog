@@ -3,7 +3,7 @@
 	* Changed cite to use citeseerx.ist.psu.edu, the old
 	  site is no longer being updated. Modified
 	  command line options to match new site.
-	* Fixed amazon uk.
+	* Amazon: fixed; updated categories.
 
 2009-02-27  Ian Beckwith  <ianb@erislabs.net>
 
