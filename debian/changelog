@@ -1,8 +1,11 @@
 surfraw (2.2.4-1) unstable; urgency=low
 
   * New upstream version.
+  * postrm: add 'set -e'.
+  * debian/copyright: point to right GPL link (NB only the file
+    'missing' is GPLed, most of the package is PD).
 
- -- Ian Beckwith <ianb@erislabs.net>  Sun, 01 Mar 2009 02:11:29 +0000
+ -- Ian Beckwith <ianb@erislabs.net>  Sun, 01 Mar 2009 02:18:17 +0000
 
 surfraw (2.2.3-1) unstable; urgency=low
 

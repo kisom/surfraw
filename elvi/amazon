@@ -211,6 +211,9 @@ else
     case "$host" in
     www.amazon.cn)
     	path="mn/searchApp"
+	if [ "$SURFRAW_amazon_search" = "aps" ] ;then
+	    SURFRAW_amazon_search=""
+	fi
 	args="ix=sunray&pageletid=headsearch&searchType=${SURFRAW_amazon_search}&keywords=${escaped_args}&Go.x=0&Go.y=0&bestSaleNum=0"
 	 break;;
     www.amazon.co.jp)
