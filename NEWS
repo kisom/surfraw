@@ -15,6 +15,10 @@
 
 				  N E W S
 
+Mon Mar  9 02:28:56 GMT 2009  - surfraw 2.2.5
+
+  * rfc: use HTML for RFCs and BCPs.
+
 Sun Mar  1 02:12:14 GMT 2009  - surfraw 2.2.4
 
   * New elvi:
