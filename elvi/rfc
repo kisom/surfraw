@@ -114,7 +114,9 @@ else
             if ifyes SURFRAW_rfc_ftp
             then
                 url="ftp://ftp.rfc-editor.org/in-notes${subdir}/${fileprefix}${escaped_args}.txt"
-            else
+            elif [ $fileprefix = rfc ] || [ $fileprefix = bcp ]; then
+		url="http://tools.ietf.org/html/${fileprefix}${escaped_args}"
+	    else
                 url="http://www.rfc-editor.org/rfc${subdir}/${fileprefix}${escaped_args}.txt"
             fi
         else # godless PDFs

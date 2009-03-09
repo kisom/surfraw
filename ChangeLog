@@ -1,3 +1,9 @@
+2009-03-09  Ian Beckwith  <ianb@erislabs.net>
+
+	* rfc: Default to HTML for RFCs and BCPs.
+	  Thanks to Micah Anderson.
+	* rfc.test: Test tools.ietf.org.
+
 2009-02-28  Ian Beckwith  <ianb@erislabs.net>
 
 	* Changed cite to use citeseerx.ist.psu.edu, the old
