@@ -2,7 +2,7 @@ Source: surfraw
 Section: web
 Priority: optional
 Maintainer: Debian surfraw maintainers <surfraw-devel@lists.alioth.debian.org>
-Uploaders: Moritz Muehlenhoff <jmm@debian.org>, Thomas Smith <tgs@debian.org>, Christian Surchi <csurchi@debian.org>, Ian Beckwith <ianb@erislabs.net>
+Uploaders: Moritz Muehlenhoff <jmm@debian.org>, Christian Surchi <csurchi@debian.org>, Ian Beckwith <ianb@erislabs.net>
 Standards-Version: 3.8.0
 Build-Depends: debhelper (>= 6)
 Vcs-Cvs: :pserver:anonymous@cvs.alioth.debian.org:/cvsroot/surfraw
