@@ -1,3 +1,8 @@
+2009-04-05  Ian Beckwith  <ianb@erislabs.net>
+
+	* Support '--' to indicate end of options, so, for instance,
+	  "sr google -g -- foo -bar" works. Thanks to Andy Valencia.
+
 2009-03-09  Ian Beckwith  <ianb@erislabs.net>
 
 	* Bump version to 2.2.5.

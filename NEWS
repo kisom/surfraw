@@ -18,6 +18,8 @@
 Mon Mar  9 02:28:56 GMT 2009  - surfraw 2.2.5
 
   * rfc: use HTML for RFCs and BCPs.
+  * Support '--' to indicate end of options, so, for instance,
+    "sr google -g -- foo -bar" works.
 
 Sun Mar  1 02:12:14 GMT 2009  - surfraw 2.2.4
 

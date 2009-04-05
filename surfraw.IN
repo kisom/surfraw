@@ -96,7 +96,7 @@ setoptyn () {
 
 quote_ifs () {
 	 if [ -z "$1" ];   then return;  fi
-     perl -e '$ifs=$ENV{IFS} || " "; $arg=shift;if($arg =~/[$ifs]/) { $arg="\"$arg\""; } print "$arg\n"; ' "$1"
+     perl -e '$ifs=$ENV{IFS} || " "; $arg=shift;if($arg =~/[$ifs]/) { $arg="\"$arg\""; } print "$arg\n"; ' -- "$1"
 }
 
 bookmark_file_search () {
@@ -219,6 +219,7 @@ Global options:
 				Default: $SURFRAW_quote_args
 				Environment: SURFRAW_quote_args
   -version			Display Surfraw version ($surfraw_version)
+  --				End of options
 Copyright:
   Copyright (c) 2003-2009 The Surfraw-Devel Team
                            <surfraw-devel@lists.alioth.debian.org>
@@ -247,7 +248,6 @@ w3_parse_option () {
 	    -*=*) optarg=`echo "$opt" | sed 's/[-_a-zA-Z0-9]*=//'`
     esac
     w3_parse_option_hook "$opt" "$optarg" && return 0
-
     case "$opt" in
 	-browser=*)	    setopt   SURFRAW_browser		$optarg	;;
 	-elvi)		    sed -n 's/^.*elvis: \(.*\)$/\1/p' $elvidir/*; exit 0            ;;
@@ -261,8 +261,8 @@ w3_parse_option () {
 	-t | -text)	    unset DISPLAY
 			    setoptyn SURFRAW_graphical 		no	;;
 	-version)	    echo $surfraw_version; exit 0	    	;;
-	-p | -print)    setoptyn SURFRAW_print  yes     ;;
-	--)		    return 1					;;
+	-p | -print)        setoptyn SURFRAW_print  yes     		;;
+	--)		    setoptyn SURFRAW_end_of_args yes 		;;
 	-*)		    w3_bad_option "$opt"		    	;;
 	*)		    return 1					;;
     esac
@@ -274,18 +274,24 @@ w3_parse_args () {
     def SURFRAW_browser none
     def SURFRAW_browser_args none
     defyn SURFRAW_quote_ifs yes
+    defyn SURFRAW_end_of_args no
     do_help=0
     mode=unknown
     for arg in "$@"; do
+	isarg=1
+	if ifno SURFRAW_end_of_args
+	then
 	    w3_parse_option "$arg"
-        if [ $? -eq 1 ]
-		then
-		    if ok SURFRAW_quote_ifs
-			then
-			    arg=`quote_ifs "$arg"`
-			fi
-		    w3_args="$w3_args $arg"
-		fi
+	    isarg=$?
+	fi
+        if [ $isarg -eq 1 ]
+	then
+	    if ok SURFRAW_quote_ifs
+	    then
+		arg=`quote_ifs "$arg"`
+	    fi
+	    w3_args="$w3_args $arg"
+	fi
     done
     if test $SURFRAW_browser = none; then
 	if ok SURFRAW_graphical && test -n "$DISPLAY"; then
