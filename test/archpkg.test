@@ -1,2 +1,2 @@
-archpkg perl-io-compress
-perl-io-compress-zlib
+archpkg perl-yaml
+perl-yaml-syck

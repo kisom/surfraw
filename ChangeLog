@@ -1,3 +1,7 @@
+2009-05-12  Ian Beckwith  <ianb@erislabs.net>
+
+	* archpkg, bbcnews, debcontents, debwiki: fixed tests.
+
 2009-04-05  Ian Beckwith  <ianb@erislabs.net>
 
 	* Support '--' to indicate end of options, so, for instance,
