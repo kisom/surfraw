@@ -1,6 +1,6 @@
 #!/bin/sh
 # $Id$
-# elvis: comlaw	-- Search Australian Law using Comlaw (www.comlaw.gov.au)
+# elvis: comlaw		-- Search Australian Law using Comlaw (www.comlaw.gov.au)
 . surfraw || exit 1
 
 w3_usage_hook () {
