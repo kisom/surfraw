@@ -54,20 +54,23 @@ Local options:
       slink             |       2.1
       potato            |       2.2
       woody             |       3.0
+      sarge             |       3.1
      Ubuntu (-u):
        dapper           |       Dapper
        dapper-updates   |       Dapper Updates
        dapper-backports |       Dapper Backports
-       feisty           |       Feisty
-       feisty-updates   |       Feisty Updates
-       feisty-backports |       Feisty Backports
-       gutsy            |       Gutsy
-       gutsy-updates    |       Gutsy Updates
-       gutsy-backports  |       Gutsy Backports
        hardy            |       Hardy
        hardy-updates    |       Hardy Updates
        hardy-backports  |       Hardy Backports
        intrepid         |       Intrepid
+       intrepid-updates |       Intrepid Updates
+       intrepid-backports|       Intrepid Backports
+       jaunty           |       Jaunty
+       jaunty-updates   |       Jaunty Updates
+       jaunty-backports |       Jaunty Backports
+       karmic           |       Karmic
+       karmic-updates   |       Karmic Updates
+       karmic-backports |       Karmic Backports
                                 Default: $SURFRAW_debcontents_distro
                                 Environment: SURFRAW_debcontents_distro
 EOF
@@ -114,7 +117,7 @@ else
     then
 	if [ "$SURFRAW_debcontents_distro" = "stable" ]
 	then
-		SURFRAW_debcontents_distro=gutsy
+		SURFRAW_debcontents_distro=jaunty
 	fi
     fi
     url="$searchurl?keywords=${escaped_args}&searchon=contents"
