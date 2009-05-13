@@ -28,10 +28,10 @@ Local options:
       non-free          |       packages not meeting DFSG
     Ubuntu (-u):
       any               |       all releases
-      main              |       
-      restricted        |       
-      universe          |       
-      multiverse        |       
+      main              |
+      restricted        |
+      universe          |
+      multiverse        |
 
                                 Default: $SURFRAW_debian_release
                                 Environment: SURFRAW_debian_release
@@ -49,25 +49,24 @@ Local options:
       slink             |       2.1
       potato            |       2.2
       woody             |       3.0
+      sarge             |       3.1
     Ubuntu (-u):
       any               |       All distributions
-      dapper            |       
-      dapper-updates    |       
-      dapper-backports  |       
-      edgy              |       
-      edgy-updates      |       
-      edgy-backports    |       
-      feisty            |       
-      feisty-updates    |       
-      feisty-backports  |       
-      gutsy             |       
-      gutsy-updates     |       
-      gutsy-backports   |       
-      hardy             |       
-      hardy-updates     |       
-      hardy-backports   |       
-      intrepid
-
+      dapper            |
+      dapper-updates    |
+      dapper-backports  |
+      hardy             |
+      hardy-updates     |
+      hardy-backports   |
+      intrepid          |
+      intrepid-updates  |
+      intrepid-backports|
+      jaunty            |
+      jaunty-updates    |
+      jaunty-backports  |
+      karmic            |
+      karmic-updates    |
+      karmic-backports
                                 Default: $SURFRAW_debian_distro
                                 Environment: SURFRAW_debian_distro
   -search=                      Field to search

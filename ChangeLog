@@ -1,7 +1,7 @@
 2009-05-13  Ian Beckwith  <ianb@erislabs.net>
 
 	* Replaced scaleplus with comlaw.
-	* debcontents: updated ubuntu release names.
+	* debpackages, debcontents: updated ubuntu release names.
 
 2009-05-12  Ian Beckwith  <ianb@erislabs.net>
 
