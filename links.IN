@@ -13,6 +13,7 @@ elvi.1sr.gz @mandir@/man1/cite.1sr.gz
 elvi.1sr.gz @mandir@/man1/cia.1sr.gz
 elvi.1sr.gz @mandir@/man1/cnn.1sr.gz
 elvi.1sr.gz @mandir@/man1/codesearch.1sr.gz
+elvi.1sr.gz @mandir@/man1/comlaw.1sr.gz
 elvi.1sr.gz @mandir@/man1/ctan.1sr.gz
 elvi.1sr.gz @mandir@/man1/currency.1sr.gz
 elvi.1sr.gz @mandir@/man1/cve.1sr.gz
@@ -59,7 +60,6 @@ elvi.1sr.gz @mandir@/man1/pubmed.1sr.gz
 elvi.1sr.gz @mandir@/man1/rae.1sr.gz
 elvi.1sr.gz @mandir@/man1/rfc.1sr.gz
 elvi.1sr.gz @mandir@/man1/rhyme.1sr.gz
-elvi.1sr.gz @mandir@/man1/scaleplus.1sr.gz
 elvi.1sr.gz @mandir@/man1/scholar.1sr.gz
 elvi.1sr.gz @mandir@/man1/scicom.1sr.gz
 elvi.1sr.gz @mandir@/man1/scpan.1sr.gz

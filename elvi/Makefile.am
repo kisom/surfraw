@@ -17,6 +17,7 @@ dist_elvi_SCRIPTS	= \
 		  cite \
 		  cnn \
 		  codesearch \
+		  comlaw \
 		  ctan \
 		  currency \
 		  cve \
@@ -65,7 +66,6 @@ dist_elvi_SCRIPTS	= \
 		  rae \
 		  rfc \
 		  rhyme \
-		  scaleplus \
 		  scholar \
 		  scicom \
 		  slashdot \

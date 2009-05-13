@@ -1,3 +1,7 @@
+2009-05-13  Ian Beckwith  <ianb@erislabs.net>
+
+	* Replaced scaleplus with comlaw.
+
 2009-05-12  Ian Beckwith  <ianb@erislabs.net>
 
 	* archpkg, bbcnews, debcontents, debwiki: fixed tests.
