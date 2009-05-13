@@ -5,8 +5,9 @@ surfraw (2.2.5-1) unstable; urgency=low
     Thanks for your work!.
   * Updated my email address in Uploaders.
   * Fixed VCS-Browser URL (Closes: #528299).
+  * Removed DM-Upload-Allowed header.
 
- -- Ian Beckwith <ianb@debian.org>  Tue, 12 May 2009 01:36:49 +0100
+ -- Ian Beckwith <ianb@debian.org>  Wed, 13 May 2009 02:08:45 +0100
 
 surfraw (2.2.4-1) unstable; urgency=low
 

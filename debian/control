@@ -8,7 +8,6 @@ Build-Depends: debhelper (>= 6)
 Vcs-Cvs: :pserver:anonymous@cvs.alioth.debian.org:/cvsroot/surfraw
 Vcs-Browser: http://alioth.debian.org/scm/viewvc.php/?root=surfraw
 Homepage: http://surfraw.alioth.debian.org
-XS-DM-Upload-Allowed: yes
 
 Package: surfraw
 Architecture: all
