@@ -15,6 +15,11 @@
 
 				  N E W S
 
+Sun Jun 28 23:24:35 BST 2009  - surfraw 2.2.6
+
+  * Fix bookmarks with multiple matches
+
+
 Wed May 13 02:30:21 BST 2009  - surfraw 2.2.5
 
   * Replaced scaleplus elvi with comlaw.

@@ -1,3 +1,8 @@
+2009-06-28  Ian Beckwith  <ianb@erislabs.net>
+
+	* Bump version to 2.2.6.
+	* Only use first matching bookmark (Thanks to Carl Fredrik Hammar).
+
 2009-05-13  Ian Beckwith  <ianb@erislabs.net>
 
 	* Replaced scaleplus with comlaw.
