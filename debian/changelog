@@ -2,8 +2,9 @@ surfraw (2.2.6-1) unstable; urgency=low
 
   * New upstream version.
     + Only use first matching bookmark (Closes: #530786).
+  * debian/control: update vcs- fields to point to new git repo.
 
- -- Ian Beckwith <ianb@debian.org>  Sun, 28 Jun 2009 23:27:15 +0100
+ -- Ian Beckwith <ianb@debian.org>  Mon, 20 Jul 2009 04:03:04 +0100
 
 surfraw (2.2.5-1) unstable; urgency=low
 
