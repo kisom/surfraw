@@ -28,6 +28,7 @@ dist_elvi_SCRIPTS	= \
 		  debpackages \
 		  debpts \
 		  debsec \
+		  debvcsbrowse \
 		  debwiki \
 		  deja \
 		  discogs \

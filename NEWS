@@ -15,9 +15,10 @@
 
 				  N E W S
 
-Sun Jun 28 23:24:35 BST 2009  - surfraw 2.2.6
+Tue Jul 21 04:13:16 BST 2009  - surfraw 2.2.6
 
-  * Fix bookmarks with multiple matches
+  * New elvi: debvcsbrowse.
+  * Fix bookmarks with multiple matches.
 
 
 Wed May 13 02:30:21 BST 2009  - surfraw 2.2.5

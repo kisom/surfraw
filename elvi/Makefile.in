@@ -43,15 +43,15 @@ CONFIG_CLEAN_FILES =
 am__dist_elvi_SCRIPTS_DIST = W alioth altavista amazon archpkg arxiv \
 	ask aur austlii bbcnews cddb cia cite cnn codesearch comlaw \
 	ctan currency cve debbugs debcontents deblists deblogs \
-	debpackages debpts debsec debwiki deja discogs dmoz ebay etym \
-	excite fast foldoc filesearching freebsd freedb freshmeat \
-	fsfdir genpkg genportage gutenberg ixquick google happypenguin \
-	imdb javasun scpan slinuxdoc lastfm leodict lsm musicbrainz \
-	netbsd ntrs openbsd piratebay pgpkeys port pubmed rae rfc \
-	rhyme scholar scicom slashdot sourceforge springer stockquote \
-	sunonesearch thesaurus translate urban w3css w3html w3link \
-	w3rdf wayback webster wetandwild wikipedia woffle yahoo yubnub \
-	opensearch
+	debpackages debpts debsec debvcsbrowse debwiki deja discogs \
+	dmoz ebay etym excite fast foldoc filesearching freebsd freedb \
+	freshmeat fsfdir genpkg genportage gutenberg ixquick google \
+	happypenguin imdb javasun scpan slinuxdoc lastfm leodict lsm \
+	musicbrainz netbsd ntrs openbsd piratebay pgpkeys port pubmed \
+	rae rfc rhyme scholar scicom slashdot sourceforge springer \
+	stockquote sunonesearch thesaurus translate urban w3css w3html \
+	w3link w3rdf wayback webster wetandwild wikipedia woffle yahoo \
+	yubnub opensearch
 am__installdirs = "$(DESTDIR)$(elvidir)"
 dist_elviSCRIPT_INSTALL = $(INSTALL_SCRIPT)
 SCRIPTS = $(dist_elvi_SCRIPTS)
@@ -139,14 +139,14 @@ elvidir = $(ELVIDIR)
 dist_elvi_SCRIPTS = W alioth altavista amazon archpkg arxiv ask aur \
 	austlii bbcnews cddb cia cite cnn codesearch comlaw ctan \
 	currency cve debbugs debcontents deblists deblogs debpackages \
-	debpts debsec debwiki deja discogs dmoz ebay etym excite fast \
-	foldoc filesearching freebsd freedb freshmeat fsfdir genpkg \
-	genportage gutenberg ixquick google happypenguin imdb javasun \
-	scpan slinuxdoc lastfm leodict lsm musicbrainz netbsd ntrs \
-	openbsd piratebay pgpkeys port pubmed rae rfc rhyme scholar \
-	scicom slashdot sourceforge springer stockquote sunonesearch \
-	thesaurus translate urban w3css w3html w3link w3rdf wayback \
-	webster wetandwild wikipedia woffle yahoo yubnub \
+	debpts debsec debvcsbrowse debwiki deja discogs dmoz ebay etym \
+	excite fast foldoc filesearching freebsd freedb freshmeat \
+	fsfdir genpkg genportage gutenberg ixquick google happypenguin \
+	imdb javasun scpan slinuxdoc lastfm leodict lsm musicbrainz \
+	netbsd ntrs openbsd piratebay pgpkeys port pubmed rae rfc \
+	rhyme scholar scicom slashdot sourceforge springer stockquote \
+	sunonesearch thesaurus translate urban w3css w3html w3link \
+	w3rdf wayback webster wetandwild wikipedia woffle yahoo yubnub \
 	$(am__append_1)
 all: all-am
 

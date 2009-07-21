@@ -34,11 +34,11 @@ w3_config () {
 }
 
 warn () {
-    echo "$w3_argv0 WARNING: ""$@"
+    echo "$w3_argv0 WARNING: ""$@" >&2
 }
 
 err () {
-    echo "$w3_argv0 ERROR: ""$@"
+    echo "$w3_argv0 ERROR: ""$@" >&2
     exit 1
 }
 
