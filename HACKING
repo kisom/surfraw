@@ -147,42 +147,49 @@ Or... How to Eat The CHEESE
         to the surfraw-extra package by adding its files to
 	debian/surfraw-extra.files
 
-    11: if using cvs, '(cd elvi;cvs add elviname)' then 'cvs commit'
+    11: if using git, 'git add elvi/elviname' then commit and push.
 
  APPENDIX 2
 
     Preparing a release of surfraw:
 
-    1: cvs -d :ext:user@cvs.alioth.debian.org:/cvsroot/surfraw checkout surfraw web
+    1: git clone git://git.debian.org/surfraw/surfraw
 
-    2: cd surfraw
+    2: git clone git://git.debian.org/surfraw/web
 
-    3: cvs tag -c surfraw_versionnumber_debianversion
+    3: cd surfraw
 
-    4: mkdir -p  ../release/upload ; cd ../release
+    4: git tag surfraw-versionnumber-debianversion
 
-    5: cvs -d :ext:user@cvs.alioth.debian.org:/cvsroot/surfraw export -r surfraw_versionnumber_debianversion surfraw
+    5: git push --tags
 
-    6: cd surfraw
+    6: mkdir -p  ../release/upload ; cd ../release
 
-    7: ./configure &&  make distcheck
+    7: git clone git://git.debian.org/surfraw/surfraw
 
-    8: # test surfraw-version.tar.gz
+    8: cd surfraw
 
-    9: cp surfraw-version.tar.gz ../surfraw_version.orig.tar.gz
+    9: git checkout surfraw-versionnumber-debianversion
 
-    10: mv surfraw-version.tar.gz ../upload
+    10: rm -rf .git
 
-    11: pdebuild --buildresult ../upload --auto-debsign --logfile ../pbuilder.log
+    11: ./configure && make distcheck
 
-    12: cd ../upload
+    12: # test surfraw-version.tar.gz
 
-    13: # test and upload the debian packages
+    13: cp surfraw-version.tar.gz ../surfraw_version.orig.tar.gz
 
-    14: cp * ../../web/dist
+    14: mv surfraw-version.tar.gz ../upload
 
-    15: cd ../../web
+    15: pdebuild --buildresult ../upload --auto-debsign --logfile ../pbuilder.log
 
-    16: make install # see README.WEB for more info
+    16: cd ../upload
 
-$Id$
+    17: # test and upload the debian packages
+
+    18: cp * ../../web/dist
+
+    19: cd ../../web
+
+    20: make install # see README.WEB for more info
+

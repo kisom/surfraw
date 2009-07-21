@@ -41,7 +41,7 @@ just plain text) to match against the resulting web page.
 Multiple tests can be implemented per elvi, feel free to submit more!
 
 When new test files have been written, add them to EXTRA_DIST in
-test/Makefile.am, rerun autotools, and 'cvs add' them too.
+test/Makefile.am, rerun autotools, and 'git add' them too.
 
 If an elvis cannot be tested automatically, it can be marked as such
 by starting the first line of the .test file with SKIP followed by an
