@@ -43,6 +43,7 @@ dist_elvi_SCRIPTS	= \
 		  freedb \
 		  freshmeat \
 		  fsfdir \
+		  genbugs \
 		  genpkg \
 		  genportage \
 		  gutenberg \

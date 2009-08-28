@@ -7,9 +7,9 @@ EXTRA_DIST = runtests elviwithouttests README COOKIES W.test		\
 	debsec.test debwiki.test deja.test discogs.test dmoz.test	\
 	ebay.test etym.test excite.test fast.test filesearching.test	\
 	foldoc.test freebsd.test freedb.test freshmeat.test		\
-	fsfdir.test genpkg.test genportage.test google.test		\
-	gutenberg.test happypenguin.test imdb.test ixquick.test		\
-	javasun.test lastfm.test leodict.test lsm.test			\
+	fsfdir.test genbugs.test genpkg.test genportage.test		\
+	google.test gutenberg.test happypenguin.test imdb.test		\
+	ixquick.test javasun.test lastfm.test leodict.test lsm.test	\
 	musicbrainz.test netbsd.test ntrs.test openbsd.test		\
 	opensearch.test piratebay.test port.test pgpkeys.test		\
 	pubmed.test rae.test rfc.test rhyme.test scholar.test		\
