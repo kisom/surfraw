@@ -1,4 +1,9 @@
 # -*- sh -*- bash programmable completion for Surfraw, v2.2
+
+# This is for people who wish to use surfraw completion, without
+# installing the bash-completion package which sets this explicitly.
+shopt -s extglob
+
 _surfraw() 
 {       COMPREPLY=()
 	local cur=${COMP_WORDS[COMP_CWORD]}

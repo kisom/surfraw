@@ -1,6 +1,9 @@
 2009-08-28  Ian Beckwith  <ianb@erislabs.net>
 
 	* New elvi: genbugs (thanks to Nick White).
+	* surfraw-bash-completion.IN: enable extglob so completion
+	  works standalone (thanks to James Rowe).
+	  See http://bugs.gentoo.org/show_bug.cgi?id=277891
 
 2009-07-23  Ian Beckwith  <ianb@erislabs.net>
 
