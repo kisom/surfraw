@@ -11,7 +11,8 @@ _surfraw()
 	local opts='-browser -elvi -escape-url-args -graphical \
 		-help -q -quote -quiet -text -version'
 	local elvi="$(cut -f1 @sysconfdir@/surfraw.bookmarks ~/.surfraw.bookmarks 2>&-
-			cd @ELVIDIR@ && echo * 2>&-)"
+			cd @ELVIDIR@ && echo * 2>&-
+			[ -d ~/.surfraw.d ] && cd ~/.surfraw.d && echo * 2>&-)"
 	if      [[ $cur == -* ]]
 	then    COMPREPLY=( $( compgen -W "$opts" -- $cur ) )
 	# I can't see a way to get the =yes/=no parts to work...

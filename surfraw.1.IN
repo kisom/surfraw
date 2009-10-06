@@ -309,6 +309,9 @@ Default:
 .B @ELVIDIR@
 Location of the elvi.
 
+.TP
+.B ${HOME}/.surfraw.d/
+Per\(hyuser elvi.
 
 .TP
 .B @sysconfdir@/surfraw.conf

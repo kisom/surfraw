@@ -250,7 +250,13 @@ w3_parse_option () {
     w3_parse_option_hook "$opt" "$optarg" && return 0
     case "$opt" in
 	-browser=*)	    setopt   SURFRAW_browser		$optarg	;;
-	-elvi)		    sed -n 's/^.*elvis: \(.*\)$/\1/p' $elvidir/*; exit 0            ;;
+	-elvi)		    echo "Global elvi:"
+			    sed -n 's/^.*elvis: \(.*\)$/  \1/p' $elvidir/*
+			    if [ -d ~/.surfraw.d ]; then
+				echo "Local elvi:"
+				sed -n 's/^.*elvis: \(.*\)$/  \1/p' ~/.surfraw.d/*
+			    fi
+			    exit 0 ;;
 	-escape-url-args=*) setoptyn SURFRAW_escape_url_args	$optarg ;;
 	-g | -graphical)    setoptyn SURFRAW_graphical		yes	;;
 	-help | --help)     do_help=1					;;
@@ -414,7 +420,10 @@ then
 		surfraw_usage
 		exit 0
 	else
-		if [ -x "$elvidir/$elvi" ]
+		if [ -x ~/.surfraw.d/$elvi ]
+		then
+			sh -c "~/.surfraw.d/$elvi $opts $searchterms"
+		elif [ -x "$elvidir/$elvi" ]
 		then
  			sh -c "$elvidir/$elvi $opts $searchterms"
 		else
