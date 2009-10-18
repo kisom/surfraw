@@ -1,3 +1,9 @@
+2009-10-18  Ian Beckwith  <ianb@erislabs.net>
+
+	* Apply patch from James Rowe:
+	    Support per-user elvi in ~/.surfraw.d.
+            Based on the idea by Sumant Oemrawsingh.
+
 2009-08-28  Ian Beckwith  <ianb@erislabs.net>
 
 	* New elvi: genbugs (thanks to Nick White).
