@@ -22,13 +22,39 @@ w3_config_hook () {
     return 1
 }
 
+load_global_conf () {
+    local conf OIFS
+    conf=""
+    # if explicitly specified
+    if test -n "$SURFRAW_global_conf" && test -r "$SURFRAW_global_conf"; then
+	conf="$SURFRAW_global_conf"
+    elif test -n "$XDG_CONFIG_DIRS"; then
+	OIFS="$IFS"
+	IFS=:
+	set $XDG_CONFIG_DIRS
+	IFS="$OIFS"
+	for i in "$@"; do
+	    if test -r "$i/surfraw/conf"; then
+		conf="$i/surfraw/conf"
+		break
+	    fi
+	done
+    elif test -r "@sysconfdir@/xdg/surfraw/conf"; then # XDG default
+	conf="@sysconfdir@/xdg/surfraw/conf"
+    elif test -r "@sysconfdir@/surfraw.conf"; then # old surfraw default
+	conf="@sysconfdir@/surfraw.conf"
+    fi
+    if test -z "$conf"; then
+	err "couldn't find global config in @sysconfdir@/xdg/surfraw/conf or \$XDG_CONFIG_DIRS"
+    fi
+    . "$conf"
+}
+
 w3_config () {
 	prefix=@prefix@
-   def   SURFRAW_global_conf	@sysconfdir@/surfraw.conf
    def   SURFRAW_conf		$HOME/.surfraw.conf
 
-	test -r "$SURFRAW_global_conf" || err "couldn't source SURFRAW_global_conf ($SURFRAW_global_conf)"
-    . "$SURFRAW_global_conf"
+    load_global_conf
     w3_config_hook
     test -r "$SURFRAW_conf" && . "$SURFRAW_conf"
 }

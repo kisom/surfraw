@@ -26,9 +26,6 @@
 # autoconf guessed prefix
 prefix=@prefix@
 
-# setting this here is of dubious utility
-def   SURFRAW_global_conf	@sysconfdir@/surfraw.conf
-
 # secondary configuation file
 def   SURFRAW_conf		$HOME/.surfraw.conf
 
