@@ -74,7 +74,7 @@ am__base_list = \
   sed '$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;$$!N;s/\n/ /g' | \
   sed '$$!N;$$!N;$$!N;$$!N;s/\n/ /g'
 am__installdirs = "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(man1dir)" "$(DESTDIR)$(sysconfdir)"
+	"$(DESTDIR)$(man1dir)"
 am__dist_bin_SCRIPTS_DIST = opensearch-discover opensearch-genquery
 SCRIPTS = $(bin_SCRIPTS) $(dist_bin_SCRIPTS)
 SOURCES =
@@ -89,7 +89,7 @@ RECURSIVE_TARGETS = all-recursive check-recursive dvi-recursive \
 man1dir = $(mandir)/man1
 NROFF = nroff
 MANS = $(man_MANS)
-DATA = $(noinst_DATA) $(sysconf_DATA)
+DATA = $(noinst_DATA)
 RECURSIVE_CLEAN_TARGETS = mostlyclean-recursive clean-recursive	\
   distclean-recursive maintainer-clean-recursive
 AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGETS:-recursive=) \
@@ -215,7 +215,6 @@ top_srcdir = @top_srcdir@
 SUBDIRS = elvi test
 bin_SCRIPTS = surfraw surfraw-update-path
 @OPENSEARCH_TRUE@dist_bin_SCRIPTS = opensearch-discover opensearch-genquery
-sysconf_DATA = surfraw.conf surfraw.bookmarks
 devel_extra = banner prebuild
 noinst_DATA = surfraw-bash-completion
 man_MANS = surfraw-update-path.1 surfraw.1 elvi.1sr $(am__append_1)
@@ -375,26 +374,6 @@ uninstall-man1:
 	test -z "$$files" || { \
 	  echo " ( cd '$(DESTDIR)$(man1dir)' && rm -f" $$files ")"; \
 	  cd "$(DESTDIR)$(man1dir)" && rm -f $$files; }
-install-sysconfDATA: $(sysconf_DATA)
-	@$(NORMAL_INSTALL)
-	test -z "$(sysconfdir)" || $(MKDIR_P) "$(DESTDIR)$(sysconfdir)"
-	@list='$(sysconf_DATA)'; test -n "$(sysconfdir)" || list=; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(sysconfdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(sysconfdir)" || exit $$?; \
-	done
-
-uninstall-sysconfDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(sysconf_DATA)'; test -n "$(sysconfdir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	test -n "$$files" || exit 0; \
-	echo " ( cd '$(DESTDIR)$(sysconfdir)' && rm -f" $$files ")"; \
-	cd "$(DESTDIR)$(sysconfdir)" && rm -f $$files
 
 # This directory's subdirectories are mostly independent; you can cd
 # into them and run `make' without going through this Makefile.
@@ -723,7 +702,7 @@ check: check-recursive
 all-am: Makefile $(SCRIPTS) $(MANS) $(DATA)
 installdirs: installdirs-recursive
 installdirs-am:
-	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(man1dir)" "$(DESTDIR)$(sysconfdir)"; do \
+	for dir in "$(DESTDIR)$(bindir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(man1dir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-recursive
@@ -780,8 +759,7 @@ install-dvi: install-dvi-recursive
 
 install-dvi-am:
 
-install-exec-am: install-binSCRIPTS install-dist_binSCRIPTS \
-	install-sysconfDATA
+install-exec-am: install-binSCRIPTS install-dist_binSCRIPTS
 
 install-html: install-html-recursive
 
@@ -822,7 +800,7 @@ ps: ps-recursive
 ps-am:
 
 uninstall-am: uninstall-binSCRIPTS uninstall-dist_binSCRIPTS \
-	uninstall-local uninstall-man uninstall-sysconfDATA
+	uninstall-local uninstall-man
 
 uninstall-man: uninstall-man1
 
@@ -840,12 +818,12 @@ uninstall-man: uninstall-man1
 	install-dvi install-dvi-am install-exec install-exec-am \
 	install-html install-html-am install-info install-info-am \
 	install-man install-man1 install-pdf install-pdf-am install-ps \
-	install-ps-am install-strip install-sysconfDATA installcheck \
-	installcheck-am installdirs installdirs-am maintainer-clean \
+	install-ps-am install-strip installcheck installcheck-am \
+	installdirs installdirs-am maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-generic pdf \
 	pdf-am ps ps-am tags tags-recursive uninstall uninstall-am \
 	uninstall-binSCRIPTS uninstall-dist_binSCRIPTS uninstall-local \
-	uninstall-man uninstall-man1 uninstall-sysconfDATA
+	uninstall-man uninstall-man1
 
 
 surfraw: surfraw.IN
@@ -880,7 +858,10 @@ links: links.IN
 	chmod +x $@.tmp
 	mv $@.tmp $@
 
-install-data-hook: links
+install-data-hook: links surfraw.conf
+	mkdir -p $(DESTDIR)@sysconfdir@/xdg/surfraw
+	cp surfraw.conf $(DESTDIR)@sysconfdir@/xdg/surfraw/conf
+	cp surfraw.bookmarks $(DESTDIR)@sysconfdir@/xdg/surfraw/bookmarks
 	while read target link ;\
 	do \
 		ln -sf $$target  $(DESTDIR)/$$link ;\
@@ -890,6 +871,10 @@ install-data-hook: links
 @INSTALLSR_TRUE@	ln -sf surfraw.1.gz $(DESTDIR)/@mandir@/man1/sr.1.gz
 
 uninstall-local: links
+	-rm -f $(DESTDIR)@sysconfdir@/xdg/surfraw/conf
+	-rm -f $(DESTDIR)@sysconfdir@/xdg/surfraw/bookmarks
+	rmdir $(DESTDIR)@sysconfdir@/xdg/surfraw 2>/dev/null
+	rmdir $(DESTDIR)@sysconfdir@/xdg 2>/dev/null
 	while read target link ;\
 	do \
 		rm -f $(DESTDIR)/$$link ;\

@@ -5,7 +5,6 @@ bin_SCRIPTS = surfraw surfraw-update-path
 if OPENSEARCH
 dist_bin_SCRIPTS = opensearch-discover opensearch-genquery
 endif
-sysconf_DATA	= surfraw.conf surfraw.bookmarks
 devel_extra	= banner prebuild
 noinst_DATA	= surfraw-bash-completion
 man_MANS = surfraw-update-path.1 surfraw.1 elvi.1sr
@@ -41,7 +40,10 @@ links: links.IN
 
 include $(top_srcdir)/Makefile.include
 
-install-data-hook: links
+install-data-hook: links surfraw.conf
+	mkdir -p $(DESTDIR)@sysconfdir@/xdg/surfraw
+	cp surfraw.conf $(DESTDIR)@sysconfdir@/xdg/surfraw/conf
+	cp surfraw.bookmarks $(DESTDIR)@sysconfdir@/xdg/surfraw/bookmarks
 	while read target link ;\
 	do \
 		ln -sf $$target  $(DESTDIR)/$$link ;\
@@ -55,6 +57,10 @@ if INSTALLSR
 endif
 
 uninstall-local: links
+	-rm -f $(DESTDIR)@sysconfdir@/xdg/surfraw/conf
+	-rm -f $(DESTDIR)@sysconfdir@/xdg/surfraw/bookmarks
+	rmdir $(DESTDIR)@sysconfdir@/xdg/surfraw 2>/dev/null
+	rmdir $(DESTDIR)@sysconfdir@/xdg 2>/dev/null
 	while read target link ;\
 	do \
 		rm -f $(DESTDIR)/$$link ;\
