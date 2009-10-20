@@ -84,6 +84,13 @@ load_local_conf () {
     fi
 }
 
+get_local_elvi_dir () {
+    if test -n "$XDG_CONFIG_HOME";then
+	echo "$XDG_CONFIG_HOME/surfraw/elvi"
+    elif test -n "$HOME";then
+	echo "$HOME/.config/surfraw/elvi"
+    fi
+}
 
 w3_config () {
     load_global_conf
@@ -312,9 +319,10 @@ w3_parse_option () {
 	-browser=*)	    setopt   SURFRAW_browser		$optarg	;;
 	-elvi)		    echo "Global elvi:"
 			    sed -n 's/^.*elvis: \(.*\)$/  \1/p' $elvidir/*
-			    if [ -d ~/.surfraw.d ]; then
+			    localelvidir=$(get_local_elvi_dir)
+			    if [ -d "$localelvidir" ]; then
 				echo "Local elvi:"
-				sed -n 's/^.*elvis: \(.*\)$/  \1/p' ~/.surfraw.d/*
+				sed -n 's/^.*elvis: \(.*\)$/  \1/p' "$localelvidir/"*
 			    fi
 			    exit 0 ;;
 	-escape-url-args=*) setoptyn SURFRAW_escape_url_args	$optarg ;;
@@ -480,9 +488,10 @@ then
 		surfraw_usage
 		exit 0
 	else
-		if [ -x ~/.surfraw.d/$elvi ]
+		localelvidir=$(get_local_elvi_dir)
+		if [ -x "$localelvidir/$elvi" ]
 		then
-			sh -c "~/.surfraw.d/$elvi $opts $searchterms"
+			sh -c "$localelvidir/$elvi $opts $searchterms"
 		elif [ -x "$elvidir/$elvi" ]
 		then
  			sh -c "$elvidir/$elvi $opts $searchterms"
