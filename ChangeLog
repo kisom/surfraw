@@ -1,3 +1,23 @@
+2009-10-20  Ian Beckwith  <ianb@erislabs.net>
+
+	* Move config files to follow XDG basedir spec
+	  (http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+	  Global config files are searched for in:
+	  + $SURFRAW_global_conf if set.
+	  + $XDG_CONFIG_DIRS/surfraw/{conf,bookmarks}
+	    ($XDG_CONFIG_DIRS is path-style colon separated list)
+	  + @sysconfdir@/xdg/surfraw/{conf,bookmarks}
+	    (@sysconfdir@ is usually /etc or /usr/local/etc/)
+	  + @sysconfdir@/surfraw.{conf,bookmarks}
+	    (for backwards compatibility)
+	  Local config files & elvi are searched for in:
+	  + $SURFRAW_conf if set (for per-user conf file only)
+	    (no longer set by default config files)
+	  + $XDG_CONFIG_HOME/surfraw/{conf,bookmarks,elvi/}
+	  + $HOME/.config/surfraw/{conf,bookmarks,elvi/}
+	  + $HOME/.surfraw.{conf,bookmarks}
+	    (for backwards compatibility).
+
 2009-10-18  Ian Beckwith  <ianb@erislabs.net>
 
 	* Apply patch from James Rowe:
