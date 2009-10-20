@@ -22,42 +22,52 @@ w3_config_hook () {
     return 1
 }
 
-load_global_conf () {
+find_global_conf () {
+    base="$1"
     local conf OIFS
     conf=""
-    # if explicitly specified
-    if test -n "$SURFRAW_global_conf" && test -r "$SURFRAW_global_conf"; then
-	conf="$SURFRAW_global_conf"
-    elif test -n "$XDG_CONFIG_DIRS"; then
+    if test -n "$XDG_CONFIG_DIRS"; then
 	OIFS="$IFS"
 	IFS=:
 	set $XDG_CONFIG_DIRS
 	IFS="$OIFS"
 	for i in "$@"; do
-	    if test -r "$i/surfraw/conf"; then
-		conf="$i/surfraw/conf"
+	    if test -r "$i/surfraw/$base"; then
+		conf="$i/surfraw/$base"
 		break
 	    fi
 	done
-    elif test -r "@sysconfdir@/xdg/surfraw/conf"; then # XDG default
-	conf="@sysconfdir@/xdg/surfraw/conf"
-    elif test -r "@sysconfdir@/surfraw.conf"; then # old surfraw default
-	conf="@sysconfdir@/surfraw.conf"
+    elif test -r "@sysconfdir@/xdg/surfraw/$base"; then # XDG default
+	conf="@sysconfdir@/xdg/surfraw/$base"
+    elif test -r "@sysconfdir@/surfraw.$base"; then # old surfraw default
+	conf="@sysconfdir@/surfraw.$base"
     fi
-    if test -z "$conf"; then
+    echo "$conf"
+}
+
+load_global_conf () {
+    local conf
+    if test -n "$SURFRAW_global_conf" && test -r "$SURFRAW_global_conf"; then
+	conf="$SURFRAW_global_conf"
+    else
+	conf=$(find_global_conf conf)
+    fi
+    if test -z "$conf" || ! test -r "$conf"; then
 	err "couldn't find global config in @sysconfdir@/xdg/surfraw/conf or \$XDG_CONFIG_DIRS"
     fi
     . "$conf"
 }
 
-find_config_file () {
+find_local_conf () {
     base="$1"
     if test -n "$XDG_CONFIG_HOME" && test -r "$XDG_CONFIG_HOME/surfraw/$base"; then
 	echo "$XDG_CONFIG_HOME/surfraw/$base"
-    elif test -n "$HOME" && test -r "$HOME/.config/surfraw/$base"; then
-	echo "$HOME/.config/surfraw/$base"
-    elif test -r "$HOME/.surfraw.$base"; then
-	echo "$HOME/.surfraw.$base"
+    elif test -n "$HOME"; then
+	if test -r "$HOME/.config/surfraw/$base"; then
+	    echo "$HOME/.config/surfraw/$base"
+	elif test -r "$HOME/.surfraw.$base"; then
+	    echo "$HOME/.surfraw.$base"
+	fi
     fi
 }
 
@@ -67,9 +77,9 @@ load_local_conf () {
     if test -n "$SURFRAW_conf" && test -r "$SURFRAW_conf"; then
 	conf="$SURFRAW_conf"
     else
-	conf="$(find_config_file conf)"
+	conf="$(find_local_conf conf)"
     fi
-    if test -n "$conf"; then
+    if test -n "$conf" && test -r "$conf"; then
 	. $conf
     fi
 }
@@ -150,7 +160,7 @@ quote_ifs () {
 bookmark_file_search () {
 	search="$1"
 	file="$2"
-	if [ -f "$file" ]
+	if [ -r "$file" ]
 	then
 		@AWK@ -v search="$search" '$1 ~ search { print $2; }'  $file | head -n 1
 	fi
@@ -158,10 +168,12 @@ bookmark_file_search () {
 
 bookmark_lookup () {
 	search="$1"
-	lookup=`bookmark_file_search "$search" ~/.surfraw.bookmarks`
+	file=$(find_local_conf bookmarks)
+	lookup=$(bookmark_file_search "$search" "$file")
 	if [ -z "$lookup" ]
 	then
-		lookup=`bookmark_file_search "$search" @sysconfdir@/surfraw.bookmarks`
+	    file=$(find_global_conf bookmarks)
+	    lookup=$(bookmark_file_search "$search" "$file")
 	fi
 	if [ -n "$lookup" ]
 	then
