@@ -317,12 +317,12 @@ w3_parse_option () {
     w3_parse_option_hook "$opt" "$optarg" && return 0
     case "$opt" in
 	-browser=*)	    setopt   SURFRAW_browser		$optarg	;;
-	-elvi)		    echo "Global elvi:"
-			    sed -n 's/^.*elvis: \(.*\)$/  \1/p' $elvidir/*
+	-elvi)		    echo " GLOBAL ELVI:"
+			    sed -n 's/^.*elvis: \(.*\)$/\1/p' $elvidir/*
 			    localelvidir=$(get_local_elvi_dir)
 			    if [ -d "$localelvidir" ]; then
-				echo "Local elvi:"
-				sed -n 's/^.*elvis: \(.*\)$/  \1/p' "$localelvidir/"*
+				echo " LOCAL ELVI:"
+				sed -n 's/^.*elvis: \(.*\)$/\1/p' "$localelvidir/"*
 			    fi
 			    exit 0 ;;
 	-escape-url-args=*) setoptyn SURFRAW_escape_url_args	$optarg ;;
