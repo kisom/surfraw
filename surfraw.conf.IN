@@ -26,9 +26,6 @@
 # autoconf guessed prefix
 prefix=@prefix@
 
-# secondary configuation file
-def   SURFRAW_conf		$HOME/.surfraw.conf
-
 # graphical browser? defaults to yes for meatminds. text browser users can
 # work it out how to change it.
 defyn   SURFRAW_graphical		yes

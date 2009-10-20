@@ -50,13 +50,35 @@ load_global_conf () {
     . "$conf"
 }
 
-w3_config () {
-	prefix=@prefix@
-   def   SURFRAW_conf		$HOME/.surfraw.conf
+find_config_file () {
+    base="$1"
+    if test -n "$XDG_CONFIG_HOME" && test -r "$XDG_CONFIG_HOME/surfraw/$base"; then
+	echo "$XDG_CONFIG_HOME/surfraw/$base"
+    elif test -n "$HOME" && test -r "$HOME/.config/surfraw/$base"; then
+	echo "$HOME/.config/surfraw/$base"
+    elif test -r "$HOME/.surfraw.$base"; then
+	echo "$HOME/.surfraw.$base"
+    fi
+}
 
+load_local_conf () {
+    local conf
+    conf=""
+    if test -n "$SURFRAW_conf" && test -r "$SURFRAW_conf"; then
+	conf="$SURFRAW_conf"
+    else
+	conf="$(find_config_file conf)"
+    fi
+    if test -n "$conf"; then
+	. $conf
+    fi
+}
+
+
+w3_config () {
     load_global_conf
     w3_config_hook
-    test -r "$SURFRAW_conf" && . "$SURFRAW_conf"
+    load_local_conf
 }
 
 warn () {
