@@ -1,9 +1,7 @@
 
         Surfraw - Shell Users' Revolutionary Front Rage Against the Web
 
-Original Home Page: http://surfraw.sourceforge.net/
-
-New project home page: http://surfraw.alioth.debian.org
+Home Page: http://surfraw.alioth.debian.org
 
         ______  _     _  ______   _______  ______   _______  _  _  _
        / _____)(_)   (_)(_____ \ (_______)(_____ \ (_______)(_)(_)(_)
@@ -13,8 +11,8 @@ New project home page: http://surfraw.alioth.debian.org
       (______/  \_____/ |_|   |_||_|      |_|   |_||_|   |_| \_____/
 
    Surfraw - Shell Users' Revolutionary Front Rage Against the Web
-		 Old: http://surfraw.sourceforge.net/
 		 New: http://surfraw.alioth.debian.org
+		 Old: http://surfraw.sourceforge.net/
 
 			       Oh Baybe
 			     I need some
@@ -72,10 +70,38 @@ Adding the elvi to your path
   directory (usually /usr/lib/surfraw or /usr/local/lib/surfraw/) to
   your path, either manually or using surfraw-update-path(1).
 
+Config files
+
+  Surfraw implements the XDG basedir spec
+  (http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html).
+
+  Essentially this means global config will be in /etc/xdg/surfraw/
+  and local config will be in $HOME/.config/surfraw/.
+  This can be modified by setting $XDG_CONFIG_DIRS and $XDG_CONFIG_HOME,
+  see the spec for more details.
+
+  If your system has a different sysconfdir set during configure, that
+  will be used instead of /etc (for instance, /usr/local/etc).
+
+  In the documentation below, only the default paths will be referred to.
+
+Local elvi
+
+  Surfraw can use your own private elvi, store them in
+  $HOME/.config/surfraw/elvi/.
+
+  Local elvi will be listed separately at the end of
+  'surfraw -elvi'.
+
+  Use existing elvi (e.g. google) as a template. If you think your
+  elvi may be useful to others, consider submitting them to
+  surfraw-devel@lists.alioth.debian.org.
+
 Bookmarks
 
-  Surfraw now supports bookmarks. To add a bookmark, add it to
-  /etc/surfraw.bookmarks or $HOME/.surfraw.bookmarks
+  Surfraw now supports bookmarks. To add a bookmark, add it to to the
+  global bookmark list in /etc/xdg/surfraw/bookmarks or to your
+  personal bookmark list in $HOME/.config/surfraw/bookmarks
 
   The format of the bookmarks file is simple, each bookmark is on a
   separate line, with the bookmark and URL separated by whitespace,
@@ -87,7 +113,7 @@ Bookmarks
   and if an elvis of that name doesn't exist, it searches for a
   bookmark of that name instead.
 
-  There are some example bookmarks in /etc/surfraw.bookmarks
+  There are some example bookmarks in /etc/xdg/surfraw/bookmarks
 
 Installation
 
@@ -120,10 +146,11 @@ Examples
 Options
 
   Global options are common to all Surfraw elvi (clients). You can
-  get a list of the currently installed elvi by just typing `surfraw'.
+  get a list of the currently installed elvi by just typing `surfraw -elvi'.
   For example:
 
   $ surfraw -elvi
+ GLOBAL ELVI:
 alioth		-- Search Alioth (alioth.debian.org)
 altavista	-- Search the web using Altavista (www.altavista.com)
 amazon		-- Search the amazon.com bookstore
@@ -259,28 +286,28 @@ Global options:
                                 Environment: SURFRAW_quote_args
   -version                      Display Surfraw version (1.0.4)
 Copyright:
-  Copyright (c) 2003-2008 The Surfraw-Devel Team
+  Copyright (c) 2003-2009 The Surfraw-Devel Team
                            <surfraw-devel@lists.alioth.debian.org>
   Copyright (c) 2000-2001 Julian Assange
   Copyright (c) 2001 Australian Institute for Collaborative Research
   Copyright (c) 2000 Melbourne Institute for Advanced Study
   ---
 
-  The system wide configuration file can be found in:
+  The system wide configuration file can usually be found in
+  /etc/xdg/surfraw/conf (but see 'Config files' above). This can be
+  overridden by setting the environment variable SURFRAW_global_conf.
 
-        SURFRAW_global_conf     @sysconfdir@/surfraw.conf
-
-  Where @sysconfdir@ is something like /etc, or /usr/local/etc
-
-  Each user can also specify their own overrides in:
-
-         SURFRAW_conf           $HOME/.surfraw.conf
+  Each user can also specify their own overrides, usually in
+  $HOME/.config/surfraw/conf (again, see 'Config files' above).  This
+  can be overridden by setting SURFRAW_conf, either in the environment
+  or the global config file.
 
   e.g
 
         SURFRAW_graphical_remote=yes
         SURFRAW_graphical_browser=mozilla
         SURFRAW_text_browser=w3m
+	SURFRAW_pgpkeys_sigs=on
 
   Read HACKING. Surfrawize the soul of your favourite internet wonder.
   Join the Shell Users' Revolutionary Front Against the WWW by

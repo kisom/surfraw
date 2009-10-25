@@ -5,7 +5,7 @@
 	  Global config files are searched for in:
 	  + $SURFRAW_global_conf if set.
 	  + $XDG_CONFIG_DIRS/surfraw/{conf,bookmarks}
-	    ($XDG_CONFIG_DIRS is path-style colon separated list)
+	    ($XDG_CONFIG_DIRS is $PATH-style colon separated list)
 	  + @sysconfdir@/xdg/surfraw/{conf,bookmarks}
 	    (@sysconfdir@ is usually /etc or /usr/local/etc/)
 	  + @sysconfdir@/surfraw.{conf,bookmarks}
