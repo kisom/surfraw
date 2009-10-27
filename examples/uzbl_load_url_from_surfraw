@@ -27,7 +27,13 @@
 DEFAULT_SEARCH=google
 
 # The location of the surfraw bookmark file
-BOOKMARKS="$HOME/.surfraw.bookmarks"
+if [ -n "$XDG_CONFIG_HOME" -a -e "$XDG_CONFIG_HOME/surfraw/bookmarks" ]; then
+    BOOKMARKS="$XDG_CONFIG_HOME/surfraw/bookmarks"
+elif [ -e "$HOME/.config/surfraw/bookmarks" ]; then
+    BOOKMARKS="$HOME/.config/surfraw/bookmarks"
+else
+    BOOKMARKS="$HOME/.surfraw.bookmarks"
+fi
 
 # Colors for dmenu
 COLORS=" -nb #303030 -nf khaki -sb #CCFFAA -sf #303030"
