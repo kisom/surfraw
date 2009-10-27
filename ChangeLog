@@ -9,7 +9,7 @@
 2009-10-20  Ian Beckwith  <ianb@erislabs.net>
 
 	* Move config files to follow XDG basedir spec
-	  (http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html)
+	  (http://standards.freedesktop.org/basedir-spec/basedir-spec-0.6.html)
 	  Global config files are searched for in:
 	  + $SURFRAW_global_conf if set.
 	  + $XDG_CONFIG_DIRS/surfraw/{conf,bookmarks}

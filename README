@@ -73,7 +73,7 @@ Adding the elvi to your path
 Config files
 
   Surfraw implements the XDG basedir spec
-  (http://standards.freedesktop.org/basedir-spec/basedir-spec-latest.html).
+  (http://standards.freedesktop.org/basedir-spec/basedir-spec-0.6.html)
 
   Essentially this means global config will be in /etc/xdg/surfraw/
   and local config will be in $HOME/.config/surfraw/.
