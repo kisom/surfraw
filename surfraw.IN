@@ -275,6 +275,7 @@ Global options:
 				Environment: SURFRAW_graphical
   -help				What you're reading now, dude
   -p | -print			Just print search URL, don't pass to browser
+  -o | -o=FILE			Fetch URL and dump to stdout or FILE.
   -quiet=yes|no			I can't enjoy it with you talking all the time
 				Default: $SURFRAW_quiet
 				Environment: SURFRAW_quiet
@@ -332,6 +333,9 @@ w3_parse_option () {
 	-q | -quote)	    setoptyn SURFRAW_quote_args	    	yes	;;
 	-new)		    setoptyn SURFRAW_new_window		yes	;;
 	-new=*)		    setoptyn SURFRAW_new_window		$optarg ;;
+	-o)		    setoptyn SURFRAW_dump		yes	;;
+	-o=*)		    setoptyn SURFRAW_dump		yes
+			    setopt SURFRAW_dump_file		$optarg ;;
 	-t | -text)	    unset DISPLAY
 			    setoptyn SURFRAW_graphical 		no	;;
 	-version)	    echo $surfraw_version; exit 0	    	;;
@@ -384,13 +388,34 @@ w3_parse_args () {
     fi
 }
 
+w3_dump () {
+    if test -z "$SURFRAW_dump_file"; then
+	SURFRAW_dump_file="-"
+    fi
+    if test -x "$(which curl)"; then
+	curl -o "$SURFRAW_dump_file" "$@"
+    elif test -x "$(which wget)"; then
+	wget -q -O "$SURFRAW_dump_file" "$@"
+    elif test -x "$(which GET)"; then
+	if test "$SURFRAW_dump_file" = "-"; then
+	    GET "$@"
+	else
+	    GET "$@" > "$SURFRAW_dump_file"
+	fi
+    else
+	err "No URL fetcher found: install curl, wget or libwww-perl"
+    fi
+}
+
 w3_browse_url () {
    if ok SURFRAW_new_screen && test -n "$STY" && test $mode = text; then
    	screen=yes
    else
    	screen=no
    fi
-    if ok SURFRAW_print; then
+    if ok SURFRAW_dump; then
+	w3_dump "$@"
+    elif ok SURFRAW_print; then
 		echo "$@"
     elif ok screen; then
 	if test $SURFRAW_browser_args = "none"; then

@@ -12,7 +12,7 @@ Homepage: http://surfraw.alioth.debian.org
 Package: surfraw
 Architecture: all
 Depends: lynx | www-browser
-Recommends: surfraw-extra, links | elinks | elinks-lite | w3m
+Recommends: surfraw-extra, links | elinks | elinks-lite | w3m, curl | wget | libwww-perl
 Suggests: screen
 Conflicts: surfaw
 Replaces: surfaw

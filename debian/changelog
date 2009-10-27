@@ -8,8 +8,9 @@ surfraw (2.2.6-1) unstable; urgency=low
   * debian/control:
     + update vcs- fields to point to new git repo.
     + Standards-Version: 3.8.3 (No changes).
+    + add Recommends: curl | wget | libwww-perl for -o.
 
- -- Ian Beckwith <ianb@debian.org>  Tue, 27 Oct 2009 02:38:17 +0000
+ -- Ian Beckwith <ianb@debian.org>  Tue, 27 Oct 2009 05:26:27 +0000
 
 surfraw (2.2.5-1) unstable; urgency=low
 

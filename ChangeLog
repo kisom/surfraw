@@ -7,6 +7,8 @@
 	  and all his other work).
 	* Fixed cia.
 	* Fixed tests: aur, debpts, lastfm.
+	* Added -o | -o=FILE option, to fetch URL and dump to
+	  stdout or FILE.
 	* test/Makefile.am: add debvcsbrowse.test to EXTRA_DIST
 	* Makefile.am: install-data-hook: remove execute flag
 	  from generated files surfraw.conf, elvi.1sr & surfraw.1.
