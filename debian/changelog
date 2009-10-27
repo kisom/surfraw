@@ -2,6 +2,8 @@ surfraw (2.2.6-1) unstable; urgency=low
 
   * New upstream version.
     + Only use first matching bookmark (Closes: #530786).
+    + Fix debsec (patch from Moritz Muehlenhoff) (Closes: #550741).
+  * Remove Moritz from Uploaders (per #550741), thanks for your work!.
   * debian/control: update vcs- fields to point to new git repo.
 
  -- Ian Beckwith <ianb@debian.org>  Mon, 20 Jul 2009 04:03:04 +0100

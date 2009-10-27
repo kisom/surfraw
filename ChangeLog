@@ -1,3 +1,8 @@
+2009-10-26  Ian Beckwith  <ianb@erislabs.net>
+
+	* Fix debsec (Thanks to Moritz Muehlenhoff, for this
+	  and all his other work).
+
 2009-10-20  Ian Beckwith  <ianb@erislabs.net>
 
 	* Move config files to follow XDG basedir spec
