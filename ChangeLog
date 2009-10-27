@@ -1,7 +1,8 @@
-2009-10-26  Ian Beckwith  <ianb@erislabs.net>
+2009-10-27  Ian Beckwith  <ianb@erislabs.net>
 
 	* Fix debsec (Thanks to Moritz Muehlenhoff, for this
 	  and all his other work).
+	* test/Makefile.am: add debvcsbrowse.test to EXTRA_DIST
 
 2009-10-20  Ian Beckwith  <ianb@erislabs.net>
 
