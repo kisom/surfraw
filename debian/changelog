@@ -4,11 +4,12 @@ surfraw (2.2.6-1) unstable; urgency=low
     + Only use first matching bookmark (Closes: #530786).
     + Fix debsec (patch from Moritz Muehlenhoff) (Closes: #550741).
   * Remove Moritz from Uploaders (per #550741), thanks for your work!.
+  * debian/rules: call dh_installexamples to install examples/ dir.
   * debian/control:
     + update vcs- fields to point to new git repo.
     + Standards-Version: 3.8.3 (No changes).
 
- -- Ian Beckwith <ianb@debian.org>  Tue, 27 Oct 2009 00:21:33 +0000
+ -- Ian Beckwith <ianb@debian.org>  Tue, 27 Oct 2009 02:38:17 +0000
 
 surfraw (2.2.5-1) unstable; urgency=low
 

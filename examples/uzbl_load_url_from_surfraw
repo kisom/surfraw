@@ -1,0 +1,81 @@
+#!/bin/bash
+#
+#
+# This script attempts to be the ultimate url opening script for UZBL. It
+# hopes to do this in the following way. It presents all surfraw bookmarks
+# and elvi in a dmenu, and uses surfraw to obtain a valid URL. If the first
+# word entered by the user (and thus returned by dmenu) contains a colon (:)
+# or a period (.), it assumes that the user entered a valid URL and just
+# immediately prints that, bypassing surfraw.
+#
+# As such, the script itself is stupid, and the awesomeness comes from dmenu
+# and surfraw.
+#
+# Example UZBL configuration:
+#
+# To open any url in the current UZBL instance:
+# bind    o         = sh 'uri=`$XDG_DATA_HOME/uzbl/scripts/load_url_from_surfraw.sh` && echo "uri $uri" > $4'
+# To open any url in a new UZBL instance:
+# bind    t         = sh 'uri=`$XDG_DATA_HOME/uzbl/scripts/load_url_from_surfraw.sh` && uzbl --uri $uri'
+#
+#
+# October 2009, Sumant Oemrawsingh
+#
+# TODO: Do we also want history? Titles of webpages and urls? Tags for bookmarks?
+
+# Default search engine. If we really are at a loss, use this
+DEFAULT_SEARCH=google
+
+# The location of the surfraw bookmark file
+BOOKMARKS="$HOME/.surfraw.bookmarks"
+
+# Colors for dmenu
+COLORS=" -nb #303030 -nf khaki -sb #CCFFAA -sf #303030"
+
+# Prompt for dmenu
+PROMPT="Open"
+
+# Use surfraw to search for the words
+function search()
+{
+  # Does surfraw know what to do with it?
+  url=`surfraw -print $@`
+
+  # If not, then use the default search engine
+  if [ $? -ne 0 ]
+  then
+    url=`surfraw -print $DEFAULT_SEARCH $@`
+  fi
+
+  echo $url
+
+}
+
+# We assume that this is a URL
+function goto()
+{
+  case "$1" in
+    *:*) echo $1 ;;
+    *) echo "http://$1" ;;
+  esac
+}
+
+# Use dmenu to navigate through possible choices
+function present_menu()
+{
+  elvi=`surfraw -elvi | cut -f 1 | tail --lines=+2`
+  if [ -r "$BOOKMARKS" ]
+  then
+    bookmarks=" `cut -f 1 -d ' ' "$BOOKMARKS" 2>/dev/null`"
+  else
+    bookmarks=""
+  fi
+
+  echo "${elvi}${bookmarks}" | tr ' ' '\n' | sort | dmenu -p "$PROMPT" -i $COLORS
+}
+
+present_menu | \
+  ( read car cdr
+    test -z "$car" && exit 1
+    ( test -z "$cdr" && echo $car | fgrep -c '.
+:' > /dev/null && goto $car ) || search "$car $cdr" )

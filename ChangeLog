@@ -1,12 +1,14 @@
 2009-10-27  Ian Beckwith  <ianb@erislabs.net>
 
-	* Fix debsec (Thanks to Moritz Muehlenhoff, for this
+	* Added examples/uzbl-load-url-from-surfraw,
+	  thanks to Sumant Oemrawsingh.
+	* Fixed debsec (Thanks to Moritz Muehlenhoff, for this
 	  and all his other work).
+	* Fixed cia.
+	* Fixed tests: aur, debpts, lastfm.
 	* test/Makefile.am: add debvcsbrowse.test to EXTRA_DIST
 	* Makefile.am: install-data-hook: remove execute flag
 	  from generated files surfraw.conf, elvi.1sr & surfraw.1.
-	* Fixed elvi: cia.
-	* Fixed tests: aur, debpts, lastfm.
 
 2009-10-20  Ian Beckwith  <ianb@erislabs.net>
 

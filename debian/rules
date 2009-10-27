@@ -66,6 +66,7 @@ binary-indep: build install
 	install -m 644 surfraw-bash-completion debian/surfraw/etc/bash_completion.d/surfraw
 	dh_installdocs
 	dh_installchangelogs ChangeLog
+	dh_installexamples examples/*
 	# copy shared doc files
 	dh_install   --sourcedir=debian/surfraw  -psurfraw-extra
 	# move files that are in surfraw-extra
