@@ -3,6 +3,8 @@
 	* Fix debsec (Thanks to Moritz Muehlenhoff, for this
 	  and all his other work).
 	* test/Makefile.am: add debvcsbrowse.test to EXTRA_DIST
+	* Makefile.am: install-data-hook: remove execute flag
+	  from generated files surfraw.conf, elvi.1sr & surfraw.1.
 
 2009-10-20  Ian Beckwith  <ianb@erislabs.net>
 

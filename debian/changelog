@@ -8,7 +8,7 @@ surfraw (2.2.6-1) unstable; urgency=low
     + update vcs- fields to point to new git repo.
     + Standards-Version: 3.8.3 (No changes).
 
-  -- Ian Beckwith <ianb@debian.org>  Mon, 20 Jul 2009 04:03:04 +0100
+ -- Ian Beckwith <ianb@debian.org>  Tue, 27 Oct 2009 00:21:33 +0000
 
 surfraw (2.2.5-1) unstable; urgency=low
 

@@ -41,6 +41,7 @@ links: links.IN
 include $(top_srcdir)/Makefile.include
 
 install-data-hook: links surfraw.conf
+	chmod -x surfraw.conf elvi.1sr surfraw.1
 	mkdir -p $(DESTDIR)@sysconfdir@/xdg/surfraw
 	cp surfraw.conf $(DESTDIR)@sysconfdir@/xdg/surfraw/conf
 	cp surfraw.bookmarks $(DESTDIR)@sysconfdir@/xdg/surfraw/bookmarks
