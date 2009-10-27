@@ -6,7 +6,7 @@ if OPENSEARCH
 dist_bin_SCRIPTS = opensearch-discover opensearch-genquery
 endif
 devel_extra	= banner prebuild
-examples_extra  = examples/README examples/uzbl-load-url-from-surfraw
+examples_extra  = examples/README examples/uzbl_load_url_from_surfraw
 noinst_DATA	= surfraw-bash-completion
 man_MANS = surfraw-update-path.1 surfraw.1 elvi.1sr
 if OPENSEARCH

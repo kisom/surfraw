@@ -1,8 +1,8 @@
 2009-10-27  Ian Beckwith  <ianb@erislabs.net>
 
-	* Added examples/uzbl-load-url-from-surfraw,
+	* Added examples/uzbl_load_url_from_surfraw,
 	  thanks to Sumant Oemrawsingh.
-	* Updated uzbl-load-url-from-surfraw to use new bookmark locations.
+	* Updated uzbl_load_url_from_surfraw to use new bookmark locations.
 	* Fixed debsec (Thanks to Moritz Muehlenhoff, for this
 	  and all his other work).
 	* Fixed cia.

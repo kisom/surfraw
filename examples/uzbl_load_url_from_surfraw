@@ -14,9 +14,9 @@
 # Example UZBL configuration:
 #
 # To open any url in the current UZBL instance:
-# bind    o         = sh 'uri=`$XDG_DATA_HOME/uzbl/scripts/load_url_from_surfraw.sh` && echo "uri $uri" > $4'
+# bind    o         = sh 'uri=`$XDG_DATA_HOME/uzbl/scripts/uzbl_load_url_from_surfraw` && echo "uri $uri" > $4'
 # To open any url in a new UZBL instance:
-# bind    t         = sh 'uri=`$XDG_DATA_HOME/uzbl/scripts/load_url_from_surfraw.sh` && uzbl --uri $uri'
+# bind    t         = sh 'uri=`$XDG_DATA_HOME/uzbl/scripts/uzbl_load_url_from_surfraw` && uzbl --uri $uri'
 #
 #
 # October 2009, Sumant Oemrawsingh

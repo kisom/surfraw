@@ -1,5 +1,5 @@
 Useful example code.
 
-* uzbl-load-url-from-surfraw
+* uzbl_load_url_from_surfraw
   Integrates surfraw with uzbl (see www.uzbl.org).
   Contributed by Sumant Oemrawsingh.
