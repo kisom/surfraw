@@ -9,8 +9,10 @@ surfraw (2.2.6-1) unstable; urgency=low
     + update vcs- fields to point to new git repo.
     + Standards-Version: 3.8.3 (No changes).
     + add Recommends: curl | wget | libwww-perl for -o.
+    + Remove Conflicts/Replaces: surfaw, this transition was complete
+      many releases ago.
 
- -- Ian Beckwith <ianb@debian.org>  Tue, 27 Oct 2009 05:26:27 +0000
+ -- Ian Beckwith <ianb@debian.org>  Fri, 06 Nov 2009 15:02:35 +0000
 
 surfraw (2.2.5-1) unstable; urgency=low
 

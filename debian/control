@@ -14,8 +14,6 @@ Architecture: all
 Depends: lynx | www-browser
 Recommends: surfraw-extra, links | elinks | elinks-lite | w3m, curl | wget | libwww-perl
 Suggests: screen
-Conflicts: surfaw
-Replaces: surfaw
 Description: a fast unix command line interface to WWW
  Surfraw - Shell Users' Revolutionary Front Rage Against the World Wide Web
  .
