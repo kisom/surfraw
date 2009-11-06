@@ -6,7 +6,7 @@ if OPENSEARCH
 dist_bin_SCRIPTS = opensearch-discover opensearch-genquery
 endif
 devel_extra	= banner prebuild
-noinst_DATA	= surfraw-bash-completion
+noinst_DATA	= surfraw-bash-completion surfraw.bookmarks
 man_MANS = surfraw-update-path.1 surfraw.1 elvi.1sr
 if OPENSEARCH
 man_MANS += opensearch-discover.1 opensearch-genquery.1
@@ -45,7 +45,7 @@ install-data-hook: links surfraw.conf
 	chmod -x surfraw.conf elvi.1sr surfraw.1
 	mkdir -p $(DESTDIR)@sysconfdir@/xdg/surfraw
 	cp surfraw.conf $(DESTDIR)@sysconfdir@/xdg/surfraw/conf
-	cp surfraw.bookmarks $(DESTDIR)@sysconfdir@/xdg/surfraw/bookmarks
+	cp $(top_srcdir)/surfraw.bookmarks $(DESTDIR)@sysconfdir@/xdg/surfraw/bookmarks
 	while read target link ;\
 	do \
 		ln -sf $$target  $(DESTDIR)/$$link ;\
