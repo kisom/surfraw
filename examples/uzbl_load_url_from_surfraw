@@ -80,7 +80,7 @@ function present_menu()
   elvi=`surfraw -elvi | grep -v -e ' ELVI:' -e '^W' | cut -f 1`
   if [ -r "$BOOKMARKS" ]
   then
-    elvi="$elvi `cut -f 1 -d ' ' "$BOOKMARKS" 2>/dev/null`"
+    elvi="$elvi $(awk '{print $1}' "$BOOKMARKS" 2>/dev/null)"
   fi
 
   echo "$elvi" | tr ' ' '\n' | sort | $DMENU -p "$PROMPT" $COLORS

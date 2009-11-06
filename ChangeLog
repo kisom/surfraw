@@ -4,6 +4,8 @@
 	  + Applied patch from Sumant Oemrawsingh to strip "GLOBAL ELVI"
 	    and "LOCALELVI" and support vertical menus if patched dmenu is
 	    available.
+	  + present_menu(): use awk(1) instead of cut(1), so tabs in
+	    bookmark files are handled correctly.
 
 2009-10-27  Ian Beckwith  <ianb@erislabs.net>
 
