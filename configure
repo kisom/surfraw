@@ -2391,7 +2391,7 @@ fi
 done
 
 
-ac_config_files="$ac_config_files Makefile surfraw.lsm surfraw.spec elvi/Makefile test/Makefile"
+ac_config_files="$ac_config_files Makefile surfraw.lsm surfraw.spec elvi/Makefile test/Makefile examples/Makefile"
 
 cat >confcache <<\_ACEOF
 # This file is a shell script that caches the results of configure
@@ -3104,6 +3104,7 @@ do
     "surfraw.spec") CONFIG_FILES="$CONFIG_FILES surfraw.spec" ;;
     "elvi/Makefile") CONFIG_FILES="$CONFIG_FILES elvi/Makefile" ;;
     "test/Makefile") CONFIG_FILES="$CONFIG_FILES test/Makefile" ;;
+    "examples/Makefile") CONFIG_FILES="$CONFIG_FILES examples/Makefile" ;;
 
   *) as_fn_error "invalid argument: \`$ac_config_target'" "$LINENO" 5;;
   esac

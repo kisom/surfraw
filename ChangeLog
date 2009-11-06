@@ -1,5 +1,7 @@
 2009-11-06  Ian Beckwith  <ianb@erislabs.net>
 
+	* Add examples/ to SUBDIRS, move uzbl_load_url_from_surfraw
+	  build logic to examples/Makefile.am
 	* examples/uzbl_load_url_from_surfraw:
 	  + Applied patch from Sumant Oemrawsingh to strip "GLOBAL ELVI"
 	    and "LOCALELVI" and support vertical menus if patched dmenu is

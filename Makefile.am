@@ -1,13 +1,11 @@
 # $Id$
-SUBDIRS		= elvi test
+SUBDIRS		= elvi test examples
 
 bin_SCRIPTS = surfraw surfraw-update-path
-noinst_SCRIPTS = examples/uzbl_load_url_from_surfraw
 if OPENSEARCH
 dist_bin_SCRIPTS = opensearch-discover opensearch-genquery
 endif
 devel_extra	= banner prebuild
-examples_extra  = examples/README examples/uzbl_load_url_from_surfraw.IN
 noinst_DATA	= surfraw-bash-completion
 man_MANS = surfraw-update-path.1 surfraw.1 elvi.1sr
 if OPENSEARCH
@@ -17,12 +15,11 @@ EXTRA_DIST	= surfraw.lsm.in surfraw.IN surfraw-update-path.IN\
                   surfraw.spec.in aclocal.m4 HACKING Makefile.include \
 		  surfraw.1.IN elvi.1sr.IN surfraw.bookmarks links.IN \
 		  surfraw-bash-completion.IN surfraw.conf.IN \
-		  $(devel_extra) $(examples_extra)
+		  $(devel_extra)
 
 CLEANFILES = surfraw surfraw-update-path surfraw-update-path.1 surfraw.spec surfraw.lsm \
 		surfraw.1 elvi.1sr links surfraw-bash-completion surfraw.conf surfraw.1 \
-		elvi.1sr opensearch-discover.1 opensearch-genquery.1 \
-		examples/uzbl_load_url_from_surfraw
+		elvi.1sr opensearch-discover.1 opensearch-genquery.1
 
 surfraw: surfraw.IN
 
@@ -35,8 +32,6 @@ surfraw-bash-completion: surfraw-bash-completion.IN
 elvi.1sr: elvi.1sr.IN
 
 surfraw.1: surfraw.1.IN
-
-uzbl_load_url_from_surfraw: uzbl_load_url_from_surfraw.IN
 
 surfraw-update-path.1 opensearch-discover.1 opensearch-genquery.1: %.1: %
 	-rm -f $@

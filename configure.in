@@ -52,6 +52,6 @@ dnl Checks for programs.
 AC_PROG_INSTALL
 AC_PROG_AWK
 
-AC_CONFIG_FILES([Makefile surfraw.lsm surfraw.spec elvi/Makefile test/Makefile])
+AC_CONFIG_FILES([Makefile surfraw.lsm surfraw.spec elvi/Makefile test/Makefile examples/Makefile])
 AC_OUTPUT
 
