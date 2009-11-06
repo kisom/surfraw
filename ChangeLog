@@ -1,7 +1,5 @@
 2009-11-06  Ian Beckwith  <ianb@erislabs.net>
 
-	* Add examples/ to SUBDIRS, move uzbl_load_url_from_surfraw
-	  build logic to examples/Makefile.am
 	* examples/uzbl_load_url_from_surfraw:
 	  + Applied patch from Sumant Oemrawsingh to strip "GLOBAL ELVI"
 	    and "LOCALELVI" and support vertical menus if patched dmenu is
@@ -10,6 +8,12 @@
 	    bookmark files are handled correctly.
 	  + Add '.IN' suffix and dependency so correct value of @AWK@
 	    is picked up from ./configure.
+	* Add examples/ to SUBDIRS, move uzbl_load_url_from_surfraw
+	  build logic to examples/Makefile.am
+	* Fix 'make distcheck':
+	  + Install surfraw.bookmarks from $(top_srcdir)
+	  + Fix CLEANFILES entries for surfraw-update-path
+	    and uzbl_load_url_from_surfraw.
 
 2009-10-27  Ian Beckwith  <ianb@erislabs.net>
 
