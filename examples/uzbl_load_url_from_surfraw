@@ -41,6 +41,14 @@ COLORS=" -nb #303030 -nf khaki -sb #CCFFAA -sf #303030"
 # Prompt for dmenu
 PROMPT="Open"
 
+# From load_url_from_bookmarks.sh: Use dmenu with vertical patch if available
+if dmenu --help 2>&1 | grep -q '\[-rs\] \[-ni\] \[-nl\] \[-xs\]'
+then
+	DMENU="dmenu -i -xs -rs -l 10" # vertical patch
+else
+	DMENU="dmenu -i"
+fi
+
 # Use surfraw to search for the words
 function search()
 {
@@ -69,15 +77,13 @@ function goto()
 # Use dmenu to navigate through possible choices
 function present_menu()
 {
-  elvi=`surfraw -elvi | cut -f 1 | tail --lines=+2`
+  elvi=`surfraw -elvi | grep -v -e ' ELVI:' -e '^W' | cut -f 1`
   if [ -r "$BOOKMARKS" ]
   then
-    bookmarks=" `cut -f 1 -d ' ' "$BOOKMARKS" 2>/dev/null`"
-  else
-    bookmarks=""
+    elvi="$elvi `cut -f 1 -d ' ' "$BOOKMARKS" 2>/dev/null`"
   fi
 
-  echo "${elvi}${bookmarks}" | tr ' ' '\n' | sort | dmenu -p "$PROMPT" -i $COLORS
+  echo "$elvi" | tr ' ' '\n' | sort | $DMENU -p "$PROMPT" $COLORS
 }
 
 present_menu | \

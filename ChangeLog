@@ -1,3 +1,10 @@
+2009-11-06  Ian Beckwith  <ianb@erislabs.net>
+
+	* examples/uzbl_load_url_from_surfraw:
+	  + Applied patch from Sumant Oemrawsingh to strip "GLOBAL ELVI"
+	    and "LOCALELVI" and support vertical menus if patched dmenu is
+	    available.
+
 2009-10-27  Ian Beckwith  <ianb@erislabs.net>
 
 	* Added examples/uzbl_load_url_from_surfraw,
