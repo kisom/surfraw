@@ -24,4 +24,4 @@ surfraw.conf
 surfraw.lsm
 surfraw.spec
 test/Makefile
-
+examples/uzbl_load_url_from_surfraw

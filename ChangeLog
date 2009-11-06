@@ -6,6 +6,8 @@
 	    available.
 	  + present_menu(): use awk(1) instead of cut(1), so tabs in
 	    bookmark files are handled correctly.
+	  + Add '.IN' suffix and dependency so correct value of @AWK@
+	    is picked up from ./configure.
 
 2009-10-27  Ian Beckwith  <ianb@erislabs.net>
 
