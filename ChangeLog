@@ -1,3 +1,11 @@
+2009-11-07  Ian Beckwith  <ianb@erislabs.net>
+
+	* New elvi, thanks to Sumant Oemrawsingh:
+	  + cliki     - search the common lisp wiki.
+	  + l1sp      - search lisp documentation.
+	  + mathworld - search Wolfram MathWorld.
+	  + mininova  - search mininova for torrents.
+
 2009-11-06  Ian Beckwith  <ianb@erislabs.net>
 
 	* examples/uzbl_load_url_from_surfraw:

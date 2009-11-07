@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# AUTHOR: S.S.R. Oemrawsingh
+#
+# DATE: Sun Nov  1 2009
+#
+# DESC: Elvi to search l1sp.org
+# elvis: l1sp		-- Search lisp documentation
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+Search lisp documentation using l1sp.org
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "http://l1sp.org/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://l1sp.org/search?q=${escaped_args}"
+fi

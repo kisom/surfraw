@@ -11,6 +11,7 @@ elvi.1sr.gz @mandir@/man1/bbcnews.1sr.gz
 elvi.1sr.gz @mandir@/man1/cddb.1sr.gz
 elvi.1sr.gz @mandir@/man1/cite.1sr.gz
 elvi.1sr.gz @mandir@/man1/cia.1sr.gz
+elvi.1sr.gz @mandir@/man1/cliki.1sr.gz
 elvi.1sr.gz @mandir@/man1/cnn.1sr.gz
 elvi.1sr.gz @mandir@/man1/codesearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/comlaw.1sr.gz
@@ -50,7 +51,10 @@ elvi.1sr.gz @mandir@/man1/ixquick.1sr.gz
 elvi.1sr.gz @mandir@/man1/javasun.1sr.gz
 elvi.1sr.gz @mandir@/man1/lastfm.1sr.gz
 elvi.1sr.gz @mandir@/man1/leodict.1sr.gz
+elvi.1sr.gz @mandir@/man1/l1sp.1sr.gz
 elvi.1sr.gz @mandir@/man1/lsm.1sr.gz
+elvi.1sr.gz @mandir@/man1/mathworld.1sr.gz
+elvi.1sr.gz @mandir@/man1/mininova.1sr.gz
 elvi.1sr.gz @mandir@/man1/musicbrainz.1sr.gz
 elvi.1sr.gz @mandir@/man1/netbsd.1sr.gz
 elvi.1sr.gz @mandir@/man1/ntrs.1sr.gz

@@ -1,0 +1,98 @@
+#!/bin/sh
+#
+# AUTHOR: S.S.R. Oemrawsingh
+#
+# DATE: Mon Oct 26 2009
+#
+# DESC: Elvi to search the mininova bittorrent source.
+# elvis: mininova	-- Search the mininova bittorent source.
+. surfraw || exit 1
+
+
+w3_config_hook () {
+    def SURFRAW_mininova_category all
+}
+
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search terms]
+Description:
+  Surfraw the mininova bittorrent source.
+Local options:
+  -category=                    Search for torrent in the given category
+         all        |           Search all categories
+         anime      |           Search anime torrents
+         books      |           Search book torrents
+         featured   |           Search featured torrents
+         games      |           Search game torrents
+         movies     |           Search movie torrents
+         music      |           Search music torrents
+         pictures   |           Search picture torrents
+         software   |           Search software torrents
+         tv-shows   |           Search tv show torrents
+         other                  Search other torrents
+                                Default: $SURFRAW_mininova_category
+                                Environment: SURFRAW_mininova_category
+EOF
+    w3_global_usage
+}
+
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-category=*) setopt   SURFRAW_mininova_category $optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+if [ -z "$w3_args" ]; then
+    url="http://www.mininova.org/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    case $SURFRAW_mininova_category in
+	all)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=0"
+	    ;;
+	anime)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=1"
+	    ;;
+	books)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=2"
+	    ;;
+	featured)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=10"
+	    ;;
+	games)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=3"
+	    ;;
+	movies)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=4"
+	    ;;
+	music)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=5"
+	    ;;
+	pictures)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=6"
+	    ;;
+	software)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=6"
+	    ;;
+	tv-shows)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=8"
+	    ;;
+	other)
+	    url="http://www.mininova.org/search/?search="$escaped_args"&cat=9"
+	    ;;
+	*)
+	    return 1 ;;
+    esac
+fi
+
+
+w3_browse_url $url

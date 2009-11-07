@@ -15,6 +15,7 @@ dist_elvi_SCRIPTS	= \
 		  cddb \
 		  cia \
 		  cite \
+		  cliki \
 		  cnn \
 		  codesearch \
 		  comlaw \
@@ -54,9 +55,12 @@ dist_elvi_SCRIPTS	= \
 		  javasun \
 		  scpan \
 		  slinuxdoc \
+		  l1sp \
 		  lastfm \
 		  leodict \
 		  lsm \
+		  mathworld \
+		  mininova \
 		  musicbrainz \
 		  netbsd \
 		  ntrs \

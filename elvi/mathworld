@@ -1,0 +1,27 @@
+#!/bin/sh
+#
+# AUTHOR: S.S.R. Oemrawsingh
+#
+# DATE: Mon Nov  4 2009
+#
+# DESC: Elvi to search Wolfram MathWorld
+# elvis: mathworld	-- Search Wolfram MathWorld
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search Wolfram MathWorld
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"; then
+    w3_browse_url "http://mathworld.wolfram.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://mathworld.wolfram.com/search/?query=${escaped_args}&x=0&y=0"
+fi
