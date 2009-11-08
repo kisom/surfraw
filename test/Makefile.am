@@ -19,7 +19,7 @@ EXTRA_DIST = runtests elviwithouttests README COOKIES W.test		\
 	sunonesearch.test thesaurus.test translate.test urban.test	\
 	w3css.test w3html.test w3link.test w3rdf.test wayback.test	\
 	webster.test wetandwild.test wikipedia.test woffle.test		\
-	yahoo.test yubnub.test
+	yahoo.test youtube.test yubnub.test
 
 test:
 	./runtests

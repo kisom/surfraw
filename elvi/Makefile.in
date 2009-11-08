@@ -54,7 +54,8 @@ am__dist_elvi_SCRIPTS_DIST = W alioth altavista amazon archpkg arxiv \
 	piratebay pgpkeys port pubmed rae rfc rhyme scholar scicom \
 	slashdot sourceforge springer stockquote sunonesearch \
 	thesaurus translate urban w3css w3html w3link w3rdf wayback \
-	webster wetandwild wikipedia woffle yahoo yubnub opensearch
+	webster wetandwild wikipedia woffle yahoo youtube yubnub \
+	opensearch
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -171,7 +172,7 @@ dist_elvi_SCRIPTS = W alioth altavista amazon archpkg arxiv ask aur \
 	piratebay pgpkeys port pubmed rae rfc rhyme scholar scicom \
 	slashdot sourceforge springer stockquote sunonesearch \
 	thesaurus translate urban w3css w3html w3link w3rdf wayback \
-	webster wetandwild wikipedia woffle yahoo yubnub \
+	webster wetandwild wikipedia woffle yahoo youtube yubnub \
 	$(am__append_1)
 all: all-am
 

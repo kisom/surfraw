@@ -92,6 +92,7 @@ dist_elvi_SCRIPTS	= \
 		  wikipedia \
 		  woffle \
 		  yahoo \
+		  youtube \
 		  yubnub
 
 if OPENSEARCH
