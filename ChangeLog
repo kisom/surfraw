@@ -2,7 +2,9 @@
 
 	* New elvi: acronym, gcache (google cache).
 	  Thanks to fittabile@lifegate.it
-	* surfraw.IN: only list local elvi if $localelvidir contains files.
+	* surfraw.IN: only list local elvi if $localelvidir contains
+	  files.
+	* README: update elvi list and surfraw options.
 
 2009-11-08  Ian Beckwith  <ianb@erislabs.net>
 
