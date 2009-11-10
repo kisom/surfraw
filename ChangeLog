@@ -5,6 +5,7 @@
 	* surfraw.IN: only list local elvi if $localelvidir contains
 	  files.
 	* README: update elvi list and surfraw options.
+	* configure.in, HACKING: specify automake 1.11
 
 2009-11-08  Ian Beckwith  <ianb@erislabs.net>
 

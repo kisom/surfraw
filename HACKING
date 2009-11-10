@@ -133,7 +133,7 @@ Or... How to Eat The CHEESE
 
     4: add a link for the manpage in links.IN
 
-    5: run aclocal (1.10), automake (1.10) and autoconf (2.50+)
+    5: run aclocal (1.11), automake (1.11) and autoconf (2.50+)
 
     6: update the elvi list in README
 
