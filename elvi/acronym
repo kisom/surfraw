@@ -1,0 +1,168 @@
+#!/bin/sh
+# $Id$
+# elvis: acronym		-- Look for acronyms definitions (www.acronymfinder.com)
+. surfraw || exit 1
+
+w3_config_hook () {
+    defyn SURFRAW_acronym_ict 0
+    defyn SURFRAW_acronym_sci 0
+    defyn SURFRAW_acronym_gov 0
+    defyn SURFRAW_acronym_org 0
+    defyn SURFRAW_acronym_biz 0
+    defyn SURFRAW_acronym_pop 0
+    defyn SURFRAW_acronym_exa 1
+    defyn SURFRAW_acronym_wim 0
+    defyn SURFRAW_acronym_zip 0
+    defyn SURFRAW_acronym_ran 0
+    defyn SURFRAW_acronym_gen 0
+    defyn SURFRAW_acronym_alpha 0
+    defyn SURFRAW_acronym_attic 0
+    def   SURFRAW_acronym_path 
+    def   SURFRAW_acronym_par
+
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [option] [keyword]
+Description:
+  Surfraw searches for possible definitions of acronyms using acronymfinder.com
+Local option:
+  -i -ict              List all acronyms matching in Information Technology category
+  -s -sci	       List all acronyms matching in Science & Medicine category
+  -g -gov	       List all acronyms matching in Government & Military category
+  -o -org              List all acronyms matching in Organizations & Schools category
+  -b -biz              List all acronyms matching in Business & Finance category
+  -c -common	       List all acronyms matching in Slang & Pop Culture category
+  -e -exact            List all acronyms matching with exact match (Default when keyword specified)
+  -w -wim              List all acronyms matching with Word(s) in meaning match
+  -z -zip              List all acronyms matching with Location (postal code, name) match
+  -r -random           List a random acronym (Default when no keyword specified)
+  -f -fake	       List a fake acronym generated with the Acronym Finder Random Systematic Buzz Phrase Projector (AFRSBPP)
+  -a -alphabetic       List all acronyms matching sorted alphabetically instead of by rank
+  -u -unverified       List all acronyms matching, included those unverified by men and potentially misleading (Acronym Attic)
+
+
+
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+#Information Technology category
+    -i*)        setoptyn SURFRAW_acronym_ict   1
+		setoptyn SURFRAW_acronym_sci   0
+                setoptyn SURFRAW_acronym_gov   0
+                setoptyn SURFRAW_acronym_org   0
+                setoptyn SURFRAW_acronym_biz   0
+                setoptyn SURFRAW_acronym_pop   0 ;;
+#Science & Medicine category
+    -s*)        setoptyn SURFRAW_acronym_sci   1
+                setoptyn SURFRAW_acronym_ict   0
+                setoptyn SURFRAW_acronym_gov   0
+                setoptyn SURFRAW_acronym_org   0
+                setoptyn SURFRAW_acronym_biz   0
+                setoptyn SURFRAW_acronym_pop   0 ;;
+#Government & Military category
+    -g*)        setoptyn SURFRAW_acronym_gov   1
+                setoptyn SURFRAW_acronym_sci   0
+                setoptyn SURFRAW_acronym_ict   0
+                setoptyn SURFRAW_acronym_org   0
+                setoptyn SURFRAW_acronym_biz   0
+                setoptyn SURFRAW_acronym_pop   0 ;;
+#Organizations & Schools category
+    -o*)        setoptyn SURFRAW_acronym_org   1
+                setoptyn SURFRAW_acronym_sci   0
+                setoptyn SURFRAW_acronym_gov   0
+                setoptyn SURFRAW_acronym_ict   0
+                setoptyn SURFRAW_acronym_biz   0
+                setoptyn SURFRAW_acronym_pop   0 ;;
+#Business & Finance category
+    -b*)        setoptyn SURFRAW_acronym_biz   1
+                setoptyn SURFRAW_acronym_sci   0
+                setoptyn SURFRAW_acronym_gov   0
+                setoptyn SURFRAW_acronym_org   0
+                setoptyn SURFRAW_acronym_ict   0
+                setoptyn SURFRAW_acronym_pop   0 ;;
+#Slang & Pop Culture category
+    -c*)        setoptyn SURFRAW_acronym_pop   1
+                setoptyn SURFRAW_acronym_sci   0
+                setoptyn SURFRAW_acronym_gov   0
+                setoptyn SURFRAW_acronym_org   0
+                setoptyn SURFRAW_acronym_biz   0
+                setoptyn SURFRAW_acronym_ict   0 ;;
+#exact match
+    -e*)        setoptyn SURFRAW_acronym_exa   1
+		setoptyn SURFRAW_acronym_wim   0
+                setoptyn SURFRAW_acronym_zip   0 ;;
+#Word(s) in meaning match
+    -w*)        setoptyn SURFRAW_acronym_wim   1 
+                setoptyn SURFRAW_acronym_exa   0 
+                setoptyn SURFRAW_acronym_zip   0 ;;
+#Location (postal code, name) match
+    -z*)        setoptyn SURFRAW_acronym_zip   1
+                setoptyn SURFRAW_acronym_wim   0
+                setoptyn SURFRAW_acronym_exa   0 ;;
+#Random acronym
+    -r*)        setoptyn SURFRAW_acronym_ran   1
+	        setoptyn SURFRAW_acronym_gen   0 ;;
+#Fake acronym
+    -f*)        setoptyn SURFRAW_acronym_gen   1
+	        setoptyn SURFRAW_acronym_ran   0 ;;
+#Sort alphabetically
+    -a*)	setoptyn SURFRAW_acronym_alpha  1 ;;
+#Match from Acronym Attic
+    -u*)	setoptyn SURFRAW_acronym_attic  1 ;;
+
+    *) 		return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+if test -z "$w3_args"; then
+    if [ "$SURFRAW_acronym_gen" = 1 ]; then
+	SURFRAW_acronym_path="http://www.acronymfinder.com/buzzgen.asp" # Fake Acronym
+    else SURFRAW_acronym_path="http://www.acronymfinder.com/random.aspx"     # Random Acronym
+    fi
+else
+     escaped_args=`w3_url_of_arg $w3_args`
+     if	[ "$SURFRAW_acronym_attic" = 1 ]; then
+	SURFRAW_acronym_path="http://www.acronymattic.com/~/search/aa.aspx?Acronym=" # Acronym Attic
+     else
+	SURFRAW_acronym_path="http://www.acronymfinder.com/~/search/af.aspx?Acronym=" # Acronym Finder
+	if [ "$SURFRAW_acronym_exa" = 1 ]; then
+		par="exact"
+	elif [ "$SURFRAW_acronym_wim" = 1 ]; then
+		par="on"
+	elif [ "$SURFRAW_acronym_zip" = 1 ]; then
+	        par="zip"
+	fi
+	SURFRAW_acronym_par="&Find=find&string=$par&Page=1"
+	if [ "$SURFRAW_acronym_ict" = 1 ]; then
+		par="IT"
+	elif [ "$SURFRAW_acronym_sci" = 1 ]; then
+	        par="SciMed"
+	elif [ "$SURFRAW_acronym_gov" = 1 ]; then
+        	par="MilGov"
+	elif [ "$SURFRAW_acronym_org" = 1 ]; then
+        	par="Org"
+	elif [ "$SURFRAW_acronym_biz" = 1 ]; then
+        	par="Business"
+	elif [ "$SURFRAW_acronym_pop" = 1 ]; then
+        	par="Slang"
+	fi   
+	SURFRAW_acronym_par="$SURFRAW_acronym_par&Category=$par"
+     fi
+     if [ "$SURFRAW_acronym_alpha" = 1 ]; then
+	SURFRAW_acronym_par="$SURFRAW_acronym_par&s=a"
+     fi
+fi
+w3_browse_url "$SURFRAW_acronym_path${escaped_args}$SURFRAW_acronym_par"
+

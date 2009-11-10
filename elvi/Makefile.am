@@ -3,6 +3,7 @@ elvidir=$(ELVIDIR)
 
 dist_elvi_SCRIPTS	= \
 		  W \
+		  acronym \
 		  alioth \
 		  altavista \
 		  amazon \
@@ -44,14 +45,15 @@ dist_elvi_SCRIPTS	= \
 		  freedb \
 		  freshmeat \
 		  fsfdir \
+		  gcache \
 		  genbugs \
 		  genpkg \
 		  genportage \
 		  gutenberg \
-		  ixquick \
 		  google \
 		  happypenguin \
 		  imdb \
+		  ixquick \
 		  javasun \
 		  scpan \
 		  slinuxdoc \

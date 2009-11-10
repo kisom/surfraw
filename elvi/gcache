@@ -1,0 +1,49 @@
+#!/bin/sh
+# $Id$
+# elvis: gcache		-- Search the web using Google cache (www.google.com)
+. surfraw || exit 1
+
+w3_config_hook () {
+    defyn SURFRAW_cache_graphic 0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [option] [URL]...
+Description:
+  Surfraw shows the cached page using Google (www.google.com)
+Local option:
+  -i, -images                   Retrieve the stored page WITH images and media.
+				Default: textonly.
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -i*)        setoptyn SURFRAW_cache_graphic   1 ;;
+    *) 		return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+if !( test -n "$SURFRAW_lang" ); then
+    SURFRAW_lang="en";
+fi
+
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.google.com/intl/$SURFRAW_lang/help/features_list.html#cached"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+	if [ "$SURFRAW_cache_graphic" = 1 ]; then
+	     w3_browse_url "http://www.google.com/search?q=cache:${escaped_args}&hl=$SURFRAW_lang"
+        else
+             w3_browse_url "http://www.google.com/search?q=cache:${escaped_args}&hl=$SURFRAW_lang&strip=1"
+        fi
+fi

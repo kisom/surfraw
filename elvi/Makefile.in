@@ -43,19 +43,19 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 mkinstalldirs = $(SHELL) $(top_srcdir)/mkinstalldirs
 CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
-am__dist_elvi_SCRIPTS_DIST = W alioth altavista amazon archpkg arxiv \
-	ask aur austlii bbcnews cddb cia cite cliki cnn codesearch \
-	comlaw ctan currency cve debbugs debcontents deblists deblogs \
-	debpackages debpts debsec debvcsbrowse debwiki deja discogs \
-	dmoz ebay etym excite fast foldoc filesearching freebsd freedb \
-	freshmeat fsfdir genbugs genpkg genportage gutenberg ixquick \
-	google happypenguin imdb javasun scpan slinuxdoc l1sp lastfm \
-	leodict lsm mathworld mininova musicbrainz netbsd ntrs openbsd \
-	piratebay pgpkeys port pubmed rae rfc rhyme scholar scicom \
-	slashdot sourceforge springer stockquote sunonesearch \
-	thesaurus translate urban w3css w3html w3link w3rdf wayback \
-	webster wetandwild wikipedia woffle yahoo youtube yubnub \
-	opensearch
+am__dist_elvi_SCRIPTS_DIST = W acronym alioth altavista amazon archpkg \
+	arxiv ask aur austlii bbcnews cddb cia cite cliki cnn \
+	codesearch comlaw ctan currency cve debbugs debcontents \
+	deblists deblogs debpackages debpts debsec debvcsbrowse \
+	debwiki deja discogs dmoz ebay etym excite fast foldoc \
+	filesearching freebsd freedb freshmeat fsfdir gcache genbugs \
+	genpkg genportage gutenberg google happypenguin imdb ixquick \
+	javasun scpan slinuxdoc l1sp lastfm leodict lsm mathworld \
+	mininova musicbrainz netbsd ntrs openbsd piratebay pgpkeys \
+	port pubmed rae rfc rhyme scholar scicom slashdot sourceforge \
+	springer stockquote sunonesearch thesaurus translate urban \
+	w3css w3html w3link w3rdf wayback webster wetandwild wikipedia \
+	woffle yahoo youtube yubnub opensearch
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -161,16 +161,16 @@ top_srcdir = @top_srcdir@
 
 # $Id$
 elvidir = $(ELVIDIR)
-dist_elvi_SCRIPTS = W alioth altavista amazon archpkg arxiv ask aur \
-	austlii bbcnews cddb cia cite cliki cnn codesearch comlaw ctan \
-	currency cve debbugs debcontents deblists deblogs debpackages \
-	debpts debsec debvcsbrowse debwiki deja discogs dmoz ebay etym \
-	excite fast foldoc filesearching freebsd freedb freshmeat \
-	fsfdir genbugs genpkg genportage gutenberg ixquick google \
-	happypenguin imdb javasun scpan slinuxdoc l1sp lastfm leodict \
-	lsm mathworld mininova musicbrainz netbsd ntrs openbsd \
-	piratebay pgpkeys port pubmed rae rfc rhyme scholar scicom \
-	slashdot sourceforge springer stockquote sunonesearch \
+dist_elvi_SCRIPTS = W acronym alioth altavista amazon archpkg arxiv \
+	ask aur austlii bbcnews cddb cia cite cliki cnn codesearch \
+	comlaw ctan currency cve debbugs debcontents deblists deblogs \
+	debpackages debpts debsec debvcsbrowse debwiki deja discogs \
+	dmoz ebay etym excite fast foldoc filesearching freebsd freedb \
+	freshmeat fsfdir gcache genbugs genpkg genportage gutenberg \
+	google happypenguin imdb ixquick javasun scpan slinuxdoc l1sp \
+	lastfm leodict lsm mathworld mininova musicbrainz netbsd ntrs \
+	openbsd piratebay pgpkeys port pubmed rae rfc rhyme scholar \
+	scicom slashdot sourceforge springer stockquote sunonesearch \
 	thesaurus translate urban w3css w3html w3link w3rdf wayback \
 	webster wetandwild wikipedia woffle yahoo youtube yubnub \
 	$(am__append_1)
