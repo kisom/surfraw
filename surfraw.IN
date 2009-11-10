@@ -321,7 +321,7 @@ w3_parse_option () {
 	-elvi)		    echo " GLOBAL ELVI:"
 			    sed -n 's/^.*elvis: \(.*\)$/\1/p' $elvidir/*
 			    localelvidir=$(get_local_elvi_dir)
-			    if [ -d "$localelvidir" ]; then
+			    if [ -d "$localelvidir" ] && [ -n "$(ls "$localelvidir")" ]; then
 				echo " LOCAL ELVI:"
 				sed -n 's/^.*elvis: \(.*\)$/\1/p' "$localelvidir/"*
 			    fi
