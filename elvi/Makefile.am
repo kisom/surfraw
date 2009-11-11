@@ -28,6 +28,7 @@ dist_elvi_SCRIPTS	= \
 		  deblists \
 		  deblogs \
 		  debpackages \
+		  debpkghome \
 		  debpts \
 		  debsec \
 		  debvcsbrowse \

@@ -24,6 +24,7 @@ elvi.1sr.gz @mandir@/man1/debcontents.1sr.gz
 elvi.1sr.gz @mandir@/man1/deblists.1sr.gz
 elvi.1sr.gz @mandir@/man1/deblogs.1sr.gz
 elvi.1sr.gz @mandir@/man1/debpackages.1sr.gz
+elvi.1sr.gz @mandir@/man1/debpkghome.1sr.gz
 elvi.1sr.gz @mandir@/man1/debpts.1sr.gz
 elvi.1sr.gz @mandir@/man1/debsec.1sr.gz
 elvi.1sr.gz @mandir@/man1/debvcsbrowse.1sr.gz

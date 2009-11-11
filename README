@@ -176,6 +176,7 @@ debcontents     -- Search contents of debian/ubuntu packages (packages.debian.or
 deblists        -- Search debian mailing lists (lists.debian.org/search.html)
 deblogs         -- Show changelogs for a package in Debian main (changelogs.debian.net)
 debpackages     -- Search debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
+debpkghome      -- Visit the home page for a Debian package
 debpts          -- Search the Debian Package Tracking System (packages.qa.debian.org)
 debsec          -- Search the Debian Security Tracker for CVE ids or package names
 debvcsbrowse    -- Browse the VCS repository for a Debian package

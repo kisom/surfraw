@@ -1,0 +1,76 @@
+#!/bin/sh
+# elvis: debpkghome	-- Visit the home page for a Debian package
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [package|file.dsc|controlfile]
+Description:
+  Visit the home page for a Debian package
+EOF
+    w3_global_usage
+}
+
+extract_home_page ()
+{
+    # sed /I is a gnu extension
+    grep -i '^homepage:' | head -1 | \
+    	sed 's/^[Hh][Oo][Mm][Ee][Pp][Aa][Gg][Ee]: *//;'
+}
+
+do_control()
+{
+    if [ ! -f $1 ]
+    then
+	err $1": file not found"
+	return
+    fi
+    OUT="$(cat $1 | extract_home_page)"
+    if [ -z "$OUT" ]
+    then
+	err $1": no Homepage field"
+    else
+	echo "$OUT"
+    fi
+}
+
+do_package()
+{
+    if [ ! -x "`which apt-cache`" ]
+    then
+	err "apt-cache not installed. Try finding the homepage via debpts instead"
+	return
+    fi
+    OUT="$(apt-cache showsrc $1)"
+    if [ -z "$OUT" ]
+    then
+	err $1": package not found"
+	return
+    fi
+    OUT="$(echo "$OUT" | extract_home_page)"
+    if [ -z "$OUT" ]
+    then
+	err $1": no Homepage field"
+    else
+	echo "$OUT"
+    fi
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+if test -z "$w3_args"; then
+    w3_usage_hook
+    exit
+fi
+
+case "$w3_args" in
+     *.dsc|*control) url="$(do_control "$w3_args")"  ;;
+     *)              url="$(do_package "$w3_args")"  ;;
+esac
+
+if [ -n "$url" ]
+then
+    w3_browse_url "$url"
+fi
