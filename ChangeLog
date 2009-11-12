@@ -1,6 +1,8 @@
 2009-11-12  Ian Beckwith  <ianb@erislabs.net>
 
-	* New elvi: finkpkg: search Fink packages.
+	* New elvi:
+	  + finkpkg: search Fink packages.
+	  + macportspkg: search macports packages.
 	* surfraw.IN: w3_parse_args: avoid bogus initial space in w3_args
 
 2009-11-11  Ian Beckwith  <ianb@erislabs.net>

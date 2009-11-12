@@ -51,11 +51,12 @@ am__dist_elvi_SCRIPTS_DIST = W acronym alioth altavista amazon archpkg \
 	foldoc filesearching finkpkg freebsd freedb freshmeat fsfdir \
 	gcache genbugs genpkg genportage gutenberg google happypenguin \
 	imdb ixquick javasun scpan slinuxdoc l1sp lastfm leodict lsm \
-	mathworld mininova musicbrainz netbsd ntrs openbsd piratebay \
-	pgpkeys port pubmed rae rfc rhyme scholar scicom slashdot \
-	sourceforge springer stockquote sunonesearch thesaurus \
-	translate urban w3css w3html w3link w3rdf wayback webster \
-	wetandwild wikipedia woffle yahoo youtube yubnub opensearch
+	macportspkg mathworld mininova musicbrainz netbsd ntrs openbsd \
+	piratebay pgpkeys port pubmed rae rfc rhyme scholar scicom \
+	slashdot sourceforge springer stockquote sunonesearch \
+	thesaurus translate urban w3css w3html w3link w3rdf wayback \
+	webster wetandwild wikipedia woffle yahoo youtube yubnub \
+	opensearch
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
     $(srcdir)/*) f=`echo "$$p" | sed "s|^$$srcdirstrip/||"`;; \
@@ -168,12 +169,12 @@ dist_elvi_SCRIPTS = W acronym alioth altavista amazon archpkg arxiv \
 	discogs dmoz ebay etym excite fast foldoc filesearching \
 	finkpkg freebsd freedb freshmeat fsfdir gcache genbugs genpkg \
 	genportage gutenberg google happypenguin imdb ixquick javasun \
-	scpan slinuxdoc l1sp lastfm leodict lsm mathworld mininova \
-	musicbrainz netbsd ntrs openbsd piratebay pgpkeys port pubmed \
-	rae rfc rhyme scholar scicom slashdot sourceforge springer \
-	stockquote sunonesearch thesaurus translate urban w3css w3html \
-	w3link w3rdf wayback webster wetandwild wikipedia woffle yahoo \
-	youtube yubnub $(am__append_1)
+	scpan slinuxdoc l1sp lastfm leodict lsm macportspkg mathworld \
+	mininova musicbrainz netbsd ntrs openbsd piratebay pgpkeys \
+	port pubmed rae rfc rhyme scholar scicom slashdot sourceforge \
+	springer stockquote sunonesearch thesaurus translate urban \
+	w3css w3html w3link w3rdf wayback webster wetandwild wikipedia \
+	woffle yahoo youtube yubnub $(am__append_1)
 all: all-am
 
 .SUFFIXES:

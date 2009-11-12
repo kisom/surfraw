@@ -63,6 +63,7 @@ dist_elvi_SCRIPTS	= \
 		  lastfm \
 		  leodict \
 		  lsm \
+		  macportspkg \
 		  mathworld \
 		  mininova \
 		  musicbrainz \

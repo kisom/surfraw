@@ -1,0 +1,48 @@
+#!/bin/sh
+# elvis: macportspkg	-- Search macports packages (macports.org)
+# ianb@erislabs.net 20091112
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_macportspkg_by     name
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search macports packages (macports.org)
+Local options:
+  -by=TYPE                      Search by TYPE
+      name            |          Software Title (default)
+      category        |          Category
+      maintainer      |          Maintainer
+      variant         |          Variant
+      platform        |          Platform
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-by*=*)     setopt   SURFRAW_macportspkg_by           $optarg ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+escaped_args=$(w3_url_of_arg $w3_args)
+
+url="http://www.macports.org/ports.php"
+if [ -n "$escaped_args" ]
+then
+    url="${url}?by=${SURFRAW_macportspkg_by}&substr=${escaped_args}"
+fi
+
+w3_browse_url "$url"
