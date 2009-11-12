@@ -1,11 +1,11 @@
 #!/bin/sh
-# elvis: macportspkg	-- Search macports packages (macports.org)
+# elvis: macports	-- Search macports packages (macports.org)
 # ianb@erislabs.net 20091112
 
 . surfraw || exit 1
 
 w3_config_hook () {
-def   SURFRAW_macportspkg_by     name
+def   SURFRAW_macports_by     name
 }
 
 w3_usage_hook () {
@@ -28,7 +28,7 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-by*=*)     setopt   SURFRAW_macportspkg_by           $optarg ;;
+	-by*=*)     setopt   SURFRAW_macports_by           $optarg ;;
 	*) return 1 ;;
     esac
     return 0
@@ -42,7 +42,7 @@ escaped_args=$(w3_url_of_arg $w3_args)
 url="http://www.macports.org/ports.php"
 if [ -n "$escaped_args" ]
 then
-    url="${url}?by=${SURFRAW_macportspkg_by}&substr=${escaped_args}"
+    url="${url}?by=${SURFRAW_macports_by}&substr=${escaped_args}"
 fi
 
 w3_browse_url "$url"

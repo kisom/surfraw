@@ -2,7 +2,8 @@
 
 	* New elvi:
 	  + finkpkg: search Fink packages.
-	  + macportspkg: search macports packages.
+	  + macports: search macports packages.
+	  + rpmsearch: search for packages in rpm-based distros.
 	* surfraw.IN: w3_parse_args: avoid bogus initial space in w3_args
 
 2009-11-11  Ian Beckwith  <ianb@erislabs.net>

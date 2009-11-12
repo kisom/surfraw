@@ -209,7 +209,7 @@ l1sp            -- Search lisp documentation
 lastfm          -- Search last.fm
 leodict         -- Search Leo's German <-> English dictionary (dict.leo.org)
 lsm             -- Search the Linux Software Map
-macportspkg	-- Search macports packages (macports.org)
+macports   	-- Search macports packages (macports.org)
 mathworld       -- Search Wolfram MathWorld
 mininova        -- Search the mininova bittorent source.
 musicbrainz     -- Search MusicBrainz (musicbrainz.org)
