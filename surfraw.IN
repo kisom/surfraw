@@ -368,7 +368,12 @@ w3_parse_args () {
 	    then
 		arg=`quote_ifs "$arg"`
 	    fi
-	    w3_args="$w3_args $arg"
+	    if [ -n "$w3_args" ]
+	    then
+		w3_args="$w3_args $arg"
+	    else
+		w3_args="$arg"
+	    fi
 	fi
     done
     if test $SURFRAW_browser = none; then
