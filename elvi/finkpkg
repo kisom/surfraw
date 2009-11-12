@@ -1,0 +1,152 @@
+#!/bin/sh
+# elvis: finkpkg		-- Search Fink packages (pdb.finkproject.org)
+# ianb@erislabs.net 20091111
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_fink_pkgname     ""
+def   SURFRAW_fink_maintainer  ""
+def   SURFRAW_fink_distro      default
+def   SURFRAW_fink_arch        any
+def   SURFRAW_fink_tree        any
+def   SURFRAW_fink_section     any
+defyn SURFRAW_fink_exact       no
+defyn SURFRAW_fink_nomaint     no
+defyn SURFRAW_fink_nochildren  no
+defyn SURFRAW_fink_noshlibsdev no
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search Fink packages (pdb.finkproject.org)
+Local options:
+  -pkg=NAME                     Search by packagename for NAME
+  -maintainer=NAME              Search by maintainer for NAME
+  -dist=DIST                    Specify distribution DIST
+	default         |        Supported [10.5 & 10.6] (default)
+        any             |        Any
+        10.4            |        10.4
+        10.5            |        10.5
+        10.6            |        10.6
+  -arch=ARCH                    Search in arch ARCH
+        any             |        Any (default)
+	i386            |        i386
+	x86_64          |        X86_64 (aka AMD64)
+	powerpc         |        powerpc
+  -tree=TREE                    Search in tree TREE
+        any             |        Any (default)
+	unstable        |        Unstable
+	stable          |        Stable
+	bindist         |        Binary Distribution
+	testing         |        Packages that need testing
+  -section=SEC                  Search in section SEC
+        any             |        Any (default)
+        base            |        Core packages
+        crypto          |        Cryptographic software (subject to national regulations)
+        database        |        SQL and other database software
+        devel           |        Software for software development
+        editors         |        Text editors
+        games           |        Games and other fun stuff
+        gnome           |        The GNOME desktop environment (version 2.26)
+        graphics        |        Graphics applications and libraries
+        kde             |        K Desktop Environment (version 3.5.10 and 4.2.4)
+        languages       |        Programming languages (compilers, interpreters)
+        libs            |        General purpose libraries
+        libs/perlmods   |        Perl libraries
+        libs/pythonmods |        Python libraries
+        libs/rubymods   |        Ruby libraries
+        net             |        Network-related applications and libraries
+        sci             |        Scientific applications
+        shells          |        Shells (command line interpreters)
+        sound           |        Audio software
+        text            |        Text-processing software
+        utils           |        Utilities that do not fit elsewhere
+        web             |        Web-related software
+        x11             |        General X11 packages - toolkits and utilities
+        x11-system      |        X Window System core packages
+        x11-wm          |        Window managers for the X Window System
+  -exact                        Exact package matches only
+  -nomaint                      Find packages with no maintainer
+  -nochildren                   Exclude packages with parent
+                                 (includes most "-dev", "-shlibs", ... splitoffs)
+  -noshlibsdev                  Exclude -shlibs, -dev, -bin, -common, -doc packages
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-pkg*=*)    setopt   SURFRAW_fink_pkgname      $optarg ;;
+	-maint*=*)  setopt   SURFRAW_fink_maintainer   $optarg ;;
+	-dist*=*)   setopt   SURFRAW_fink_distro       $optarg ;;
+	-arch=*)    setopt   SURFRAW_fink_arch         $optarg ;;
+	-tree*=*)   setopt   SURFRAW_fink_tree         $optarg ;;
+	-sec*=*)    setopt   SURFRAW_fink_section      $optarg ;;
+	-ex*)       setoptyn SURFRAW_fink_exact        yes     ;;
+	-nomaint*)  setoptyn SURFRAW_fink_nomaint      yes     ;;
+	-noch*)     setoptyn SURFRAW_fink_nochildren   yes     ;;
+	-noshlib*)  setoptyn SURFRAW_fink_noshlibsdev  yes     ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+escaped_args=$(w3_url_of_arg $w3_args)
+
+url="http://pdb.finkproject.org/pdb/browse.php"
+
+if [ -z "$escaped_args" ] && [ -z "$SURFRAW_fink_pkgname" ] && [ -z "$SURFRAW_fink_maintainer" ]
+then
+    w3_browse_url "$url"
+else
+    if [ "$SURFRAW_fink_arch" = any ]
+    then
+	SURFRAW_fink_arch=""
+    fi
+    if [ "$SURFRAW_fink_section" = any ]
+    then
+	SURFRAW_fink_section=""
+    fi
+    url="${url}?dist_name=${SURFRAW_fink_distro}"
+    url="${url}&architecture=${SURFRAW_fink_arch}"
+    url="${url}&tree=${SURFRAW_fink_tree}"
+    url="${url}&sec=${SURFRAW_fink_section}"
+    if [ -n "$escaped_args" ]
+    then
+	url="${url}&summary=${escaped_args}"
+    fi
+    if [ -n "$SURFRAW_fink_pkgname" ]
+    then
+	url="${url}&name=${SURFRAW_fink_pkgname}"
+    fi
+    if [ -n "$SURFRAW_fink_maintainer" ]
+    then
+	url="${url}&maintainer=${SURFRAW_fink_maintainer}"
+    fi
+    if ifyes SURFRAW_fink_exact
+    then
+	url="${url}&name_exact=on"
+    fi
+    if ifyes SURFRAW_fink_nomaint
+    then
+	url="$url&nomaintainer=on"
+    fi
+    if ifyes SURFRAW_fink_nochildren
+    then
+	url="$url&nochildren=on"
+    fi
+    if ifyes SURFRAW_fink_noshlibsdev
+    then
+	url="$url&noshlibsdev=on"
+    fi
+
+    w3_browse_url "$url"
+fi

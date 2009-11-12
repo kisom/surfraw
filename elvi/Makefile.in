@@ -48,9 +48,9 @@ am__dist_elvi_SCRIPTS_DIST = W acronym alioth altavista amazon archpkg \
 	codesearch comlaw ctan currency cve debbugs debcontents \
 	deblists deblogs debpackages debpkghome debpts debsec \
 	debvcsbrowse debwiki deja discogs dmoz ebay etym excite fast \
-	foldoc filesearching freebsd freedb freshmeat fsfdir gcache \
-	genbugs genpkg genportage gutenberg google happypenguin imdb \
-	ixquick javasun scpan slinuxdoc l1sp lastfm leodict lsm \
+	foldoc filesearching finkpkg freebsd freedb freshmeat fsfdir \
+	gcache genbugs genpkg genportage gutenberg google happypenguin \
+	imdb ixquick javasun scpan slinuxdoc l1sp lastfm leodict lsm \
 	mathworld mininova musicbrainz netbsd ntrs openbsd piratebay \
 	pgpkeys port pubmed rae rfc rhyme scholar scicom slashdot \
 	sourceforge springer stockquote sunonesearch thesaurus \
@@ -166,7 +166,7 @@ dist_elvi_SCRIPTS = W acronym alioth altavista amazon archpkg arxiv \
 	comlaw ctan currency cve debbugs debcontents deblists deblogs \
 	debpackages debpkghome debpts debsec debvcsbrowse debwiki deja \
 	discogs dmoz ebay etym excite fast foldoc filesearching \
-	freebsd freedb freshmeat fsfdir gcache genbugs genpkg \
+	finkpkg freebsd freedb freshmeat fsfdir gcache genbugs genpkg \
 	genportage gutenberg google happypenguin imdb ixquick javasun \
 	scpan slinuxdoc l1sp lastfm leodict lsm mathworld mininova \
 	musicbrainz netbsd ntrs openbsd piratebay pgpkeys port pubmed \

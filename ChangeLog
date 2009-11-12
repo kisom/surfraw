@@ -1,3 +1,7 @@
+2009-11-12  Ian Beckwith  <ianb@erislabs.net>
+
+	* New elvi: finkpkg: search Fink packages.
+
 2009-11-11  Ian Beckwith  <ianb@erislabs.net>
 
 	* New elvi: debpkghome: view home page of a debian package.

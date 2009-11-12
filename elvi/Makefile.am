@@ -42,6 +42,7 @@ dist_elvi_SCRIPTS	= \
 		  fast \
 		  foldoc \
 		  filesearching \
+		  finkpkg \
 		  freebsd \
 		  freedb \
 		  freshmeat \
