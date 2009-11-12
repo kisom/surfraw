@@ -52,8 +52,8 @@ am__dist_elvi_SCRIPTS_DIST = W acronym alioth altavista amazon archpkg \
 	gcache genbugs genpkg genportage gutenberg google happypenguin \
 	imdb ixquick javasun scpan slinuxdoc l1sp lastfm leodict lsm \
 	macportspkg mathworld mininova musicbrainz netbsd ntrs openbsd \
-	piratebay pgpkeys port pubmed rae rfc rhyme scholar scicom \
-	slashdot sourceforge springer stockquote sunonesearch \
+	piratebay pgpkeys port pubmed rae rfc rhyme rpmsearch scholar \
+	scicom slashdot sourceforge springer stockquote sunonesearch \
 	thesaurus translate urban w3css w3html w3link w3rdf wayback \
 	webster wetandwild wikipedia woffle yahoo youtube yubnub \
 	opensearch
@@ -171,10 +171,11 @@ dist_elvi_SCRIPTS = W acronym alioth altavista amazon archpkg arxiv \
 	genportage gutenberg google happypenguin imdb ixquick javasun \
 	scpan slinuxdoc l1sp lastfm leodict lsm macportspkg mathworld \
 	mininova musicbrainz netbsd ntrs openbsd piratebay pgpkeys \
-	port pubmed rae rfc rhyme scholar scicom slashdot sourceforge \
-	springer stockquote sunonesearch thesaurus translate urban \
-	w3css w3html w3link w3rdf wayback webster wetandwild wikipedia \
-	woffle yahoo youtube yubnub $(am__append_1)
+	port pubmed rae rfc rhyme rpmsearch scholar scicom slashdot \
+	sourceforge springer stockquote sunonesearch thesaurus \
+	translate urban w3css w3html w3link w3rdf wayback webster \
+	wetandwild wikipedia woffle yahoo youtube yubnub \
+	$(am__append_1)
 all: all-am
 
 .SUFFIXES:

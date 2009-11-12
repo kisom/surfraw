@@ -1,0 +1,96 @@
+#!/bin/sh
+# elvis: rpmsearch	-- Search for RPMs in various distros
+# ianb@erislabs.net 20091112
+. surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_rpmsearch_distro  all
+    def   SURFRAW_rpmsearch_version all
+    def   SURFRAW_rpmsearch_arch    all
+    def   SURFRAW_rpmsearch_by      rpmname
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search for RPMs in various distros
+Local options:
+  -search=TYPE                  Search by TYPE
+          rpmname       |        RPM name (default)
+          fuzzyname     |        Fuzzy name match
+          provide       |        Provides
+          require       |        Requires
+          conflict      |        Conflicts
+          obsolete      |        Obsoletes
+          trigger       |        Triggers
+  -distro=NAME                  Search in distribution NAME
+          all           |        All (default)
+          Altlinux      |        Altlinux
+          Arklinux      |        Arklinux
+          Caosity       |        Caosity
+          CentOS        |        CentOS
+          Fedora        |        Fedora
+          Mandriva      |        Mandriva
+          Momonga       |        Momonga
+          OpenSuse      |        OpenSuse
+          PLD           |        PLD
+          Scientific    |        Scientific
+  -arch=NAME                    Search in architecture NAME
+    all (default), alpha, athlon, i386, i486,
+    i586, i686, ia64, ppc, ppc64, sparc, sparc64,
+    sparcv9, x86_64
+  -version=VER                  Search in distro version VER
+    all (default), 10, 10.0, 10.0-community, 10.1,
+    10.1-community, 10.2, 10.2-community, 10.3, 11,
+    11.0, 11.1, 2, 2006.0, 2006.0-community,
+    2007.0, 2007.1, 2008.0, 2008.1, 2009.0, 2009.1,
+    2010.0, 3, 4, 40, 4.0, 4.1, 46, 5, 50, 51,
+    5.1, 52, 5.2, 6, 7, 7.0, 7.1, 7.2, 8, 8.0, 8.1,
+    8.2, 9, 9.0, 9.1, 9.2, ac, community, cooker,
+    cs4.0, current, devel, development, factory, th
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -dist*=*)   setopt   SURFRAW_rpmsearch_distro  "$optarg" ;;
+    -ver*=*)    setopt   SURFRAW_rpmsearch_version "$optarg" ;;
+    -arch*=*)   setopt   SURFRAW_rpmsearch_arch    "$optarg" ;;
+    -ver*=*)    setopt   SURFRAW_rpmsearch_version "$optarg" ;;
+    -sear*=*)   setopt   SURFRAW_rpmsearch_by      "$optarg" ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+if test -z "$w3_args"; then
+    w3_browse_url "http://sophie.zarb.org/rpmfind"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+
+    if [ "$SURFRAW_rpmsearch_distro" = all ]
+    then
+	SURFRAW_rpmsearch_distro=""
+    fi
+
+    if [ "$SURFRAW_rpmsearch_version" = all ]
+    then
+	SURFRAW_rpmsearch_version=""
+    fi
+
+    if [ "$SURFRAW_rpmsearch_arch" = all ]
+    then
+	SURFRAW_rpmsearch_arch=""
+    fi
+
+    w3_browse_url "http://sophie.zarb.org/rpmfind?distrib=${SURFRAW_rpmsearch_distro}&version=${SURFRAW_rpmsearch_version}&arch=${SURFRAW_rpmsearch_arch}&search=${escaped_args}&st=${SURFRAW_rpmsearch_by}"
+
+fi

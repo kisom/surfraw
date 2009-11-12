@@ -224,6 +224,7 @@ pubmed          -- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
 rae             -- Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)
 rfc             -- Search RFCs (internet standards documents)
 rhyme           -- Search for rhymes et al using Lycos Rhyme (rhyme.lycos.com)
+rpmsearch       -- Search for RPMs in various distros
 scholar         -- Search Google Scholar (scholar.google.com)
 scicom          -- Search Scientific Commons
 scpan           -- Search the Comprehensive Perl Archive Network (search.cpan.org)

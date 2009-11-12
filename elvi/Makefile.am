@@ -77,6 +77,7 @@ dist_elvi_SCRIPTS	= \
 		  rae \
 		  rfc \
 		  rhyme \
+		  rpmsearch \
 		  scholar \
 		  scicom \
 		  slashdot \
