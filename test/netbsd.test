@@ -4,3 +4,5 @@ netbsd -pr 666
 loose source routing
 netbsd -mail netbsd
 NetBSD
+netbsd -ps surfraw
+Shell Users Revolutionary Front

@@ -2,6 +2,7 @@
 
 	* freebsd: new options -psearch=TYPE -psection=SEC
 	  to conduct a search of type TYPE in section SEC of ports.
+	* netbsd: new option -ps to search ports
 
 2009-11-12  Ian Beckwith  <ianb@erislabs.net>
 
