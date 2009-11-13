@@ -4,8 +4,9 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-defyn   SURFRAW_openbsd_mail	no
-defyn   SURFRAW_openbsd_pr	no
+defyn   SURFRAW_openbsd_mail            no
+defyn   SURFRAW_openbsd_pr              no
+defyn   SURFRAW_openbsd_ports           no
 }
 
 w3_usage_hook () {
@@ -14,19 +15,23 @@ Usage: $w3_argv0 [options] [search-string | PR-number]
 Description:
   Surfraw search OpenBSD related information
 Local options:
-  -mail[=(yes|no)]		Search OpenBSD mailinglists
-  				Default: $SURFRAW_openbsd_mail
-  				Environment: SURFRAW_openbsd_mail
-  -pr[=(yes|no)]		Query Problem Reports
-  				Default: $SURFRAW_openbsd_pr
-  				Environment: SURFRAW_openbsd_pr
+  -mail[=(yes|no)]              Search OpenBSD mailinglists
+                                Default: $SURFRAW_openbsd_mail
+                                Environment: SURFRAW_openbsd_mail
+  -pr[=(yes|no)]                Query Problem Reports
+                                Default: $SURFRAW_openbsd_pr
+                                Environment: SURFRAW_openbsd_pr
+  -ps[=(yes|no)]                Search ports.
+                                Default: $SURFRAW_openbsd_ports
+                                Environment: SURFRAW_openbsd_ports
 Examples:
-  $w3_argv0 			Teleport to the OpenBSD website
-  $w3_argv0 mycroft		Search OpenBSD website for odeur de mycroft
-  $w3_argv0 -mail  		Teleport to the mail-index Query form
-  $w3_argv0 -mail proff		Search mailing-list archives for odeur de proff
-  $w3_argv0 -pr			Query Problem Report form
-  $w3_argv0 -pr 666		Display PR 666
+  $w3_argv0                     Teleport to the OpenBSD website
+  $w3_argv0 mycroft             Search OpenBSD website for odeur de mycroft
+  $w3_argv0 -mail               Teleport to the mail-index Query form
+  $w3_argv0 -mail proff         Search mailing-list archives for odeur de proff
+  $w3_argv0 -pr                 Query Problem Report form
+  $w3_argv0 -pr 666             Display PR 666
+  $w3_argv0 -ps surfraw         Search ports for surfraw
 EOF
     w3_global_usage
 }
@@ -39,6 +44,8 @@ w3_parse_option_hook () {
 	-mail=*) setoptyn	SURFRAW_openbsd_mail		$optarg	;;
 	-pr)	setoptyn	SURFRAW_openbsd_pr		yes	;;
 	-pr=*)	setoptyn	SURFRAW_openbsd_pr		$optarg	;;
+	-ps)	setoptyn	SURFRAW_openbsd_ports		yes	;;
+	-ps=*)	setoptyn	SURFRAW_openbsd_ports		$optarg	;;
 	*) return 1 ;;
     esac
     return 0
@@ -49,6 +56,14 @@ w3_parse_args "$@"
 # w3_args now contains a list of arguments
 test -z "$w3_args" || escaped_args=`w3_url_of_arg $w3_args`
 
+if ok SURFRAW_openbsd_ports; then
+    if test -z "$escaped_args"; then
+        w3_browse_url "http://openports.se/"
+    else
+        w3_browse_url "http://openports.se/search.php?so=${escaped_args}"
+    fi
+    exit $?
+fi
 if ok SURFRAW_openbsd_pr; then
     if test -z "$escaped_args"; then
         w3_browse_url "http://www.openbsd.org/query-pr.html"
