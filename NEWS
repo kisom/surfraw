@@ -15,11 +15,48 @@
 
 				  N E W S
 
-Tue Jul 21 04:13:16 BST 2009  - surfraw 2.2.6
+Fri Nov 13 04:38:10 GMT 2009  - surfraw 2.2.6
 
-  * New elvi: debvcsbrowse.
-  * Fix bookmarks with multiple matches.
-
+        * New elvi:
+          + by Sumant Oemrawsingh:
+            * cliki        - search the common lisp wiki.
+            * l1sp         - search lisp documentation.
+            * mathworld    - search Wolfram MathWorld.
+            * mininova     - search mininova for torrents.
+            * youtube      - search youtube for videos.
+          + by fittabile@lifegate.it:
+            * acronym      - find acronyms
+            * gcache       - search google cache.
+          + by Nick White:
+            * genbugs      - search gentoo bug tracker
+          + by Ian Beckwith:
+            * debpkghome   - view home page of a debian package.
+            * debvcsbrowse - browse vcs of a debian package
+            * rpmsearch    - search for packages in rpm-based distros.
+            * finkpkg      - search Fink packages.
+            * macports     - search macports packages.
+        * Move config files to follow XDG basedir spec
+	  This means that if your global config was in /etc/surfraw.conf
+	  it is now in /etc/xdg/surfraw/conf, and local config is
+	  now in $HOME/.config/surfraw/conf. The same applies to bookmarks.
+	  See README for details on configuring config locations, and
+	  http://standards.freedesktop.org/basedir-spec/basedir-spec-0.6.html
+	  for the gory details. The old locations are still supported for
+	  backwards-compatibility.
+        * Support per-user elvi in $HOME/.config/surfraw/elvi/
+          Patch by James Rowe, idea by Sumant Oemrawsingh.
+        * Added -o | -o=FILE option, to fetch URL and dump to
+          stdout or FILE.
+        * Modified elvi:
+          + freebsd: new options -psearch=TYPE -psection=SEC
+            to conduct a search of type TYPE in section SEC of ports.
+          + netbsd:  new option -ps to search ports
+          + openbsd: new option -ps to search ports
+          + debsec: fixed (Thanks to Moritz Muehlenhoff, for this
+            and all his other work).
+          + cia: fixed.
+        * Added examples/uzbl_load_url_from_surfraw, to integrate surfraw
+          with uzbl (uzbl.org), thanks to Sumant Oemrawsingh.
 
 Wed May 13 02:30:21 BST 2009  - surfraw 2.2.5
 
