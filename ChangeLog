@@ -6,6 +6,7 @@
 	* openbsd: new option -ps to search ports
 	* URLs for *bsd portsearch, finkpkg, macports and rpmsearch
 	  from whohas(1), http://www.philippwesche.org/200811/whohas/intro.html
+	* cia, pubmed: fixed tests.
 
 2009-11-12  Ian Beckwith  <ianb@erislabs.net>
 
