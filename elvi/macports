@@ -20,6 +20,8 @@ Local options:
       maintainer      |          Maintainer
       variant         |          Variant
       platform        |          Platform
+                                Default: $SURFRAW_macports_by
+                                Environment: SURFRAW_macports_by
 EOF
     w3_global_usage
 }

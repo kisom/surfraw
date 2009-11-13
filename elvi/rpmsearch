@@ -24,6 +24,8 @@ Local options:
           conflict      |        Conflicts
           obsolete      |        Obsoletes
           trigger       |        Triggers
+                                Default: $SURFRAW_rpmsearch_by
+                                Environment: SURFRAW_rpmsearch_by
   -distro=NAME                  Search in distribution NAME
           all           |        All (default)
           Altlinux      |        Altlinux
@@ -36,10 +38,14 @@ Local options:
           OpenSuse      |        OpenSuse
           PLD           |        PLD
           Scientific    |        Scientific
+                                Default: $SURFRAW_rpmsearch_distro
+                                Environment: SURFRAW_rpmsearch_distro
   -arch=NAME                    Search in architecture NAME
     all (default), alpha, athlon, i386, i486,
     i586, i686, ia64, ppc, ppc64, sparc, sparc64,
     sparcv9, x86_64
+                                Default: $SURFRAW_rpmsearch_arch
+                                Environment: SURFRAW_rpmsearch_arch
   -version=VER                  Search in distro version VER
     all (default), 10, 10.0, 10.0-community, 10.1,
     10.1-community, 10.2, 10.2-community, 10.3, 11,
@@ -49,6 +55,8 @@ Local options:
     5.1, 52, 5.2, 6, 7, 7.0, 7.1, 7.2, 8, 8.0, 8.1,
     8.2, 9, 9.0, 9.1, 9.2, ac, community, cooker,
     cs4.0, current, devel, development, factory, th
+                                Default: $SURFRAW_rpmsearch_version
+                                Environment: SURFRAW_rpmsearch_version
 EOF
     w3_global_usage
 }
