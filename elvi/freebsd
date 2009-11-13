@@ -13,8 +13,8 @@ defyn   SURFRAW_freebsd_ps             no
 defyn   SURFRAW_freebsd_prs            no
 defyn   SURFRAW_freebsd_elogs          no
 defyn   SURFRAW_freebsd_portsearch     no
-def     SURFRAW_freebsd_portsearchtype ""
-def     SURFRAW_freebsd_portsearchsec  ""
+def     SURFRAW_freebsd_portsearchtype all
+def     SURFRAW_freebsd_portsearchsec  all
 }
 
 w3_usage_hook () {
@@ -69,8 +69,8 @@ Local options:
     windowmaker, www, x11, x11-clocks,
     x11-drivers, x11-fm, x11-fonts, x11-servers,
     x11-themes, x11-toolkits, x11-wm, xfce, zope
-                                Default: $SURFRAW_freebsd_portsec
-				Environment: SURFRAW_freebsd_portsec
+                                Default: $SURFRAW_freebsd_portsearchsec
+				Environment: SURFRAW_freebsd_portsearchsec
   -prs[=(yes|no)]               Teleport to the Problem Report Survey Page
                                 Default: $SURFRAW_freebsd_prs
                                 Environment: SURFRAW_freebsd_prs
