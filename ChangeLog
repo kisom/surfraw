@@ -1,3 +1,8 @@
+2009-11-13  Ian Beckwith  <ianb@erislabs.net>
+
+	* freebsd: new options -psearch=TYPE -psection=SEC
+	  to conduct a search of type TYPE in section SEC of ports.
+
 2009-11-12  Ian Beckwith  <ianb@erislabs.net>
 
 	* New elvi:

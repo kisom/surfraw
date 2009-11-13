@@ -4,14 +4,17 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-defyn   SURFRAW_freebsd_mail	no
-defyn   SURFRAW_freebsd_pr	no
-defyn   SURFRAW_freebsd_cvs	no
-defyn   SURFRAW_freebsd_mid	no
-defyn   SURFRAW_freebsd_gg	no
-defyn   SURFRAW_freebsd_ps	no
-defyn   SURFRAW_freebsd_prs	no
-defyn   SURFRAW_freebsd_elogs	no
+defyn   SURFRAW_freebsd_mail           no
+defyn   SURFRAW_freebsd_pr             no
+defyn   SURFRAW_freebsd_cvs            no
+defyn   SURFRAW_freebsd_mid            no
+defyn   SURFRAW_freebsd_gg             no
+defyn   SURFRAW_freebsd_ps             no
+defyn   SURFRAW_freebsd_prs            no
+defyn   SURFRAW_freebsd_elogs          no
+defyn   SURFRAW_freebsd_portsearch     no
+def     SURFRAW_freebsd_portsearchtype ""
+def     SURFRAW_freebsd_portsearchsec  ""
 }
 
 w3_usage_hook () {
@@ -38,6 +41,36 @@ Local options:
   -ps[=(yes|no)]                Teleport to the Port Survey Page
                                 Default: $SURFRAW_freebsd_ps
                                 Environment: SURFRAW_freebsd_ps
+  -psearch[=TYPE]               Search of type TYPE in ports.
+    all                |          All (default)
+    name               |          Package Name
+    text               |          Description
+    pkgdescr           |          Long Description
+    maintainer         |          Maintainer
+    requires           |          Requires
+                                Default: $SURFRAW_freebsd_portsearchtype
+				Environment: SURFRAW_freebsd_portsearchtype
+  -psection[=SEC]               Section of ports to search in.
+    all, accessibility, afterstep, arabic,
+    archivers, astro, audio, benchmarks, biology,
+    cad, chinese, comms, converters, databases,
+    deskutils, devel, dns, docs, editors, elisp,
+    emulators, finance, french, ftp, games,
+    geography, german, gnome, gnustep, graphics,
+    hamradio, haskell, hebrew, hungarian, ipv6,
+    irc, japanese, java, kde, kld, korean, lang,
+    linux, lisp, mail, math, mbone, misc,
+    multimedia, net, net-im, net-mgmt, net-p2p,
+    news, palm, parallel, pear, perl5, plan9,
+    polish, ports-mgmt, portuguese, print, python,
+    ruby, rubygems, russian, scheme, science,
+    security, shells, spanish, sysutils, tcl,
+    textproc, tk, ukrainian, vietnamese,
+    windowmaker, www, x11, x11-clocks,
+    x11-drivers, x11-fm, x11-fonts, x11-servers,
+    x11-themes, x11-toolkits, x11-wm, xfce, zope
+                                Default: $SURFRAW_freebsd_portsec
+				Environment: SURFRAW_freebsd_portsec
   -prs[=(yes|no)]               Teleport to the Problem Report Survey Page
                                 Default: $SURFRAW_freebsd_prs
                                 Environment: SURFRAW_freebsd_prs
@@ -80,7 +113,13 @@ w3_parse_option_hook () {
 	-mid=*)	setoptyn	SURFRAW_freebsd_mid		$optarg	;;
 	-ps)	setoptyn	SURFRAW_freebsd_ps		yes	;;
 	-prs)	setoptyn	SURFRAW_freebsd_prs		yes	;;
-	-elogs)	setoptyn	SURFRAW_freebsd_elogs		yes	;;
+	-psea*=*) setoptyn      SURFRAW_freebsd_portsearch      yes;
+	          setopt        SURFRAW_freebsd_portsearchtype  $optarg ;;
+	-psea*)   setoptyn      SURFRAW_freebsd_portsearch      yes     ;;
+	-psec*=*) setoptyn      SURFRAW_freebsd_portsearch      yes;
+	          setopt        SURFRAW_freebsd_portsec         $optarg ;;
+	-psec*)   setoptyn      SURFRAW_freebsd_portsearch      yes     ;;
+	-elogs)	  setoptyn	SURFRAW_freebsd_elogs		yes	;;
 	*) return 1 ;;
     esac
     return 0
@@ -91,6 +130,14 @@ w3_parse_args "$@"
 # w3_args now contains a list of arguments
 test -z "$w3_args" || escaped_args=`w3_url_of_arg $w3_args`
 
+if ok SURFRAW_freebsd_portsearch; then
+    if test -z "$escaped_args"; then
+        w3_browse_url "http://www.freebsd.org/cgi/ports.cgi"
+    else
+        w3_browse_url "http://www.freebsd.org/cgi/ports.cgi?query=${escaped_args}&stype=${SURFRAW_freebsd_portsearchtype}&sektion=${SURFRAW_freebsd_portsec}"
+    fi
+    exit $?
+fi
 if ok SURFRAW_freebsd_pr; then
     if test -z "$escaped_args"; then
         w3_browse_url "http://www.freebsd.org/cgi/query-pr-summary.cgi?query"
