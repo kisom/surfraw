@@ -5,16 +5,16 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-def   SURFRAW_fink_pkgname     ""
-def   SURFRAW_fink_maintainer  ""
-def   SURFRAW_fink_distro      default
-def   SURFRAW_fink_arch        any
-def   SURFRAW_fink_tree        any
-def   SURFRAW_fink_section     any
-defyn SURFRAW_fink_exact       no
-defyn SURFRAW_fink_nomaint     no
-defyn SURFRAW_fink_nochildren  no
-defyn SURFRAW_fink_noshlibsdev no
+def   SURFRAW_finkpkg_pkgname     ""
+def   SURFRAW_finkpkg_maintainer  ""
+def   SURFRAW_finkpkg_distro      default
+def   SURFRAW_finkpkg_arch        any
+def   SURFRAW_finkpkg_tree        any
+def   SURFRAW_finkpkg_section     any
+defyn SURFRAW_finkpkg_exact       no
+defyn SURFRAW_finkpkg_nomaint     no
+defyn SURFRAW_finkpkg_nochildren  no
+defyn SURFRAW_finkpkg_noshlibsdev no
 }
 
 w3_usage_hook () {
@@ -31,23 +31,23 @@ Local options:
         10.4            |        10.4
         10.5            |        10.5
         10.6            |        10.6
-	                        Default: $SURFRAW_fink_distro
-	                        Environment: SURFRAW_fink_distro
+	                        Default: $SURFRAW_finkpkg_distro
+	                        Environment: SURFRAW_finkpkg_distro
   -arch=ARCH                    Search in arch ARCH
         any             |        Any (default)
 	i386            |        i386
 	x86_64          |        X86_64 (aka AMD64)
 	powerpc         |        powerpc
-	                        Default: $SURFRAW_fink_arch
-	                        Environment: SURFRAW_fink_arch
+	                        Default: $SURFRAW_finkpkg_arch
+	                        Environment: SURFRAW_finkpkg_arch
   -tree=TREE                    Search in tree TREE
         any             |        Any (default)
 	unstable        |        Unstable
 	stable          |        Stable
 	bindist         |        Binary Distribution
 	testing         |        Packages that need testing
-	                        Default: $SURFRAW_fink_tree
-	                        Environment: SURFRAW_fink_tree
+	                        Default: $SURFRAW_finkpkg_tree
+	                        Environment: SURFRAW_finkpkg_tree
   -section=SEC                  Search in section SEC
         any             |        Any (default)
         base            |        Core packages
@@ -74,21 +74,21 @@ Local options:
         x11             |        General X11 packages - toolkits and utilities
         x11-system      |        X Window System core packages
         x11-wm          |        Window managers for the X Window System
-	                        Default: $SURFRAW_fink_section
-	                        Environment: SURFRAW_fink_section
+	                        Default: $SURFRAW_finkpkg_section
+	                        Environment: SURFRAW_finkpkg_section
   -exact                        Exact package matches only
-                                Default: $SURFRAW_fink_exact
-                                Environment: SURFRAW_fink_exact
+                                Default: $SURFRAW_finkpkg_exact
+                                Environment: SURFRAW_finkpkg_exact
   -nomaint                      Find packages with no maintainer
-                                Default: $SURFRAW_fink_nomaint
-                                Environment: SURFRAW_fink_nomaint
+                                Default: $SURFRAW_finkpkg_nomaint
+                                Environment: SURFRAW_finkpkg_nomaint
   -nochildren                   Exclude packages with parent
                                  (includes most "-dev", "-shlibs", ... splitoffs)
-				Default: $SURFRAW_fink_nochildren
-                                Environment: SURFRAW_fink_nochildren
+				Default: $SURFRAW_finkpkg_nochildren
+                                Environment: SURFRAW_finkpkg_nochildren
   -noshlibsdev                  Exclude -shlibs, -dev, -bin, -common, -doc packages
-				Default: $SURFRAW_fink_noshlibsdev
-                                Environment: SURFRAW_fink_noshlibsdev
+				Default: $SURFRAW_finkpkg_noshlibsdev
+                                Environment: SURFRAW_finkpkg_noshlibsdev
 EOF
     w3_global_usage
 }
@@ -97,16 +97,16 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-pkg*=*)    setopt   SURFRAW_fink_pkgname      $optarg ;;
-	-maint*=*)  setopt   SURFRAW_fink_maintainer   $optarg ;;
-	-dist*=*)   setopt   SURFRAW_fink_distro       $optarg ;;
-	-arch=*)    setopt   SURFRAW_fink_arch         $optarg ;;
-	-tree*=*)   setopt   SURFRAW_fink_tree         $optarg ;;
-	-sec*=*)    setopt   SURFRAW_fink_section      $optarg ;;
-	-ex*)       setoptyn SURFRAW_fink_exact        yes     ;;
-	-nomaint*)  setoptyn SURFRAW_fink_nomaint      yes     ;;
-	-noch*)     setoptyn SURFRAW_fink_nochildren   yes     ;;
-	-noshlib*)  setoptyn SURFRAW_fink_noshlibsdev  yes     ;;
+	-pkg*=*)    setopt   SURFRAW_finkpkg_pkgname      $optarg ;;
+	-maint*=*)  setopt   SURFRAW_finkpkg_maintainer   $optarg ;;
+	-dist*=*)   setopt   SURFRAW_finkpkg_distro       $optarg ;;
+	-arch=*)    setopt   SURFRAW_finkpkg_arch         $optarg ;;
+	-tree*=*)   setopt   SURFRAW_finkpkg_tree         $optarg ;;
+	-sec*=*)    setopt   SURFRAW_finkpkg_section      $optarg ;;
+	-ex*)       setoptyn SURFRAW_finkpkg_exact        yes     ;;
+	-nomaint*)  setoptyn SURFRAW_finkpkg_nomaint      yes     ;;
+	-noch*)     setoptyn SURFRAW_finkpkg_nochildren   yes     ;;
+	-noshlib*)  setoptyn SURFRAW_finkpkg_noshlibsdev  yes     ;;
 	*) return 1 ;;
     esac
     return 0
@@ -119,47 +119,47 @@ escaped_args=$(w3_url_of_arg $w3_args)
 
 url="http://pdb.finkproject.org/pdb/browse.php"
 
-if [ -z "$escaped_args" ] && [ -z "$SURFRAW_fink_pkgname" ] && [ -z "$SURFRAW_fink_maintainer" ]
+if [ -z "$escaped_args" ] && [ -z "$SURFRAW_finkpkg_pkgname" ] && [ -z "$SURFRAW_finkpkg_maintainer" ]
 then
     w3_browse_url "$url"
 else
-    if [ "$SURFRAW_fink_arch" = any ]
+    if [ "$SURFRAW_finkpkg_arch" = any ]
     then
-	SURFRAW_fink_arch=""
+	SURFRAW_finkpkg_arch=""
     fi
-    if [ "$SURFRAW_fink_section" = any ]
+    if [ "$SURFRAW_finkpkg_section" = any ]
     then
-	SURFRAW_fink_section=""
+	SURFRAW_finkpkg_section=""
     fi
-    url="${url}?dist_name=${SURFRAW_fink_distro}"
-    url="${url}&architecture=${SURFRAW_fink_arch}"
-    url="${url}&tree=${SURFRAW_fink_tree}"
-    url="${url}&sec=${SURFRAW_fink_section}"
+    url="${url}?dist_name=${SURFRAW_finkpkg_distro}"
+    url="${url}&architecture=${SURFRAW_finkpkg_arch}"
+    url="${url}&tree=${SURFRAW_finkpkg_tree}"
+    url="${url}&sec=${SURFRAW_finkpkg_section}"
     if [ -n "$escaped_args" ]
     then
 	url="${url}&summary=${escaped_args}"
     fi
-    if [ -n "$SURFRAW_fink_pkgname" ]
+    if [ -n "$SURFRAW_finkpkg_pkgname" ]
     then
-	url="${url}&name=${SURFRAW_fink_pkgname}"
+	url="${url}&name=${SURFRAW_finkpkg_pkgname}"
     fi
-    if [ -n "$SURFRAW_fink_maintainer" ]
+    if [ -n "$SURFRAW_finkpkg_maintainer" ]
     then
-	url="${url}&maintainer=${SURFRAW_fink_maintainer}"
+	url="${url}&maintainer=${SURFRAW_finkpkg_maintainer}"
     fi
-    if ifyes SURFRAW_fink_exact
+    if ifyes SURFRAW_finkpkg_exact
     then
 	url="${url}&name_exact=on"
     fi
-    if ifyes SURFRAW_fink_nomaint
+    if ifyes SURFRAW_finkpkg_nomaint
     then
 	url="$url&nomaintainer=on"
     fi
-    if ifyes SURFRAW_fink_nochildren
+    if ifyes SURFRAW_finkpkg_nochildren
     then
 	url="$url&nochildren=on"
     fi
-    if ifyes SURFRAW_fink_noshlibsdev
+    if ifyes SURFRAW_finkpkg_noshlibsdev
     then
 	url="$url&noshlibsdev=on"
     fi
