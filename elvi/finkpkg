@@ -31,17 +31,23 @@ Local options:
         10.4            |        10.4
         10.5            |        10.5
         10.6            |        10.6
+	                        Default: $SURFRAW_fink_distro
+	                        Environment: SURFRAW_fink_distro
   -arch=ARCH                    Search in arch ARCH
         any             |        Any (default)
 	i386            |        i386
 	x86_64          |        X86_64 (aka AMD64)
 	powerpc         |        powerpc
+	                        Default: $SURFRAW_fink_arch
+	                        Environment: SURFRAW_fink_arch
   -tree=TREE                    Search in tree TREE
         any             |        Any (default)
 	unstable        |        Unstable
 	stable          |        Stable
 	bindist         |        Binary Distribution
 	testing         |        Packages that need testing
+	                        Default: $SURFRAW_fink_tree
+	                        Environment: SURFRAW_fink_tree
   -section=SEC                  Search in section SEC
         any             |        Any (default)
         base            |        Core packages
@@ -68,11 +74,21 @@ Local options:
         x11             |        General X11 packages - toolkits and utilities
         x11-system      |        X Window System core packages
         x11-wm          |        Window managers for the X Window System
+	                        Default: $SURFRAW_fink_section
+	                        Environment: SURFRAW_fink_section
   -exact                        Exact package matches only
+                                Default: $SURFRAW_fink_exact
+                                Environment: SURFRAW_fink_exact
   -nomaint                      Find packages with no maintainer
+                                Default: $SURFRAW_fink_nomaint
+                                Environment: SURFRAW_fink_nomaint
   -nochildren                   Exclude packages with parent
                                  (includes most "-dev", "-shlibs", ... splitoffs)
+				Default: $SURFRAW_fink_nochildren
+                                Environment: SURFRAW_fink_nochildren
   -noshlibsdev                  Exclude -shlibs, -dev, -bin, -common, -doc packages
+				Default: $SURFRAW_fink_noshlibsdev
+                                Environment: SURFRAW_fink_noshlibsdev
 EOF
     w3_global_usage
 }
