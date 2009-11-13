@@ -92,7 +92,8 @@ Examples:
   $w3_argv0 -mid <x>              Display message with ID <x>
   $w3_argv0 -ps                   Teleport to the Port Survey page
   $w3_argv0 -prs                  Teleport to the Port Report Survey page
-  $w3_argv0 -elogs                Teleport to the Build Error Logs page
+  $w3_argv0 -psearch surfraw      Search ports for surfraw
+  $w3_argv0 -psearch=text perl    Search port descriptions for perl
 EOF
     w3_global_usage
 }
