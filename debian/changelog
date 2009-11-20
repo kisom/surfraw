@@ -12,7 +12,7 @@ surfraw (2.2.6-1) unstable; urgency=low
     + Remove Conflicts/Replaces: surfaw, this transition was complete
       many releases ago.
 
- -- Ian Beckwith <ianb@debian.org>  Fri, 06 Nov 2009 15:02:35 +0000
+ -- Ian Beckwith <ianb@debian.org>  Fri, 20 Nov 2009 03:34:34 +0000
 
 surfraw (2.2.5-1) unstable; urgency=low
 

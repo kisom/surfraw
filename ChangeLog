@@ -1,3 +1,7 @@
+2009-11-20  Ian Beckwith  <ianb@erislabs.net>
+
+	* test/Makefile.am: Add missing tests to EXTRA_DIST.
+
 2009-11-13  Ian Beckwith  <ianb@erislabs.net>
 
 	* freebsd: new options -psearch=TYPE -psection=SEC
