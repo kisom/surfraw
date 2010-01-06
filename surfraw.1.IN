@@ -69,9 +69,9 @@ directory (\%@ELVIDIR@) to your path, either manually or using
 
 .SS Bookmarks
 
-Surfraw now supports bookmarks. To add a bookmark, add it to
-\fB\%@sysconfdir@/surfraw.bookmarks\fP or
-\fB\%$HOME/.surfraw.bookmarks\fP
+Surfraw supports bookmarks. To add a bookmark, add it to
+\fB\%@sysconfdir@/xdg/surfraw/bookmarks\fP or
+\fB\%$HOME/.config/surfraw/bookmarks\fP
 
 The format of the bookmarks file is simple, each bookmark is on a
 separate line, with the bookmark and URL separated by whitespace,
@@ -83,7 +83,7 @@ To invoke a bookmark, use "surfraw bookmark" or "sr bookmark",
 and if an elvis of that name doesn't exist, it searches for a
 bookmark of that name instead.
 
-There are some example bookmarks in \%@sysconfdir@/surfraw.bookmarks
+There are some example bookmarks in \%@sysconfdir@/xdg/surfraw/bookmarks
 
 .SH OPTIONS
 
@@ -134,21 +134,30 @@ I can't enjoy it with you talking all the time (default: no)
 
 .SH CONFIGURATION
 
+Surfraw uses the XDG basedir spec
+(http://standards.freedesktop.org/basedir-spec/basedir-spec-0.6.html) to
+locate config files. The default locations are shown below, but can be
+modified by setting the environment variables
+.B $XDG_CONFIG_HOME
+and
+.B $XDG_CONFIG_DIRS.
+See the spec for more details.
+
 Surfraw gets its configuration from three sources, in order:
 
 .IP 1. 4
 Environment variables
 .IP 2.
-\%@sysconfdir@/surfraw.conf
+\%@sysconfdir@/xdg/surfraw/conf
 .IP 3.
-\%$HOME/.surfraw.conf
+\%$HOME/.config/surfraw/conf
 
 .PP
 
-@sysconfdir@/surfraw.conf and $HOME/.surfraw.conf are both fragments of
+@sysconfdir@/xdg/surfraw.conf and $HOME/.config/surfraw/conf are both fragments of
 bourne\(hyshell style shell script.
 
-@sysconfdir@/surfraw.conf should use def and defyn to define variables.
+@sysconfdir@/xdg/surfraw.conf should use def and defyn to define variables.
 These functions set variables unless they are already set by the
 environment.
 defyn is used for boolean configuration variables, def for
@@ -157,7 +166,7 @@ all others. For instance:
  def     SURFRAW_text_browser	/usr/bin/lynx
  defyn   SURFRAW_graphical		no
 
-$HOME/.surfraw.conf should use sh\(hystyle entries, eg:
+$HOME/.config/surfraw/conf should use sh\(hystyle entries, eg:
 
  SURFRAW_text_browser=/usr/bin/lynx
  SURFRAW_graphical=no
@@ -173,7 +182,7 @@ Location of global configuration file.
 
 Default:
 
- def SURFRAW_global_conf @sysconfdir@/surfraw.conf
+ def SURFRAW_global_conf @sysconfdir@/xdg/surfraw/conf
 
 .TP
 .B SURFRAW_conf
@@ -181,7 +190,7 @@ Location of per\(hyuser configuration file.
 
 Default:
 
- def SURFRAW_conf $HOME/.surfraw.conf
+ def SURFRAW_conf $HOME/.config/surfraw/conf
 
 .TP
 .B SURFRAW_graphical
@@ -310,23 +319,23 @@ Default:
 Location of the elvi.
 
 .TP
-.B ${HOME}/.surfraw.d/
+.B ${HOME}/.config/surfraw/elvi
 Per\(hyuser elvi.
 
 .TP
-.B @sysconfdir@/surfraw.conf
+.B @sysconfdir@/xdg/surfraw/conf
 Default system wide configuration file.
 
 .TP
-.B $HOME/.surfraw.conf
+.B $HOME/.config/surfraw/conf
 Default per\(hyuser config file
 
 .TP
-.B @sysconfdir@/surfraw.bookmarks
+.B @sysconfdir@/xdg/surfraw/bookmarks
 System wide bookmarks file.
 
 .TP
-.B $HOME/.surfraw.bookmarks
+.B $HOME/.config/surfraw/bookmarks
 Per\(hyuser bookmarks file.
 
 .SH BUGS
