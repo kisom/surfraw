@@ -1,3 +1,8 @@
+2010-01-26  James Rowe  <jnrowe@gmail.com>
+
+	* elvi/bbcnews: Fixes for upstreams search changes. Based on a patch by
+	  Sumant Oemrawsingh.
+
 2010-01-06  Ian Beckwith  <ianb@erislabs.net>
 
 	* surfraw.1.IN: document new config locations.

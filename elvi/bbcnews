@@ -41,17 +41,13 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-	if [ $SURFRAW_bbcnews_scope = uk ]; then
-		w3_browse_url "http://news.bbc.co.uk/1/hi.html"
-	else
-		w3_browse_url "http://news.bbc.co.uk/2/hi.html"
-	fi
+	w3_browse_url "http://news.bbc.co.uk/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
 	if [ $SURFRAW_bbcnews_scope = uk ]; then
-                w3_browse_url "http://newssearch.bbc.co.uk/cgi-bin/search/results.pl?scope=newsukfs&tab=news&q=${escaped_args}"
+                w3_browse_url "http://search.bbc.co.uk/search?scope=uk&tab=ns&q=${escaped_args}"
  	else
-                w3_browse_url "http://newssearch.bbc.co.uk/cgi-bin/search/results.pl?scope=newsifs&tab=news&q=${escaped_args}"
+                w3_browse_url "http://search.bbc.co.uk/search?scope=all&tab=ns&q=${escaped_args}"
 	fi
 fi
 
