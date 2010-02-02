@@ -160,6 +160,7 @@ arxiv           -- Search arXiv E-Print Archive for articles
 ask             -- Question the web using Ask Jeeves (www.ask.com)
 aur             -- Search aur.archlinux.org for PKGBUILDS
 austlii         -- Search Australian Law docs (www.austlii.edu.au)
+bing            -- Search the web using Microsoft's Bing (www.bing.com)
 bbcnews         -- Search BBC News (news.bbc.co.uk)
 cddb            -- Search for cd track listings in CDDB (www.gracenote.com)
 cia             -- Search CIA documents at www.cia.gov

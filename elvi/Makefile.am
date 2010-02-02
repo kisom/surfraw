@@ -12,6 +12,7 @@ dist_elvi_SCRIPTS	= \
 		  ask \
 		  aur \
 		  austlii \
+		  bing \
 		  bbcnews \
 		  cddb \
 		  cia \
