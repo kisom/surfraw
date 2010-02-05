@@ -1,3 +1,8 @@
+2010-02-05  Ian Beckwith  <ianb@erislabs.net>
+
+	* Added options for 'aur' elvi.
+	  Patch from Ivy Foster.
+
 2010-02-02  Ian Beckwith  <ianb@erislabs.net>
 
 	* New elvi: bing, thanks to tczy.

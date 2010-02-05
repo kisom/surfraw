@@ -1,28 +1,141 @@
 #!/bin/sh
 #
 # AUTHOR: René Reigel based on piratebay by J.R. Mauro
+#         Ivy Foster added additional search options
 #
-# DATE: Tue, 20 Jan 2009 05:48:21 +0100
-#
-# DESC: Elvi to search the Arch User Repository
-# elvis: aur		-- Search aur.archlinux.org for PKGBUILDS
+# DESC: Search the Arch User Repository
+# $ID$
+# elvis: aur		-- Search aur.archlinux.org for PKGBUILDs
 . surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_aur_action   "Search=Go"
+    def   SURFRAW_aur_category "any"
+    def   SURFRAW_aur_order    "a"
+    def   SURFRAW_aur_language en
+    defyn SURFRAW_aur_outdated 0
+    def   SURFRAW_aur_results  "$SURFRAW_results"
+    def   SURFRAW_aur_search   name
+    def   SURFRAW_aur_sort     name
+}
 
 w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words]...
 Description:
   Search aur.archlinux.org for PKGBUILDS
+Local options
+  -category                     Search the given AUR category
+                                Consult aur.archlinux.org/packages.php for
+                                    a complete list.
+                                Default: any
+  -language                     Search in your your language
+                                See aur.archlinux.org for available languages
+                                Default: en
+  -order=ascending|descending   Organize in ascending or descending order
+                                Default: ascending
+  -orphans                      Search orphaned packages
+  -outdated                     Search for out-of-date packages
+  -results=NUM                  Number of search results returned
+                                Default: $SURFRAW_aur_results
+                                Must be in range 25-100
+  -search=                      Search for one of...
+          name          |       Package name
+          maintainer    |       Maintainer
+          submitter     |       Submitter
+                                Default: name
+  -sort=                        Sort by...
+        name            |       Package name
+        category        |       Package category
+        location        |       Package location
+        votes           |       Number of votes
+        maintainer      |       Package maintainer
+        age             |       Package age
+                                Default: name
 EOF
     w3_global_usage
 }
 
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+        -category=*) setopt   SURFRAW_aur_category "$optarg" ;;
+        -language=*) setopt   SURFRAW_aur_language "$optarg" ;;
+        -orphans*)   setopt   SURFRAW_aur_action   "Orphans=Orphans" ;;
+        -order=d*)   setopt   SURFRAW_aur_order    d ;;
+        -order=*)    setopt   SURFRAW_aur_order    a ;;
+        -outdated*)  setoptyn SURFRAW_aur_outdated 1 ;;
+        -results=*)  setopt   SURFRAW_aur_results  "$optarg" ;;
+        -search=*)   setopt   SURFRAW_aur_search   "$optarg" ;;
+        -sort=*)     setopt   SURFRAW_aur_sort     "$optarg" ;;
+        *) return 1 ;;
+    esac
+    return 0
+}
+
 w3_config
 w3_parse_args "$@"
+
+case "$SURFRAW_aur_category" in
+  a*)  aur_category=0 ;;
+  da*) aur_category=2 ;;
+  de*) aur_category=3 ;;
+  ed*) aur_category=4 ;;
+  em*) aur_category=5 ;;
+  ga*) aur_category=6 ;;
+  gn*) aur_category=7 ;;
+  i*)  aur_category=8 ;;
+  kd*) aur_category=9 ;;
+  ke*) aur_category=19 ;;
+  l*)  aur_category=10 ;;
+  mo*) aur_category=11 ;;
+  mu*) aur_category=12 ;;
+  n*)  aur_category=13 ;;
+  o*)  aur_category=14 ;;
+  sc*) aur_category=15 ;;
+  sy*) aur_category=16 ;;
+  x1*) aur_category=17 ;;
+  xf*) aur_category=18 ;;
+  *)   aur_category=0 ;;
+esac
+
+case "$SURFRAW_aur_search" in
+  n*) aur_search_by=nd ;;
+  m*) aur_search_by=m ;;
+  s*) aur_search_by=s ;;
+  *)  aur_search_by=nd ;;
+esac
+
+case "$SURFRAW_aur_sort" in
+  n*) aur_sort_by=n ;;
+  c*) aur_sort_by=c ;;
+  l*) aur_sort_by=l ;;
+  v*) aur_sort_by=v ;;
+  m*) aur_sort_by=m ;;
+  a*) aur_sort_by=a ;;
+  *)  aur_sort_by=n ;;
+esac
+
+# Use SURFRAW_lang if present and the country has not been changed
+# More or less verbatim from the google elvis
+if test -n "$SURFRAW_lang" -a "$SURFRAW_aur_language" = "en"; then
+    SURFRAW_aur_language="$SURFRAW_lang";
+fi
+
+case "$SURFRAW_aur_language" in
+  ca|cs|de|en|es|fr|hr|hu|it|nb_no|nb_NO|pl|pt|ro|ru|sr|tr|uk|zh_cn|zh_CN) aur_lang="$SURFRAW_aur_language" ;;
+  *) aur_lang=en ;;
+esac
+
 # w3_args now contains a list of arguments
-if test -z "$w3_args"; then
-    w3_browse_url "http://aur.archlinux.org/packages"
+if test -z "$w3_args" && test "$SURFRAW_aur_action" = "Search=Go"; then
+    w3_browse_url "http://aur.archlinux.org/packages.php?setlang=${aur_lang}"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://aur.archlinux.org/packages.php?O=0&L=0&C=0&K=${escaped_args}&SeB=nd&SB=a&SO=d&PP=100&do_Search=Go"
+    if [ "$SURFRAW_aur_outdated" = 1 ]; then
+        w3_browse_url "http://aur.archlinux.org/packages.php?O=0&L=0&detail=1&C=${aur_category}&K=${escaped_args}&SeB=${aur_search_by}&SB=${aur_sort_by}&SO=${SURFRAW_aur_order}&PP=${SURFRAW_aur_results}&do_${SURFRAW_aur_action}&outdated=on&setlang=${aur_lang}"
+    else
+        w3_browse_url "http://aur.archlinux.org/packages.php?O=0&L=0&detail=1&C=${aur_category}&K=${escaped_args}&SeB=${aur_search_by}&SB=${aur_sort_by}&SO=${SURFRAW_aur_order}&PP=${SURFRAW_aur_results}&do_${SURFRAW_aur_action}&setlang=${aur_lang}"
+    fi
 fi
