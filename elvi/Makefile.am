@@ -14,6 +14,7 @@ dist_elvi_SCRIPTS	= \
 		  austlii \
 		  bing \
 		  bbcnews \
+		  bugmenot \
 		  cddb \
 		  cia \
 		  cite \
