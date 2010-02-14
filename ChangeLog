@@ -1,5 +1,9 @@
 2010-02-14  James Rowe  <jnrowe@gmail.com>
 
+	* Added $SURFRAW_screen_args for passing arguments to the defined screen
+	  tool, thanks to Ivy Foster.
+	* Support for using tmux as $SURFRAW_screen, thanks once again to Ivy
+	  Foster.
 	* New elvi: bugmenot, thanks to Ivy Foster.
 
 2010-02-05  Ian Beckwith  <ianb@erislabs.net>

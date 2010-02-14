@@ -269,6 +269,14 @@ Default:
  defyn SURFRAW_new_screen no
 
 .TP
+.B SURFRAW_screen_args
+Arguments to pass to the SURFRAW_screen command
+
+Default:
+
+ def SURFRAW_screen_args ""
+
+.TP
 .B SURFRAW_quiet
 I can't enjoy it with you talking all the time.
 

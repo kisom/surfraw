@@ -413,20 +413,29 @@ w3_dump () {
 }
 
 w3_browse_url () {
-   if ok SURFRAW_new_screen && test -n "$STY" && test $mode = text; then
-   	screen=yes
-   else
-   	screen=no
-   fi
+    if ok SURFRAW_new_screen && test `echo $TERM | cut -c 1-6` = "screen" &&
+	test $mode = text; then
+	screen=yes
+    else
+	screen=no
+    fi
     if ok SURFRAW_dump; then
 	w3_dump "$@"
     elif ok SURFRAW_print; then
-		echo "$@"
+	echo "$@"
     elif ok screen; then
-	if test $SURFRAW_browser_args = "none"; then
-		$SURFRAW_screen $SURFRAW_browser "$@"
+	if [ "$SURFRAW_screen" = "tmux" ]; then
+	    if test "$SURFRAW_browser_args" = "none"; then
+		$SURFRAW_screen $SURFRAW_screen_args "$SURFRAW_browser \"$@\""
+	    else
+		$SURFRAW_screen $SURFRAW_screen_args "$SURFRAW_browser $SURFRAW_browser_args \"$@\""
+	    fi
 	else
-		$SURFRAW_screen $SURFRAW_browser $SURFRAW_browser_args "$@"
+	    if test $SURFRAW_browser_args = "none"; then
+		$SURFRAW_screen $SURFRAW_screen_args $SURFRAW_browser "$@"
+	    else
+		$SURFRAW_screen $SURFRAW_screen_args $SURFRAW_browser $SURFRAW_browser_args "$@"
+	    fi
 	fi
     else
 	if ok SURFRAW_graphical_remote && test $mode = graphical; then
