@@ -1,0 +1,131 @@
+#!/bin/sh
+# $Id$
+# elvis: bookfinder 	-- Search for books using www.bookfinder.com
+. surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_bookfinder_binding     "any"
+    defyn SURFRAW_bookfinder_classic     0
+    def   SURFRAW_bookfinder_currency    "USD"
+    def   SURFRAW_bookfinder_destination "us"
+    defyn SURFRAW_bookfinder_first       0
+    def   SURFRAW_bookfinder_language    "en"
+    def   SURFRAW_bookfinder_search      "title"
+    defyn SURFRAW_bookfinder_signed      0
+    def   SURFRAW_bookfinder_type        "any"
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search terms]...
+Description:
+  Surfraw: Search for books using www.bookfinder.com
+Example:
+Local Options:
+  -author="..."                 Search for an author.
+                                Complements -search=title
+  -binding=                     Search for copies with a particular binding
+           any          |       Any
+           hard         |       Hardbacks only
+           soft         |       Softcovers/paperbacks only
+                                Default: $SURFRAW_bookfinder_binding
+                                Environment: SURFRAW_bookfinder_binding
+  -classic                      Use classic search display
+                                Default: no
+                                Environment: SURFRAW_bookfinder_classic
+  -currency=                    Display prices in the given currency
+                                (ISO currency code)
+                                Default: $SURFRAW_bookfinder_currency
+                                Environment: SURFRAW_bookfinder_destination
+  -destination=                 Shipping destination
+                                (Two-digit ISO country code)
+                                Default: $SURFRAW_bookfinder_destination
+                                Environment: SURFRAW_bookfinder_destination
+  -first                        Search first editions
+  -keywords="..."               Search for keywords
+  -language=                    Search for books in...
+            de          |       German
+            en          |       English
+            es          |       Spanish
+            fr          |       French
+            it          |       Italian
+            nl          |       Dutch
+                                Default: $SURFRAW_bookfinder_language
+                                Environment: SURFRAW_bookfinder_language
+  -maxprice=                    Set the maximum acceptable price
+  -minprice=                    Set the minimum acceptable price
+  -search=                      Search by...
+          title
+          author
+          isbn
+                                Default: $SURFRAW_bookfinder_search
+                                Environment: SURFRAW_bookfinder_search
+  -signed                       Search for signed copies
+  -title="..."                  Search for a title.
+                                Complements -search=author
+  -type=                        Search books that are...
+        any             |       Any
+        new             |       New
+        used            |       Used and/or out of print
+                                Default: $SURFRAW_bookfinder_type
+                                Environment: SURFRAW_bookfinder_type
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -author=*)
+	setopt   SURFRAW_bookfinder_author      `w3_url_of_arg "$optarg"` ;;
+    -binding=any)   setopt   SURFRAW_bookfinder_binding     '*'           ;;
+    -binding=*)     setopt   SURFRAW_bookfinder_binding     "$optarg"     ;;
+    -classic)       setoptyn SURFRAW_bookfinder_classic     1             ;;
+    -currency=*)    setopt   SURFRAW_bookfinder_currency    "$optarg"     ;;
+    -destination=*) setopt   SURFRAW_bookfinder_destination "$optarg"     ;;
+    -first)         setoptyn SURFRAW_bookfinder_first       1             ;;
+    -keywords=*)
+	setopt   SURFRAW_bookfinder_keywords    `w3_url_of_arg "$optarg"` ;;
+    -language=*)    setopt   SURFRAW_bookfinder_language    "$optarg"     ;;
+    -maxprice=*)    setopt   SURFRAW_bookfinder_maxprice    "$optarg"     ;;
+    -minprice=*)    setopt   SURFRAW_bookfinder_minprice    "$optarg"     ;;
+    -search=*)      setopt   SURFRAW_bookfinder_search      "$optarg"     ;;
+    -signed)        setoptyn SURFRAW_bookfinder_signed      1             ;;
+    -title=*)
+	setopt   SURFRAW_bookfinder_title       `w3_url_of_arg "$optarg"` ;;
+    -type=any)      setopt   SURFRAW_bookfinder_type        '*'           ;;
+    -type=*)        setopt   SURFRAW_bookfinder_type        "$optarg"     ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+if test -z "$w3_args"; then
+    url="http://www.bookfinder.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    case "$SURFRAW_bookfinder_search" in
+        author) setopt SURFRAW_bookfinder_author "$escaped_args" ;;
+        isbn) setopt SURFRAW_bookfinder_isbn   "$escaped_args" ;;
+        title)  setopt SURFRAW_bookfinder_title  "$escaped_args" ;;
+        *) return 1 ;;
+    esac
+    url="http://www.bookfinder.com/search/?author=${SURFRAW_bookfinder_author}&title=${SURFRAW_bookfinder_title}&lang=${SURFRAW_bookfinder_language}&submit=Begin%20search&new_used=${SURFRAW_bookfinder_type}&destination=${SURFRAW_bookfinder_destination}&currency=${SURFRAW_bookfinder_currency}&binding=${SURFRAW_bookfinder_binding}&isbn=${SURFRAW_bookfinder_isbn}&keywords=${SURFRAW_bookfinder_keywords}&minprice=${SURFRAW_bookfinder_minprice}&maxprice=${SURFRAW_bookfinder_maxprice}&mode=advanced&st=sr&ac=qr"
+    if [ "$SURFRAW_bookfinder_classic" = 1 ]; then
+        url="${url}&classic=on"
+    fi
+    if [ "$SURFRAW_bookfinder_first" = 1 ]; then
+        url="${url}&first=on"
+    fi
+    if [ "$SURFRAW_bookfinder_signed" = 1 ]; then
+        url="${url}&signed=on"
+    fi
+fi
+w3_browse_url "$url"
+
+# End of file
