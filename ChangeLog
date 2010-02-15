@@ -1,3 +1,7 @@
+2010-02-15  James Rowe  <jnrowe@gmail.com>
+
+	* elvi/imdb: Fixes for upstream search changes.  Thanks to Sadako.
+
 2010-02-14  James Rowe  <jnrowe@gmail.com>
 
 	* Added $SURFRAW_screen_args for passing arguments to the defined screen

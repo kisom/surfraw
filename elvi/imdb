@@ -6,7 +6,7 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-def   SURFRAW_imdb_category All
+def   SURFRAW_imdb_category all
 }
 
 w3_usage_hook () {
@@ -34,7 +34,10 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-category=*) setopt   SURFRAW_imdb_category $optarg	;;
+	-category=Titles)     setopt SURFRAW_imdb_category tt      ;;
+	-category=People)     setopt SURFRAW_imdb_category nm      ;;
+	-category=Characters) setopt SURFRAW_imdb_category ch      ;;
+	-category=*)          setopt SURFRAW_imdb_category $optarg ;;
 	*) return 1 ;;
     esac
     return 0
@@ -51,5 +54,5 @@ else
 	if [ $SURFRAW_imdb_category = MyMovies ]; then
 		SURFRAW_imdb_category="My+Movies"
 	fi
-    w3_browse_url "http://www.imdb.com/Find?select=${SURFRAW_imdb_category}&for=${escaped_args}"
+    w3_browse_url "http://www.imdb.com/find?s=${SURFRAW_imdb_category}&q=${escaped_args}"
 fi
