@@ -282,6 +282,9 @@ Global options:
   -new[=yes|no]			Start in a new window
 				Default: $SURFRAW_new_window
 				Environment: SURFRAW_new_window
+  -ns[=yes|no]			Start in a new screen
+     | -newscreen[=yes|no]	Default: $SURFRAW_new_screen
+				Environment: SURFRAW_new_screen
   -t | -text			Back to the yellow brick road
   -q | -quote			Quote arguments with " characters
 				Default: $SURFRAW_quote_args
@@ -333,6 +336,8 @@ w3_parse_option () {
 	-q | -quote)	    setoptyn SURFRAW_quote_args	    	yes	;;
 	-new)		    setoptyn SURFRAW_new_window		yes	;;
 	-new=*)		    setoptyn SURFRAW_new_window		$optarg ;;
+	-ns | -newscreen)   setoptyn SURFRAW_new_screen yes ;;
+	-ns=* | -newscreen=*)   setoptyn SURFRAW_new_screen $optarg ;;
 	-o)		    setoptyn SURFRAW_dump		yes	;;
 	-o=*)		    setoptyn SURFRAW_dump		yes
 			    setopt SURFRAW_dump_file		$optarg ;;
