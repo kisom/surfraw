@@ -1,3 +1,8 @@
+2010-03-01  Ian Beckwith  <ianb@erislabs.net>
+
+	* Update AUTHORS.
+	* Add a note to appendix 1 of HACKING about updating AUTHORS.
+
 2010-02-22  Ivy Foster  <joyfulgirl@archlinux.us>
 
 	* Added `-ns|-newscreen' switch for setting $SURFRAW_new_screen.

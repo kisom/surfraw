@@ -1,12 +1,10 @@
-ORIGINAL AUTHOR
+AUTHORS
 
 Julian Assange <proff@iq.org>
-	original concept / code
-
-THE SURFRAW-DEVEL TEAM <surfraw-devel@lists.alioth.debian.org>
+	original author
 
 Christian Surchi <csurchi@debian.org>
-    Debian maintainer
+        original debian maintainer
 	elvi: debcontents, debbugs, debpackages
 
 Ian Beckwith <ianb@erislabs.net>
@@ -14,12 +12,14 @@ Ian Beckwith <ianb@erislabs.net>
 	      port, codesearch, debwiki, lastfm, musicbrainz,
 	      opensearch, scholar, ctan, fsfdir, gutenberg, wayback,
 	      dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc,
-	      sunonesearch, lsm
+	      sunonesearch, lsm, finkpkg, rpmsearch, macports,
+	      debpkghome, debvcsbrowse
 	plus various tweaks/bugfixes/features.
 
 Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
 	elvi: debsec, ebay, leodict, wikipedia, sharereactor,
 	      pgpkeys, happypenguin
+	plus various patches/maintenance.
 
 Thomas Smith <tgs@debian.org>
 	Bugfixes, uploading.
@@ -29,8 +29,6 @@ Stephen Stafford <bagpuss@debian.org>
 
 Kevin Kreamer <kkreamer@etherhogz.org>
 	Bug fixes
-
-OTHER ELVI AUTHORS
 
 Christian Weisgerber <naddy@mips.inka.de>
         elvi: fast, thesaurus, webster
@@ -46,7 +44,7 @@ Ian Broadfoot <ibroadfo@cis.strath.ac.uk>
 
 James Rowe <jnrowe@ukfsn.org>
         elvi: genpkg
-        plus useful patches.
+        plus useful patches/maintenance.
 
 Aparna Jaitly <aparnajaitly@hotmail.com>
         elvi: ixquick
@@ -66,11 +64,45 @@ Ivy Foster <joyfulgirl@archlinux.us>
         plus patches
 
 Sumant Oemrawsingh <soemraws@xs4all.nl>
-
-        elvi: cliki, l1sp, mathworth, mininova
+        elvi: cliki, l1sp, mathworth, mininova, youtube
         plus patches, including the uzbl examples.
 
-OTHER CONTRIBUTORS
+Sadako <Sadako@hamiltonshells.ca>
+        imdb fixes
+
+tczy <cy@wre.ath.cx>
+        elvi: bing
+
+S. <fittabile@lifegate.it>
+        elvi: acronym, gcache
+
+Micah Anderson <micah@debian.org>
+        various patches
+
+René Reigel <Stormtrooperofdeath@gmx.net>
+        elvi: aur
+
+J.R. Mauro <jrm8005@gmail.com>
+        elvi: urban, piratebay, genportage
+
+Wim van Hoydonck <wim.van.hoydonck@gmail.com>
+        elvi: ntrs, springer, sc
+
+John Briggs <john_briggs@telstra.com>
+        patch to google
+
+John Gruenenfelder <johng@as.arizona.edu>
+        elvi: arxiv
+	csh patch
+
+James TD Smith <ahktenzero@dsl.pipex.com>
+        elvi: javasun
+        google country-specific options
+
+Charles Twardy <ctwardy@iet.com>
+        fixed cia
+
+THANKS TO
 
 Brian Nelson           <bnelson@bloodclot.net>
 Christian Garbs        <mitch@yggdrasil.mitch.h.shuttle.de>
@@ -79,10 +111,11 @@ Jeff Bailey            <jbailey@nisa.net>
 Mark W. Eichin         <eichin@thok.org>
 Teófilo Ruiz Suárez    <teo@debian.org>
 Maru Dubshinki         <marudubshinki@gmail.com>
-Micah Anderson         <micah@debian.org>
 Matt Kraai             <kraai@ftbfs.org>
 Brian Mcdonald         <weifgvjlpmvr@spammotel.com>
+Carl Fredrik Hammar    <hammy.lite@gmail.com>
+Andy Valencia          <ajv-914-325-0787@vsta.org>
+Philip Armstrong       <phil@kantaka.co.uk>
+Dan Jacobson           <jidanni@jidanni.org>
 
 If we've missed anyone, let us know.
-
-$Id$
