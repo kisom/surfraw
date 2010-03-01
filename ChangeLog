@@ -9,6 +9,7 @@
 	* W, yahoo: fix tests.
 	* Update AUTHORS.
 	* Add a note to appendix 1 of HACKING about updating AUTHORS.
+	* test/Makefile.am: fix bookfinder typo, add bing.test.
 
 2010-02-22  Ivy Foster  <joyfulgirl@archlinux.us>
 
