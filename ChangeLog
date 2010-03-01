@@ -1,5 +1,7 @@
 2010-03-01  Ian Beckwith  <ianb@erislabs.net>
 
+	* Removed autotools-generated files from git repo
+	  use ./prebuild to regenerate.
 	* Lower required automake version to 1.10.
 	* prebuild: try and find a sane set of autotools, then call
 	  autoreconf -vi
