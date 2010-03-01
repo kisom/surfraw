@@ -1,6 +1,8 @@
 2010-03-01  Ian Beckwith  <ianb@erislabs.net>
 
 	* Lower required automake version to 1.10.
+	* prebuild: try and find a sane set of autotools, then call
+	  autoreconf -vi
 	* W, yahoo: fix tests.
 	* Update AUTHORS.
 	* Add a note to appendix 1 of HACKING about updating AUTHORS.

@@ -1,3 +1,31 @@
-automake
-autoconf
-sh configure
+#!/bin/sh
+
+set -e
+
+# if AUTOMAKE + ACLOCAL are not set, explicity search
+# for automake-1.{10,11} and aclocal-1.{10,11}
+if [ -z "$AUTOMAKE" ] && [ -z "$ACLOCAL" ]; then
+    if   [ -x "`which automake-1.10 2>/dev/null`" ] &&
+         [ -x "`which aclocal-1.10 2>/dev/null`" ]; then
+	AUTOMAKE=automake-1.10
+	ACLOCAL=aclocal-1.10
+	export AUTOMAKE ACLOCAL
+    elif [ -x "`which automake-1.11 2>/dev/null`" ] &&
+ 	 [ -x "`which aclocal-1.11 2>/dev/null`" ]; then
+	AUTOMAKE=automake-1.11
+	ACLOCAL=aclocal-1.11
+	export AUTOMAKE ACLOCAL
+    fi
+    # else use default
+fi
+
+# if AUTOCONF is not set, explicity search for autoconf2.50
+if [ -z "$AUTOCONF" ]; then
+    if   [ -x "`which autoconf2.50 2>/dev/null`" ]; then
+	AUTOCONF=autoconf2.50
+	export AUTOCONF
+    fi
+    # else use default
+fi
+
+autoreconf -vi
