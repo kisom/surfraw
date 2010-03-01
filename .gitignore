@@ -11,7 +11,6 @@ debian/surfraw.debhelper.log
 debian/surfraw.substvars
 debian/surfraw/
 elvi.1sr
-elvi/Makefile
 links
 opensearch-discover.1
 opensearch-genquery.1
@@ -23,5 +22,8 @@ surfraw.1
 surfraw.conf
 surfraw.lsm
 surfraw.spec
-test/Makefile
 examples/uzbl_load_url_from_surfraw
+Makefile.in
+aclocal.m4
+configure
+autom4te.cache

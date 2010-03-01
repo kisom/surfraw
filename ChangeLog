@@ -5,6 +5,7 @@
 	* Lower required automake version to 1.10.
 	* prebuild: try and find a sane set of autotools, then call
 	  autoreconf -vi
+	* Add autotools-generated files to .gitignore
 	* W, yahoo: fix tests.
 	* Update AUTHORS.
 	* Add a note to appendix 1 of HACKING about updating AUTHORS.
