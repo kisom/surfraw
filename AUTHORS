@@ -1,34 +1,34 @@
 AUTHORS
 
 Julian Assange <proff@iq.org>
-	original author
+        original author
 
 Christian Surchi <csurchi@debian.org>
         original debian maintainer
-	elvi: debcontents, debbugs, debpackages
+        elvi: debcontents, debbugs, debpackages
 
 Ian Beckwith <ianb@erislabs.net>
-	elvi: alioth, bbcnews, cddb, deblists, freedb, imdb, scpan,
-	      port, codesearch, debwiki, lastfm, musicbrainz,
-	      opensearch, scholar, ctan, fsfdir, gutenberg, wayback,
-	      dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc,
-	      sunonesearch, lsm, finkpkg, rpmsearch, macports,
-	      debpkghome, debvcsbrowse
-	plus various tweaks/bugfixes/features.
+        elvi: alioth, bbcnews, cddb, deblists, freedb, imdb, scpan,
+              port, codesearch, debwiki, lastfm, musicbrainz,
+              opensearch, scholar, ctan, fsfdir, gutenberg, wayback,
+              dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc,
+              sunonesearch, lsm, finkpkg, rpmsearch, macports,
+              debpkghome, debvcsbrowse
+        plus various tweaks/bugfixes/features.
 
 Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
-	elvi: debsec, ebay, leodict, wikipedia, sharereactor,
-	      pgpkeys, happypenguin
-	plus various patches/maintenance.
+        elvi: debsec, ebay, leodict, wikipedia, sharereactor,
+              pgpkeys, happypenguin
+        plus various patches/maintenance.
 
 Thomas Smith <tgs@debian.org>
-	Bugfixes, uploading.
+        Bugfixes, uploading.
 
 Stephen Stafford <bagpuss@debian.org>
-	Bug fixes
+        Bug fixes
 
 Kevin Kreamer <kkreamer@etherhogz.org>
-	Bug fixes
+        Bug fixes
 
 Christian Weisgerber <naddy@mips.inka.de>
         elvi: fast, thesaurus, webster
@@ -93,7 +93,7 @@ John Briggs <john_briggs@telstra.com>
 
 John Gruenenfelder <johng@as.arizona.edu>
         elvi: arxiv
-	csh patch
+        csh patch
 
 James TD Smith <ahktenzero@dsl.pipex.com>
         elvi: javasun
