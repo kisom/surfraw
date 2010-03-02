@@ -32,7 +32,7 @@ $ua->agent("Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.8.1.4) Gecko/20070508 I
 
 my %results;
 
-my @testnamelengths= map { my $base=(/(?:.*\/)(.*)/)[0]; length($base); } @testfiles;
+my @testnamelengths= map { my $base=(/(?:.*\/)?(.*)/)[0]; length($base); } @testfiles;
 my $longestname=(sort { $a <=> $b } @testnamelengths)[$#testnamelengths];
 $longestname -= length ".test";
 
