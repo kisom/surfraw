@@ -2,7 +2,7 @@
 # $Id$
 # Surfraw -- Shell Users' Revolutionary Front Against the World wide web
 #
-#  Copyright (c) 2003-2009 The Surfraw-Devel Team
+#  Copyright (c) 2003-2010 The Surfraw-Devel Team
 #                          <surfraw-devel@lists.alioth.debian.org>
 #  Copyright (c) 2000-2001 Julian Assange, placed into the public domain
 #  Copyright (c) 2000 Melbourne Institute for Advanced Study, placed into the public domain
@@ -292,7 +292,7 @@ Global options:
   -version			Display Surfraw version ($surfraw_version)
   --				End of options
 Copyright:
-  Copyright (c) 2003-2009 The Surfraw-Devel Team
+  Copyright (c) 2003-2010 The Surfraw-Devel Team
                            <surfraw-devel@lists.alioth.debian.org>
   Copyright (c) 2000-2001 Julian Assange <proff@iq.org>
   Copyright (c) 2001 Australian Institute for Collaborative Research
