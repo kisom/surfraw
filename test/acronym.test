@@ -1,10 +1,10 @@
-sr acronym -e NASA
+acronym -e NASA
 National Aeronautics and Space Administration \(USA\)
-sr acronym -u NASA
+acronym -u NASA
 National Association for the Advancement
-sr acronym surfraw
+acronym surfraw
 What does SURFRAW stand for\?
-sr acronym -f
+acronym -f
 Systematic Buzz Phrase Projector \(SBPP\) number
-sr acronym -a aaa
+acronym -a aaa
 Academia de Automovilismo Andrade \(Guatemala\)

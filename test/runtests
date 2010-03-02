@@ -4,6 +4,7 @@
 #
 
 eval "require LWP::UserAgent" or die("runtests: libwww-perl not found, aborting tests.\n");
+use Cwd;
 use strict;
 use vars qw($me);
 $me=($0=~/(?:.*\/)?(.*)/)[0];
@@ -11,11 +12,14 @@ $me=($0=~/(?:.*\/)?(.*)/)[0];
 our($OK,$FAIL,$SKIP)=(0,1,2);
 our $ua;
 
+my $scriptpath=Cwd::abs_path($0);
+# drop scriptname and last path component to get srcdir
+my $srcdir= ($scriptpath=~/(.*)\/.*\/.*/)[0];
 my @testfiles;
 if(@ARGV) {
     @testfiles=@ARGV;
 } else {
-    @testfiles=<*.test>;
+    @testfiles=<$srcdir/test/*.test>;
 }
 
 die("No tests found\n") unless(@testfiles);
@@ -34,7 +38,7 @@ $longestname -= length ".test";
 
 for my $testfile (@testfiles)
 {
-    my ($elvi)=($testfile=~/(.*)\.test/);
+    my ($elvi)=($testfile=~/(?:.*\/)?(.*)\.test/);
     unless(defined($elvi)) { $elvi=$testfile; }
     print $elvi;
     my $space=($longestname+1)-(length $elvi);
@@ -136,7 +140,7 @@ sub testelvis
 	my $hash=$tests[$count];
 	my $cmd  =(keys  (%$hash))[0];
 	my $match=(values(%$hash))[0];
-	unless(open(ELVI,"SURFRAW_lang= SURFRAW_browser=echo PATH=\"../elvi:..:\$PATH\"  $cmd|"))
+	unless(open(ELVI,"SURFRAW_lang= SURFRAW_browser=echo SURFRAW_global_conf=\"$srcdir/surfraw.conf\" PATH=\"$srcdir/elvi:$srcdir:\$PATH\" $srcdir/elvi/$cmd|"))
 	{
 	    print "FAIL: cannot execute \"$cmd\": $!";
 	    push(@results,$FAIL);

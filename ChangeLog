@@ -9,7 +9,13 @@
 	* W, yahoo: fix tests.
 	* Update AUTHORS.
 	* Add a note to appendix 1 of HACKING about updating AUTHORS.
+	* runtests: explicitly use elvi and config from source tree,
+	  now works when surfraw is not installed (but you need to have
+	  run make).
 	* test/Makefile.am: fix bookfinder typo, add bing.test.
+	* remove leading 'sr ' from command lines for following tests:
+	    acronym aur bing cliki gcache genportage google javasun l1sp
+	    lsm mathworld mininova piratebay youtube
 
 2010-02-22  Ivy Foster  <joyfulgirl@archlinux.us>
 
