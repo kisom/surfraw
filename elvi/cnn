@@ -21,5 +21,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://cnn.com/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://search.cnn.com/search?query=${escaped_args}&type=news&sortBy=date"
+    w3_browse_url "http://www.cnn.com/search/?query=${escaped_args}&x=0&y=0&primaryType=mixed"
 fi

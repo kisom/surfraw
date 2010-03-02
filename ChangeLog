@@ -7,6 +7,9 @@
 	  autoreconf -vi
 	* Add autotools-generated files to .gitignore
 	* Bump version to 2.2.7
+	* cnn: fix URL.
+	* cnn.test: Disable. Bloody CNN now needs javascript for search,
+	  so should be tested manually.
 	* W, yahoo: fix tests.
 	* Update AUTHORS.
 	* Add a note to appendix 1 of HACKING about updating AUTHORS.
