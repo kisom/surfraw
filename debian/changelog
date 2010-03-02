@@ -1,3 +1,9 @@
+surfraw (2.2.7-1) unstable; urgency=low
+
+  * New upstream version.
+
+ -- Ian Beckwith <ianb@debian.org>  Tue, 02 Mar 2010 02:05:46 +0000
+
 surfraw (2.2.6-1) unstable; urgency=low
 
   * New upstream version.

@@ -306,7 +306,7 @@ Global options:
   -q | -quote                   Quote arguments with " characters
                                 Default: no
                                 Environment: SURFRAW_quote_args
-  -version                      Display Surfraw version (2.2.6)
+  -version                      Display Surfraw version (2.2.7)
   --                            End of options
 Copyright:
   Copyright (c) 2003-2009 The Surfraw-Devel Team
