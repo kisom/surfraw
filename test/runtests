@@ -149,7 +149,7 @@ sub testelvis
 	my $url=<ELVI>;
 	unless(defined($url))
 	{
-	    print "FAIL: elvi \"$cmd\"did not produce a URL";
+	    print "FAIL: elvi \"$cmd\" did not produce a URL";
 	    push(@results,$FAIL);
 	    close ELVI;
 	    next;
