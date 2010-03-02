@@ -21,6 +21,8 @@ CLEANFILES = surfraw surfraw-update-path surfraw-update-path.1 surfraw.spec surf
 		surfraw.1 elvi.1sr links surfraw-bash-completion surfraw.conf surfraw.1 \
 		elvi.1sr opensearch-discover.1 opensearch-genquery.1
 
+BUILT_SOURCES = surfraw.conf
+
 surfraw: surfraw.IN
 
 surfraw.conf: surfraw.conf.IN
@@ -41,7 +43,7 @@ links: links.IN
 
 include $(top_srcdir)/Makefile.include
 
-install-data-hook: links surfraw.conf
+install-data-hook: links
 	chmod -x surfraw.conf elvi.1sr surfraw.1
 	mkdir -p $(DESTDIR)@sysconfdir@/xdg/surfraw
 	cp surfraw.conf $(DESTDIR)@sysconfdir@/xdg/surfraw/conf
@@ -79,7 +81,7 @@ endif
 submit-lsm: surfraw.lsm
 	mail -s add LSM@qqx.org < $<
 
-test: all
+test: all surfraw.conf
 	make -C test test
 
 .PHONY: test

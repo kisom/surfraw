@@ -19,6 +19,8 @@
 	    lsm mathworld mininova piratebay youtube
 	* HACKING, README, test/README: document autotools and test
 	  suite changes.
+	* Makefile.am: add surfraw.conf to BUILT_SOURCES so it is
+	  made by 'make'. This may be a misuse of BUILT_SOURCES.
 
 2010-02-22  Ivy Foster  <joyfulgirl@archlinux.us>
 
