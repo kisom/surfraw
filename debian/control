@@ -11,7 +11,7 @@ Homepage: http://surfraw.alioth.debian.org
 
 Package: surfraw
 Architecture: all
-Depends: lynx | www-browser
+Depends: ${misc:Depends}, lynx | www-browser
 Recommends: surfraw-extra, links | elinks | elinks-lite | w3m, curl | wget | libwww-perl
 Suggests: screen
 Description: a fast unix command line interface to WWW
@@ -34,7 +34,7 @@ Description: a fast unix command line interface to WWW
 
 Package: surfraw-extra
 Architecture: all
-Depends: surfraw, lynx | www-browser, libwww-opensearch-perl, libwww-perl, libhtml-parser-perl
+Depends: surfraw, ${misc:Depends}, lynx | www-browser, libwww-opensearch-perl, libwww-perl, libhtml-parser-perl
 Recommends: links | elinks | elinks-lite | w3m | w3m-ssl | lynx-cur
 Suggests: screen
 Conflicts: surfraw (<< 2.1.7)

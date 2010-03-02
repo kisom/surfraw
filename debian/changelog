@@ -2,8 +2,9 @@ surfraw (2.2.7-1) unstable; urgency=low
 
   * New upstream version.
   * Standards-Version: 3.8.4 (no changes).
+  * Add ${misc:Depends} to dependencies.
 
- -- Ian Beckwith <ianb@debian.org>  Tue, 02 Mar 2010 02:43:51 +0000
+ -- Ian Beckwith <ianb@debian.org>  Tue, 02 Mar 2010 03:00:38 +0000
 
 surfraw (2.2.6-1) unstable; urgency=low
 
