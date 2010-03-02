@@ -11,6 +11,7 @@
 	* cnn.test: Disable. Bloody CNN now needs javascript for search,
 	  so should be tested manually.
 	* W, yahoo: fix tests.
+	* Remove unused '-quiet' option.
 	* Update AUTHORS.
 	* Add a note to appendix 1 of HACKING about updating AUTHORS.
 	* runtests: explicitly use elvi and config from source tree,

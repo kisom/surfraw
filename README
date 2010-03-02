@@ -296,9 +296,6 @@ Global options:
   -help                         What you're reading now, dude
   -p | -print                   Just print search URL, don't pass to browser
   -o | -o=FILE                  Fetch URL and dump to stdout or FILE.
-  -quiet=yes|no                 I can't enjoy it with you talking all the time
-                                Default: no
-                                Environment: SURFRAW_quiet
   -new[=yes|no]                 Start in a new window
                                 Default: no
                                 Environment: SURFRAW_new_window

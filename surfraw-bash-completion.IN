@@ -9,7 +9,7 @@ _surfraw()
 	local cur=${COMP_WORDS[COMP_CWORD]}
 	local prev=${COMP_WORDS[COMP_CWORD-1]}
 	local opts='-browser -elvi -escape-url-args -graphical \
-		-help -q -quote -quiet -text -version'
+		-help -q -quote -text -version'
 	local elvi="$(cut -f1 @sysconfdir@/surfraw.bookmarks ~/.surfraw.bookmarks 2>&-
 			cd @ELVIDIR@ && echo * 2>&-
 			[ -d ~/.surfraw.d ] && cd ~/.surfraw.d && echo * 2>&-)"

@@ -121,10 +121,6 @@ for example:
 
 and the quoting is passed on to the search engine
 
-.TP
-.B \-quiet=yes|no
-I can't enjoy it with you talking all the time (default: no)
-
 .SH EXAMPLES
 
  $ sr ask why is jeeves gay?
@@ -275,14 +271,6 @@ Arguments to pass to the SURFRAW_screen command
 Default:
 
  def SURFRAW_screen_args ""
-
-.TP
-.B SURFRAW_quiet
-I can't enjoy it with you talking all the time.
-
-Default:
-
- defyn SURFRAW_quiet no
 
 .TP
 .B SURFRAW_quote_args

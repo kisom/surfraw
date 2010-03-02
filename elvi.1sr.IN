@@ -108,10 +108,6 @@ for example:
 
 and the quoting is passed on to the search engine
 
-.TP
-.B \-quiet=yes|no
-I can't enjoy it with you talking all the time (default: no)
-
 .SH EXAMPLES
 
  $ sr ask why is jeeves gay?

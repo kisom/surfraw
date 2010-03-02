@@ -60,9 +60,6 @@ defyn SURFRAW_new_screen	no
 # arguments for the screen command
 def   SURFRAW_screen_args	""
 
-# I can't enjoy it with you talking all the time
-defyn SURFRAW_quiet		no
-
 # "quote" arguments
 defyn SURFRAW_quote_args	no
 
