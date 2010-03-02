@@ -35,8 +35,9 @@ Writing tests
 Tests should be called elviname.test and be placed in the test/ directory
 
 Test files consist of pairs of lines. The first line is the command to
-run, and the second line is a perl regular expression (which can be
-just plain text) to match against the resulting web page.
+run (starting with the elvi name, don't use a leading 'sr' or
+'surfraw', and the second line is a perl regular expression (which can
+be just plain text) to match against the resulting web page.
 
 Multiple tests can be implemented per elvi, feel free to submit more!
 

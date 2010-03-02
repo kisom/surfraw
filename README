@@ -118,7 +118,10 @@ Bookmarks
 Installation
 
   Surfraw is installed with the standard ./configure; make; make install
-  procedure. See INSTALL for more details. 
+  procedure. See INSTALL for more details. If you obtained surfraw
+  direct from the git repository rather than a release tarball, run
+  ./prebuild to generate the autotools build files *before* running
+  ./configure.
 
   Note that the opensearch elvis depends on the perl libraries
   WWW::OpenSearch, HTML::Parser and LWP (libwww-perl). If you don't

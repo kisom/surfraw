@@ -16,6 +16,8 @@
 	* remove leading 'sr ' from command lines for following tests:
 	    acronym aur bing cliki gcache genportage google javasun l1sp
 	    lsm mathworld mininova piratebay youtube
+	* HACKING, README, test/README: document autotools and test
+	  suite changes.
 
 2010-02-22  Ivy Foster  <joyfulgirl@archlinux.us>
 

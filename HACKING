@@ -129,11 +129,12 @@ Or... How to Eat The CHEESE
 
     2: copy elviname to the elvi directory
 
-    3: add elviname to the elvi_SCRIPTS list in elvi/Makefile.am
+    3: make the elvi executable (chmod 755 elvipath) so the test
+       suite can run it directly.
 
-    4: add a link for the manpage in links.IN
+    4: add elviname to the elvi_SCRIPTS list in elvi/Makefile.am
 
-    5: run aclocal (1.10+), automake (1.10+) and autoconf (2.50+)
+    5: add a link for the manpage in links.IN
 
     6: update the elvi list in README
 
@@ -175,7 +176,7 @@ Or... How to Eat The CHEESE
 
     10: rm -rf .git
 
-    11: ./configure && make distcheck
+    11: ./prebuild && ./configure && make distcheck
 
     12: # test surfraw-version.tar.gz
 
