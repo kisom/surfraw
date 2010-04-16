@@ -1,6 +1,6 @@
 bookfinder 1984
 Nineteen Eighty-Four
 bookfinder -search=isbn 1556229119
-3D Math Primer for Graphics and Game Development
+Publisher: Wordware, 2002
 bookfinder -search=author Carl Sagan
 Pale Blue Dot
