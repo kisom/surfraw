@@ -15,6 +15,28 @@
 
 				  N E W S
 
+Fri Apr 16 18:53:55 BST 2010  - surfraw 2.2.7
+
+	* New elvi (surfraw now has over one hundred elvi!):
+	  + by tczy:
+	    * bing: Search using Microsoft's Bing.
+	  + by Ivy Foster:
+	    * bookfinder: Search for books using www.bookfinder.com.
+	    * bugmenot: Bypass compulsory web registration with bugmenot.com.
+	  + by Ian Beckwith:
+	    * duckduckgo: Search the web via duckduckgo.com.
+	    * scroogle: Search Google anonymously via www.scroogle.org.
+	* Fixed elvi:
+	  + cnn
+	  + imdb (thanks to Sadako)
+	  + bbcnews (thanks to Sumant Oemrawsingh and James Rowe)
+	* aur: added options (thanks to Ivy Foster)
+	* Improved support for screen(1). Thanks to Ivy Foster:
+	  + Support for using tmux as $SURFRAW_screen.
+	  + Added `-ns|-newscreen' switch for setting $SURFRAW_new_screen.
+	  + Added $SURFRAW_screen_args for passing arguments to the defined
+	    screen tool.
+
 Fri Nov 20 03:34:19 GMT 2009  - surfraw 2.2.6
 
         * New elvi:
