@@ -1,8 +1,9 @@
 2010-04-16  Ian Beckwith  <ianb@erislabs.net>
 
 	* New elvi:
-	  + scroogle: Search Google anonymously via www.scroogle.org
-	  + duckduckgo: Search the web via duckduckgo.com
+	  + scroogle: Search Google anonymously via www.scroogle.org.
+	  + duckduckgo: Search the web via duckduckgo.com.
+	* Fix tests: excite, javasun, musicbrainz, yahoo.
 
 2010-03-03  James Rowe  <jnrowe@gmail.com>
 
