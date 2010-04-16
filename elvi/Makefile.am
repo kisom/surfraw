@@ -39,6 +39,7 @@ dist_elvi_SCRIPTS	= \
 		  deja \
 		  discogs \
 		  dmoz \
+		  duckduckgo \
 		  ebay \
 		  etym \
 		  excite \
@@ -60,8 +61,6 @@ dist_elvi_SCRIPTS	= \
 		  imdb \
 		  ixquick \
 		  javasun \
-		  scpan \
-		  slinuxdoc \
 		  l1sp \
 		  lastfm \
 		  leodict \
@@ -83,7 +82,10 @@ dist_elvi_SCRIPTS	= \
 		  rpmsearch \
 		  scholar \
 		  scicom \
+		  scpan \
+		  scroogle \
 		  slashdot \
+		  slinuxdoc \
 		  sourceforge \
 		  springer \
 		  stockquote \

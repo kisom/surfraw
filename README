@@ -161,12 +161,12 @@ amazon          -- Search the amazon.com bookstore
 archpkg         -- Search Arch Linux packages (www.archlinux.org)
 arxiv           -- Search arXiv E-Print Archive for articles
 ask             -- Question the web using Ask Jeeves (www.ask.com)
-aur             -- Search aur.archlinux.org for PKGBUILDS
+aur             -- Search aur.archlinux.org for PKGBUILDs
 austlii         -- Search Australian Law docs (www.austlii.edu.au)
-bing            -- Search the web using Microsoft's Bing (www.bing.com)
 bbcnews         -- Search BBC News (news.bbc.co.uk)
-bookfinder      -- Search for books (www.bookfinder.com)
-bugmenot        -- Bypass compulsory Web registration (www.bugmenot.com)
+bing            -- Search the web using Microsoft's Bing (www.bing.com)
+bookfinder      -- Search for books using www.bookfinder.com
+bugmenot        -- Bypass compulsory web registration with bugmenot.com
 cddb            -- Search for cd track listings in CDDB (www.gracenote.com)
 cia             -- Search CIA documents at www.cia.gov
 cite            -- Search computer science papers (citeseerx.ist.psu.edu)
@@ -190,6 +190,7 @@ debwiki         -- Search the Debian Wikis (wiki.debian.org & women.debian.org/w
 deja            -- Search usenet using Google Groups (groups.google.com)
 discogs         -- Search the Discogs database of music information (www.discogs.com)
 dmoz            -- Search the Open Directory Project web directory (dmoz.org)
+duckduckgo      -- Search the web using Duckduckgo (www.duckduckgo.com)
 ebay            -- Search the Ebay auction site
 etym            -- Look up word origins at www.etymonline.com
 excite          -- Search on Excite (www.excite.com)
@@ -215,7 +216,7 @@ l1sp            -- Search lisp documentation
 lastfm          -- Search last.fm
 leodict         -- Search Leo's German <-> English dictionary (dict.leo.org)
 lsm             -- Search the Linux Software Map
-macports   	-- Search macports packages (macports.org)
+macports        -- Search macports packages (macports.org)
 mathworld       -- Search Wolfram MathWorld
 mininova        -- Search the mininova bittorent source.
 musicbrainz     -- Search MusicBrainz (musicbrainz.org)
@@ -234,6 +235,7 @@ rpmsearch       -- Search for RPMs in various distros
 scholar         -- Search Google Scholar (scholar.google.com)
 scicom          -- Search Scientific Commons
 scpan           -- Search the Comprehensive Perl Archive Network (search.cpan.org)
+scroogle        -- Search Google anonymously via Scroogle (www.scroogle.org)
 slashdot        -- Search stories on Slashdot (www.slashdot.org)
 slinuxdoc       -- Search entries in LDP (www.linuxdoc.org)
 sourceforge     -- Search SourceForge (www.sourceforge.net)

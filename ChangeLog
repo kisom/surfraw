@@ -1,3 +1,9 @@
+2010-04-16  Ian Beckwith  <ianb@erislabs.net>
+
+	* New elvi:
+	  + scroogle: Search Google anonymously via www.scroogle.org
+	  + duckduckgo: Search the web via duckduckgo.com
+
 2010-03-01  Ian Beckwith  <ianb@erislabs.net>
 
 	* Removed autotools-generated files from git repo

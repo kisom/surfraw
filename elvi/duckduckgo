@@ -1,0 +1,60 @@
+#!/bin/sh
+# elvis: duckduckgo	-- Search the web using Duckduckgo (www.duckduckgo.com)
+# ianb@erislabs.net 20100416
+. surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_duckduckgo_search ""
+    defyn SURFRAW_duckduckgo_lucky 0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the web using Duckduckgo (duckduckgo.com)
+  Requires Javascript
+Local options:
+  -l, -lucky, -d, -ducky        Feeling d^Hlucky? Jump to first result.
+  -search=                      Search type
+          info          |       Information
+          shopping      |       Shopping
+                                Environment: SURFRAW_duckduckgo_search
+				Default is neither, use normal search.
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -search=*)  setopt   SURFRAW_duckduckgo_search  "$optarg" ;;
+    -[ld]*)     setoptyn SURFRAW_duckduckgo_lucky   1         ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+if test -z "$w3_args"; then
+    w3_browse_url "http://duckduckgo.com/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    url="http://duckduckgo.com/?q=${escaped_args}"
+    # -lucky & -search= are mutually exclusive - prefer -lucky
+    if ifyes SURFRAW_duckduckgo_lucky; then
+	url="${url}&v=i"
+    elif test -n "$SURFRAW_duckduckgo_search"; then
+	case "$SURFRAW_duckduckgo_search" in
+	    i*) url="${url}&v=d" ;;
+	    s*) url="${url}&v=s" ;;
+	    *)  err "duckduckgo: unknown search type \"${SURFRAW_duckduckgo_search}\"" ;;
+	esac
+    fi
+
+    w3_browse_url "$url"
+fi
