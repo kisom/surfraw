@@ -26,6 +26,7 @@ Fri Apr 16 18:53:55 BST 2010  - surfraw 2.2.7
 	  + by Ian Beckwith:
 	    * duckduckgo: Search the web via duckduckgo.com.
 	    * scroogle: Search Google anonymously via www.scroogle.org.
+	* Removed elvi: genpkg (use genportage instead).
 	* Fixed elvi:
 	  + cnn
 	  + imdb (thanks to Sadako)
