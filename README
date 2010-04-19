@@ -204,7 +204,6 @@ freshmeat       -- Search Freshmeat (www.freshmeat.net)
 fsfdir          -- Search the FSF/UNESCO Free Software Directory (directory.fsf.org)
 gcache          -- Search the web using Google cache (www.google.com)
 genbugs         -- Search the Gentoo bug tracker (bugs.gentoo.org)
-genpkg          -- Search Gentoo packages (packages.gentoo.org)
 genportage      -- Search gentoo-portage.com for packages
 google          -- Search the web using Google (www.google.com)
 gutenberg       -- Search for books on Project Gutenberg (gutenberg.org)

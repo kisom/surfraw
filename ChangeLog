@@ -1,3 +1,7 @@
+2010-04-19  James Rowe  <jnrowe@gmail.com>
+
+	* genpkg: removed, use genportage.
+
 2010-04-16  Ian Beckwith  <ianb@erislabs.net>
 
 	* New elvi:

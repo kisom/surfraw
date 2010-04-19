@@ -53,7 +53,6 @@ dist_elvi_SCRIPTS	= \
 		  fsfdir \
 		  gcache \
 		  genbugs \
-		  genpkg \
 		  genportage \
 		  gutenberg \
 		  google \
