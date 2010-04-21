@@ -1,0 +1,91 @@
+#!/bin/sh
+# $Id$
+# elvis: jamendo		-- Search Jamendo: free music with Creative Commons licenses (www.jamendo.com)
+. surfraw || exit 1
+
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the web using Jamendo: free music with Creative Commons licenses (www.jamendo.com)
+Local options:
+  -t=     |  -type=		Type of search (Default All types)
+	artist 			Artists
+	album			Albums
+	xartist			External artists
+	lyrics			Lyrics
+	user			Members
+	tag			Tags
+	playlist		Playlists 
+	  
+	 
+                                Environment: SURFRAW_jamendo_results
+
+  -l=     |  -lang=             Search with this l10n
+        en|english
+        fr|french
+        de|german
+        it|italian
+        pt|portuguese
+        pl|polish
+        ru|russian
+        es|spanish
+                                Default:  English
+                                Environment: SURFRAW_jamendo_lang, SURFRAW_lang
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -t=*|-type=*)     setopt   SURFRAW_jamendo_type	$optarg ;;
+    -l=*|-lang=*)     setopt   SURFRAW_jamendo_lang	$optarg ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+	
+# Use SURFRAW_lang if present
+if [ -z $SURFRAW_jamendo_lang ]; then
+    SURFRAW_jamendo_lang="$SURFRAW_lang";
+fi
+
+
+if test -z "$w3_args"; then
+
+
+    w3_browse_url "http://www.jamendo.com/${SURFRAW_jamendo_lang}/about"
+else
+    case "$SURFRAW_jamendo_lang" in
+        en|english) setopt   SURFRAW_jamendo_lang en  ;;
+        fr|french)  setopt   SURFRAW_jamendo_lang fr  ;;
+        de|german)  setopt   SURFRAW_jamendo_lang de  ;;
+        it|italian) setopt   SURFRAW_jamendo_lang it  ;;
+        pt|portuguese) setopt   SURFRAW_jamendo_lang  br;;
+        pl|polish)  setopt   SURFRAW_jamendo_lang pl  ;; 
+        ru|russian) setopt   SURFRAW_jamendo_lang ru  ;;
+        es|spanish) setopt   SURFRAW_jamendo_lang es  ;;
+	*)          setopt   SURFRAW_jamendo_lang en  ;;
+    esac
+    case "$SURFRAW_jamendo_type" in
+	artist) ;;
+        album)  ;;
+        xartist) ;;
+        lyrics)  ;;
+        user)  ;;
+        tag)  ;;
+        playlist) ;;
+	*)          setopt   SURFRAW_jamendo_type ""  ;;
+    esac
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.jamendo.com/${SURFRAW_jamendo_lang}/search/${SURFRAW_jamendo_type}/search?search_string=${escaped_args}"
+
+fi

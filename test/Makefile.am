@@ -11,17 +11,17 @@ EXTRA_DIST = runtests elviwithouttests README COOKIES W.test		\
 	finkpkg.test foldoc.test freebsd.test freedb.test		\
 	freshmeat.test fsfdir.test gcache.test genbugs.test		\
 	genportage.test google.test gutenberg.test happypenguin.test	\
-	imdb.test ixquick.test javasun.test lastfm.test leodict.test	\
-	l1sp.test lsm.test macports.test mathworld.test mininova.test	\
-	musicbrainz.test netbsd.test ntrs.test openbsd.test		\
-	opensearch.test piratebay.test port.test pgpkeys.test		\
-	pubmed.test rae.test rfc.test rhyme.test rpmsearch.test		\
-	scholar.test scicom.test scpan.test scroogle.test slashdot.test	\
-	slinuxdoc.test sourceforge.test springer.test stockquote.test	\
-	sunonesearch.test thesaurus.test translate.test urban.test	\
-	w3css.test w3html.test w3link.test w3rdf.test wayback.test	\
-	webster.test wetandwild.test wikipedia.test woffle.test		\
-	yahoo.test youtube.test yubnub.test
+	imdb.test ixquick.test jamendo.test javasun.test lastfm.test	\
+	leodict.test l1sp.test lsm.test macports.test mathworld.test	\
+	mininova.test musicbrainz.test netbsd.test ntrs.test		\
+	openbsd.test opensearch.test piratebay.test port.test		\
+	pgpkeys.test pubmed.test rae.test rfc.test rhyme.test		\
+	rpmsearch.test scholar.test scicom.test scpan.test		\
+	scroogle.test slashdot.test slinuxdoc.test sourceforge.test	\
+	springer.test stockquote.test sunonesearch.test thesaurus.test	\
+	translate.test urban.test w3css.test w3html.test w3link.test	\
+	w3rdf.test wayback.test webster.test wetandwild.test		\
+	wikipedia.test woffle.test yahoo.test youtube.test yubnub.test
 
 test:
 	./runtests

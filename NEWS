@@ -26,6 +26,8 @@ Fri Apr 16 18:53:55 BST 2010  - surfraw 2.2.7
 	  + by Ian Beckwith:
 	    * duckduckgo: Search the web via duckduckgo.com.
 	    * scroogle: Search Google anonymously via www.scroogle.org.
+	  + by Simone Fittabile:
+	    * jamendo: Search Jamendo: free music with Creative Commons licenses
 	* Removed elvi: genpkg (use genportage instead).
 	* Fixed elvi:
 	  + cnn

@@ -1,3 +1,8 @@
+2010-04-21  Ian Beckwith  <ianb@erislabs.net>
+
+	* New elvi: jamendo - Search Jamendo: free music with Creative
+	  Commons licenses (www.jamendo.com). Thanks to Simone Fittabile.
+
 2010-04-19  James Rowe  <jnrowe@gmail.com>
 
 	* genpkg: removed, use genportage.

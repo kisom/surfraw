@@ -59,6 +59,7 @@ dist_elvi_SCRIPTS	= \
 		  happypenguin \
 		  imdb \
 		  ixquick \
+		  jamendo \
 		  javasun \
 		  l1sp \
 		  lastfm \
