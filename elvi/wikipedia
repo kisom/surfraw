@@ -14,6 +14,7 @@ Usage: $w3_argv0 [options] [search-string]
 Description:
   Search the Wikipedia online encyclopedia
 Local options:
+  -s				  Uses experimental HTTPS secure connection.
   -language=ISOCODE | -l=ISOCODE  Two letter language code (resembles ISO country codes)
 				  Default: en
 				  Environment: SURFRAW_wikipedia_language, SURFRAW_lang
@@ -30,6 +31,7 @@ w3_parse_option_hook () {
     case "$opt" in
 	-language=*)	setopt	SURFRAW_wikipedia_language		$optarg	;;
 	-l=*)	setopt	SURFRAW_wikipedia_language		$optarg	;;
+	-s*)	setopt	SURFRAW_wikipedia_https			$optarg ;;
 	*) return 1 ;;
     esac
     return 0
@@ -45,11 +47,16 @@ if [ -z "$SURFRAW_wikipedia_language" ]; then
 fi
 
 prefix="http://${SURFRAW_wikipedia_language}.wikipedia.org/w/wiki.phtml?search="
+prefixs="https://secure.wikimedia.org/wikipedia/${SURFRAW_wikipedia_language}/w/index.php?search="
 suffix="&go=Go"
 
 if null "$w3_args"; then
     w3_browse_url "http://${SURFRAW_wikipedia_language}.wikipedia.org"
 else
     escaped_args=`w3_url_of_arg $w3_args`
+    if [ -z "$SURFRAW_wikipedia_https" ]; then
+         w3_browse_url "${prefixs}${escaped_args}"
+    else
     w3_browse_url "${prefix}${escaped_args}${suffix}"
+    fi
 fi

@@ -15,7 +15,7 @@
 
 				  N E W S
 
-Fri Apr 16 18:53:55 BST 2010  - surfraw 2.2.7
+Wed Apr 21 18:43:12 BST 2010  - surfraw 2.2.7
 
 	* New elvi (surfraw now has over one hundred elvi!):
 	  + by tczy:
@@ -34,6 +34,7 @@ Fri Apr 16 18:53:55 BST 2010  - surfraw 2.2.7
 	  + imdb (thanks to Sadako)
 	  + bbcnews (thanks to Sumant Oemrawsingh and James Rowe)
 	* aur: added options (thanks to Ivy Foster)
+	* wikipedia, ixquick: support https. Thanks to Simone Fittabile.
 	* Improved support for screen(1). Thanks to Ivy Foster:
 	  + Support for using tmux as $SURFRAW_screen.
 	  + Added `-ns|-newscreen' switch for setting $SURFRAW_new_screen.
@@ -49,7 +50,7 @@ Fri Nov 20 03:34:19 GMT 2009  - surfraw 2.2.6
             * mathworld    - search Wolfram MathWorld.
             * mininova     - search mininova for torrents.
             * youtube      - search youtube for videos.
-          + by fittabile@lifegate.it:
+          + by Simone Fittabile:
             * acronym      - find acronyms
             * gcache       - search google cache.
           + by Nick White:

@@ -1,6 +1,6 @@
 #!/bin/sh
 # $Id$
-# elvis: ixquick		-- Search the web using ixquick (www.ixquick.com)
+# elvis: ixquick		-- Search the web using ixquick [HTTPS] (www.ixquick.com)
 . surfraw || exit 1
 
 w3_config_hook () {
@@ -12,7 +12,7 @@ w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words]...
 Description:
-  Surfraw search the web using Ixquick metasearch (www.ixquick.com)
+  Surfraw search the web using Ixquick metasearch [HTTPS] (www.ixquick.com)
 Local options:
   -search=                      Specialized search on topic
           web		|       web
@@ -58,7 +58,7 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-    w3_browse_url "http://www.ixquick.com/"
+    w3_browse_url "https://www.ixquick.com/"
 else
     case "$SURFRAW_ixquick_lang" in
 	en|english)           SURFRAW_ixquick_lang="english"        ;;
@@ -81,5 +81,5 @@ else
 	*)                    SURFRAW_ixquick_lang="english"        ;;
     esac
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.ixquick.com/do/metasearch.pl?cat=${SURFRAW_ixquick_search}&cmd=process_search&language=${SURFRAW_ixquick_lang}&query=${escaped_args}"
+    w3_browse_url "https://www.ixquick.com/do/metasearch.pl?cat=${SURFRAW_ixquick_search}&cmd=process_search&language=${SURFRAW_ixquick_lang}&query=${escaped_args}"
 fi
