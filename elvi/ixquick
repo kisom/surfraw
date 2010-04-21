@@ -6,6 +6,7 @@
 w3_config_hook () {
 def   SURFRAW_ixquick_search 'do/metasearch.pl'
 def   SURFRAW_ixquick_lang "$SURFRAW_lang"
+defyn SURFRAW_ixquick_ssl   yes
 }
 
 w3_usage_hook () {
@@ -14,6 +15,8 @@ Usage: $w3_argv0 [options] [search words]...
 Description:
   Surfraw search the web using Ixquick metasearch [HTTPS] (www.ixquick.com)
 Local options:
+  -nossl                        Don't use https
+                                Environment: SURFRAW_ixquick_ssl
   -search=                      Specialized search on topic
           web		|       web
           pics		|       images
@@ -47,6 +50,7 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
+    -no*)       setoptyn SURFRAW_ixquick_ssl    no      ;;
     -search=*)  setopt   SURFRAW_ixquick_search	$optarg ;;
     -lang=*)  setopt   SURFRAW_ixquick_lang	$optarg ;;
 	*) return 1 ;;
@@ -56,9 +60,17 @@ w3_parse_option_hook () {
 
 w3_config
 w3_parse_args "$@"
+
+if ifyes SURFRAW_ixquick_ssl
+then
+    proto="https"
+else
+    proto="http"
+fi
+
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-    w3_browse_url "https://www.ixquick.com/"
+    w3_browse_url "${proto}://www.ixquick.com/"
 else
     case "$SURFRAW_ixquick_lang" in
 	en|english)           SURFRAW_ixquick_lang="english"        ;;
@@ -81,5 +93,5 @@ else
 	*)                    SURFRAW_ixquick_lang="english"        ;;
     esac
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "https://www.ixquick.com/do/metasearch.pl?cat=${SURFRAW_ixquick_search}&cmd=process_search&language=${SURFRAW_ixquick_lang}&query=${escaped_args}"
+    w3_browse_url "${proto}://www.ixquick.com/do/metasearch.pl?cat=${SURFRAW_ixquick_search}&cmd=process_search&language=${SURFRAW_ixquick_lang}&query=${escaped_args}"
 fi

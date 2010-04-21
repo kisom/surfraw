@@ -5,6 +5,7 @@
 	* wikipedia, ixquick: Support https. Thanks to Simone Fittabile.
 	* wikipedia: tweak Simone's patch to support https for start
 	  page and document the SURFRAW_wikipedia_ssl variable.
+	* ixquick: add -nossl option.
 
 2010-04-19  James Rowe  <jnrowe@gmail.com>
 
