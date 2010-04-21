@@ -6,6 +6,8 @@
 
 w3_config_hook () {
 def   SURFRAW_wikipedia_language	"$SURFRAW_lang"
+# default to off until we know the ssl site is going to stick around
+defyn SURFRAW_wikipedia_ssl		no
 }
 
 w3_usage_hook () {
@@ -15,6 +17,7 @@ Description:
   Search the Wikipedia online encyclopedia
 Local options:
   -s				  Uses experimental HTTPS secure connection.
+                                  Environment: SURFRAW_wikipedia_ssl
   -language=ISOCODE | -l=ISOCODE  Two letter language code (resembles ISO country codes)
 				  Default: en
 				  Environment: SURFRAW_wikipedia_language, SURFRAW_lang
@@ -31,7 +34,7 @@ w3_parse_option_hook () {
     case "$opt" in
 	-language=*)	setopt	SURFRAW_wikipedia_language		$optarg	;;
 	-l=*)	setopt	SURFRAW_wikipedia_language		$optarg	;;
-	-s*)	setopt	SURFRAW_wikipedia_https			$optarg ;;
+	-s*)   setoptyn SURFRAW_wikipedia_ssl			yes ;;
 	*) return 1 ;;
     esac
     return 0
@@ -51,12 +54,16 @@ prefixs="https://secure.wikimedia.org/wikipedia/${SURFRAW_wikipedia_language}/w/
 suffix="&go=Go"
 
 if null "$w3_args"; then
-    w3_browse_url "http://${SURFRAW_wikipedia_language}.wikipedia.org"
+    if ifyes SURFRAW_wikipedia_ssl ; then
+	w3_browse_url "https://secure.wikimedia.org/wikipedia/${SURFRAW_wikipedia_language}/wiki/Main_Page"
+    else
+	w3_browse_url "http://${SURFRAW_wikipedia_language}.wikipedia.org"
+    fi
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    if [ -z "$SURFRAW_wikipedia_https" ]; then
-         w3_browse_url "${prefixs}${escaped_args}"
+    if ifyes SURFRAW_wikipedia_ssl ; then
+        w3_browse_url "${prefixs}${escaped_args}"
     else
-    w3_browse_url "${prefix}${escaped_args}${suffix}"
+	w3_browse_url "${prefix}${escaped_args}${suffix}"
     fi
 fi
