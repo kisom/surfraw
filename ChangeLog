@@ -6,6 +6,7 @@
 	* wikipedia: tweak Simone's patch to support https for start
 	  page and document the SURFRAW_wikipedia_ssl variable.
 	* ixquick: add -nossl option.
+	* javasun.test: revert to previous test, works again.
 
 2010-04-19  James Rowe  <jnrowe@gmail.com>
 
