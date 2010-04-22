@@ -35,6 +35,8 @@ Wed Apr 21 18:43:12 BST 2010  - surfraw 2.2.7
 	  + bbcnews (thanks to Sumant Oemrawsingh and James Rowe)
 	* aur: added options (thanks to Ivy Foster)
 	* wikipedia, ixquick: support https. Thanks to Simone Fittabile.
+	* debwiki: remove -w, Debian Women wiki is being merged into main
+	  Debian wiki.
 	* Improved support for screen(1). Thanks to Ivy Foster:
 	  + Support for using tmux as $SURFRAW_screen.
 	  + Added `-ns|-newscreen' switch for setting $SURFRAW_new_screen.

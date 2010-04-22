@@ -5,7 +5,6 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-defyn SURFRAW_debwiki_women   0
 defyn SURFRAW_debwiki_title   0
 defyn SURFRAW_debwiki_context 1
 defyn SURFRAW_debwiki_case    0
@@ -16,9 +15,8 @@ w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words]...
 Description:
-  Surfraw search the Debian Wikis (wiki.debian.org & women.debian.org/wiki)
+  Surfraw search the Debian Wiki (wiki.debian.org)
 Local options:
-  -w                            Search the Debian Women wiki.
   -c                            Make search case-sensitive.
   -n                            Don't show context of search result.
   -t                            Limit search to title.
@@ -31,7 +29,6 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-    -w)        setoptyn SURFRAW_debwiki_women   1       ;;
     -c)        setoptyn SURFRAW_debwiki_case    1       ;;
     -n)        setoptyn SURFRAW_debwiki_context 0       ;;
     -d)        setoptyn SURFRAW_debwiki_direct  1       ;;
@@ -46,10 +43,6 @@ w3_parse_args "$@"
 # w3_args now contains a list of arguments
 
 url="http://wiki.debian.org"
-if ifyes SURFRAW_debwiki_women
-then
-    url="http://women.debian.org/wiki"
-fi
 
 if test -z "$w3_args"
 then
