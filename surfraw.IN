@@ -490,7 +490,7 @@ then
 	for arg in "$@"
 	do
 	  # if it is an option
-	  if awk -v arg="$arg" 'BEGIN { if(arg ~ /^-/) { exit 0 } else { exit 1 } } ' 
+	  if @AWK@ -v arg="$arg" 'BEGIN { if(arg ~ /^-/) { exit 0 } else { exit 1 } } '
 	  then
 		  # if option before elvi
 		  if [ -z "$elvi" ]
