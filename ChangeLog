@@ -2,6 +2,7 @@
 
 	* debwiki: remove -w, Debian Women wiki is now being merged
 	  into main wiki. Thanks to Simone Fittabile.
+	* debwiki.test: stop testing -w option.
 
 2010-04-21  Ian Beckwith  <ianb@erislabs.net>
 
