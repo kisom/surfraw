@@ -1,3 +1,7 @@
+2010-04-28  Ian Beckwith  <ianb@erislabs.net>
+
+	* configure.in: test for google-chrome, opera and links2.
+
 2010-04-22  Ian Beckwith  <ianb@erislabs.net>
 
 	* debwiki: remove -w, Debian Women wiki is now being merged

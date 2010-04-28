@@ -26,8 +26,8 @@ AC_MSG_RESULT([$enable_sr])
 AM_CONDITIONAL(INSTALLSR, test "$enable_sr" = "yes")
 
 ELVIDIR="\$(libdir)/surfraw"
-AC_CHECK_PROGS(TEXTBROWSER, lynx links elinks w3m netrik)
-AC_CHECK_PROGS(GRAPHICALBROWSER, iceweasel firefox mozilla safari epiphany-browser konqueror galeon kazenhakase conkeror dillo netscape)
+AC_CHECK_PROGS(TEXTBROWSER, lynx links2 links elinks w3m netrik)
+AC_CHECK_PROGS(GRAPHICALBROWSER, iceweasel firefox google-chrome opera mozilla safari epiphany-browser konqueror galeon kazenhakase conkeror dillo netscape)
 
 AC_ARG_WITH([elvidir],
 	[AS_HELP_STRING([--with-elvidir=ELVIDIR], [specify location of elvi])],
