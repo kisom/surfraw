@@ -1,5 +1,7 @@
 2010-05-06  Ian Beckwith  <ianb@erislabs.net>
 
+	* uzbl_load_url_from_surfraw: fix menu.
+	  Thanks to Sumant Oemrawsingh.
 	* Fixed tests: deblists google openbsd.
 
 2010-04-28  Ian Beckwith  <ianb@erislabs.net>

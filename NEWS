@@ -15,7 +15,7 @@
 
 				  N E W S
 
-Wed Apr 21 18:43:12 BST 2010  - surfraw 2.2.7
+Thu May  6 20:20:09 BST 2010  - surfraw 2.2.7
 
 	* New elvi (surfraw now has over one hundred elvi!):
 	  + by tczy:
@@ -42,6 +42,8 @@ Wed Apr 21 18:43:12 BST 2010  - surfraw 2.2.7
 	  + Added `-ns|-newscreen' switch for setting $SURFRAW_new_screen.
 	  + Added $SURFRAW_screen_args for passing arguments to the defined
 	    screen tool.
+	* uzbl_load_url_from_surfraw: fix menu.
+	  Thanks to Sumant Oemrawsingh.
 
 Fri Nov 20 03:34:19 GMT 2009  - surfraw 2.2.6
 

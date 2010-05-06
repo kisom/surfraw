@@ -77,7 +77,7 @@ function goto()
 # Use dmenu to navigate through possible choices
 function present_menu()
 {
-  elvi=`surfraw -elvi | grep -v -e ' ELVI:' -e '^W' | cut -f 1`
+  elvi=`surfraw -elvi | grep -v -e ' ELVI:' -e '^W' | awk '{print $1}'`
   if [ -r "$BOOKMARKS" ]
   then
     elvi="$elvi $(awk '{print $1}' "$BOOKMARKS" 2>/dev/null)"
