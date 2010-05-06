@@ -1,2 +1,2 @@
 google foo
-Results .* of about .* for
+About [\d,]+ results

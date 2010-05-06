@@ -1,3 +1,7 @@
+2010-05-06  Ian Beckwith  <ianb@erislabs.net>
+
+	* Fixed tests: deblists google openbsd.
+
 2010-04-28  Ian Beckwith  <ianb@erislabs.net>
 
 	* configure.in: test for google-chrome, opera and links2.
