@@ -1,3 +1,7 @@
+2010-07-02  Ian Beckwith  <ianb@erislabs.net>
+
+	* new elvi: yandex. Thanks to Uspenskiy Andrey.
+
 2010-05-06  Ian Beckwith  <ianb@erislabs.net>
 
 	* uzbl_load_url_from_surfraw: fix menu.

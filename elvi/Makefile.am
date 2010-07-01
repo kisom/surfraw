@@ -103,6 +103,7 @@ dist_elvi_SCRIPTS	= \
 		  wikipedia \
 		  woffle \
 		  yahoo \
+		  yandex \
 		  youtube \
 		  yubnub
 

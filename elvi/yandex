@@ -1,0 +1,49 @@
+#!/bin/sh
+# $Id$
+# elvis: yandex		-- Search the web using Yandex (yandex.ru)
+. surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_yandex_search "${search:-yandsearch?}text"
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the web using Yandex (yandex.ru)
+Local options:		Specialized search on topic
+  -dict		|	Slovari
+  -news		|	News
+  -images	|	Images
+  -market	|	Market
+  -maps		|	Maps (not implemented)
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+      -dict)   search="search.xml?" opt=slovari ;;
+      -news)   search="yandsearch?rpt=nnews2\&" ;;
+      -market) search="search.xml?" ;;
+      -images|-maps) : ;;
+       *)      return 1
+    esac
+    setopt SURFRAW_yandex_domain "${opt:+${opt#-}.}"
+    [[ -n $search ]] && setopt SURFRAW_yandex_search "${search}text"
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+if test -z "$w3_args"; then
+    w3_browse_url "http://${SURFRAW_yandex_domain}yandex.ru/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://${SURFRAW_yandex_domain}yandex.ru/${SURFRAW_yandex_search}=${escaped_args}"
+fi
