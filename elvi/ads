@@ -1,0 +1,27 @@
+#!/bin/sh
+# elvis: ads           -- Search SAO/NASA Astrophysics Data System
+# jrollins@finestructure.net 20100819
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the SAO/NASA Astrophysics Data System
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://adsabs.harvard.edu/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+
+    # not direct to ads, construct url from options
+    url="http://adsabs.harvard.edu/cgi-bin/nph-basic_connect?qsearch=${escaped_args}&version=1"
+
+    w3_browse_url "$url"
+fi
