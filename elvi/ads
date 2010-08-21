@@ -1,5 +1,5 @@
 #!/bin/sh
-# elvis: ads           -- Search SAO/NASA Astrophysics Data System
+# elvis: ads		-- Search SAO/NASA Astrophysics Data System
 # jrollins@finestructure.net 20100819
 . surfraw || exit 1
 

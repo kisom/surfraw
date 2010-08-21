@@ -1,5 +1,5 @@
 EXTRA_DIST = runtests elviwithouttests README COOKIES W.test		\
-	acronym.test alioth.test altavista.test amazon.test		\
+	acronym.test ads.test alioth.test altavista.test amazon.test	\
 	archpkg.test arxiv.test ask.test aur.test austlii.test		\
 	bbcnews.test bing.test bookfinder.test bugmenot.test cddb.test	\
 	cia.test cite.test cliki.test cnn.test codesearch.test		\

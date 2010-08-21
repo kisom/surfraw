@@ -4,6 +4,7 @@ elvidir=$(ELVIDIR)
 dist_elvi_SCRIPTS	= \
 		  W \
 		  acronym \
+		  ads \
 		  alioth \
 		  altavista \
 		  amazon \

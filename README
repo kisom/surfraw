@@ -155,6 +155,7 @@ Options
   $ surfraw -elvi
  GLOBAL ELVI:
 acronym         -- Look for acronyms definitions (www.acronymfinder.com)
+ads             -- Search SAO/NASA Astrophysics Data System
 alioth          -- Search Alioth (alioth.debian.org)
 altavista       -- Search the web using Altavista (www.altavista.com)
 amazon          -- Search the amazon.com bookstore
