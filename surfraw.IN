@@ -310,6 +310,14 @@ w3_parse_option_hook () {
     return 1
 }
 
+list_elvi() {
+    local dir="$1"
+    sed -n 's/^.*elvis: \(.*\)$/\1/p' $(find "$dir" ! -type d ! -type l ! -name '*~' | sort)
+    for script in $(find "$dir" ! -type d -type l | sort) ; do
+	printf '%-16s--> %s\n' $(basename "$script") $(basename $(readlink "${script}"))
+    done
+}
+
 w3_parse_option () {
     opt="$1"
     case "$opt" in
@@ -319,11 +327,11 @@ w3_parse_option () {
     case "$opt" in
 	-browser=*)	    setopt   SURFRAW_browser		$optarg	;;
 	-elvi)		    echo " GLOBAL ELVI:"
-			    sed -n 's/^.*elvis: \(.*\)$/\1/p' $elvidir/*
+			    list_elvi "$elvidir"
 			    localelvidir=$(get_local_elvi_dir)
 			    if [ -d "$localelvidir" ] && [ -n "$(ls "$localelvidir")" ]; then
 				echo " LOCAL ELVI:"
-				sed -n 's/^.*elvis: \(.*\)$/\1/p' "$localelvidir/"*
+				list_elvi "$localelvidir"
 			    fi
 			    exit 0 ;;
 	-escape-url-args=*) setoptyn SURFRAW_escape_url_args	$optarg ;;
