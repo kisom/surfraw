@@ -7,6 +7,8 @@ w3_config_hook () {
 defyn   SURFRAW_openbsd_mail            no
 defyn   SURFRAW_openbsd_pr              no
 defyn   SURFRAW_openbsd_ports           no
+defyn   SURFRAW_openbsd_mail_misc	no
+defyn   SURFRAW_openbsd_mail_tech	no
 }
 
 w3_usage_hook () {
@@ -24,6 +26,10 @@ Local options:
   -ps[=(yes|no)]                Search ports.
                                 Default: $SURFRAW_openbsd_ports
                                 Environment: SURFRAW_openbsd_ports
+  -misc[=(yes|no)]		Search misc mailing list.
+				Default: $SURFRAW_openbsd_mail_misc
+  -tech[=(yes|no)]		Search tech mailing list.
+				Default: $SURFRAW_openbsd_mail_tech
 Examples:
   $w3_argv0                     Teleport to the OpenBSD website
   $w3_argv0 mycroft             Search OpenBSD website for odeur de mycroft
@@ -32,6 +38,8 @@ Examples:
   $w3_argv0 -pr                 Query Problem Report form
   $w3_argv0 -pr 666             Display PR 666
   $w3_argv0 -ps surfraw         Search ports for surfraw
+  $w3_argv0 -misc supermicro    Search misc mailing list for supermico
+  $w3_argv0 -tech SMP           Search tech mailing list for SMP
 EOF
     w3_global_usage
 }
@@ -40,12 +48,16 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-mail)	setoptyn	SURFRAW_openbsd_mail		yes	;;
-	-mail=*) setoptyn	SURFRAW_openbsd_mail		$optarg	;;
-	-pr)	setoptyn	SURFRAW_openbsd_pr		yes	;;
-	-pr=*)	setoptyn	SURFRAW_openbsd_pr		$optarg	;;
-	-ps)	setoptyn	SURFRAW_openbsd_ports		yes	;;
-	-ps=*)	setoptyn	SURFRAW_openbsd_ports		$optarg	;;
+	-mail)		setoptyn	SURFRAW_openbsd_mail		yes	;;
+	-mail=*) 	setoptyn	SURFRAW_openbsd_mail		$optarg	;;
+	-pr)		setoptyn	SURFRAW_openbsd_pr		yes	;;
+	-pr=*)		setoptyn	SURFRAW_openbsd_pr		$optarg	;;
+	-ps)		setoptyn	SURFRAW_openbsd_ports		yes	;;
+	-ps=*)		setoptyn	SURFRAW_openbsd_ports		$optarg	;;
+	-misc)		setoptyn	SURFRAW_openbsd_mail_misc	yes	;;
+	-misc=*)	setoptyn	SURFRAW_openbsd_mail_misc 	$optarg	;;
+	-tech)		setoptyn	SURFRAW_openbsd_mail_tech 	yes	;;
+	-tech=*)	setoptyn	SURFRAW_openbsd_mail_tech 	$optarg	;;
 	*) return 1 ;;
     esac
     return 0
@@ -77,6 +89,22 @@ if ok SURFRAW_openbsd_mail; then
         w3_browse_url "http://www.openbsd.org/mail.html"
     else
 	w3_browse_url "http://groups.google.com/groups?q=group%3Amailing.openbsd.*+${escaped_args}&hl=en"
+    fi
+    exit $?
+fi
+if ok SURFRAW_openbsd_mail_misc; then
+    if test -z "$escaped_args"; then
+        w3_browse_url "http://marc.info/?l=openbsd-misc&r=1&w=2"
+    else
+	w3_browse_url "http://marc.info/?l=openbsd-misc&w=2&r=1&s=${escaped_args}&q=b"
+    fi
+    exit $?
+fi
+if ok SURFRAW_openbsd_mail_tech; then
+    if test -z "$escaped_args"; then
+        w3_browse_url "http://marc.info/?l=openbsd-tech&r=1&w=2"
+    else
+	w3_browse_url "http://marc.info/?l=openbsd-tech&w=2&r=1&s=${escaped_args}&q=b"
     fi
     exit $?
 fi
