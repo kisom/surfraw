@@ -4,9 +4,10 @@
 	* yahoo: reduced query string to just p and n options.
 	* openbsd: support -misc and -tech. Thanks to
 	  Sunil Nimmagadda for the patch.
-	* removed altavista: is now just a front-end to yahoo.
 	* removed cddb: gracenote made the "hard decision"
 	  to remove the website search. sigh.
+	* removed altavista: is now just a front-end to yahoo.
+	* removed fast: another yahoo front-end.
 
 2010-08-22  Jameson Rollins <jrollins@finestructure.net>
 
