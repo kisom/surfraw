@@ -1,5 +1,6 @@
 2010-10-25  Ian Beckwith  <ianb@erislabs.net>
 
+	* new elvi: scirus.
 	* yahoo: reduced query string to just p and n options.
 	* openbsd: support -misc and -tech. Thanks to
 	  Sunil Nimmagadda for the patch.
