@@ -13,7 +13,8 @@ Ian Beckwith <ianb@erislabs.net>
               opensearch, scholar, ctan, fsfdir, gutenberg, wayback,
               dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc,
               sunonesearch, lsm, finkpkg, rpmsearch, macports,
-              debpkghome, debvcsbrowse, scroogle, duckduckgo
+              debpkghome, debvcsbrowse, scroogle, duckduckgo,
+	      scirus, scitopia, worldwidescience
         plus various tweaks/bugfixes/features.
 
 Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
