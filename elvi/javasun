@@ -64,9 +64,9 @@ case "$SURFRAW_java_product" in
 esac
 
 if test -z "$w3_args"; then
-    w3_browse_url "http://java.sun.com/${JAVA_SITE}"
+    w3_browse_url "http://download.oracle.com/${JAVA_SITE}"
 else
     button=`w3_url_escape "I'm Feeling Lucky"`
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.google.com/search?q=${escaped_args}&sitesearch=java.sun.com/${JAVA_SITE}&btnI=${button}"
+    w3_browse_url "http://www.google.com/search?q=${escaped_args}&sitesearch=download.oracle.com/${JAVA_SITE}&btnI=${button}"
 fi

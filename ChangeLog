@@ -9,6 +9,8 @@
 	* removed altavista: is now just a front-end to yahoo.
 	* removed fast: another yahoo front-end.
 	* imdb: fix test.
+	* javasun: oracleized URLs.
+	* w3link: fixed URL.
 
 2010-08-22  Jameson Rollins <jrollins@finestructure.net>
 
