@@ -1,4 +1,3 @@
-# $Id$
 SUBDIRS		= elvi test examples
 
 bin_SCRIPTS = surfraw surfraw-update-path

@@ -6,7 +6,6 @@ dist_elvi_SCRIPTS	= \
 		  acronym \
 		  ads \
 		  alioth \
-		  altavista \
 		  amazon \
 		  archpkg \
 		  arxiv \
@@ -17,7 +16,6 @@ dist_elvi_SCRIPTS	= \
 		  bbcnews \
 		  bookfinder \
 		  bugmenot \
-		  cddb \
 		  cia \
 		  cite \
 		  cliki \
@@ -44,7 +42,6 @@ dist_elvi_SCRIPTS	= \
 		  ebay \
 		  etym \
 		  excite \
-		  fast \
 		  foldoc \
 		  filesearching \
 		  finkpkg \
@@ -83,6 +80,8 @@ dist_elvi_SCRIPTS	= \
 		  rpmsearch \
 		  scholar \
 		  scicom \
+		  scitopia \
+		  scirus \
 		  scpan \
 		  scroogle \
 		  slashdot \
@@ -103,6 +102,7 @@ dist_elvi_SCRIPTS	= \
 		  wetandwild \
 		  wikipedia \
 		  woffle \
+		  worldwidescience \
 		  yahoo \
 		  yandex \
 		  youtube \

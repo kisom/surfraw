@@ -2,7 +2,6 @@ elvi.1sr.gz @mandir@/man1/W.1.gz
 elvi.1sr.gz @mandir@/man1/acronym.1sr.gz
 elvi.1sr.gz @mandir@/man1/ads.1sr.gz
 elvi.1sr.gz @mandir@/man1/alioth.1sr.gz
-elvi.1sr.gz @mandir@/man1/altavista.1sr.gz
 elvi.1sr.gz @mandir@/man1/amazon.1sr.gz
 elvi.1sr.gz @mandir@/man1/archpkg.1sr.gz
 elvi.1sr.gz @mandir@/man1/arxiv.1sr.gz
@@ -13,7 +12,6 @@ elvi.1sr.gz @mandir@/man1/bing.1sr.gz
 elvi.1sr.gz @mandir@/man1/bbcnews.1sr.gz
 elvi.1sr.gz @mandir@/man1/bookfinder.1sr.gz
 elvi.1sr.gz @mandir@/man1/bugmenot.1sr.gz
-elvi.1sr.gz @mandir@/man1/cddb.1sr.gz
 elvi.1sr.gz @mandir@/man1/cite.1sr.gz
 elvi.1sr.gz @mandir@/man1/cia.1sr.gz
 elvi.1sr.gz @mandir@/man1/cliki.1sr.gz
@@ -40,7 +38,6 @@ elvi.1sr.gz @mandir@/man1/duckduckgo.1sr.gz
 elvi.1sr.gz @mandir@/man1/ebay.1sr.gz
 elvi.1sr.gz @mandir@/man1/etym.1sr.gz
 elvi.1sr.gz @mandir@/man1/excite.1sr.gz
-elvi.1sr.gz @mandir@/man1/fast.1sr.gz
 elvi.1sr.gz @mandir@/man1/filesearching.1sr.gz
 elvi.1sr.gz @mandir@/man1/finkpkg.1sr.gz
 elvi.1sr.gz @mandir@/man1/foldoc.1sr.gz
@@ -79,6 +76,8 @@ elvi.1sr.gz @mandir@/man1/rhyme.1sr.gz
 elvi.1sr.gz @mandir@/man1/rpmsearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/scholar.1sr.gz
 elvi.1sr.gz @mandir@/man1/scicom.1sr.gz
+elvi.1sr.gz @mandir@/man1/scitopia.1sr.gz
+elvi.1sr.gz @mandir@/man1/scirus.1sr.gz
 elvi.1sr.gz @mandir@/man1/scpan.1sr.gz
 elvi.1sr.gz @mandir@/man1/scroogle.1sr.gz
 elvi.1sr.gz @mandir@/man1/slashdot.1sr.gz
@@ -99,6 +98,7 @@ elvi.1sr.gz @mandir@/man1/webster.1sr.gz
 elvi.1sr.gz @mandir@/man1/wetandwild.1sr.gz
 elvi.1sr.gz @mandir@/man1/wikipedia.1sr.gz
 elvi.1sr.gz @mandir@/man1/woffle.1sr.gz
+elvi.1sr.gz @mandir@/man1/worldwidescience.1sr.gz
 elvi.1sr.gz @mandir@/man1/yahoo.1sr.gz
 elvi.1sr.gz @mandir@/man1/yandex.1sr.gz
 elvi.1sr.gz @mandir@/man1/youtube.1sr.gz
