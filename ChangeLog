@@ -8,6 +8,7 @@
 	  to remove the website search. sigh.
 	* removed altavista: is now just a front-end to yahoo.
 	* removed fast: another yahoo front-end.
+	* imdb: fix test.
 
 2010-08-22  Jameson Rollins <jrollins@finestructure.net>
 
