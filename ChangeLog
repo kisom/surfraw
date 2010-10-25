@@ -1,10 +1,12 @@
 2010-10-25  Ian Beckwith  <ianb@erislabs.net>
 
 	* new elvi: scirus, scitopia, worldwidescience.
-	* removed altavista: is now just a front-end to yahoo.
 	* yahoo: reduced query string to just p and n options.
 	* openbsd: support -misc and -tech. Thanks to
 	  Sunil Nimmagadda for the patch.
+	* removed altavista: is now just a front-end to yahoo.
+	* removed cddb: gracenote made the "hard decision"
+	  to remove the website search. sigh.
 
 2010-08-22  Jameson Rollins <jrollins@finestructure.net>
 
