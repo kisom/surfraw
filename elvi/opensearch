@@ -56,7 +56,7 @@ w3_parse_option_hook () {
     -la*=*) setopt   SURFRAW_opensearch_language       "$optarg" ;;
     -in*=*) setopt   SURFRAW_opensearch_inputencoding  "$optarg" ;;
     -o*=*)  setopt   SURFRAW_opensearch_outputencoding "$optarg" ;;
-    -l*)    setoptyn SURFRAW_opensearch_list            1        ;;
+    -l)     setoptyn SURFRAW_opensearch_list            1        ;;
 	*) return 1 ;;
     esac
     return 0

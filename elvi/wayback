@@ -65,13 +65,13 @@ w3_parse_option_hook () {
     -sm*=*)  setopt   SURFRAW_wayback_smonth     "`monthtonum "$optarg"`" ;;
     -em*=*)  setopt   SURFRAW_wayback_emonth     "`monthtonum "$optarg"`" ;;
     -ali*=*) setopt   SURFRAW_wayback_aliases    $optarg ;;
-    -re*=*)   setopt   SURFRAW_wayback_redirects  $optarg ;;
-    -ty*=*)   setopt   SURFRAW_wayback_filetype   $optarg ;;
-    -l*)     setoptyn SURFRAW_wayback_list       1       ;;
+    -re*=*)  setopt   SURFRAW_wayback_redirects  $optarg ;;
+    -ty*=*)  setopt   SURFRAW_wayback_filetype   $optarg ;;
+    -l|-li*) setoptyn SURFRAW_wayback_list       1       ;;
     -d*)     setoptyn SURFRAW_wayback_dups       1       ;;
     -c*)     setoptyn SURFRAW_wayback_comp       1       ;;
     -pd*)    setoptyn SURFRAW_wayback_pdf        1       ;;
-	*)       return 1 ;;
+	*)   return 1 ;;
     esac
     return 0
 }

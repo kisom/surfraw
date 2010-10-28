@@ -29,8 +29,8 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-    -search=*)  setopt   SURFRAW_duckduckgo_search  "$optarg" ;;
-    -[ld]*)     setoptyn SURFRAW_duckduckgo_lucky   1         ;;
+    -search=*)       setopt   SURFRAW_duckduckgo_search  "$optarg" ;;
+    -d|-du*|-l|-lu*) setoptyn SURFRAW_duckduckgo_lucky   1         ;;
     *) return 1 ;;
     esac
     return 0

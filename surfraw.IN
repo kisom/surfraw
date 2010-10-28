@@ -260,6 +260,10 @@ false () {
 }
 
 w3_global_usage () {
+    defyn SURFRAW_local_help no
+    if ifyes SURFRAW_local_help; then
+	return;
+    fi
 # style: keep sorted
 #-------------------------------------79 cols----------------------------------
     cat <<EOF
@@ -273,7 +277,8 @@ Global options:
   -g | -graphical		Get some windowed sin
   				Default: $SURFRAW_graphical
 				Environment: SURFRAW_graphical
-  -help				What you're reading now, dude
+  -h  | -help			What you're reading now, dude
+  -lh | -local-help		Just show elvi-specific help, not the global options
   -p | -print			Just print search URL, don't pass to browser
   -o | -o=FILE			Fetch URL and dump to stdout or FILE.
   -new[=yes|no]			Start in a new window
@@ -336,7 +341,9 @@ w3_parse_option () {
 			    exit 0 ;;
 	-escape-url-args=*) setoptyn SURFRAW_escape_url_args	$optarg ;;
 	-g | -graphical)    setoptyn SURFRAW_graphical		yes	;;
-	-help | --help)     do_help=1					;;
+	-help | --help |-h) do_help=1					;;
+	-local-help | \
+	--local-help |-lh ) do_help=1 ;setoptyn SURFRAW_local_help yes  ;;
 	-q | -quote)	    setoptyn SURFRAW_quote_args	    	yes	;;
 	-new)		    setoptyn SURFRAW_new_window		yes	;;
 	-new=*)		    setoptyn SURFRAW_new_window		$optarg ;;
@@ -495,6 +502,7 @@ then
 	unquoted_opts=""
 	elvi=""
 	searchterms=""
+	do_help=0
 	for arg in "$@"
 	do
 	  # if it is an option
@@ -504,10 +512,17 @@ then
 		  if [ -z "$elvi" ]
 		  then
 			  case "$arg" in
-				  -help*) surfraw_usage;         exit 0 ;;
-				  -\?)    surfraw_usage;         exit 0 ;;
-				  -elvi*)  w3_parse_option -elvi; exit 0 ;;
+			      -help | --help |-h) do_help=1 ;;
+			      -local-help  | \
+			      --local-help | \
+			      -lh | -\? ) do_help=1 ; setoptyn SURFRAW_local_help yes ;;
+			      -elvi*)  w3_parse_option -elvi; exit 0 ;;
 			  esac
+		  fi
+		  if ok do_help
+		  then
+		      surfraw_usage
+		      exit 0
 		  fi
 		  if  [ -z "$opts" ]
 		  then

@@ -1,3 +1,12 @@
+2010-10-28  Ian Beckwith  <ianb@erislabs.net>
+
+	* Support -local-help, --local-help or -lh to get elvi-specific
+	  help without displaying the global options. This works for
+	  all elvi and the main surfraw script.
+	* google, duckduckgo, opensearch, wayback: tweak overbroad
+	  option parsing so it doesn't interfere with -lh.
+	* Support -h as a synonym for -help.
+
 2010-10-25  Ian Beckwith  <ianb@erislabs.net>
 
 	* new elvi: scirus, scitopia, worldwidescience.

@@ -57,7 +57,7 @@ using the "I'm feeling lucky" option:
 
 To find out about options specific to this elvis, do:
 
- sr elvisname \-help
+ sr elvisname \-local\-help
 
 To find out about surfraw, see the man page for surfraw(1).
 To see the full list of elvi, do:
@@ -74,13 +74,17 @@ directory (\%@ELVIDIR@) to your path, either manually or using
 
 .SH OPTIONS
 
-Use	\fB\%sr elviname \-help\fP for elvi\(hyspecific options.
+Use	\fB\%sr elviname \-local-help\fP for elvi\(hyspecific options.
 
 The following options work with all elvi.
 
 .TP
 .B \-help
 Show summary of options (including elvi\(hyspecific options).
+
+.TP
+.B \-local-help
+Show elvi\(hyspecific options.
 
 .TP
 .B \-version

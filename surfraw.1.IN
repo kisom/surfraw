@@ -87,13 +87,17 @@ There are some example bookmarks in \%@sysconfdir@/xdg/surfraw/bookmarks
 
 .SH OPTIONS
 
-Use	\fB\%sr elviname \-help\fP for elvi\(hyspecific options.
+Use	\fB\%sr elviname \-local\-help\fP for elvi\(hyspecific options.
 
 The following options work with all elvi.
 
 .TP
 .B \-help
 Show summary of options (including elvi\(hyspecific options).
+
+.TP
+.B \-local-help
+Show elvi\(hyspecific options.
 
 .TP
 .B \-version
