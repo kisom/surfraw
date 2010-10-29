@@ -1,3 +1,8 @@
+2010-10-29  Ian Beckwith  <ianb@erislabs.net>
+
+	* uzbl_load_url_from_surfraw: use @AWK@ to pick up
+	  ./configure's choice of awk implementation.
+
 2010-10-28  Ian Beckwith  <ianb@erislabs.net>
 
 	* Support -local-help, --local-help or -lh to get elvi-specific

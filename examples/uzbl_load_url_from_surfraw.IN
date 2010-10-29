@@ -77,10 +77,10 @@ function goto()
 # Use dmenu to navigate through possible choices
 function present_menu()
 {
-  elvi=`surfraw -elvi | grep -v -e ' ELVI:' -e '^W' | awk '{print $1}'`
+  elvi=`surfraw -elvi | grep -v -e ' ELVI:' -e '^W' | @AWK@ '{print $1}'`
   if [ -r "$BOOKMARKS" ]
   then
-    elvi="$elvi $(awk '{print $1}' "$BOOKMARKS" 2>/dev/null)"
+    elvi="$elvi $(@AWK@ '{print $1}' "$BOOKMARKS" 2>/dev/null)"
   fi
 
   echo "$elvi" | tr ' ' '\n' | sort | $DMENU -p "$PROMPT" $COLORS
