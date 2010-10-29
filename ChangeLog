@@ -1,5 +1,6 @@
 2010-10-29  Ian Beckwith  <ianb@erislabs.net>
 
+	* w3_url_escape: add /g to '/'->'%2F' replacement.
 	* uzbl_load_url_from_surfraw: use @AWK@ to pick up
 	  ./configure's choice of awk implementation.
 

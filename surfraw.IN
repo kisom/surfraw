@@ -218,7 +218,7 @@ w3_url_escape () {
 		     s/&/%26/g;
 		     s/,/%2C/g;
 #		     s/\./%2E/g;
-		     sx/x%2Fx;
+		     sx/x%2Fxg;
 		     s/:/%3A/g;
 		     s/;/%3B/g;
 		     s/</%3C/g;
