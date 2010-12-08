@@ -70,6 +70,7 @@ dist_elvi_SCRIPTS	= \
 		  netbsd \
 		  ntrs \
 		  openbsd \
+		  pasearch \
 		  piratebay \
 		  pgpkeys \
 		  port \

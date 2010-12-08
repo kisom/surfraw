@@ -14,8 +14,8 @@ EXTRA_DIST = runtests elviwithouttests README COOKIES W.test		\
 	ixquick.test jamendo.test javasun.test lastfm.test		\
 	leodict.test l1sp.test lsm.test macports.test mathworld.test	\
 	mininova.test musicbrainz.test netbsd.test ntrs.test		\
-	openbsd.test opensearch.test piratebay.test port.test		\
-	pgpkeys.test pubmed.test rae.test rfc.test rhyme.test		\
+	openbsd.test opensearch.test pasearch.test piratebay.test	\
+	port.test pgpkeys.test pubmed.test rae.test rfc.test rhyme.test	\
 	rpmsearch.test scholar.test scicom.test scitopia.test		\
 	scirus.test scpan.test scroogle.test slashdot.test		\
 	slinuxdoc.test sourceforge.test springer.test stockquote.test	\

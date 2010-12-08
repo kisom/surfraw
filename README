@@ -224,6 +224,7 @@ ntrs              -- Search the NASA Technical Report Server
 openbsd           -- Search OpenBSD related information (www.openbsd.org)
 opensearch        -- Search an OpenSearch-enabled website
 pgpkeys           -- Search the PGP key database
+pasearch          -- Search the unofficial Penny Arcade archives (pipefour.org/pa)
 piratebay         -- Search thepiratebay.org for torrents
 port              -- Look up a TCP/UDP port number on seifried.org/security/ports/
 pubmed            -- Search medical/molbio databases (www.ncbi.nlm.nih.gov)

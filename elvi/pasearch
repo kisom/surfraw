@@ -1,0 +1,78 @@
+#!/bin/sh
+#
+# AUTHOR: jakob
+#
+# DATE: 2010.12.04
+#
+# DESC: Elvis to search the unofficial Penny Arcade archives
+# elvis: pasearch	-- Search the unofficial Penny Arcade archives (pipefour.org/pa)
+. surfraw || exit 1
+
+w3_usage_hook () {
+	cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Search the unofficial Penny Arcade archives (pipefour.org/pa)
+Local options:
+  -t/-T				Enable/disable searching title field
+				Default: yes
+				Environment: SURFRAW_pasearch_search_title
+  -b/-B				Enable/disable searching body field
+				Default: yes
+				Environment: SURFRAW_pasearch_search_body
+  -n/-N				Enable/disable searching notes field
+				Default: yes
+				Environment: SURFRAW_pasearch_search_notes
+  -p/-P				Enable/disable showing preview thumbnails
+				Default: yes
+				Environment: SURFRAW_pasearch_show_previews
+EOF
+	w3_global_usage
+}
+
+w3_config_hook () {
+	defyn SURFRAW_pasearch_search_title  1
+	defyn SURFRAW_pasearch_search_body   1
+	defyn SURFRAW_pasearch_search_notes  1
+	defyn SURFRAW_pasearch_show_previews 1
+}
+
+w3_parse_option_hook () {
+	opt="$1"
+	optarg="$2"
+	case "$opt" in
+		-t) setoptyn SURFRAW_pasearch_search_title  1 ;;
+		-T) setoptyn SURFRAW_pasearch_search_title  0 ;;
+		-b) setoptyn SURFRAW_pasearch_search_body   1 ;;
+		-B) setoptyn SURFRAW_pasearch_search_body   0 ;;
+		-n) setoptyn SURFRAW_pasearch_search_notes  1 ;;
+		-N) setoptyn SURFRAW_pasearch_search_notes  0 ;;
+		-p) setoptyn SURFRAW_pasearch_show_previews 1 ;;
+		-P) setoptyn SURFRAW_pasearch_show_previews 0 ;;
+		*) return 1 ;;
+	esac
+	return 0
+}
+
+w3_config
+w3_parse_args "$@"
+
+# Make sure they have at least one field enabled
+ifno SURFRAW_pasearch_search_title &&
+ifno SURFRAW_pasearch_search_body &&
+ifno SURFRAW_pasearch_search_notes &&
+	err You can\'t search 0 fields.
+
+if test -z "$w3_args"; then
+	w3_browse_url "http://pipefour.org/pa/"
+else
+	escaped_args=`w3_url_of_arg $w3_args`
+	ifyes SURFRAW_pasearch_search_title && fields=${fields}'&search[]=title'
+	ifyes SURFRAW_pasearch_search_body && fields=${fields}'&search[]=body'
+	ifyes SURFRAW_pasearch_search_notes && fields=${fields}'&search[]=notes'
+
+	thumbs="off"
+	ifyes SURFRAW_pasearch_show_previews && thumbs=on
+
+	w3_browse_url "http://pipefour.org/pa/search.php?thumbs=${thumbs}&${fields}&q=${escaped_args}"
+fi
