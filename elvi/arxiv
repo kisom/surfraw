@@ -53,7 +53,7 @@ w3_parse_option_hook () {
 w3_config
 
 # Parse search terms
-SURFRAW_quote_ifs=0
+SURFRAW_escape_url_args=no
 w3_parse_args "$@"
 
 
@@ -63,13 +63,18 @@ cnt=0
 if [ ! -z "$w3_args" ]; then
     case $SURFRAW_arxiv_scope in
 	all | title | abstract)
-	    for w in $w3_args ; do
-		terms=$terms"+"`w3_url_of_arg $w`
-		cnt=$((cnt + 1))
-	    done
-	    if [ $cnt -gt 1 ]; then
-		terms="+AND"$terms
+	    if [ `w3_url_of_arg $w3_args | cut -c1` = \" ]; then
+		terms="+EXACT+"`echo $w3_args | sed -e 's/ /_/g'`
+	    else
+		for w in $w3_args ; do
+		    terms="+"`w3_url_of_arg $w`$terms
+		    cnt=$((cnt + 1))
+		    if [ $cnt -gt 1 ]; then
+		    	terms="+AND"$terms
+		    fi
+	    	done
 	    fi
+	    terms=`echo $terms | sed -e 's/"//g'`
 	    ;;
 	author)
 	    # Names without commas need to be reversed
@@ -94,14 +99,7 @@ if [ ! -z "$w3_args" ]; then
 	    fi
 	    ;;
 	fulltext)
-	    # Need to remove leading/trailing spaces and quotes
-	    for w in $w3_args ; do
-		if [ -z $terms ]; then
-		    terms=`w3_url_of_arg $w`
-		else
-		    terms="$terms "`w3_url_of_arg $w`
-		fi
-	    done
+	    terms=`w3_url_escape $w3_args`
 	    ;;
 	*)
 	    return 1 ;;

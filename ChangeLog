@@ -1,3 +1,11 @@
+2010-12-08  Ian Beckwith  <ianb@erislabs.net>
+
+	* arxiv: Thanks to MT <mt_void@warpmail.net> for patch that fixes:
+	  1. Search queries with more than two terms would fail, e.g.
+	    'supermassive black hole'.
+	  2. Full text search was broken, it works now.
+	  3. Enhancement: quoting the query now does an exact string match.
+
 2010-10-29  Ian Beckwith  <ianb@erislabs.net>
 
 	* wayback: advanced search is broken, rip out all
