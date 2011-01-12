@@ -13,11 +13,11 @@ Ian Beckwith <ianb@erislabs.net>
               opensearch, scholar, ctan, fsfdir, gutenberg, wayback,
               dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc,
               sunonesearch, lsm, finkpkg, rpmsearch, macports,
-              debpkghome, debvcsbrowse, scroogle, duckduckgo,
-	      scirus, scitopia, worldwidescience
+              debpkghome, debvcsbrowse, scroogle, scirus,
+	      scitopia, worldwidescience
         plus various tweaks/bugfixes/features.
 
-Moritz Muehlenhoff <jmm@informatik.uni-bremen.de>
+Moritz Muehlenhoff <jmm@inutil.org>
         elvi: debsec, ebay, leodict, wikipedia, sharereactor,
               pgpkeys, happypenguin
         plus various patches/maintenance.
@@ -112,6 +112,10 @@ Jameson Rollins <jrollins@finestructure.net>
 
 Jakob <jakob@pipefour.org>
         elvi: pasearch
+
+Kyle Isom <coder@kyleisom.net>
+        elvi: cablesearch, duckduckgo, openports
+
 
 THANKS TO
 
