@@ -178,7 +178,6 @@ comlaw            -- Search Australian Law using Comlaw (www.comlaw.gov.au)
 ctan              -- Search the Comprehensive TeX Archive Network (ctan.org)
 currency          -- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
 cve               -- Search for CAN assignments in CVE
-ddg               -- Securely search the web using duckduckgo (www.duckduckgo.com)
 debbugs           -- Search the debian BTS (bugs.debian.org)
 debcontents       -- Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 deblists          -- Search debian mailing lists (lists.debian.org/search.html)
@@ -192,7 +191,7 @@ debwiki           -- Search the Debian Wikis (wiki.debian.org & women.debian.org
 deja              -- Search usenet using Google Groups (groups.google.com)
 discogs           -- Search the Discogs database of music information (www.discogs.com)
 dmoz              -- Search the Open Directory Project web directory (dmoz.org)
-duckduckgo        -- Search the web using Duckduckgo (www.duckduckgo.com)
+duckduckgo        -- Securely search the web using duckduckgo (www.duckduckgo.com)
 ebay              -- Search the Ebay auction site
 etym              -- Look up word origins at www.etymonline.com
 excite            -- Search on Excite (www.excite.com)
