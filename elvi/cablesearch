@@ -1,0 +1,41 @@
+#!/bin/sh
+# elvis: openports      -- search openports for OpenBSD packages
+# coder@kyleisom.net 20110105
+. surfraw || exit 1
+
+w3_config_hook () {
+    # for when I figured out how to parse json in surfraw...
+    def     SURFRAW_cablesearch_api     "http://cablesearch.org/cable/api/search"
+    def     SURFRAW_cablesearch         "http://cablesearch.org/"
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+    Search leaked diplomatic cables.
+Local options:
+  If you can read this, it means your hard drive has already been wiped and 
+  the NSA alerted to your conniving schemes.
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    #-m|-mai*)           setopt  SURFRAW_openports_stype     "maintainer"    ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+escaped_args=`w3_url_of_arg $w3_args`
+
+url="${SURFRAW_cablesearch}?q=${escaped_args}"    
+w3_browse_url $url

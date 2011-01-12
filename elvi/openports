@@ -1,0 +1,58 @@
+#!/bin/sh
+# elvis: openports      -- search openports for OpenBSD packages
+# coder@kyleisom.net 20110105
+. surfraw || exit 1
+
+w3_config_hook () {
+    def     SURFRAW_openports_search    "http://openports.se/search.php?"
+    def     SURFRAW_openports_stype     ""
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+    Search openports for OpenBSD packages / ports. Only one search is active
+    at a time. Feel free to n00b it up and use more than one flag. Go ahead,
+    just try.
+Local options:
+  -m,-maintainer                search by maintainer
+  -c,-comment                   search by comment
+  -b,-builddeps                 search by build dependencies
+  -r,-rundeps                   search by run dependencies
+  -s,-mastersite                search by master site
+  -d,-description               search by description
+  -l,-commitlogs                search by commit logs
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -m|-mai*)           setopt  SURFRAW_openports_stype     "maintainer"    ;;
+    -c|-comme*)         setopt  SURFRAW_openports_stype     "comment"       ;;
+    -b|-bu*)            setopt  SURFRAW_openports_stype     "dependbuild"   ;;
+    -r|-ru*)            setopt  SURFRAW_openports_stype     "dependrun"     ;;
+    -s|-mas*)           setopt  SURFRAW_openports_stype     "MASTER_SITES"  ;;
+    -d|-de*)            setopt  SURFRAW_openports_stype     "description"   ;;
+    -l|-commi*)         setopt  SURFRAW_openports_stype     "commitlog"     ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+escaped_args=`w3_url_of_arg $w3_args`
+
+if test -z $SURFRAW_openports_stype ; then
+    url="${SURFRAW_openports_search}so=${escaped_args}"
+else
+    url="${SURFRAW_openports_search}stype=${SURFRAW_openports_stype}&so=${escaped_args}"
+fi
+    
+w3_browse_url $url

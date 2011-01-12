@@ -168,6 +168,7 @@ bbcnews           -- Search BBC News (news.bbc.co.uk)
 bing              -- Search the web using Microsoft's Bing (www.bing.com)
 bookfinder        -- Search for books using www.bookfinder.com
 bugmenot          -- Bypass compulsory web registration with bugmenot.com
+cablesearch       -- Search leaked diplomatic cables.
 cia               -- Search CIA documents at www.cia.gov
 cite              -- Search computer science papers (citeseerx.ist.psu.edu)
 cliki             -- Search the common lisp wiki
@@ -177,6 +178,7 @@ comlaw            -- Search Australian Law using Comlaw (www.comlaw.gov.au)
 ctan              -- Search the Comprehensive TeX Archive Network (ctan.org)
 currency          -- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
 cve               -- Search for CAN assignments in CVE
+ddg               -- Securely search the web using duckduckgo (www.duckduckgo.com)
 debbugs           -- Search the debian BTS (bugs.debian.org)
 debcontents       -- Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 deblists          -- Search debian mailing lists (lists.debian.org/search.html)
@@ -222,6 +224,7 @@ musicbrainz       -- Search MusicBrainz (musicbrainz.org)
 netbsd            -- Search NetBSD related information (www.netbsd.org)
 ntrs              -- Search the NASA Technical Report Server
 openbsd           -- Search OpenBSD related information (www.openbsd.org)
+openports         -- Search for OpenBSD ports (www.openports.se)
 opensearch        -- Search an OpenSearch-enabled website
 pgpkeys           -- Search the PGP key database
 pasearch          -- Search the unofficial Penny Arcade archives (pipefour.org/pa)

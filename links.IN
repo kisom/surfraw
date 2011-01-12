@@ -12,6 +12,7 @@ elvi.1sr.gz @mandir@/man1/bing.1sr.gz
 elvi.1sr.gz @mandir@/man1/bbcnews.1sr.gz
 elvi.1sr.gz @mandir@/man1/bookfinder.1sr.gz
 elvi.1sr.gz @mandir@/man1/bugmenot.1sr.gz
+elvi.1sr.bz @mandir@/man1/cablesearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/cite.1sr.gz
 elvi.1sr.gz @mandir@/man1/cia.1sr.gz
 elvi.1sr.gz @mandir@/man1/cliki.1sr.gz
@@ -21,6 +22,7 @@ elvi.1sr.gz @mandir@/man1/comlaw.1sr.gz
 elvi.1sr.gz @mandir@/man1/ctan.1sr.gz
 elvi.1sr.gz @mandir@/man1/currency.1sr.gz
 elvi.1sr.gz @mandir@/man1/cve.1sr.gz
+elvi.1sr.gz @mandir@/man1/ddg.1sr.gz
 elvi.1sr.gz @mandir@/man1/debbugs.1sr.gz
 elvi.1sr.gz @mandir@/man1/debcontents.1sr.gz
 elvi.1sr.gz @mandir@/man1/deblists.1sr.gz
@@ -66,6 +68,7 @@ elvi.1sr.gz @mandir@/man1/musicbrainz.1sr.gz
 elvi.1sr.gz @mandir@/man1/netbsd.1sr.gz
 elvi.1sr.gz @mandir@/man1/ntrs.1sr.gz
 elvi.1sr.gz @mandir@/man1/openbsd.1sr.gz
+elvi.1sr.gz @mandir@/man1/openports.1sr.gz
 elvi.1sr.gz @mandir@/man1/pasearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/piratebay.1sr.gz
 elvi.1sr.gz @mandir@/man1/pgpkeys.1sr.gz
