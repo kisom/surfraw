@@ -15,20 +15,10 @@ Usage: $w3_argv0 [options] [search words]...
 Description:
     Search leaked diplomatic cables.
 Local options:
-  If you can read this, it means your hard drive has already been wiped and 
+  If you can read this, it means your hard drive has already been wiped and
   the NSA alerted to your conniving schemes.
 EOF
     w3_global_usage
-}
-
-w3_parse_option_hook () {
-    opt="$1"
-    optarg="$2"
-    case "$opt" in
-    #-m|-mai*)           setopt  SURFRAW_openports_stype     "maintainer"    ;;
-    *) return 1 ;;
-    esac
-    return 0
 }
 
 w3_config
@@ -37,5 +27,5 @@ w3_parse_args "$@"
 
 escaped_args=`w3_url_of_arg $w3_args`
 
-url="${SURFRAW_cablesearch}?q=${escaped_args}"    
+url="${SURFRAW_cablesearch}?q=${escaped_args}"
 w3_browse_url $url
