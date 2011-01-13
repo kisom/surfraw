@@ -37,7 +37,7 @@ Architecture: all
 Depends: surfraw, ${misc:Depends}, lynx | www-browser, libwww-opensearch-perl, libwww-perl, libhtml-parser-perl
 Recommends: links | elinks | elinks-lite | w3m | w3m-ssl | lynx-cur
 Suggests: screen
-Conflicts: surfraw (<< 2.1.7)
+Breaks: surfraw (<< 2.1.7)
 Description: extra surfraw search tools with heavy dependencies
  surfraw-extra contains extra website search tools for surfraw that
  have large dependency trees. Currently surfraw-extra only contains:
