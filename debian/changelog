@@ -8,8 +8,9 @@ surfraw (2.2.8-1) unstable; urgency=low
     + Build-Depends: bump debhelper dependency to (>= 7).
     + Standards-Version: 3.9.1.
     + surfraw-extra: convert Conflicts: to Breaks:.
+  * debian/source/format: explicitly specify 1.0 source format.
 
- -- Ian Beckwith <ianb@debian.org>  Thu, 13 Jan 2011 18:37:51 +0000
+ -- Ian Beckwith <ianb@debian.org>  Thu, 13 Jan 2011 18:39:23 +0000
 
 surfraw (2.2.7-1) unstable; urgency=low
 
