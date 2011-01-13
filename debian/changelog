@@ -6,7 +6,7 @@ surfraw (2.2.8-1) unstable; urgency=low
     + use dh_prep instead of dh_clean -k.
   * debian/control:
     + Build-Depends: bump debhelper dependency to (>= 7).
-    + Standards-Version: 3.9.0.
+    + Standards-Version: 3.9.1.
 
  -- Ian Beckwith <ianb@debian.org>  Thu, 13 Jan 2011 18:30:09 +0000
 
