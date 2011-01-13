@@ -166,7 +166,7 @@ sub usage
 		" 2 - Cannot find (matching) OpenSearch link at URL.\n".
 		" 3 - Cannot find required perl modules.\n");
 }
-		
+
 __END__
 
 
@@ -176,7 +176,7 @@ opensearch-discover - Find an OpenSearch link from a given URL.
 
 =head1 SYNOPSIS
 
-B<opensearch-discover> [B<-q>] [B<-v>] S<[B<-t TITLE>]> S<[B<-1>|B<-a>]> <[B<-h>]  [I<URL>]
+B<opensearch-discover> [B<-q>] [B<-v>] S<[B<-t TITLE>]> S<[B<-1>|B<-a>]> [B<-h>]  [I<URL>]
 
 =head1 DESCRIPTION
 
