@@ -19,5 +19,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://www.comlaw.gov.au/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://agsearch.ag.gov.au/clsearch/home?query=${escaped_args}"
+    w3_browse_url "http://www.comlaw.gov.au/Search/${escaped_args}"
 fi
