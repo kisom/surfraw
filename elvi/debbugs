@@ -45,18 +45,19 @@ Local options:
   -search= pkg          |       Search type.
            src          |
            bug          |       (bug number)
-           maint        | 
+           maint        |
            tag          |
            submitter    |
            severity     |
            tag
+  -s                            Alias for -search=src
   -version=VERSION              Package version.
   -dist=oldstable        |      Distribution
         stable           |
         proposed-updates |
         testing          |
         unstable         |
-        experimental     | 
+        experimental     |
         testing-proposed-updates
   -arc                          Show archived bugs.
   -raw                          Do not sort by status or severity.
@@ -96,6 +97,7 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
+	-s)          setopt   SURFRAW_debbugs_search     src    ; setoptyn setsearch 1  ;;
 	-se*=*)      setopt   SURFRAW_debbugs_search     $optarg; setoptyn setsearch 1  ;;
 	-ve*=*)      setopt   SURFRAW_debbugs_version    $optarg ;;
 	-dis*=*)     setopt   SURFRAW_debbugs_dist       $optarg ;;
