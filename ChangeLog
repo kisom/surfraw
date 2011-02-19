@@ -1,4 +1,10 @@
+2011-02-19  Ian Beckwith  <ianb@erislabs.net>
+
+	* lastfm: fix url to avoid a redirect that mangled
+	  args with spaces.
+
 2011-02-09  Kyle Isom <coder@kyleisom.net>
+
         * fix a number of tests to match current site formats
 
 2011-01-12  Kyle Isom  <coder@kyleisom.net>
