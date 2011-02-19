@@ -75,7 +75,6 @@ dist_elvi_SCRIPTS	= \
 		  pasearch \
 		  piratebay \
 		  pgpkeys \
-		  port \
 		  pubmed \
 		  rae \
 		  rfc \
