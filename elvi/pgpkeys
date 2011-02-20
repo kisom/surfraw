@@ -4,7 +4,10 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-def   SURFRAW_pgpkeys_sigs	off
+def   SURFRAW_pgpkeys_sigs		off
+defyn SURFRAW_pgpkeys_fingerprints	off
+defyn SURFRAW_pgpkeys_exact		off
+def   SURFRAW_pgpkeys_server		sks
 }
 
 w3_usage_hook () {
@@ -13,10 +16,22 @@ Usage: $w3_argv0 [options] [search-string]
 Description:
   Search the PGP key database
 Local options:
-  -s                              Displays signatures of the keys
-				  Default: $SURFRAW_pgpkeys_sigs
-				  Environment: SURFRAW_pgpkeys_sigs
-
+  -s                            Displays signatures of the keys
+				Default: $SURFRAW_pgpkeys_sigs
+				Environment: SURFRAW_pgpkeys_sigs
+  -f                            Displays fingerprints of the keys
+				Default: $SURFRAW_pgpkeys_fingerprints
+				Environment: SURFRAW_pgpkeys_fingerprints
+  -e                            Exact matches only
+				Default: $SURFRAW_pgpkeys_exact
+				Environment: SURFRAW_pgpkeys_exact
+  -k=				Keyserver to query. Supported:
+      sks           |           www.sks-keyservers.net (default)
+      gnupg         |           www-keys.gnupg.net
+      pgp           |           www.uk.pgp.net
+      mit           |           pgp.mit.edu
+	                        Default: $SURFRAW_pgpkeys_server
+	                        Environment: SURFRAW_pgpkeys_server
 Examples:
   $w3_argv0 -s rms@gnu.org
 EOF
@@ -27,7 +42,10 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-s*)	setopt	SURFRAW_pgpkeys_sigs on	;;
+	-s*)	setopt	 SURFRAW_pgpkeys_sigs on	  ;;
+	-f*)	setoptyn SURFRAW_pgpkeys_fingerprints on  ;;
+	-e*)	setoptyn SURFRAW_pgpkeys_exact	      on  ;;
+        -k*=*)  setopt   SURFRAW_pgpkeys_server "$optarg" ;;
 	*) return 1 ;;
     esac
     return 0
@@ -36,15 +54,37 @@ w3_parse_option_hook () {
 w3_config
 w3_parse_args "$@"
 
-prefix="http://pgp.mit.edu:11371/pks/lookup?search="
-suffix="&op=index"
+case "$SURFRAW_pgpkeys_server" in
+    mit)
+        base="http://pgp.mit.edu"
+        prefix="http://pgp.mit.edu:11371/pks/lookup?search=" ;;
+    sks)
+        base="http://www.sks-keyservers.net/i/"
+        prefix="http://pool.sks-keyservers.net:11371/pks/lookup?search=" ;;
+    gnupg)
+        base="http://http-keys.gnupg.net"
+        prefix="http://http-keys.gnupg.net/pks/lookup?search=" ;;
+    pgp)
+        base="http://www.uk.pgp.net/pgpnet/wwwkeys.html"
+        prefix="http://wwwkeys.uk.pgp.net:11371/pks/lookup?search=" ;;
+    *) err "Server \"$SURFRAW_pgpkeys_server\" not supported" ;;
+esac
 
+suffix="&op=index"
 if [ $SURFRAW_pgpkeys_sigs = on ]; then
-	suffix="&op=vindex"
+    suffix="&op=vindex"
+fi
+
+if ifyes SURFRAW_pgpkeys_fingerprints ;then
+    suffix="$suffix&fingerprint=on"
+fi
+
+if ifyes SURFRAW_pgpkeys_exact ;then
+    suffix="$suffix&exact=on"
 fi
 
 if null "$w3_args"; then
-    w3_browse_url "http://pgp.mit.edu"
+    w3_browse_url "$base"
 else
     escaped_args=`w3_url_of_arg $w3_args`
     w3_browse_url "${prefix}${escaped_args}${suffix}"

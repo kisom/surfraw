@@ -1,3 +1,8 @@
+2011-02-20  Ian Beckwith  <ianb@erislabs.net>
+
+	* pgpkeys: add more options, support more
+	  keyservers, default to sks-keyservers.net.
+
 2011-02-19  Ian Beckwith  <ianb@erislabs.net>
 
 	* lastfm: fix url to avoid a redirect that mangled

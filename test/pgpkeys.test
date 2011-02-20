@@ -1,2 +1,8 @@
-pgpkeys beckwith
-ianb@erislabs.net
+pgpkeys surfraw
+E7892D44
+pgpkeys -k=gnupg surfraw
+E7892D44
+pgpkeys -k=pgp surfraw
+E7892D44
+pgpkeys -k=mit surfraw
+E7892D44
