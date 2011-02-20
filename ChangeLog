@@ -5,6 +5,7 @@
 	* pgpkeys: add more options, support more
 	  keyservers, default to sks-keyservers.net.
 	* bump version to 2.2.8.
+	* test/Makefile.am: add cablesearch.test.
 
 2011-02-19  Ian Beckwith  <ianb@erislabs.net>
 
