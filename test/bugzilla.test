@@ -1,0 +1,20 @@
+bugzilla ipv6
+bugs found
+bugzilla -s=mozilla ipv6
+bugs found
+bugzilla -s=gnome ipv6
+bugs found
+bugzilla -s=kde ipv6
+bugs found
+bugzilla -s=apache ipv6
+bugs found
+bugzilla -s=freedesktop ipv6
+bugs found
+bugzilla -s=eclipse delete
+bugs found
+bugzilla -s=mandriva ipv6
+bugs found
+bugzilla -s=gentoo ipv6
+bugs found
+bugzilla -s=novell ipv6
+bugs found

@@ -16,6 +16,7 @@ dist_elvi_SCRIPTS	= \
 		  bbcnews \
 		  bookfinder \
 		  bugmenot \
+		  bugzilla \
 		  cablesearch \
 		  cia \
 		  cite \

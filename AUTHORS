@@ -8,8 +8,8 @@ Christian Surchi <csurchi@debian.org>
         elvi: debcontents, debbugs, debpackages
 
 Ian Beckwith <ianb@erislabs.net>
-        elvi: alioth, bbcnews, deblists, freedb, imdb, scpan,
-              port, codesearch, debwiki, lastfm, musicbrainz,
+        elvi: alioth, bbcnews, bugzilla, deblists, freedb, imdb,
+              scpan, codesearch, debwiki, lastfm, musicbrainz,
               opensearch, scholar, ctan, fsfdir, gutenberg, wayback,
               dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc,
               sunonesearch, lsm, finkpkg, rpmsearch, macports,

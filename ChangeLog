@@ -1,5 +1,7 @@
 2011-02-20  Ian Beckwith  <ianb@erislabs.net>
 
+	* New elvi: bugzilla - searches various bugzillas,
+	  defaults to kernel.
 	* pgpkeys: add more options, support more
 	  keyservers, default to sks-keyservers.net.
 

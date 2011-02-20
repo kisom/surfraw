@@ -1,9 +1,9 @@
 EXTRA_DIST = runtests elviwithouttests README COOKIES W.test		\
 	acronym.test ads.test alioth.test amazon.test archpkg.test	\
 	arxiv.test ask.test aur.test austlii.test bbcnews.test		\
-	bing.test bookfinder.test bugmenot.test cia.test cite.test	\
-	cliki.test cnn.test codesearch.test comlaw.test ctan.test	\
-	currency.test cve.test debbugs.test debcontents.test		\
+	bing.test bookfinder.test bugmenot.test bugzilla.test cia.test	\
+	cite.test cliki.test cnn.test codesearch.test comlaw.test	\
+	ctan.test currency.test cve.test debbugs.test debcontents.test	\
 	deblists.test deblogs.test debpackages.test debpkghome.test	\
 	debpts.test debsec.test debvcsbrowse.test debwiki.test		\
 	deja.test discogs.test dmoz.test duckduckgo.test ebay.test	\

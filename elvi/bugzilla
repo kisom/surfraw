@@ -1,0 +1,87 @@
+#!/bin/sh
+# elvis: bugzilla	-- Search for bugs on Bugzilla bugtrackers
+. surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_bugzilla_site     kernel
+    def   SURFRAW_bugzilla_status   open
+    def   SURFRAW_bugzilla_product  all
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search for bugs on Bugzilla bugtrackers
+Local options:
+  -site=URL                     Bugzilla site to search
+                                The site URL can be specified,
+				or the following aliases can be used:
+				  kernel, mozilla, gnome, kde, apache,
+				  freedesktop, eclipse, mandriva,
+				  gentoo, novell
+                                Default: $SURFRAW_bugzilla_site
+                                Environment: SURFRAW_bugzilla_site
+				Examples: bugzilla -s=http://bugs.kde.org ipv6
+				          bugzilla -s=kde ipv6
+  -status=open            |     Bug status
+          closed          |
+	  all
+                                Default: $SURFRAW_bugzilla_status
+                                Environment: SURFRAW_bugzilla_status
+  -product=all            |     Product to search for bugs in.
+           <product name>
+                                Default: $SURFRAW_bugzilla_product
+                                Environment: SURFRAW_bugzilla_product
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -st*=*)     setopt   SURFRAW_bugzilla_status  "$optarg" ;;
+    -s*=*)      setopt   SURFRAW_bugzilla_site    "$optarg" ;;
+    -p*=*)      setopt	 SURFRAW_bugzilla_product "$(w3_url_of_arg "$optarg")" ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+if [ "$SURFRAW_bugzilla_product" = all ] ; then
+    setopt SURFRAW_bugzilla_product ""
+fi
+
+case "$SURFRAW_bugzilla_status" in
+    open)   setopt SURFRAW_bugzilla_status "__open__"    ;;
+    closed) setopt SURFRAW_bugzilla_status "__closed__"  ;;
+    all)    setopt SURFRAW_bugzilla_status "__all__"     ;;
+esac
+
+case "$SURFRAW_bugzilla_site" in
+    kernel)      setopt SURFRAW_bugzilla_site "https://bugzilla.kernel.org"         ;;
+    mozilla)     setopt SURFRAW_bugzilla_site "http://bugzilla.mozilla.org"         ;;
+    gnome)       setopt SURFRAW_bugzilla_site "http://bugzilla.gnome.org"           ;;
+    kde)         setopt SURFRAW_bugzilla_site "http://bugs.kde.org"                 ;;
+    apache)      setopt SURFRAW_bugzilla_site "http://issues.apache.org/bugzilla"   ;;
+    freedesktop) setopt SURFRAW_bugzilla_site "http://bugs.freedesktop.org"         ;;
+    eclipse)     setopt SURFRAW_bugzilla_site "http://bugs.eclipse.org/bugs"        ;;
+#    redhat)      setopt SURFRAW_bugzilla_site "http://bugzilla.redhat.com/bugzilla" ;;
+    mandriva)    setopt SURFRAW_bugzilla_site "http://qa.mandriva.com"              ;;
+    gentoo)      setopt SURFRAW_bugzilla_site "http://bugs.gentoo.org"              ;;
+    novell)      setopt SURFRAW_bugzilla_site "https://bugzilla.novell.com"         ;;
+esac
+
+if test -z "$w3_args"; then
+    w3_browse_url "${SURFRAW_bugzilla_site}/query.cgi?format=advanced"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    params="quicksearch=${escaped_args}&bug_status=${SURFRAW_bugzilla_status}"
+    params="${params}&product=${SURFRAW_bugzilla_product}"
+    w3_browse_url "${SURFRAW_bugzilla_site}/buglist.cgi?${params}"
+fi
