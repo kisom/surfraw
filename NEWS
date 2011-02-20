@@ -15,6 +15,38 @@
 
 				  N E W S
 
+Sun Feb 20 04:45:06 GMT 2011  - surfraw 2.2.8
+
+        * New elvi:
+	  + ads - search the SAO/NASA Astrophysics data system.
+	  + bugzilla - search various bugzillas, defaults to kernel.
+	  + cablesearch - search wikileaks cables
+	  + duckduckgo - replace with better implementation
+	  + openports - search openbsd ports
+	  + pasearch - search Penny Arcade archives.
+	  + scirus, scitopia, worldwidescience - science searches
+	  + yandex - russian web search.
+	* Changed elvi:
+	  + pgpkeys: add more options, support more keyservers,
+	    default to sks-keyservers.net.
+	  + debbugs: add -s as an alias for -search=src.
+	  + wayback: advanced search is broken, rip out all
+	    options and use basic search.
+	  + arxiv: quote queries for exact string matches.
+	  + openbsd: support -misc and -tech.
+	* Fixed elvi: yahoo, lastfm, javasun, w3link.
+	* Removed elvi:
+	  + port: site gone
+	  + cddb: gracenote made the "hard decision" to remove the
+	    website search. sigh.
+	  + altavista: is now just a front-end to yahoo. RIP.
+	  + fast: another yahoo front-end.
+	* Support -local-help, --local-help or -lh to get elvi-specific
+	  help without displaying the global options. This works for
+	  all elvi and the main surfraw script.
+	* Support -h as a synonym for -help.
+	* Improved listing of elvi.
+
 Thu May  6 20:20:09 BST 2010  - surfraw 2.2.7
 
 	* New elvi (surfraw now has over one hundred elvi!):
