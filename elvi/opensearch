@@ -1,5 +1,4 @@
 #!/bin/sh
-# $Id$
 # elvis: opensearch	-- Search an OpenSearch-enabled website
 # ianb@erislabs.net 20060903
 
@@ -13,7 +12,8 @@ def   SURFRAW_opensearch_pageindex      ""
 def   SURFRAW_opensearch_language       "$SURFRAW_lang"
 def   SURFRAW_opensearch_inputencoding  ""
 def   SURFRAW_opensearch_outputencoding ""
-defyn SURFRAW_opensearch_list           0
+defyn SURFRAW_opensearch_list           no
+defyn SURFRAW_opensearch_redirect       no
 }
 
 w3_usage_hook () {
@@ -21,7 +21,11 @@ w3_usage_hook () {
 Usage: $w3_argv0 [options] [url] [search words]...
 Description:
   Surfraw search an OpenSearch-enabled website.
+  If opensearch-discover and opensearch-genquery are installed then
+  it will handle the opensearch lookups locally, otherwise it will fall
+  back on a redirector.
 Local options:
+  -r                            Explicitly use redirector.
   -l                            List OpenSearch searches at url.
   -title=TITLE                  Use search with title matching TITLE.
                                 TITLE is case-insensitive.
@@ -57,6 +61,7 @@ w3_parse_option_hook () {
     -in*=*) setopt   SURFRAW_opensearch_inputencoding  "$optarg" ;;
     -o*=*)  setopt   SURFRAW_opensearch_outputencoding "$optarg" ;;
     -l)     setoptyn SURFRAW_opensearch_list            1        ;;
+    -r)     setoptyn SURFRAW_opensearch_redirect        yes      ;;
 	*) return 1 ;;
     esac
     return 0
@@ -69,10 +74,12 @@ if test -z "$w3_args"; then
 	exit 0
 fi
 
-if ! which opensearch-discover > /dev/null 2>&1; then
-	err opensearch-discover not found
+if  ifno SURFRAW_opensearch_redirect      &&
+    [ ! -x $(which opensearch-discover) ] ||
+    [ ! -x $(which opensearch-genquery) ]
+then
+    setoptyn SURFRAW_opensearch_redirect yes
 fi
-
 
 # Clobbers command line, but we've already parsed it
 set $w3_args
@@ -81,25 +88,48 @@ shift
 w3_args="$*"
 # w3_args now contains a list of arguments
 
-if ifyes SURFRAW_opensearch_list; then
+if ifyes SURFRAW_opensearch_redirect; then
+    if ifyes SURFRAW_opensearch_list; then
+	err "-l not supported with -r"
+    elif test -z "$w3_args"; then
+	w3_browse_url "$siteurl"
+    else
+	escaped_args=`w3_url_of_arg $w3_args`
+
+	if [ -n "$SURFRAW_opensearch_title" ]; then
+	    err "-t not supported with -r"
+	fi
+
+	url="http://erislabs.net/ianb/webtools/opensearch/"
+	url="${url}?site=$(w3_url_of_arg "$siteurl")"
+	url="${url}&searchTerms=${escaped_args}"
+	url="${url}&count=${SURFRAW_opensearch_count}"
+	url="${url}&startIndex=${SURFRAW_opensearch_startindex}"
+	url="${url}&pageIndex=${SURFRAW_opensearch_pageindex}"
+	url="${url}&language=${SURFRAW_opensearch_language}"
+	url="${url}&inputEncoding=${SURFRAW_opensearch_inputencoding}"
+	url="${url}&outputEncoding=${SURFRAW_opensearch_outputencoding}"
+	url="${url}&fmt=html"
+
+	w3_browse_url "$url"
+    fi
+
+else # dont use redirector
+
+    if ifyes SURFRAW_opensearch_list; then
 	opensearch-discover -q -v -a $siteurl
 	case "$?" in
-		0) ;; # OK
-		1) err "Cannot access $siteurl" ;;
-		2) err "Cannot find ${matching}OpenSearch link at $siteurl"  ;;
-		3) err "opensearch-discover: required perl module not found"  ;;
-		*) err "Unknown error from opensearch-discover" ;;
+	    0) ;; # OK
+	    1) err "Cannot access $siteurl" ;;
+	    2) err "Cannot find ${matching}OpenSearch link at $siteurl"  ;;
+	    3) err "opensearch-discover: required perl module not found"  ;;
+	    *) err "Unknown error from opensearch-discover" ;;
 	esac
-	
-elif test -z "$w3_args"; then
+
+    elif test -z "$w3_args"; then
 	w3_browse_url "$siteurl"
-else
-    escaped_args=`w3_url_of_arg $w3_args`
-
-if ! which opensearch-genquery > /dev/null 2>&1; then
-	err opensearch-genquery not found
-fi
-
+    else
+	escaped_args=`w3_url_of_arg $w3_args`
 
 	discover_args="-q"
 	matching="" # for error message below
@@ -107,7 +137,7 @@ fi
 		discover_args="-q -t $SURFRAW_opensearch_title"
 		matching="matching "
 	fi
-	
+
 	opensearchurl=`opensearch-discover $discover_args $siteurl`
 
 	case "$?" in
@@ -145,7 +175,7 @@ fi
 	fi
 
 	query=`opensearch-genquery $queryargs $opensearchurl $w3_args`
-	
+
 	case "$?" in
 		0) ;; # OK
 		1) err "Cannot access OpenSearch description $opensearchurl" ;;
@@ -157,4 +187,5 @@ fi
 
 	w3_browse_url "$query"
 
+    fi
 fi

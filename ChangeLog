@@ -1,3 +1,11 @@
+2011-03-03  Ian Beckwith  <ianb@erislabs.net>
+
+	* opensearch: new option -r, uses redirector at
+	  http://erislabs.net/ianb/webtools/opensearch/
+	  instead of calling opensearch-discover and
+	  opensearch-genquery. -r is selected automatically
+	  if those tools are not installed.
+
 2011-02-20  Ian Beckwith  <ianb@erislabs.net>
 
 	* New elvi: bugzilla - searches various bugzillas,
