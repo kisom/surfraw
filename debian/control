@@ -12,7 +12,8 @@ Homepage: http://surfraw.alioth.debian.org
 Package: surfraw
 Architecture: all
 Depends: ${misc:Depends}, lynx | www-browser
-Recommends: surfraw-extra, links | elinks | elinks-lite | w3m, curl | wget | libwww-perl
+Recommends: surfraw-extra (>> 2.2.7-1), links | elinks | elinks-lite | w3m, curl | wget | libwww-perl
+Breaks: surfraw-extra (<= 2.2.7-1)
 Suggests: screen
 Description: a fast unix command line interface to WWW
  Surfraw - Shell Users' Revolutionary Front Rage Against the World Wide Web
@@ -40,9 +41,11 @@ Suggests: screen
 Breaks: surfraw (<< 2.1.7)
 Description: extra surfraw search tools with heavy dependencies
  surfraw-extra contains extra website search tools for surfraw that
- have large dependency trees. Currently surfraw-extra only contains:
+ have large dependency trees. Currently surfraw-extra only contains
+ support tools for the opensearch elvi:
  .
- opensearch -- Search an OpenSearch-enabled website
+ opensearch-discover - find an opensearch link from a URL.
+ opensearch-genquery - construct a search URL from an opensearch description
  .
  Surfraw - Shell Users' Revolutionary Front Rage Against the World Wide Web
  .

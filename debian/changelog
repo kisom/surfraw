@@ -1,6 +1,9 @@
 surfraw (2.2.8-1) unstable; urgency=low
 
   * New upstream version.
+  * Move opensearch elvi to main surfraw package.
+    It now has an optional mode that uses a redirector
+    if the dependencies are not installed.
   * debian/rules:
     + hardcode AWK as awk (Closes: #608967).
     + use dh_prep instead of dh_clean -k.
@@ -8,9 +11,13 @@ surfraw (2.2.8-1) unstable; urgency=low
     + Build-Depends: bump debhelper dependency to (>= 7).
     + Standards-Version: 3.9.1.
     + surfraw-extra: convert Conflicts: to Breaks:.
+    + surfraw:
+      * Breaks: surfraw-extra (<= 2.2.7-1)
+        as we have taken over /usr/lib/surfraw/opensearch.
+      * Recommends: surfraw-extra: add version of (>> 2.2.7-1).
   * debian/source/format: explicitly specify 1.0 source format.
 
- -- Ian Beckwith <ianb@debian.org>  Thu, 13 Jan 2011 18:39:23 +0000
+ -- Ian Beckwith <ianb@debian.org>  Thu, 03 Mar 2011 02:24:44 +0000
 
 surfraw (2.2.7-1) unstable; urgency=low
 
