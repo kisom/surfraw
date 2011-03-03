@@ -5,6 +5,14 @@
 	  instead of calling opensearch-discover and
 	  opensearch-genquery. -r is selected automatically
 	  if those tools are not installed.
+	* wikipedia: new options:
+	  + -d, uses a redirector at http://erislabs.net/ianb/webtools/wpdp/
+	    This redirector searches for a page with that name at wikipedia.
+ 	    If not found, it searches deletionpedia, if not found there
+	    it falls back to a normal wikipedia search.
+	  + -f=w|d, -fallback=wikipedia|deletionpedia
+	    Implies -d. If page not found at either wikipedia or deletionpedia,
+            whether to fallback to wikipedia search or deletionpedia search.
 
 2011-02-20  Ian Beckwith  <ianb@erislabs.net>
 

@@ -8,6 +8,8 @@ w3_config_hook () {
 def   SURFRAW_wikipedia_language	"$SURFRAW_lang"
 # default to off until we know the ssl site is going to stick around
 defyn SURFRAW_wikipedia_ssl		no
+defyn SURFRAW_wikipedia_deletionpedia   no
+def   SURFRAW_wikipedia_fallback        wikipedia
 }
 
 w3_usage_hook () {
@@ -21,6 +23,10 @@ Local options:
   -language=ISOCODE | -l=ISOCODE  Two letter language code (resembles ISO country codes)
 				  Default: en
 				  Environment: SURFRAW_wikipedia_language, SURFRAW_lang
+  -d                              If page doesn't exist, also search Deletionpedia
+  -f=w|d, -fallback=              If page not found in wikipedia OR deletionpedia,
+             wikipedia |          fallback to searching which site
+             deletionpedia        Default: wikipedia. Implies -d.
 
 Examples:
   $w3_argv0 -language=de Richard Stallman
@@ -32,9 +38,12 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-language=*)	setopt	SURFRAW_wikipedia_language		$optarg	;;
-	-l=*)	setopt	SURFRAW_wikipedia_language		$optarg	;;
-	-s*)   setoptyn SURFRAW_wikipedia_ssl			yes ;;
+	-language=*)	setopt	SURFRAW_wikipedia_language     	$optarg	;;
+	-l=*)	setopt	 SURFRAW_wikipedia_language		$optarg	;;
+	-s*)    setoptyn SURFRAW_wikipedia_ssl			yes ;;
+	-d)     setoptyn SURFRAW_wikipedia_deletionpedia        yes ;;
+	-f*=*)  setopt   SURFRAW_wikipedia_fallback             $optarg ; \
+	        setoptyn SURFRAW_wikipedia_deletionpedia        yes ;;
 	*) return 1 ;;
     esac
     return 0
@@ -61,9 +70,28 @@ if null "$w3_args"; then
     fi
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    if ifyes SURFRAW_wikipedia_ssl ; then
-        w3_browse_url "${prefixs}${escaped_args}"
+
+    if ifyes SURFRAW_wikipedia_deletionpedia
+    then
+	if [ "$SURFRAW_wikipedia_language" != "en" ]
+	then
+	    err "Deletionpedia only archives from the english (en) wikipedia, other languages are not supported"
+	fi
+
+	url="http://erislabs.net/ianb/webtools/wpdp/"
+	url="${url}?q=${escaped_args}"
+	case "$SURFRAW_wikipedia_fallback" in
+	    w*)	url="${url}&f=wp" ;;
+	    d*)	url="${url}&f=dp" ;;
+        esac
+	w3_browse_url "$url"
     else
-	w3_browse_url "${prefix}${escaped_args}${suffix}"
+
+    	if ifyes SURFRAW_wikipedia_ssl ; then
+            w3_browse_url "${prefixs}${escaped_args}"
+	else
+	    w3_browse_url "${prefix}${escaped_args}${suffix}"
+	fi
     fi
 fi
+
