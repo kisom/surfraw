@@ -1,10 +1,12 @@
 2011-03-03  Ian Beckwith  <ianb@erislabs.net>
 
 	* opensearch: new option -r, uses redirector at
-	  http://erislabs.net/ianb/webtools/opensearch/
-	  instead of calling opensearch-discover and
-	  opensearch-genquery. -r is selected automatically
-	  if those tools are not installed.
+	  http://erislabs.net/ianb/webtools/opensearch/ instead of calling
+	  opensearch-discover and opensearch-genquery. -r is selected
+	  automatically if those tools are not installed. This enables us
+	  to ship opensearch in the main surfraw package and it still
+	  functions if the dependencies are not installed. See
+	  debian/changelog.
 	* wikipedia: new options:
 	  + -d, uses a redirector at http://erislabs.net/ianb/webtools/wpdp/
 	    This redirector searches for a page with that name at wikipedia.
@@ -13,6 +15,10 @@
 	  + -f=w|d, -fallback=wikipedia|deletionpedia
 	    Implies -d. If page not found at either wikipedia or deletionpedia,
             whether to fallback to wikipedia search or deletionpedia search.
+	* google:
+	  + support video, maps and news.
+	  + new options -i, -v, -m, -n, shortcuts for
+	    -search={images,videos,maps,news}.
 
 2011-02-20  Ian Beckwith  <ianb@erislabs.net>
 

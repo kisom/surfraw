@@ -21,16 +21,23 @@ Local options:
                                 Default: $SURFRAW_google_results
                                 Environment: SURFRAW_google_results
   -search=                      Specialized search on topic
+	  images	|	Images
+	  videos	|	Videos
+	  maps		|	Maps
+	  news		|	News
           bsd           |       BSD
           linux         |       Linux
           mac           |       Apple Macintosh
           unclesam      |       U.S. Government
-	  images	|	Images
                                 Environment: SURFRAW_google_search
   -country=			Select regional google site
 				Default is us (google.com)
 	   <ISO 3166 alpha-2 code>
-				Environment: SURFRAW_google_country 
+				Environment: SURFRAW_google_country
+  -i, -images                   Image Search (same as -search=images)
+  -v, -videos                   Video Search (same as -search=videos)
+  -m, -maps                     Map Search (same as -search=maps)
+  -n, -news                     News Search (same as -search-news)
 EOF
     w3_global_usage
 }
@@ -39,10 +46,14 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-    -results=*) setopt   SURFRAW_google_results "$optarg" ;;
-    -search=*)  setopt   SURFRAW_google_search  "$optarg" ;;
+    -r*=*)      setopt   SURFRAW_google_results "$optarg" ;;
+    -s*=*)      setopt   SURFRAW_google_search  "$optarg" ;;
     -l|-lu*)    setoptyn SURFRAW_google_lucky   1         ;;
-    -country=*) setopt	 SURFRAW_google_country "$optarg" ;;
+    -c=*) 	setopt	 SURFRAW_google_country "$optarg" ;;
+    -i*)        setopt   SURFRAW_google_search  images    ;;
+    -v*)        setopt   SURFRAW_google_search  videos    ;;
+    -m*)        setopt   SURFRAW_google_search  maps      ;;
+    -n|-news)   setopt   SURFRAW_google_search  news      ;;
     *) return 1 ;;
     esac
     return 0
@@ -64,14 +75,36 @@ case "$SURFRAW_google_country" in
   *)  domain="$SURFRAW_google_country" ;;
 esac
 
-if test -z "$w3_args"; then
-    w3_browse_url "http://www.google.${domain}/"
+url="http://"
+
+if test -z "$w3_args" ; then
+    case "$SURFRAW_google_search" in
+	i*) url="${url}images" ;;
+	m*) url="${url}maps"   ;;
+	n*) url="${url}news"   ;;
+	v*) url="${url}video"  ;;
+	*)  url="${url}www"    ;;
+    esac
+    url="${url}.google.${domain}"
 else
+    search="$SURFRAW_google_search"
+    case "$SURFRAW_google_search" in
+	v*) url="${url}www"; search="search"; extra="&tbo=p&tbm=vid";;
+	i*) url="${url}images" ; search="images";;
+	m*) url="${url}maps"   ; search=maps    ;;
+	n*) url="${url}news"   ; search=news    ;;
+	*)  url="${url}www"    ;;
+    esac
+
+    url="${url}.google.${domain}/${search}"
     escaped_args=`w3_url_of_arg $w3_args`
-	if [ "$SURFRAW_google_lucky" = 1 ]; then
-		button=`w3_url_escape "I'm Feeling Lucky"`
-		w3_browse_url "http://www.google.${domain}/${SURFRAW_google_search}?q=${escaped_args}&btnI=$button&num=${SURFRAW_google_results}"	
-	else
-		w3_browse_url "http://www.google.${domain}/${SURFRAW_google_search}?q=${escaped_args}&num=${SURFRAW_google_results}"
-	fi
+    url="${url}?q=${escaped_args}&num=${SURFRAW_google_results}"
+    if [ "$SURFRAW_google_lucky" = 1 ]; then
+	button=`w3_url_escape "I'm Feeling Lucky"`
+	url="${url}&btnI=$button"
+    fi
+    url="${url}${extra}"
 fi
+
+w3_browse_url "$url"
+
