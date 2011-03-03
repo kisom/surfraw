@@ -19,6 +19,8 @@
 	  + support video, maps and news.
 	  + new options -i, -v, -m, -n, shortcuts for
 	    -search={images,videos,maps,news}.
+	* debcontents, debpackages: update docs for new arches and
+	  distributions.
 
 2011-02-20  Ian Beckwith  <ianb@erislabs.net>
 

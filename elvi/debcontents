@@ -20,57 +20,69 @@ Local options:
   -a                            Search archived debian releases
   -u                            Search ubuntu packages instead of debian
   -search=                      Type of search
-      files             |       Packages that contain files named like this
-      path              |       Paths ending with the keyword
-      word              |       Packages that contain files or directories
+      files              |      Packages that contain files named like this
+      path               |      Paths ending with the keyword
+      word               |      Packages that contain files or directories
                                 whose names contain the keyword
                                 Default: $SURFRAW_debcontents_search
                                 Environment: SURFRAW_debcontents_search
   -arch=                        Specialized search on architecture
-      i386              |       Intel x86       (debian & ubuntu)
-      powerpc           |       PowerPC         (debian & ubuntu)
-      amd64             |       AMD64           (debian & ubuntu)
-      m68k              |       Motorola 680x0  (debian)
-      alpha             |       Alpha           (debian)
-      sparc             |       SPARC           (debian)
-      arm               |       ARM             (debian)
-      hppa              |       HP PA/RISC      (debian)
-      ia64              |       Intel IA-64     (debian)
-      mips              |       MIPS            (debian)
-      mipsel            |       MIPS (DEC)      (debian)
-      s390              |       IBM S/390       (debian)
-      hurd-i386                 Hurd (i386)     (debian)
+      i386               |      Intel x86        (all)
+      powerpc            |      PowerPC          (all)
+      amd64              |      AMD64            (all)
+      m68k               |      Motorola 680x0   (debian, archive.debian)
+      alpha              |      Alpha            (debian, archive.debian)
+      sparc              |      SPARC            (debian, archive.debian)
+      arm                |      ARM              (debian, archive.debian)
+      hppa               |      HP PA/RISC       (debian, archive.debian)
+      ia64               |      Intel IA-64      (debian, archive.debian)
+      mips               |      MIPS             (debian, archive.debian)
+      mipsel             |      MIPS (DEC)       (debian, archive.debian)
+      s390               |      IBM S/390        (debian, archive.debian)
+      hurd-i386          |      Hurd (i386)      (debian)
+      kfreebsd-amd64     |      kFreeBSD (amd64) (debian)
+      kfreebsd-i386             kFreeBSD (i386)  (debian)
                                 Default: $SURFRAW_debcontents_arch
                                 Environment: SURFRAW_debcontents_arch
   -distro=                      Specific distribution
      Debian:
-       stable           |       Stable
-       testing          |       Testing
-       unstable         |       Unstable
-       oldstable        |       Old Stable
+       stable            |      Stable
+       testing           |      Testing
+       unstable          |      Unstable
+       oldstable         |      Old Stable
      Archived Debian (-a):
-      bo                |       1.3.1
-      hamm              |       2.0
-      slink             |       2.1
-      potato            |       2.2
-      woody             |       3.0
-      sarge             |       3.1
+      bo                 |      1.3.1
+      hamm               |      2.0
+      slink              |      2.1
+      potato             |      2.2
+      woody              |      3.0
+      sarge              |      3.1
+      etch               |      4.0
      Ubuntu (-u):
-       dapper           |       Dapper
-       dapper-updates   |       Dapper Updates
-       dapper-backports |       Dapper Backports
-       hardy            |       Hardy
-       hardy-updates    |       Hardy Updates
-       hardy-backports  |       Hardy Backports
-       intrepid         |       Intrepid
-       intrepid-updates |       Intrepid Updates
-       intrepid-backports|       Intrepid Backports
-       jaunty           |       Jaunty
-       jaunty-updates   |       Jaunty Updates
-       jaunty-backports |       Jaunty Backports
-       karmic           |       Karmic
-       karmic-updates   |       Karmic Updates
-       karmic-backports |       Karmic Backports
+       dapper            |      Dapper
+       dapper-updates    |      Dapper Updates
+       dapper-backports  |      Dapper Backports
+       hardy             |      Hardy
+       hardy-updates     |      Hardy Updates
+       hardy-backports   |      Hardy Backports
+       intrepid          |      Intrepid
+       intrepid-updates  |      Intrepid Updates
+       intrepid-backports|      Intrepid Backports
+       jaunty            |      Jaunty
+       jaunty-updates    |      Jaunty Updates
+       jaunty-backports  |      Jaunty Backports
+       karmic            |      Karmic
+       karmic-updates    |      Karmic Updates
+       karmic-backports  |      Karmic Backports
+       lucid             |      Lucid
+       lucid-updates     |      Lucid Updates
+       lucid-backports   |      Lucid Backports
+       maverick          |      Maverick
+       maverick-updates  |      Maverick Updates
+       maverick-backports|      Maverick Backports
+       natty             |      Natty
+       natty-updates     |      Natty Updates
+       natty-backports   |      Natty Backports
                                 Default: $SURFRAW_debcontents_distro
                                 Environment: SURFRAW_debcontents_distro
 EOF

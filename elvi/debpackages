@@ -50,6 +50,7 @@ Local options:
       potato            |       2.2
       woody             |       3.0
       sarge             |       3.1
+      etch              |       4.0
     Ubuntu (-u):
       any               |       All distributions
       dapper            |
@@ -66,7 +67,16 @@ Local options:
       jaunty-backports  |
       karmic            |
       karmic-updates    |
-      karmic-backports
+      karmic-backports  |
+      lucid             |
+      lucid-updates     |
+      lucid-backports   |
+      maverick          |
+      maverick-updates  |
+      maverick-backports|
+      natty             |
+      natty-updates     |
+      natty-backports
                                 Default: $SURFRAW_debian_distro
                                 Environment: SURFRAW_debian_distro
   -search=                      Field to search
