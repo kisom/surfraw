@@ -1,2 +1,4 @@
 opensearch en.wikipedia.org surfraw
 Julian Assange
+opensearch -r en.wikipedia.org surfraw
+Julian Assange

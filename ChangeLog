@@ -25,6 +25,7 @@
 	  + fix url so it works with redhat & eclipse bugzillas too.
 	  + enable -s=redhat.
 	* ixquick, w3css: fix tests.
+	* opensearch, wikipedia: add redirector tests.
 
 2011-02-20  Ian Beckwith  <ianb@erislabs.net>
 
