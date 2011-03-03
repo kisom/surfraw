@@ -18,3 +18,5 @@ bugzilla -s=gentoo ipv6
 bugs found
 bugzilla -s=novell ipv6
 bugs found
+bugzilla -s=redhat ipv6
+bugs found

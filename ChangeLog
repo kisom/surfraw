@@ -21,6 +21,9 @@
 	    -search={images,videos,maps,news}.
 	* debcontents, debpackages: update docs for new arches and
 	  distributions.
+	* bugzilla:
+	  + fix url so it works with redhat & eclipse bugzillas too.
+	  + enable -s=redhat.
 
 2011-02-20  Ian Beckwith  <ianb@erislabs.net>
 

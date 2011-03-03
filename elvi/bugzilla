@@ -70,8 +70,8 @@ case "$SURFRAW_bugzilla_site" in
     kde)         setopt SURFRAW_bugzilla_site "http://bugs.kde.org"                 ;;
     apache)      setopt SURFRAW_bugzilla_site "http://issues.apache.org/bugzilla"   ;;
     freedesktop) setopt SURFRAW_bugzilla_site "http://bugs.freedesktop.org"         ;;
-    eclipse)     setopt SURFRAW_bugzilla_site "http://bugs.eclipse.org/bugs"        ;;
-#    redhat)      setopt SURFRAW_bugzilla_site "http://bugzilla.redhat.com/bugzilla" ;;
+    eclipse)     setopt SURFRAW_bugzilla_site "https://bugs.eclipse.org/bugs"       ;;
+    redhat)      setopt SURFRAW_bugzilla_site "http://bugzilla.redhat.com/bugzilla" ;;
     mandriva)    setopt SURFRAW_bugzilla_site "http://qa.mandriva.com"              ;;
     gentoo)      setopt SURFRAW_bugzilla_site "http://bugs.gentoo.org"              ;;
     novell)      setopt SURFRAW_bugzilla_site "https://bugzilla.novell.com"         ;;
@@ -81,7 +81,8 @@ if test -z "$w3_args"; then
     w3_browse_url "${SURFRAW_bugzilla_site}/query.cgi?format=advanced"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    params="quicksearch=${escaped_args}&bug_status=${SURFRAW_bugzilla_status}"
+#    params="short_desc_type=allwordssubstr&short_desc=${escaped_args}&bug_status=${SURFRAW_bugzilla_status}"
+    params="content=${escaped_args}&bug_status=${SURFRAW_bugzilla_status}"
     params="${params}&product=${SURFRAW_bugzilla_product}"
     w3_browse_url "${SURFRAW_bugzilla_site}/buglist.cgi?${params}"
 fi
