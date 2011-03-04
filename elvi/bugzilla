@@ -18,8 +18,8 @@ Local options:
                                 The site URL can be specified,
 				or the following aliases can be used:
 				  kernel, mozilla, gnome, kde, apache,
-				  freedesktop, eclipse, mandriva,
-				  gentoo, novell
+				  freedesktop, eclipse, redhat,
+				  mandriva, gentoo, novell
                                 Default: $SURFRAW_bugzilla_site
                                 Environment: SURFRAW_bugzilla_site
 				Examples: bugzilla -s=http://bugs.kde.org ipv6
