@@ -11,7 +11,7 @@ def   SURFRAW_translate_to		"$SURFRAW_lang"
 
 w3_usage_hook () {
     cat <<EOF
-Usage: $w3_argv0 [options] [words-to-translate]...
+Usage: $w3_argv0 [options] [words|URI]...
 Description:
   Surfraw translate human language
 Local options:
@@ -22,27 +22,80 @@ Local options:
   -provider=	                Translation service provider
             babelfish		babelfish.yahoo.com (systrans)
 	    raging		babelfish.yahoo.com/raging (systrans)
+	    google		http://translate.google.com
                                 Default: $SURFRAW_translate_provider
 				Environment: SURFRAW_translate_provider
-Languages:
-  de				German
+Languages (any provider):
+  nl                Dutch
   en				English
-  es				Spanish
   fr				French
-  it				Italian
-  nl                            Dutch
+  de				German
   el                            Greek
+  it				Italian
   ja				Japanese
   ko				Korean
   pt				Portuguese
   ru				Russian
-  zh				Simplified Chinese
-  zt                            Traditional Chinese
-
+  es				Spanish
+Languages (Systrans only):
+  zh                            Chinese (Simplified)
+  zt                            Chinese (Traditional)
+Languages (Google only):
+  auto                          Automatically detect language
+  af                            Afrikaans
+  sq                            Albanian
+  ar                            Arabic
+  hy                            Armenian
+  az                            Azerbaijani
+  eu                            Basque
+  be                            Belarusian
+  bg                            Bulgarian
+  ca                            Catalan
+  zh-CN                         Chinese (Simplified)
+  zh-TW                         Chinese (Traditional)
+  hr                            Croatian
+  cs                            Czech
+  da                            Danish
+  et                            Estonian
+  tl                            Filipino
+  fi                            Finnish
+  gl                            Galician
+  ka                            Georgian
+  ht                            Hatian Creole
+  iw                            Hebrew
+  hi                            Hindi 
+  hu                            Hungarian
+  is                            Icelandic
+  id                            Indonesian
+  ga                            Irish
+  la                            Latin
+  lv                            Latvian
+  lt                            Lithuanian
+  mk                            Macedonian
+  ms                            Malay
+  mt                            Maltese
+  no                            Norwegian
+  fa                            Persian
+  pl                            Polish
+  ro                            Romanian
+  sr                            Serbian
+  sk                            Slovak
+  sl                            Slovenian
+  sw                            Swahili
+  sv                            Swedish
+  th                            Thai
+  tr                            Turkish
+  uk                            Ukrainian
+  ur                            Urdu
+  vi                            Vietnamese
+  cy                            Welsh
+  yi                            Yiddish
 Examples:
   $w3_argv0 			Provider's standard translation page
   $w3_argv0 -provider=raging	Use raging search as a translation provider
   $w3_argv0 -from=fr -to=en la verite vous liberera
+  $w3_argv0 -from=en -to=es http://tashian.com/multibabel
+                                Translate the given Web page
 Bugs:
   Systrans derived providers only support the following translation
   combinations:
@@ -84,25 +137,47 @@ w3_parse_option_hook () {
 w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
-if test -z "$w3_args"
+if [ "$SURFRAW_translate_provider" = "google" ]
 then
-	w3_browse_url "http://babelfish.yahoo.com/"
-else
+    if test -z "$w3_args"
+    then w3_browse_url "http://translate.google.com/"
+    else
         if [ -z "$SURFRAW_translate_to" ];
-	then
-	    SURFRAW_translate_to="en"
-	fi
+        then
+            SURFRAW_translate_to="en"
+        fi
         if [ -z "$SURFRAW_translate_from" ];
-	then
-	    SURFRAW_translate_from="fr"
-	fi
-	escaped_args=`w3_url_of_arg $w3_args`
-	case "$escaped_args" in
-		http*) w3_browse_url "http://babelfish.yahoo.com/translate_url?tt=url&url=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
-		;;
-		*) w3_browse_url "http://babelfish.yahoo.com/translate_txt?doit=done&tt=urltext&intl=1&urltext=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
-        ;;
-    esac
+        then
+            SURFRAW_translate_from="fr"
+        fi
+        escaped_args=`w3_url_of_arg $w3_args`
+        case "$escaped_args" in
+            http*) w3_browse_url "http://translate.google.com/translate?&sl=${SURFRAW_translate_from}&tl=${SURFRAW_translate_to}&u=${escaped_args}"
+            ;;
+            *) w3_browse_url "http://translate.google.com/?&sl=${SURFRAW_translate_from}&tl=${SURFRAW_translate_to}&q=${escaped_args}"
+            ;;
+        esac
+    fi
+else
+    if test -z "$w3_args"
+    then w3_browse_url "http://babelfish.yahoo.com/"
+    else
+        if [ -z "$SURFRAW_translate_to" ];
+        then
+            SURFRAW_translate_to="en"
+        fi
+        if [ -z "$SURFRAW_translate_from" ];
+        then
+            SURFRAW_translate_from="fr"
+        fi
+        escaped_args=`w3_url_of_arg $w3_args`
+        case "$escaped_args" in
+            http*) w3_browse_url "http://babelfish.yahoo.com/translate_url?tt=url&url=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
+            ;;
+            *) w3_browse_url "http://babelfish.yahoo.com/translate_txt?doit=done&tt=urltext&intl=1&urltext=${escaped_args}&lp=${SURFRAW_translate_from}_${SURFRAW_translate_to}"
+            ;;
+        esac
+    fi
 fi
 
 exit $?
