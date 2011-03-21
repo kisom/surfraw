@@ -1,3 +1,8 @@
+2011-03-21  Ian Beckwith  <ianb@erislabs.net>
+
+	* google: Added -safe=default|off|moderate|strict
+	  option for Safe Search.
+
 2011-03-21  Ivy Foster  <joyfulgirl@archlinux.us>
 
 	* Added Google Translate to elvi/translate.
