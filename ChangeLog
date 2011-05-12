@@ -1,3 +1,7 @@
+2011-05-12  Sara Fauzia  <sara@archlinux.us>
+
+	* Fix archpkg URL.
+
 2011-05-12  Ian Beckwith  <ianb@erislabs.net>
 
 	* Added tests for archwiki, deli & stack.
