@@ -4,7 +4,9 @@
 
 2011-05-12  Ian Beckwith  <ianb@erislabs.net>
 
-	* surfraw.IN: if elvi doesn't exist, send usage to stderr not stdout.
+	* surfraw.IN:
+	  + if elvi doesn't exist, send usage to stderr not stdout.
+	  + bookmark names: do exact match not substring match.
 	* Added tests for archwiki, deli & stack.
 	* README:
 	  + added INTEGRATION section on uzbl and pentadactyl.

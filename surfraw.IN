@@ -169,7 +169,7 @@ bookmark_file_search () {
 	file="$2"
 	if [ -r "$file" ]
 	then
-		@AWK@ -v search="$search" '$1 ~ search { print $2; }'  $file | head -n 1
+		@AWK@ -v search="$search" '$1 == search { print $2; }'  $file | head -n 1
 	fi
 }
 
