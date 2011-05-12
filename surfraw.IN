@@ -564,7 +564,7 @@ then
 				w3_browse_url "$bookmark"
 			else
 				echo "`basename $0`: $elvi: No elvis or bookmark with that name"
-				surfraw_usage
+				surfraw_usage >&2
 				exit 1
 			fi
 	   fi

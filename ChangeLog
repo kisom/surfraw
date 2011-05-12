@@ -4,6 +4,7 @@
 
 2011-05-12  Ian Beckwith  <ianb@erislabs.net>
 
+	* surfraw.IN: if elvi doesn't exist, send usage to stderr not stdout.
 	* Added tests for archwiki, deli & stack.
 	* README:
 	  + added INTEGRATION section on uzbl and pentadactyl.
