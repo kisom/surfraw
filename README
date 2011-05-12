@@ -62,7 +62,7 @@ Home Page: http://surfraw.alioth.debian.org
 
   and the quoting is passed on to the search engine.
 
-Adding the elvi to your path
+ADDING THE ELVI TO YOUR PATH
 
   If you are a regular user of surfraw, you will probably get sick
   of typing sr or surfraw each time. You can regain the old
@@ -70,7 +70,7 @@ Adding the elvi to your path
   directory (usually /usr/lib/surfraw or /usr/local/lib/surfraw/) to
   your path, either manually or using surfraw-update-path(1).
 
-Config files
+CONFIG FILES
 
   Surfraw implements the XDG basedir spec
   (http://standards.freedesktop.org/basedir-spec/basedir-spec-0.6.html)
@@ -85,7 +85,7 @@ Config files
 
   In the documentation below, only the default paths will be referred to.
 
-Local elvi
+LOCAL ELVI
 
   Surfraw can use your own private elvi, store them in
   $HOME/.config/surfraw/elvi/.
@@ -97,7 +97,7 @@ Local elvi
   elvi may be useful to others, consider submitting them to
   surfraw-devel@lists.alioth.debian.org.
 
-Bookmarks
+BOOKMARKS
 
   Surfraw now supports bookmarks. To add a bookmark, add it to to the
   global bookmark list in /etc/xdg/surfraw/bookmarks or to your
@@ -115,7 +115,7 @@ Bookmarks
 
   There are some example bookmarks in /etc/xdg/surfraw/bookmarks
 
-Installation
+INSTALLATION
 
   Surfraw is installed with the standard ./configure; make; make install
   procedure. See INSTALL for more details. If you obtained surfraw
@@ -139,14 +139,14 @@ Installation
     list of installed browsers at configure time. elvidir defaults
     to $(libdir)/surfraw (probably /usr/local/lib/surfraw).
 
-Examples
+EXAMPLES
 
          $ surfraw google -results=100 RMS, GNU, which is sinner, which is sin?
          $ sr wikipedia surfraw
          $ sr austlii -method=phrase dog like
          $ /usr/lib/surfraw/rhyme -method=perfect Julian
 
-Options
+OPTIONS
 
   Global options are common to all Surfraw elvi (clients). You can
   get a list of the currently installed elvi by just typing `surfraw -elvi'.
@@ -342,6 +342,18 @@ Copyright:
         SURFRAW_text_browser=w3m
 	SURFRAW_pgpkeys_sigs=on
 
+INTEGRATION
+
+  There is a browser plugin for Pentadactyl (a vimperator fork) at
+  http://code.google.com/p/dactyl/issues/detail?id=320
+  For details, see:
+  http://lists.alioth.debian.org/pipermail/surfraw-devel/2011-April/000916.html
+
+  Code to integrate with uzbl is in
+  examples/uzbl_load_url_from_surfraw
+
+RADICALIZATION
+
   Read HACKING. Surfrawize the soul of your favourite internet wonder.
   Join the Shell Users' Revolutionary Front Against the WWW by
   submitting code. Reclaim heathen lands. Bear witness to the
@@ -357,5 +369,3 @@ Updated by Ian Beckwith
 See NEWS, and ChangeLog for a summary of changes.
      _________________________________________________________________
 
-  $Id$
-     _________________________________________________________________

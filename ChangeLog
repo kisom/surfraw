@@ -5,6 +5,9 @@
 2011-05-12  Ian Beckwith  <ianb@erislabs.net>
 
 	* Added tests for archwiki, deli & stack.
+	* README:
+	  + added INTEGRATION section on uzbl and pentadactyl.
+	  + upcased section headings for clarity.
 
 2011-05-12  Jason Ryan  <jasonwryan@gmail.com>
 
