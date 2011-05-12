@@ -1,0 +1,76 @@
+#!/bin/sh
+# elvis: archwiki	-- Search the Arch Linux Wiki
+# Author: http://jasonwryan.com
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_archwiki_language	"$SURFRAW_lang"
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string]
+Description:
+  Search the Arch Linux Wiki (wiki.archlinux.org)
+
+Local options
+ -language=ISOCODE              Two letter language code (resembles ISO country codes)
+ -l=ISOCODE
+           en           |       Main Arch Wiki site (default)
+           fr           |       French
+           de           |       German
+           he           |       Hebrew
+           pl           |       Polish
+           pt           |       Portugese
+           ro           |       Romanian
+           es           |       Spanish
+           sv           |       Swedish
+           uk           |       Ukranian
+                                Environment: SURFRAW_archwiki_language, SURFRAW_lang
+                                Default: en
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-language=*)	setopt	SURFRAW_archwiki_language	$optarg	;;
+	-l=*)			setopt	SURFRAW_archwiki_language	$optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+w3_config
+w3_parse_args "$@"
+# w3_args now contains list of arguments
+
+case "$SURFRAW_archwiki_language" in
+    en) domain=".org"		;;
+    fr) domain=".fr"		;;
+    de) domain=".de"		;;
+    he) domain=".il"		;;
+    pl) domain=".pl"		;;
+    pt) domain="-br.org"	;;
+    ro) domain=".ro"		;;
+    es) domain=".cl"		;;
+    sv) domain=".sv"		;;
+    uk) domain=".ua"		;;
+     *) domain=".org"		;;
+esac
+
+# handle ssl
+if [ $domain = ".org" -o $domain = ".de" ]; then
+	protocol="https://";
+  else
+	protocol="http://";
+fi
+
+if [ -z "$w3_args" ]; then
+    w3_browse_url "${protocol}wiki.archlinux${domain}/"
+else
+    escaped_args=$(w3_url_of_arg $w3_args)
+    w3_browse_url "${protocol}wiki.archlinux${domain}/index.php?search=${escaped_args}"
+fi

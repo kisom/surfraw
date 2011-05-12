@@ -1,3 +1,14 @@
+2011-05-12  Ian Beckwith  <ianb@erislabs.net>
+
+	* Added tests for archwiki, deli & stack.
+
+2011-05-12  Jason Ryan  <jasonwryan@gmail.com>
+
+	* New elvi:
+	  + archwiki: search the arch wiki.
+	  + deli: search delicious.com.
+	  + stack: search stackoverflow.com and friends.
+
 2011-03-21  Ian Beckwith  <ianb@erislabs.net>
 
 	* google: Added -safe=default|off|moderate|strict

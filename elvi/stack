@@ -1,0 +1,85 @@
+#!/bin/sh
+# elvis: stack		-- Search Stack Overflow
+# Author: jason ryan • http://jasonwryan.com
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_stack_categories  "$SURFRAW_categories"
+def   SURFRAW_stack_unix         0
+def   SURFRAW_stack_results      25
+}
+
+w3_usage_hook () {
+    cat <<EOF
+
+Usage: $w3_argv0 [options] [search-string]
+Description:
+ Search Stack Overflow (http://stackoverflow.com)
+ Combine search terms (tags) with a "+" eg., "bash+script"
+
+Local options:
+ -sort=CATEGORIES
+ -s=CATEGORIES
+          new           |   Most recently asked (default)
+          feat          |   Questions with open bounties
+          vote          |   Questions with most votes
+          active        |   Recently active
+          null          |   No upvoted answers
+          faq           |   Questions with the most links
+                            Default: new
+
+ -u                     |   Search Unix & Linux Exchange
+                            Default: no
+
+ -num=NUMBER            |   Number of results per page
+                            Default: $SURFRAW_stack_results
+
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-sort=*)    setopt   SURFRAW_stack_categories   $optarg ;;
+	-s=*)       setopt   SURFRAW_stack_categories   $optarg ;;
+	-num=*)     setopt   SURFRAW_stack_results      $optarg ;;
+	-u)         setoptyn SURFRAW_stack_unix         1       ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+w3_config
+w3_parse_args "$@"
+# w3_args now contains list of arguments
+case "$SURFRAW_stack_categories" in
+	new)    category="newest"     	;;
+	feat)   category="featured"   	;;
+	vote)   category="votes"      	;;
+	active) category="active"     	;;
+	null)   category="unanswered" 	;;
+	faq)    category="faq"        	;;
+	*)      category="newest"     	;;
+esac
+
+# Check for Unix & Linux Exchange
+if [ "$SURFRAW_stack_unix" = 1 ]; then
+	url="http://unix.stackexchange.com"
+else
+	url="http://stackoverflow.com"
+fi
+
+# No arguments passed
+if [ -z "$w3_args" ]; then
+    w3_browse_url "$url"
+else
+    escaped_args=$(w3_url_of_arg $w3_args)
+	if [ -n "$SURFRAW_stack_categories" ]; then
+	w3_browse_url "${url}/questions/tagged/${escaped_args}?sort=${category}&pagesize=${SURFRAW_stack_results}"
+	else
+	w3_browse_url "${url}/questions/tagged/${escaped_args}"
+	fi
+fi
+

@@ -8,6 +8,7 @@ dist_elvi_SCRIPTS	= \
 		  alioth \
 		  amazon \
 		  archpkg \
+		  archwiki \
 		  arxiv \
 		  ask \
 		  aur \
@@ -38,6 +39,7 @@ dist_elvi_SCRIPTS	= \
 		  debvcsbrowse \
 		  debwiki \
 		  deja \
+		  deli \
 		  discogs \
 		  dmoz \
 		  duckduckgo \
@@ -91,6 +93,7 @@ dist_elvi_SCRIPTS	= \
 		  slinuxdoc \
 		  sourceforge \
 		  springer \
+		  stack \
 		  stockquote \
 		  sunonesearch \
 		  thesaurus \

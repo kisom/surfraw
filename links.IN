@@ -4,6 +4,7 @@ elvi.1sr.gz @mandir@/man1/ads.1sr.gz
 elvi.1sr.gz @mandir@/man1/alioth.1sr.gz
 elvi.1sr.gz @mandir@/man1/amazon.1sr.gz
 elvi.1sr.gz @mandir@/man1/archpkg.1sr.gz
+elvi.1sr.gz @mandir@/man1/archwiki.1sr.gz
 elvi.1sr.gz @mandir@/man1/arxiv.1sr.gz
 elvi.1sr.gz @mandir@/man1/ask.1sr.gz
 elvi.1sr.gz @mandir@/man1/aur.1sr.gz
@@ -34,6 +35,7 @@ elvi.1sr.gz @mandir@/man1/debsec.1sr.gz
 elvi.1sr.gz @mandir@/man1/debvcsbrowse.1sr.gz
 elvi.1sr.gz @mandir@/man1/debwiki.1sr.gz
 elvi.1sr.gz @mandir@/man1/deja.1sr.gz
+elvi.1sr.gz @mandir@/man1/deli.1sr.gz
 elvi.1sr.gz @mandir@/man1/discogs.1sr.gz
 elvi.1sr.gz @mandir@/man1/dmoz.1sr.gz
 elvi.1sr.gz @mandir@/man1/duckduckgo.1sr.gz
@@ -87,6 +89,7 @@ elvi.1sr.gz @mandir@/man1/slashdot.1sr.gz
 elvi.1sr.gz @mandir@/man1/slinuxdoc.1sr.gz
 elvi.1sr.gz @mandir@/man1/sourceforge.1sr.gz
 elvi.1sr.gz @mandir@/man1/springer.1sr.gz
+elvi.1sr.gz @mandir@/man1/stack.1sr.gz
 elvi.1sr.gz @mandir@/man1/stockquote.1sr.gz
 elvi.1sr.gz @mandir@/man1/sunonesearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/thesaurus.1sr.gz

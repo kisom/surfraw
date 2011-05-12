@@ -1,0 +1,62 @@
+#!/bin/sh
+# elvis: deli		-- Search Delicious bookmarks
+# Author: jason ryan • http://jasonwryan.com
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_delicious_results $SURFRAW_results
+def   SURFRAW_delicious_tags $SURFRAW_tags
+def   SURFRAW_delicious_user $SURFRAW_user
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string]
+Description: Search Delicious bookmarks (www.delicious.com)
+
+Local options
+ -tags=TAG  | -t=TAG            Refine your search with tags
+                                [Separate multiple tags with "+"]
+
+ -user=USER | -u=USER           Search a particular user's bookmarks
+
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-tags=*)  setopt	SURFRAW_delicious_tags	$optarg  ;;
+	-t=*)     setopt	SURFRAW_delicious_tags	$optarg  ;;
+	-u=*)     setopt	SURFRAW_delicious_user	$optarg  ;;
+	-user=*)  setopt	SURFRAW_delicious_user	$optarg  ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+w3_config
+w3_parse_args "$@"
+# w3_args now contains list of arguments
+
+# standard topic seach
+if [ -z "$w3_args" ]; then
+	w3_browse_url "http://www.delicious.com/search?p=${SURFRAW_delicious_results}&chk=&context=all&fr=del_icio_us&lc=1"
+else
+	escaped_args=$(w3_url_of_arg $w3_args)
+
+	# search for topic and tag(s) in a user's bookmarks
+	if [ -n "${SURFRAW_delicious_user}" -a "${SURFRAW_delicious_tags}" ]; then
+	w3_browse_url "http://www.delicious.com/search?p=${escaped_args}&chk=&fr=del_icio_us&lc=1&atags=${SURFRAW_delicious_tags}&rtags=&context=userposts%7C${SURFRAW_delicious_user}%7C"
+
+	# search for topic in a user's bookmarks
+	elif [ -n "${SURFRAW_delicious_user}" ]; then
+	w3_browse_url "http://www.delicious.com/search?p=${escaped_args}&chk=&context=userposts%7C${SURFRAW_delicious_user}&fr=del_icio_us&lc=1"
+
+	# search for topic with tag(s)
+	else
+	w3_browse_url "http://www.delicious.com/search?p=${escaped_args}&chk=&fr=del_icio_us&lc=1&atags=${SURFRAW_delicious_tags}&rtags=&context=userposts=all"
+	fi
+fi
