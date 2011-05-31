@@ -1,22 +1,98 @@
 #!/bin/sh
-# elvis: archpkg		-- Search Arch Linux packages (www.archlinux.org)
+# elvis: archpkg		-- Search Arch Linux Packages (www.archlinux.org/packages/)
+# Author: jason ryan • http://jasonwryan.com
+
 . surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_arch_ix           "$SURFRAW_ix"
+def   SURFRAW_arch_repo         "$SURFRAW_repo"
+def   SURFRAW_arch_date         "$SURFRAW_date"
+def   SURFRAW_arch_results       25
+}
 
 w3_usage_hook () {
     cat <<EOF
-Usage: $w3_argv0 [options] [search words]...
-Description:
-  Surfraw search Arch Linux packages (www.archlinux.org)
+Usage: $w3_argv0 [options] [search string]
+Description: Surfraw search Arch Linux packages (www.archlinux.org)
+
+	Local options:
+      -arch=ARCHITECTURES  | -a=ARCHITECTURES
+		any        |   Any (default)
+		i686       |   i686
+		x86_64     |   x86_64
+
+       -repo=REPOSITORIES  | -r=REPOSITORIES
+		comm       |   Community
+		commtest   |   Community-Testing
+		core       |   Core
+		extra      |   Extra
+		multi      |   Multilib
+		multitest  |   Multilib-Testing
+		test       |   Testing
+		               Default: All
+
+	-date=UPDATED  | -d=UPDATED (format: YYYY-MM-DD)
+
+	-num=NUMBER    |  Number of results per page
+	                  Default: $SURFRAW_arch_results
+
 EOF
     w3_global_usage
 }
 
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-a*=*)	setopt   SURFRAW_arch_ix        $optarg ;;
+	-r*=*)	setopt   SURFRAW_arch_repo      $optarg ;;
+	-d*=*)	setopt   SURFRAW_arch_date      $optarg ;;
+	-n*=*)	setopt   SURFRAW_arch_results   $optarg ;;
+	    *)	return 1 ;;
+    esac
+    return 0
+}
+
 w3_config
 w3_parse_args "$@"
-# w3_args now contains a list of arguments
-if test -z "$w3_args"; then
-    w3_browse_url "http://www.archlinux.org"
+
+# selected repository
+case "$SURFRAW_arch_repo" in
+	comm)     repo="Community"         ;;
+	commtest) repo="Community-Testing" ;;
+	core)     repo="Core"              ;;
+	extra)    repo="Extra"             ;;
+	multi)    repo="Multilib"          ;;
+	multitest)repo="Multilib-Testing"  ;;
+	test)     repo="Testing"           ;;
+	*)        repo=""                  ;;
+esac
+
+# no arguments present
+if [ -z "$w3_args" ]; then
+    w3_browse_url "http://www.archlinux.org/packages/"
+
 else
-    escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.archlinux.org/packages/?q=${escaped_args}"
+# if w3_args contains a list of arguments
+escaped_args=$(w3_url_of_arg $w3_args)
+base="http://www.archlinux.org/packages/?sort="
+
+	# repository and architecture
+	if [ -n "$SURFRAW_arch_repo" -a "$SURFRAW_arch_ix" ]; then
+	w3_browse_url "${base}&arch=${SURFRAW_arch_ix}&repo=${repo}&q=${escaped_args}&maintainer=&last_update=${SURFRAW_arch_date}&flagged=&limit=${SURFRAW_arch_results}"
+	
+	# check for repository
+	elif [ -n "$SURFRAW_arch_repo" ]; then
+	w3_browse_url "${base}&repo=${repo}&q=${escaped_args}&maintainer=&last_update=${SURFRAW_arch_date}&flagged=&limit=${SURFRAW_arch_results}"
+
+	# just architecture
+	elif [ -n "$SURFRAW_arch_ix" ]; then
+	w3_browse_url "${base}&arch=${SURFRAW_arch_ix}&q=${escaped_args}&maintainer=&last_update=${SURFRAW_arch_date}&flagged=&limit=${SURFRAW_arch_results}"
+
+	# none of the above...
+	else
+	w3_browse_url "${base}&q=${escaped_args}&maintainer=&last_update=${SURFRAW_arch_date}&flagged=&limit=${SURFRAW_arch_results}"
+	fi
 fi
+
