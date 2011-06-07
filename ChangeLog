@@ -1,3 +1,8 @@
+2011-06-07  Ian Beckwith  <ianb@erislabs.net>
+
+	* Default to surfraw_graphical_remote=no,
+	  as chromium doesn't support "-remote openURL".
+
 2011-05-31  Jason Ryan  <jasonwryan@gmail.com>
 
 	* Add options to archpkg.

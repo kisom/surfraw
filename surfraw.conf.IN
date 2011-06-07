@@ -45,7 +45,7 @@ def   SURFRAW_text_browser_args	none
 def   SURFRAW_graphical_browser_args	none
 
 # use -remote openURL for graphical browser
-defyn   SURFRAW_graphical_remote	yes
+defyn   SURFRAW_graphical_remote	no
 
 # when using the -remote, open a new window?
 defyn   SURFRAW_new_window	no
