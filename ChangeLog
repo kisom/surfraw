@@ -1,3 +1,7 @@
+2011-06-09  Ian Beckwith  <ianb@erislabs.net>
+
+	* fixed tests: debwiki, ntrs, wayback.
+
 2011-06-07  Ian Beckwith  <ianb@erislabs.net>
 
 	* Default to surfraw_graphical_remote=no,
