@@ -1,2 +1,2 @@
-ctan exlive
+ctan -d -i -n exlive
 texlive

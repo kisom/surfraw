@@ -6,7 +6,7 @@
 w3_config_hook () {
 defyn SURFRAW_ctan_name  0
 defyn SURFRAW_ctan_desc  0
-defyn SURFRAW_ctan_doc   0
+defyn SURFRAW_ctan_id    0
 }
 
 w3_usage_hook () {
@@ -17,7 +17,8 @@ Description:
 Local options:
   -name                         Search by filename
   -desc                         Search descriptions (default)
-  -doc                          Search documentation
+  -id                           Search package identifiers
+Options can be combined to search multiple types at once.
 EOF
     w3_global_usage
 }
@@ -26,9 +27,9 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-    -n*)        setoptyn SURFRAW_ctan_name   1       ;;
-    -de*)       setoptyn SURFRAW_ctan_desc   1       ;;
-    -do*)       setoptyn SURFRAW_ctan_doc    1       ;;
+    -n*)    setoptyn SURFRAW_ctan_name   1       ;;
+    -d*)    setoptyn SURFRAW_ctan_desc   1       ;;
+    -i*)    setoptyn SURFRAW_ctan_id     1       ;;
 	*) return 1 ;;
     esac
     return 0
@@ -43,20 +44,23 @@ else
     escaped_args=`w3_url_of_arg $w3_args`
 	if ifno SURFRAW_ctan_name &&
 	   ifno SURFRAW_ctan_desc  &&
-	   ifno SURFRAW_ctan_doc
+	   ifno SURFRAW_ctan_id
 	then
 		SURFRAW_ctan_desc=1
 	fi
 
-	url="http://www.ctan.org/cgi-bin/"
+	url="http://www.ctan.org/search/?search=${escaped_args}"
 	if ifyes SURFRAW_ctan_name
 	then
-		url="${url}filenameSearch.py?filename=${escaped_args}"
-	elif ifyes SURFRAW_ctan_desc
+		url="${url}&search_type=filename"
+	fi
+	if ifyes SURFRAW_ctan_desc
 	then
-		url="${url}search.py?metadataSearch=${escaped_args}"
-	else # must be SURFRAW_ctan_doc
-		url="${url}searchFullText.py?fullTextSearch=${escaped_args}"
+		url="${url}&search_type=description"
+	fi
+	if ifyes SURFRAW_ctan_id
+	then
+		url="${url}&search_type=id"
 	fi
 
 	w3_browse_url "$url"

@@ -1,3 +1,10 @@
+2011-06-10  Ian Beckwith  <ianb@erislabs.net>
+
+	* Fixed ctan.
+	  Option -doc has been replaced by -id.
+	  Options are no longer mutually exclusive,
+	  you can now do (eg) ctan -d -i -n exlive.
+
 2011-06-09  Ian Beckwith  <ianb@erislabs.net>
 
 	* fixed tests: debwiki, ntrs, wayback.
