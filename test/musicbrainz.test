@@ -1,2 +1,7 @@
 musicbrainz swans
 US art rock
+musicbrainz -search=mbid b3468ed3-ebae-475b-932e-5578336ce72b
+My Father Will Guide Me
+musicbrainz -tagrelease=soundtracks swans
+Blind
+

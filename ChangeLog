@@ -1,3 +1,8 @@
+2011-06-14  Ian Beckwith  <ianb@erislabs.net>
+
+	* musicbrainz: update to current URLs and options, add more
+	  tests.
+
 2011-06-13  Ian Beckwith  <ianb@erislabs.net>
 
 	* w3link: fixed URLs.
