@@ -60,6 +60,7 @@ Tue Jun 14 05:02:11 BST 2011  - surfraw 2.2.8
 	  + cddb: gracenote made the "hard decision" to remove the
 	    website search. sigh.
 	  + fast: another yahoo front-end.
+	  + filesearching: refuses to work without 'Referer:' header.
 	  + port: site gone
 	* Support -local-help, --local-help or -lh to get elvi-specific
 	  help without displaying the global options. This works for

@@ -47,7 +47,6 @@ dist_elvi_SCRIPTS	= \
 		  etym \
 		  excite \
 		  foldoc \
-		  filesearching \
 		  finkpkg \
 		  freebsd \
 		  freedb \
