@@ -12,6 +12,7 @@
 	  to work. There is no browser-portable way to specify a
 	  'Refer[r]er:' header, plus we should probably take it as a hint.
 	* Tweaked debian packaging.
+	* Updated NEWS.
 
 2011-06-13  Ian Beckwith  <ianb@erislabs.net>
 

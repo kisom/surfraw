@@ -34,13 +34,15 @@ Tue Jun 14 05:02:11 BST 2011  - surfraw 2.2.8
 	  + arxiv: quote queries for exact string matches.
 	  + ctan: Option -doc replaced by -id. Options no longer mutually
 	    exclusive.
+	  + codesearch, musicbrainz, rpmsearch: rewritten to match new
+	    site. Options have changed to match site, see help message.
 	  + debbugs: add -s as an alias for -search=src.
 	  + google: new options:
-	    * Safe Search: -safe=default|off|moderate|strict
-	    * -v, -search=video: search Video
-	    * -m, -search=maps: search Maps
-	    * -n, -search=news: search News
+	    * -v, -search=video: search video
+	    * -m, -search=maps: search maps
+	    * -n, -search=news: search news
 	    * -i: new shortcut for -search=images
+	    * -safe=default|off|moderate|strict: safe search
 	  + openbsd: support -misc and -tech.
 	  + opensearch: new option -r, uses remote redirector
 	    which means it can run without heavy dependencies.
