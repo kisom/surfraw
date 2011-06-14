@@ -15,37 +15,61 @@
 
 				  N E W S
 
-Sun Feb 20 04:45:06 GMT 2011  - surfraw 2.2.8
+Tue Jun 14 05:02:11 BST 2011  - surfraw 2.2.8
 
         * New elvi:
 	  + ads - search the SAO/NASA Astrophysics data system.
+	  + archwiki: search the arch wiki.
 	  + bugzilla - search various bugzillas, defaults to kernel.
 	  + cablesearch - search wikileaks cables
+	  + deli: search delicious.com.
 	  + duckduckgo - replace with better implementation
 	  + openports - search openbsd ports
 	  + pasearch - search Penny Arcade archives.
 	  + scirus, scitopia, worldwidescience - science searches
+	  + stack: search stackoverflow.com and friends.
 	  + yandex - russian web search.
 	* Changed elvi:
+	  + archpkg: now supports options.
+	  + arxiv: quote queries for exact string matches.
+	  + ctan: Option -doc replaced by -id. Options no longer mutually
+	    exclusive.
+	  + debbugs: add -s as an alias for -search=src.
+	  + google: new options:
+	    * Safe Search: -safe=default|off|moderate|strict
+	    * -v, -search=video: search Video
+	    * -m, -search=maps: search Maps
+	    * -n, -search=news: search News
+	    * -i: new shortcut for -search=images
+	  + openbsd: support -misc and -tech.
+	  + opensearch: new option -r, uses remote redirector
+	    which means it can run without heavy dependencies.
 	  + pgpkeys: add more options, support more keyservers,
 	    default to sks-keyservers.net.
-	  + debbugs: add -s as an alias for -search=src.
+	  + translate: added Google Translate support.
 	  + wayback: advanced search is broken, rip out all
 	    options and use basic search.
-	  + arxiv: quote queries for exact string matches.
-	  + openbsd: support -misc and -tech.
-	* Fixed elvi: yahoo, lastfm, javasun, w3link.
+	  + wikipedia: new option -d, uses remote redirector
+	    to search both wikipedia and deletionpedia.
+	    use -fallback=wikipedia|deletionpedia to customise
+	    behaviour.
+	* Fixed elvi: archpkg, codesearch, ctan, javasun,
+	  lastfm, musicbrainz, rpmsearch, w3link, yahoo.
 	* Removed elvi:
-	  + port: site gone
+	  + altavista: is now just a front-end to yahoo. RIP.
 	  + cddb: gracenote made the "hard decision" to remove the
 	    website search. sigh.
-	  + altavista: is now just a front-end to yahoo. RIP.
 	  + fast: another yahoo front-end.
+	  + port: site gone
 	* Support -local-help, --local-help or -lh to get elvi-specific
 	  help without displaying the global options. This works for
 	  all elvi and the main surfraw script.
 	* Support -h as a synonym for -help.
 	* Improved listing of elvi.
+	* Default to surfraw_graphical_remote=no,
+	  as chromium doesn't support "-remote openURL".
+	* Bookmark names are now an exact match not a substring match.
+	* README: added INTEGRATION section on uzbl and pentadactyl.
 
 Thu May  6 20:20:09 BST 2010  - surfraw 2.2.7
 
