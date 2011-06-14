@@ -1,11 +1,11 @@
 2011-06-14  Ian Beckwith  <ianb@erislabs.net>
 
-	* musicbrainz: update to current URLs and options, add more
-	  tests.
-	* codesearch: fixed URLs and options.
-	  Has gone all ajaxy, so I've implemented the options
+	* musicbrainz, codesearch, rpmsearch: Fixed URLs, options and
+	  tests. The sites have all changed significantly which means
+	  both new options and no-longer-supported options.
+	  codesearch has gone all ajaxy, so I've implemented the options
 	  via the search string, e.g. adding " package:foo".
-	  Disabled the test, as it needs javascript.
+	  Disabled codesearch.test, as it now needs javascript.
 
 2011-06-13  Ian Beckwith  <ianb@erislabs.net>
 
