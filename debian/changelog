@@ -1,6 +1,8 @@
 surfraw (2.2.8-1) unstable; urgency=low
 
-  * New upstream version.
+  * New upstream version
+    + SURFRAW_graphical_remote defaults to off, as chromium
+      doesn't support '-remote openURL()' (Closes: #628683).
   * Move opensearch elvi to main surfraw package.
     It now has an optional mode that uses a redirector
     if the dependencies are not installed.
@@ -18,7 +20,7 @@ surfraw (2.2.8-1) unstable; urgency=low
       * Tweak Description.
   * debian/source/format: explicitly specify 1.0 source format.
 
- -- Ian Beckwith <ianb@debian.org>  Tue, 14 Jun 2011 04:26:33 +0100
+ -- Ian Beckwith <ianb@debian.org>  Tue, 14 Jun 2011 04:36:38 +0100
 
 surfraw (2.2.7-1) unstable; urgency=low
 
