@@ -1,6 +1,5 @@
 #!/bin/sh
-# $Id$
-# elvis: codesearch	-- Search source code using Google Code Search (www.google.com/codesearch)
+# elvis: codesearch	-- Search source code using Google Code Search (www.google.fr/codesearch)
 . surfraw || exit 1
 
 w3_config_hook () {
@@ -8,7 +7,8 @@ def   SURFRAW_codesearch_lang         any
 def   SURFRAW_codesearch_package      ""
 def   SURFRAW_codesearch_files        ""
 def   SURFRAW_codesearch_license      any
-defyn SURFRAW_codesearch_onlylicense  1
+def   SURFRAW_codesearch_class        ""
+def   SURFRAW_codesearch_function     ""
 defyn SURFRAW_codesearch_case         0
 }
 
@@ -16,29 +16,32 @@ w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words or regular expressions]...
 Description:
-  Surfraw search source code using Google Code Search (www.google.com/codesearch)
+  Surfraw search source code using Google Code Search (www.google.fr/codesearch)
 Local options:
   -lang=LANG                    Limit search to programming language LANG
                                 Options:
-                                any (default),, ada, asp, assembly,
-                                basic c, cplusplus, csharp, eiffel,
-                                erlang, fortran, java javascript, jsp,
-                                lex, limbo, lisp, lua, makefile,
-                                mathematica, matlab, objectivec perl,
-                                php, postscript, python, ruby, scheme
-                                shell, smalltalk, sql, tcl, troff,
-                                yacc
-
+                                 any (default), actionscript, ada applescript,
+                                 asp, assembly, autoconf automake, awk, basic,
+                                 bat, c, c++, c#, caja, cobol, coldfusion,
+                                 configure, css, d, eiffel, erlang, fortran, go,
+                                 haskell, inform, java, javascript, jsp, lex,
+                                 limbo, lisp, lolcode, lua, m4, makefile, maple,
+                                 mathematica, matlab, messagecatalog, modula2,
+                                 modula3, objectivec, ocaml, pascal, perl, php,
+                                 pod, prolog, proto, python, r, rebol, ruby,
+                                 sas, scheme, scilab, shell, sgml, smalltalk,
+                                 sql, sml, svg, swig, tcl, tex, texinfo, troff,
+                                 verilog, vhdl, vim, xslt, xul, yacc
   -package=REGEXP               Find code in packages matching REGEXP
   -files=REGEXP                 Find code in files matching REGEXP
   -license=LICENSE              Find code with the specified license
 				Options:
-                                any (default), aladdin, artistic,
-                                apache, apple, bsd, cpl, gpl, lgpl,
-                                disclaimer, ibm, lucent, mit, mozilla,
-                                nasa, python, qpl, sleepycat, zope
-  -excludelicense               Change license match to match any license BUT 
-                                the license specified with -license.
+                                 any (default),aladdin, artistic, apache, apple,
+                                 bsd, cpl, epl, agpl, gpl, lgpl, disclaimer,
+                                 ibm, lucent, mit, mozilla, nasa, python, qpl,
+                                 sleepycat, zope
+  -class=CLASS                  Find code in a class matching CLASS
+  -function=FUNC 		Find code in a function matching FUNC
   -case                         Case Sensitive matching
 EOF
     w3_global_usage
@@ -50,20 +53,28 @@ w3_parse_option_hook () {
     case "$opt" in
     -pack*=*)  setopt   SURFRAW_codesearch_package       $optarg ;;
     -fi*=*)    setopt   SURFRAW_codesearch_files         $optarg ;;
-    -excl*)    setoptyn SURFRAW_codesearch_onlylicense   0       ;;
     -ca*)      setoptyn SURFRAW_codesearch_case          1       ;;
     -lan*=*)   setopt   SURFRAW_codesearch_lang          $optarg ;;
     -li*=*)    setopt   SURFRAW_codesearch_license       $optarg ;;
+    -cl*=*)    setopt   SURFRAW_codesearch_class         $optarg ;;
+    -fu*=*)    setopt   SURFRAW_codesearch_function      $optarg ;;
     *) return 1 ;;
     esac
     return 0
+}
+
+add_if_set()
+{
+    if test -n "$1"; then
+	echo "+$2:$1"
+    fi
 }
 
 w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-    w3_browse_url "http://www.google.com/codesearch"
+    w3_browse_url "http://www.google.fr/codesearch"
 else
     escaped_args=`w3_url_of_arg $w3_args`
     case "$SURFRAW_codesearch_lang" in
@@ -74,22 +85,21 @@ else
 
     if [ "$SURFRAW_codesearch_license" = "any" ]; then
 	setopt SURFRAW_codesearch_license ""
-    fi
-    
-    url="http://www.google.com/codesearch?as_q=${escaped_args}&as_lang=${SURFRAW_codesearch_lang}"
-    if ifyes SURFRAW_codesearch_onlylicense; then
-        url="$url&as_license_restrict=i"
     else
-        url="$url&as_license_restrict=e"
+	setopt SURFRAW_codesearch_license "^${SURFRAW_codesearch_license}\$"
     fi
-    url="$url&as_license=${SURFRAW_codesearch_license}"
-    url="$url&as_package=${SURFRAW_codesearch_package}"
-    url="$url&as_filename=${SURFRAW_codesearch_files}"
+
+    query="${escaped_args}"
+    query="${query}$(add_if_set "$SURFRAW_codesearch_package"   "package")"
+    query="${query}$(add_if_set "$SURFRAW_codesearch_lang"      "lang")"
+    query="${query}$(add_if_set "$SURFRAW_codesearch_file"      "file")"
+    query="${query}$(add_if_set "$SURFRAW_codesearch_class"     "class")"
+    query="${query}$(add_if_set "$SURFRAW_codesearch_function"  "function")"
+    query="${query}$(add_if_set "$SURFRAW_codesearch_license"   "license")"
     if ifyes SURFRAW_codesearch_case; then
-        url="$url&as_case=y"
-    else
-        url="$url&as_case="
+	query="${query} case:yes"
     fi
-        
+
+    url="http://www.google.fr/codesearch#search/&q=${query}&type=cs"
     w3_browse_url "$url"
 fi

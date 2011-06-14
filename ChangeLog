@@ -2,6 +2,10 @@
 
 	* musicbrainz: update to current URLs and options, add more
 	  tests.
+	* codesearch: fixed URLs and options.
+	  Has gone all ajaxy, so I've implemented the options
+	  via the search string, e.g. adding " package:foo".
+	  Disabled the test, as it needs javascript.
 
 2011-06-13  Ian Beckwith  <ianb@erislabs.net>
 
