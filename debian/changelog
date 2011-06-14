@@ -9,15 +9,16 @@ surfraw (2.2.8-1) unstable; urgency=low
     + use dh_prep instead of dh_clean -k.
   * debian/control:
     + Build-Depends: bump debhelper dependency to (>= 7).
-    + Standards-Version: 3.9.1.
+    + Standards-Version: 3.9.2.
     + surfraw-extra: convert Conflicts: to Breaks:.
     + surfraw:
       * Breaks: surfraw-extra (<= 2.2.7-1)
         as we have taken over /usr/lib/surfraw/opensearch.
       * Recommends: surfraw-extra: add version of (>> 2.2.7-1).
+      * Tweak Description.
   * debian/source/format: explicitly specify 1.0 source format.
 
- -- Ian Beckwith <ianb@debian.org>  Thu, 03 Mar 2011 02:24:44 +0000
+ -- Ian Beckwith <ianb@debian.org>  Tue, 14 Jun 2011 04:26:33 +0100
 
 surfraw (2.2.7-1) unstable; urgency=low
 

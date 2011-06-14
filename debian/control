@@ -3,7 +3,7 @@ Section: web
 Priority: optional
 Maintainer: Debian surfraw maintainers <surfraw-devel@lists.alioth.debian.org>
 Uploaders: Christian Surchi <csurchi@debian.org>, Ian Beckwith <ianb@debian.org>
-Standards-Version: 3.9.1
+Standards-Version: 3.9.2
 Build-Depends: debhelper (>= 7)
 Vcs-Git: git://git.debian.org/surfraw/surfraw.git
 Vcs-Browser: http://git.debian.org/?p=surfraw/surfraw.git
@@ -15,7 +15,7 @@ Depends: ${misc:Depends}, lynx | www-browser
 Recommends: surfraw-extra (>> 2.2.7-1), links | elinks | elinks-lite | w3m, curl | wget | libwww-perl
 Breaks: surfraw-extra (<= 2.2.7-1)
 Suggests: screen
-Description: a fast unix command line interface to WWW
+Description: fast unix command line interface to WWW
  Surfraw - Shell Users' Revolutionary Front Rage Against the World Wide Web
  .
  Surfraw provides a fast unix command line interface to a variety of

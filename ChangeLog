@@ -6,6 +6,7 @@
 	  codesearch has gone all ajaxy, so I've implemented the options
 	  via the search string, e.g. adding " package:foo".
 	  Disabled codesearch.test, as it now needs javascript.
+	* Tweak debian packaging.
 
 2011-06-13  Ian Beckwith  <ianb@erislabs.net>
 
