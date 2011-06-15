@@ -1,13 +1,19 @@
 2011-06-15  Ian Beckwith  <ianb@erislabs.net>
 
 	* scitopia, worldwidescience: fixed URLs.
+	* Fixed make portability problems.
+	  We cannot portably combine single suffix rules (foo.IN->foo)
+	  and separated dependencies so we have to explicitly specify
+	  all the .IN rules. The fix we used for this until now was
+	  specific to GNU make.
+	* Removed Makefile.include, no longer used.
 
 2011-06-14  Ian Beckwith  <ianb@erislabs.net>
 
 	* musicbrainz, codesearch, rpmsearch: Fixed URLs, options and
 	  tests. The sites have all changed significantly which means
 	  both new options and no-longer-supported options.
-	  codesearch has gone all ajaxy, so I've implemented the options
+	  Codesearch has gone all ajaxy, so I've implemented the options
 	  via the search string, e.g. adding " package:foo".
 	  Disabled codesearch.test, as it now needs javascript.
 	  Codesearch on both google.com and google.co.uk was acting up,

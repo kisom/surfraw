@@ -3,5 +3,8 @@ EXTRA_DIST     = README uzbl_load_url_from_surfraw.IN
 CLEANFILES     = uzbl_load_url_from_surfraw
 
 uzbl_load_url_from_surfraw: uzbl_load_url_from_surfraw.IN
+	-rm -f $@ $@.tmp
+	sed -e 's,@AWK\@,${AWK},g;' $< >$@.tmp
+	chmod +x $@.tmp
+	mv $@.tmp $@
 
-include $(top_srcdir)/Makefile.include

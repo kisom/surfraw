@@ -72,6 +72,7 @@ Tue Jun 14 05:02:11 BST 2011  - surfraw 2.2.8
 	* Default to surfraw_graphical_remote=no,
 	  as chromium doesn't support "-remote openURL".
 	* Bookmark names are now an exact match not a substring match.
+	* Support BSD/POSIX make.
 	* README: added INTEGRATION section on uzbl and pentadactyl.
 
 Thu May  6 20:20:09 BST 2010  - surfraw 2.2.7

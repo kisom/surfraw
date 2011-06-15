@@ -11,7 +11,7 @@ if OPENSEARCH
 man_MANS += opensearch-discover.1 opensearch-genquery.1
 endif
 EXTRA_DIST	= surfraw.lsm.in surfraw.IN surfraw-update-path.IN\
-                  surfraw.spec.in aclocal.m4 HACKING Makefile.include \
+                  surfraw.spec.in aclocal.m4 HACKING  \
 		  surfraw.1.IN elvi.1sr.IN surfraw.bookmarks links.IN \
 		  surfraw-bash-completion.IN surfraw.conf.IN \
 		  $(devel_extra)
@@ -22,25 +22,60 @@ CLEANFILES = surfraw surfraw-update-path surfraw-update-path.1 surfraw.spec surf
 
 BUILT_SOURCES = surfraw.conf
 
+# we cannot portably combine single suffix rules and separated dependencies
+# so we have to explicitly specify all the .IN rules
+
 surfraw: surfraw.IN
+	-rm -f $@ $@.tmp
+	sed -e 's,@VERSION\@,${VERSION},g; '\
+	    -e 's,@ELVIDIR\@,${ELVIDIR},g; '\
+	    -e 's,@AWK\@,${AWK},g; '\
+	    -e 's,@sysconfdir\@,${sysconfdir},g ' $< >$@.tmp
+	chmod +x $@.tmp
+	mv $@.tmp $@
 
 surfraw.conf: surfraw.conf.IN
+	-rm -f $@ $@.tmp
+	sed -e 's,@prefix\@,${prefix},g; '\
+	    -e 's,@TEXTBROWSER\@,${TEXTBROWSER},g; '\
+	    -e 's,@GRAPHICALBROWSER\@,${GRAPHICALBROWSER},g; ' $< >$@.tmp
+	chmod +x $@.tmp
+	mv $@.tmp $@
 
 surfraw-update-path: surfraw-update-path.IN
+	-rm -f $@ $@.tmp
+	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; ' $< >$@.tmp
+	chmod +x $@.tmp
+	mv $@.tmp $@
 
 surfraw-bash-completion: surfraw-bash-completion.IN
+	-rm -f $@ $@.tmp
+	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; ' $< >$@.tmp
+	chmod +x $@.tmp
+	mv $@.tmp $@
 
 elvi.1sr: elvi.1sr.IN
+	-rm -f $@ $@.tmp
+	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; ' $< >$@.tmp
+	chmod +x $@.tmp
+	mv $@.tmp $@
 
 surfraw.1: surfraw.1.IN
+	-rm -f $@ $@.tmp
+	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; '\
+	    -e 's,@sysconfdir\@,${sysconfdir},g' $< >$@.tmp
+	chmod +x $@.tmp
+	mv $@.tmp $@
+
+links: links.IN
+	-rm -f $@ $@.tmp
+	sed -e 's,@mandir\@,${mandir},g; ' $< >$@.tmp
+	chmod +x $@.tmp
+	mv $@.tmp $@
 
 surfraw-update-path.1 opensearch-discover.1 opensearch-genquery.1: %.1: %
 	-rm -f $@
 	pod2man $< > $@
-
-links: links.IN
-
-include $(top_srcdir)/Makefile.include
 
 install-data-hook: links
 	chmod -x surfraw.conf elvi.1sr surfraw.1
