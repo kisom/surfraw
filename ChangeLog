@@ -1,3 +1,7 @@
+2011-06-15  Ian Beckwith  <ianb@erislabs.net>
+
+	* scitopia, worldwidescience: fixed URLs.
+
 2011-06-14  Ian Beckwith  <ianb@erislabs.net>
 
 	* musicbrainz, codesearch, rpmsearch: Fixed URLs, options and
@@ -6,7 +10,7 @@
 	  codesearch has gone all ajaxy, so I've implemented the options
 	  via the search string, e.g. adding " package:foo".
 	  Disabled codesearch.test, as it now needs javascript.
-	  codesearch on both google.com and google.co.uk was acting up,
+	  Codesearch on both google.com and google.co.uk was acting up,
 	  so I've pointed it at google.fr.
 	* Removed filesearching elvi, it now requires a 'Referer:' header
 	  to work. There is no browser-portable way to specify a
