@@ -7,6 +7,11 @@
 	  all the .IN rules. The solution we used for this until now was
 	  specific to GNU make.
 	* Removed Makefile.include, no longer used.
+	* './configure --enable-opensearch' now only controls
+	  installation of the (direct) dependencies for opensearch,
+	  not opensearch itself, as opensearch now falls back to
+	  using a remote reflector if opensearch-discover(1)
+	  and opensearch-genquery(1) aren't found.
 	* yandex: fix test.
 
 2011-06-14  Ian Beckwith  <ianb@erislabs.net>

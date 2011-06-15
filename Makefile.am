@@ -86,9 +86,6 @@ install-data-hook: links
 	do \
 		ln -sf $$target  $(DESTDIR)/$$link ;\
 	done < links
-if OPENSEARCH
-	ln -sf elvi.1sr.gz $(DESTDIR)/@mandir@/man1/opensearch.1sr.gz
-endif
 if INSTALLSR
 	ln -sf surfraw $(DESTDIR)/@bindir@/sr
 	ln -sf surfraw.1.gz $(DESTDIR)/@mandir@/man1/sr.1.gz
@@ -103,9 +100,6 @@ uninstall-local: links
 	do \
 		rm -f $(DESTDIR)/$$link ;\
 	done < links
-if OPENSEARCH
-	rm -f $(DESTDIR)/@mandir@/man1/opensearch.1sr.gz
-endif
 if INSTALLSR
 	rm -f $(DESTDIR)/@bindir@/sr
 	rm -f $(DESTDIR)/@mandir@/man1/sr.1.gz

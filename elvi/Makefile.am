@@ -74,6 +74,7 @@ dist_elvi_SCRIPTS	= \
 		  ntrs \
 		  openbsd \
 		  openports \
+		  opensearch \
 		  pasearch \
 		  piratebay \
 		  pgpkeys \
@@ -112,10 +113,6 @@ dist_elvi_SCRIPTS	= \
 		  yandex \
 		  youtube \
 		  yubnub
-
-if OPENSEARCH
-dist_elvi_SCRIPTS	+= opensearch
-endif
 
 uninstall-local:
 	-rmdir $(DESTDIR)$(PREFIX)/$(ELVIDIR)

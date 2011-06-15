@@ -11,9 +11,9 @@ AC_CONFIG_SRCDIR([surfraw.IN])
 dnl minimum automake version, not surfraw version
 AM_INIT_AUTOMAKE([1.10])
 
-AC_MSG_CHECKING([whether to enable OpenSearch support])
+AC_MSG_CHECKING([whether to enable local OpenSearch support])
 AC_ARG_ENABLE([opensearch],
-	[AS_HELP_STRING([--disable-opensearch], [disable OpenSearch support])],,
+	[AS_HELP_STRING([--disable-opensearch], [disable local OpenSearch support])],,
 	[enable_opensearch=yes])
 AC_MSG_RESULT([$enable_opensearch])
 AM_CONDITIONAL(OPENSEARCH, test "$enable_opensearch" = "yes")
