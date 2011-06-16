@@ -3,7 +3,7 @@
 	* Fix more make(1) portability problems.
 	  Either I am horribly confused or netbsd make
 	  (or at least pmake in debian) doesn't support '$<'.
-	  Switched to '$>'.
+	  Switched to '$?'.
 
 2011-06-15  Ian Beckwith  <ianb@erislabs.net>
 

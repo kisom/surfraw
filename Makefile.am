@@ -30,7 +30,7 @@ surfraw: surfraw.IN
 	sed -e 's,@VERSION\@,${VERSION},g; '\
 	    -e 's,@ELVIDIR\@,${ELVIDIR},g; '\
 	    -e 's,@AWK\@,${AWK},g; '\
-	    -e 's,@sysconfdir\@,${sysconfdir},g ' $> > $@.tmp
+	    -e 's,@sysconfdir\@,${sysconfdir},g ' $? > $@.tmp
 	chmod +x $@.tmp
 	mv $@.tmp $@
 
@@ -38,52 +38,52 @@ surfraw.conf: surfraw.conf.IN
 	-rm -f $@ $@.tmp
 	sed -e 's,@prefix\@,${prefix},g; '\
 	    -e 's,@TEXTBROWSER\@,${TEXTBROWSER},g; '\
-	    -e 's,@GRAPHICALBROWSER\@,${GRAPHICALBROWSER},g; ' $> > $@.tmp
+	    -e 's,@GRAPHICALBROWSER\@,${GRAPHICALBROWSER},g; ' $? > $@.tmp
 	chmod +x $@.tmp
 	mv $@.tmp $@
 
 surfraw-update-path: surfraw-update-path.IN
 	-rm -f $@ $@.tmp
-	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; ' $> > $@.tmp
+	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; ' $? > $@.tmp
 	chmod +x $@.tmp
 	mv $@.tmp $@
 
 surfraw-bash-completion: surfraw-bash-completion.IN
 	-rm -f $@ $@.tmp
-	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; ' $> > $@.tmp
+	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; ' $? > $@.tmp
 	chmod +x $@.tmp
 	mv $@.tmp $@
 
 elvi.1sr: elvi.1sr.IN
 	-rm -f $@ $@.tmp
-	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; ' $> > $@.tmp
+	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; ' $? > $@.tmp
 	chmod +x $@.tmp
 	mv $@.tmp $@
 
 surfraw.1: surfraw.1.IN
 	-rm -f $@ $@.tmp
 	sed -e 's,@ELVIDIR\@,${ELVIDIR},g; '\
-	    -e 's,@sysconfdir\@,${sysconfdir},g' $> > $@.tmp
+	    -e 's,@sysconfdir\@,${sysconfdir},g' $? > $@.tmp
 	chmod +x $@.tmp
 	mv $@.tmp $@
 
 links: links.IN
 	-rm -f $@ $@.tmp
-	sed -e 's,@mandir\@,${mandir},g; ' $> > $@.tmp
+	sed -e 's,@mandir\@,${mandir},g; ' $? > $@.tmp
 	chmod +x $@.tmp
 	mv $@.tmp $@
 
 surfraw-update-path.1: surfraw-update-path
 	-rm -f $@
-	pod2man $> > $@
+	pod2man $? > $@
 
  opensearch-discover.1: opensearch-discover
 	-rm -f $@
-	pod2man $> > $@
+	pod2man $? > $@
 
 opensearch-genquery.1: opensearch-genquery
 	-rm -f $@
-	pod2man $> > $@
+	pod2man $? > $@
 
 install-data-hook: links
 	chmod -x surfraw.conf elvi.1sr surfraw.1
