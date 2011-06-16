@@ -4,6 +4,9 @@
 	  Either I am horribly confused or netbsd make
 	  (or at least pmake in debian) doesn't support '$<'.
 	  Switched to '$?'.
+	* Also switched submit-lsm rule to '$?'.
+	  Thanks to Kyle Isom.
+	* Removed long-obsolete commented-out sourceforge upload rules.
 
 2011-06-15  Ian Beckwith  <ianb@erislabs.net>
 
