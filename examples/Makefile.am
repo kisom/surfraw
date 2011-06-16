@@ -4,7 +4,7 @@ CLEANFILES     = uzbl_load_url_from_surfraw
 
 uzbl_load_url_from_surfraw: uzbl_load_url_from_surfraw.IN
 	-rm -f $@ $@.tmp
-	sed -e 's,@AWK\@,${AWK},g;' $@.IN >$@.tmp
+	sed -e 's,@AWK\@,${AWK},g;' $> > $@.tmp
 	chmod +x $@.tmp
 	mv $@.tmp $@
 
