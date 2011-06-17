@@ -55,7 +55,7 @@ Tue Jun 14 05:02:11 BST 2011  - surfraw 2.2.8
 	    to search both wikipedia and deletionpedia.
 	    use -fallback=wikipedia|deletionpedia to customise
 	    behaviour.
-	* Fixed elvi: archpkg, codesearch, ctan, javasun,
+	* Fixed elvi: archpkg, arxiv, codesearch, ctan, javasun,
 	  lastfm, musicbrainz, rpmsearch, w3link, yahoo.
 	* Removed elvi:
 	  + altavista: is now just a front-end to yahoo. RIP.

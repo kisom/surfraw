@@ -1,3 +1,10 @@
+2011-06-17  Ian Beckwith  <ianb@erislabs.net>
+
+	* arxiv: fix -scope=author with single-word queries.
+	  Thanks to Nikos Apostolakis.
+	* btw, note about entry below, netbsd make *does*
+	  support '$<', but only in suffix rules.
+
 2011-06-16  Ian Beckwith  <ianb@erislabs.net>
 
 	* Fix more make(1) portability problems.

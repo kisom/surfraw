@@ -94,7 +94,11 @@ if [ ! -z "$w3_args" ]; then
 			last=$n
 		    fi
 		done
-		terms=$last"_"$first
+		terms=""
+		if [ -n "$last" ]; then
+		    terms="${last}_"
+		fi
+		terms="$terms$first"
 		terms="+"`w3_url_of_arg $terms`
 	    fi
 	    ;;
