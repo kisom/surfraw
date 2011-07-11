@@ -20,7 +20,7 @@ surfraw (2.2.8-1) unstable; urgency=low
       * Tweak Description.
   * debian/source/format: explicitly specify 1.0 source format.
 
- -- Ian Beckwith <ianb@debian.org>  Tue, 14 Jun 2011 04:36:38 +0100
+ -- Ian Beckwith <ianb@debian.org>  Tue, 12 Jul 2011 00:46:17 +0100
 
 surfraw (2.2.7-1) unstable; urgency=low
 

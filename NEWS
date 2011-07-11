@@ -15,7 +15,7 @@
 
 				  N E W S
 
-Tue Jun 14 05:02:11 BST 2011  - surfraw 2.2.8
+Tue Jul 12 00:46:02 BST 2011  - surfraw 2.2.8
 
         * New elvi:
 	  + ads - search the SAO/NASA Astrophysics data system.
@@ -55,8 +55,8 @@ Tue Jun 14 05:02:11 BST 2011  - surfraw 2.2.8
 	    to search both wikipedia and deletionpedia.
 	    use -fallback=wikipedia|deletionpedia to customise
 	    behaviour.
-	* Fixed elvi: archpkg, arxiv, codesearch, ctan, javasun,
-	  lastfm, musicbrainz, rpmsearch, w3link, yahoo.
+	* Fixed elvi: archpkg, arxiv, cia, codesearch, ctan, javasun,
+	  lastfm, musicbrainz, netbsd, rpmsearch, w3link, yahoo.
 	* Removed elvi:
 	  + altavista: is now just a front-end to yahoo. RIP.
 	  + cddb: gracenote made the "hard decision" to remove the
