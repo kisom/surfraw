@@ -4,6 +4,7 @@
 	  google custom searches were complaining I was a bot, so I
 	  switched to normal google searches with
 	  site:{mail-index,}.netbsd.org.
+	* cia: fix search URL
 
 2011-06-17  Ian Beckwith  <ianb@erislabs.net>
 
