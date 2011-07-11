@@ -1,3 +1,10 @@
+2011-07-11  Ian Beckwith  <ianb@erislabs.net>
+
+	* netbsd: fix normal & mail search.
+	  google custom searches were complaining I was a bot, so I
+	  switched to normal google searches with
+	  site:{mail-index,}.netbsd.org.
+
 2011-06-17  Ian Beckwith  <ianb@erislabs.net>
 
 	* arxiv: fix -scope=author with single-word queries.
