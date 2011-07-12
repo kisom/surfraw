@@ -9,6 +9,7 @@ surfraw (2.2.8-1) unstable; urgency=low
   * debian/rules:
     + hardcode AWK as awk (Closes: #608967).
     + use dh_prep instead of dh_clean -k.
+    + add build-arch and build-indep targets.
   * debian/control:
     + Build-Depends: bump debhelper dependency to (>= 7).
     + Standards-Version: 3.9.2.
@@ -20,7 +21,7 @@ surfraw (2.2.8-1) unstable; urgency=low
       * Tweak Description.
   * debian/source/format: explicitly specify 1.0 source format.
 
- -- Ian Beckwith <ianb@debian.org>  Tue, 12 Jul 2011 00:46:17 +0100
+ -- Ian Beckwith <ianb@debian.org>  Tue, 12 Jul 2011 01:31:52 +0100
 
 surfraw (2.2.7-1) unstable; urgency=low
 
