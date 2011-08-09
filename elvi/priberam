@@ -1,0 +1,29 @@
+#!/bin/sh
+# $Id$
+# elvis: priberam	-- Look up word in Priberam online dictionary (www.priberam.pt/dlpo)
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_priberam dictionary
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Look up word in Priberam online dictionary (www.priberam.pt/dlpo)
+EOF
+    w3_global_usage
+}
+
+w3_config
+# disable requoting, doesn't work with this elvi.
+SURFRAW_quote_ifs=0
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"; then
+    w3_browse_url "http://www.priberam.pt/dlpo/"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://www.priberam.pt/dlpo/default.aspx?pal=${escaped_args}"
+fi

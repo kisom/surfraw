@@ -78,6 +78,7 @@ dist_elvi_SCRIPTS	= \
 		  pasearch \
 		  piratebay \
 		  pgpkeys \
+		  priberam \
 		  pubmed \
 		  rae \
 		  rfc \

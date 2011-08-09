@@ -159,7 +159,7 @@ acronym         -- Look for acronyms definitions (www.acronymfinder.com)
 ads             -- Search SAO/NASA Astrophysics Data System
 alioth          -- Search Alioth (alioth.debian.org)
 amazon          -- Search the amazon.com bookstore
-archpkg         -- Search Arch Linux packages (www.archlinux.org)
+archpkg         -- Search Arch Linux Packages (www.archlinux.org/packages/)
 archwiki        -- Search the Arch Linux Wiki
 arxiv           -- Search arXiv E-Print Archive for articles
 ask             -- Question the web using Ask Jeeves (www.ask.com)
@@ -175,7 +175,7 @@ cia             -- Search CIA documents at www.cia.gov
 cite            -- Search computer science papers (citeseerx.ist.psu.edu)
 cliki           -- Search the common lisp wiki
 cnn             -- Search on CNN (cnn.com)
-codesearch      -- Search source code using Google Code Search (www.google.com/codesearch)
+codesearch      -- Search source code using Google Code Search (www.google.fr/codesearch)
 comlaw          -- Search Australian Law using Comlaw (www.comlaw.gov.au)
 ctan            -- Search the Comprehensive TeX Archive Network (ctan.org)
 currency        -- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
@@ -230,6 +230,7 @@ opensearch      -- Search an OpenSearch-enabled website
 pasearch        -- Search the unofficial Penny Arcade archives (pipefour.org/pa)
 pgpkeys         -- Search the PGP key database
 piratebay       -- Search thepiratebay.org for torrents
+priberam        -- Look up word in Priberam online dictionary (www.priberam.pt/dlpo)
 pubmed          -- Search medical/molbio databases (www.ncbi.nlm.nih.gov)
 rae             -- Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)
 rfc             -- Search RFCs (internet standards documents)
