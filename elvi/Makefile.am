@@ -109,6 +109,7 @@ dist_elvi_SCRIPTS	= \
 		  wetandwild \
 		  wikipedia \
 		  woffle \
+                  wolfram \
 		  worldwidescience \
 		  yahoo \
 		  yandex \

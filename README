@@ -261,6 +261,7 @@ webster         -- Look up word in Merriam-Webster's Dictionary (www.m-w.com)
 wetandwild      -- Real time weather information (many sources)
 wikipedia       -- Search the free encyclopedia wikipedia
 woffle          -- Search the web using Woffle (localhost:8080)
+wolfram         -- Ask questions of the computational knowledge engine
 worldwidescience        -- Search for science with www.worldwidescience.org
 yahoo           -- Search Yahoo categories (www.yahoo.com)
 yandex          -- Search the web using Yandex (yandex.ru)
