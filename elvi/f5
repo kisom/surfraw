@@ -1,0 +1,56 @@
+#!/bin/sh
+# $Id$
+# elvis: f5		-- Search F5 related information (www.f5.com)
+. surfraw || exit 1
+
+w3_config_hook () {
+defyn   SURFRAW_f5_dc           no
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search-string | PR-number]
+Description:
+  Surfraw search F5 related information
+Local options:
+  -dc[=(yes|no)]                Search F5 Devcentral
+                                Default: $SURFRAW_f5_dc
+                                Environment: SURFRAW_f5_dc
+Examples:
+  $w3_argv0                       Teleport to the F5 Knowledgebase
+  $w3_argv0 -dc                   Teleport to the F5 Devcentral site
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-dc)	setoptyn	SURFRAW_f5_dc		yes	;;
+	-dc=*) setoptyn	SURFRAW_f5_dc		$optarg	;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+test -z "$w3_args" || escaped_args=`w3_url_of_arg $w3_args`
+
+if ok SURFRAW_f5_dc; then
+    if test -z "$escaped_args"; then
+        w3_browse_url "http://devcentral.f5.com"
+    else
+        w3_browse_url "http://devcentral.f5.com/Default.aspx?tabid=37&cx=015798286719081439686:g38hs-tdy64&cof=FORID:11i&q=${escaped_args}"
+    fi
+    exit $?
+fi
+if test -z "$escaped_args"; then
+    w3_browse_url "http://www.f5.com"
+else
+    w3_browse_url "http://search.f5.com/search?q=${escaped_args}&btnG=Search&entqr=0&ud=1&sort=date%3AD%3AL%3Ad1&output=xml_no_dtd&oe=UTF-8&ie=UTF-8&client=default_frontend&proxystylesheet=default_frontend"
+
+fi
+exit $?

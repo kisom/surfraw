@@ -172,6 +172,7 @@ bugmenot        -- Bypass compulsory web registration with bugmenot.com
 bugzilla        -- Search for bugs on Bugzilla bugtrackers
 cablesearch     -- search openports for OpenBSD packages
 cia             -- Search CIA documents at www.cia.gov
+cisco           -- Search Cisco documentation (www.cisco.com)
 cite            -- Search computer science papers (citeseerx.ist.psu.edu)
 cliki           -- Search the common lisp wiki
 cnn             -- Search on CNN (cnn.com)
@@ -198,6 +199,7 @@ duckduckgo      -- Securely search the web using duckduckgo (www.duckduckgo.com)
 ebay            -- Search the Ebay auction site
 etym            -- Look up word origins at www.etymonline.com
 excite          -- Search on Excite (www.excite.com)
+f5              -- Search F5 related information (www.f5.com)
 finkpkg         -- Search Fink packages (pdb.finkproject.org)
 foldoc          -- The Free On-Line Dictionary Of Computing (foldoc.org)
 freebsd         -- Search FreeBSD related information (www.freebsd.org)

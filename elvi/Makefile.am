@@ -20,6 +20,7 @@ dist_elvi_SCRIPTS	= \
 		  bugzilla \
 		  cablesearch \
 		  cia \
+		  cisco \
 		  cite \
 		  cliki \
 		  cnn \
@@ -46,6 +47,7 @@ dist_elvi_SCRIPTS	= \
 		  ebay \
 		  etym \
 		  excite \
+		  f5 \
 		  foldoc \
 		  finkpkg \
 		  freebsd \
