@@ -1,3 +1,8 @@
+2011-10-10  Ian Beckwith  <ianb@erislabs.net>
+
+	* surfraw.IN: test_elvi(): tweak sed regex
+	* add tests for f5, cisco and pin.
+
 2011-10-10  Shain Singh <shain.singh@gmail.com>
 
 	* New elvi: f5, cisco
