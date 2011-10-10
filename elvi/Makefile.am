@@ -76,6 +76,7 @@ dist_elvi_SCRIPTS	= \
 		  openports \
 		  opensearch \
 		  pasearch \
+		  pin \
 		  piratebay \
 		  pgpkeys \
 		  priberam \

@@ -1,0 +1,93 @@
+#!/bin/sh
+# elvis: pin		-- Search Pinboard bookmarks (http://pinboard.in)
+# author: jason ryan • http://jasonwryan.com
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def    SURFRAW_pinboard_tags "$SURFRAW_tags"
+def    SURFRAW_pinboard_user "$SURFRAW_user"
+def    SURFRAW_pinboard_new               0
+def    SURFRAW_pinboard_popular           0
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+    Surfraw search Pinboard bookmarks (http://pinboard.in)
+
+    Local options:
+    Default search (without any options) includes tags, titles and descriptions 
+    and is not limited to a specific number of search terms.
+
+    -popular    |  -p  Search popular tags
+    -recent     |  -r  Search recent tags
+
+    -tags=TAGS  |  -t=TAGS  Only search tags (separate a maximum of 3 TAGS with 
+                   a "+" eg., unix+linux)
+    -user=NAME  |  -u=NAME  Search a user's bookmarks
+                    
+                                       
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -p* ) setoptyn SURFRAW_pinboard_popular 1        ;;
+    -r* ) setoptyn SURFRAW_pinboard_new     1        ;;
+    -t=*) setopt   SURFRAW_pinboard_tags    $optarg  ;;
+    -u=*) setopt   SURFRAW_pinboard_user    $optarg  ;;
+       *) return 1  ;;
+    esac
+    return 0
+}
+
+# create tag string
+tags () {    
+    local IFS=+
+
+    for tag in $SURFRAW_pinboard_tags; do
+        printf "%s" "t:$tag/"
+    done
+}
+
+
+w3_config
+w3_parse_args "$@"
+
+# w3_args now contains a list of arguments
+escaped_args=$(w3_url_of_arg $w3_args)
+base_url="https://pinboard.in/"
+
+# check for recent & popular
+if [ "$SURFRAW_pinboard_new" = 1 ]; then
+	suffix="recent/"
+elif [ "$SURFRAW_pinboard_popular" = 1 ]; then
+	suffix="popular"
+fi
+
+# Run through the other possibilities...
+if [ -z "$w3_args" ]; then  
+    
+    if [ -n "$SURFRAW_pinboard_user" ] && [ -n "$SURFRAW_pinboard_tags" ]; then
+        w3_browse_url "${base_url}u:$SURFRAW_pinboard_user/$(tags)"
+
+    elif [ -n "$SURFRAW_pinboard_tags" ]; then
+        w3_browse_url "${base_url}$(tags)"
+
+    elif [ -n "$SURFRAW_pinboard_user" ]; then
+        w3_browse_url "${base_url}u:$SURFRAW_pinboard_user"
+
+    else w3_browse_url "$base_url${suffix}"
+    fi
+
+elif [ -n "$w3_args" ]; then
+    w3_browse_url "${base_url}search/?query=${escaped_args}&all=Search+All"
+
+else
+    w3_browse_url "${base_url}"
+fi

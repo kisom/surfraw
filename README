@@ -229,6 +229,7 @@ openports       -- search openports for OpenBSD packages
 opensearch      -- Search an OpenSearch-enabled website
 pasearch        -- Search the unofficial Penny Arcade archives (pipefour.org/pa)
 pgpkeys         -- Search the PGP key database
+pin             -- Search Pinboard bookmarks (http://pinboard.in)
 piratebay       -- Search thepiratebay.org for torrents
 priberam        -- Look up word in Priberam online dictionary (www.priberam.pt/dlpo)
 pubmed          -- Search medical/molbio databases (www.ncbi.nlm.nih.gov)

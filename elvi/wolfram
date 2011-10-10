@@ -1,5 +1,5 @@
 #!/bin/sh
-# elvis: wolfram	-- Ask questions of the computational knowledge engine
+# elvis: wolfram		-- Ask questions of the computational knowledge engine
 # coder@kyleisom.net 20110105
 . surfraw || exit 1
 

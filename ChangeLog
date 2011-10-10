@@ -1,4 +1,9 @@
-2011-09-09 Kyle Isom
+2011-10-10  Jason Ryan  <jasonwryan@gmail.com>
+
+	* New elvi: pin (search pinboard.in).
+
+2011-09-09  Kyle Isom  <coder@kyleisom.net>
+
         * New elvi: wolfram - query Wolfram Alpha
         * Author: Kyle Isom <coder@kyleisom.net>
         * Added test for wolfram.
