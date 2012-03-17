@@ -36,7 +36,7 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-    -d*|-l*)            setoptyn    SURFRAW_duckduckgo_got_a_ducky_feeling 1 ;;
+    -d*|-l|-lu*)            setoptyn    SURFRAW_duckduckgo_got_a_ducky_feeling 1 ;;
     -j|-javascript*)    setoptyn    SURFRAW_duckduckgo_use_javascript      1 ;;
     -p|-safe*)		setoptyn    SURFRAW_duckduckgo_safe_arg            1 ;;
     -r|-redirect*)      setoptyn    SURFRAW_duckduckgo_redirect_arg        1 ;;
