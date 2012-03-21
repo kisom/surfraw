@@ -1,3 +1,17 @@
+2012-03-17  Ivy Foster  <joyfulgirl@archlinux.us>
+
+	* Fix a typo in duckduckgo code.
+
+2012-03-17  Ivy Foster  <joyfulgirl@archlinux.us>
+
+	* Keep duckduckgo's -l[ucky] from clobbering -lh
+
+2012-01-10  Ivy Foster  <joyfulgirl@archlinux.us>
+
+	* aur: now uses HTTPS by default
+	  + On the AUR, connecting via HTTP disables login.
+	  + Added switch -no-https to enable connection via plain HTTP
+
 2011-10-10  Ian Beckwith  <ianb@erislabs.net>
 
 	* surfraw.IN: test_elvi(): tweak sed regex
