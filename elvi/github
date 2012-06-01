@@ -1,0 +1,67 @@
+#!/bin/sh
+# elvis: github		-- Search GitHub (https://github.com)
+# Author: jason ryan • https://jasonwryan.com
+
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_git_type        "$SURFRAW_type"
+def   SURFRAW_git_lang         any 
+}
+
+w3_usage_hook () {
+    cat <<EOF
+
+Usage: $w3_argv0 [options] [search-string]
+Description: 
+	Search Github (https://github.com)
+
+	Local options:
+	-l=LANGUAGE   |  -lang=LANGUAGE
+	Languages are case sensitive, eg., C, Shell, Python etc.	 
+	Languages with spaces must be conjoined with a "+", eg, Common+Lisp
+	Default: Any
+
+	-type=SEARCH  | -t=SEARCH
+	every  |   Everything 
+	repo   |   Repositories
+	user   |   Users
+	code   |   Code
+	           Default: Everything
+
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-t*=*)       setopt   SURFRAW_git_type   $optarg ;;
+	-l*=*)       setopt   SURFRAW_git_lang   $optarg ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+w3_config
+w3_parse_args "$@"
+# w3_args now contains list of arguments
+
+# type of search selected
+case "$SURFRAW_git_type" in
+	every)  type="Everything"    	;;
+	repo)   type="Repositories"  	;;
+	user)   type="Users"         	;;
+	code)   type="Code"          	;;
+	*)      type="Everything"    	;;
+esac
+
+# No arguments parsed
+if [ -z "$w3_args" ]; then
+	w3_browse_url "https://github.com"
+else
+	# Language and/or search type selected
+	escaped_args=$(w3_url_of_arg $w3_args)
+	w3_browse_url "https://github.com/search?q=${escaped_args}&repo=&langOverride=&start_value=1&type=${type}&language=${SURFRAW_git_lang}"
+fi
+

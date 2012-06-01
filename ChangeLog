@@ -1,3 +1,7 @@
+2012-06-01  Jason Ryan <jasonwryan@surfraw.org>
+
+	* New elvi: github (search github.com)
+
 2011-10-10  Ian Beckwith  <ianb@erislabs.net>
 
 	* surfraw.IN: test_elvi(): tweak sed regex
