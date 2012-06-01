@@ -36,7 +36,7 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-    -d*|-l*)            setoptyn    SURFRAW_duckduckgo_got_a_ducky_feeling 1 ;;
+    -d*|-l|-lu*)            setoptyn    SURFRAW_duckduckgo_got_a_ducky_feeling 1 ;;
     -j|-javascript*)    setoptyn    SURFRAW_duckduckgo_use_javascript      1 ;;
     -p|-safe*)		setoptyn    SURFRAW_duckduckgo_safe_arg            1 ;;
     -r|-redirect*)      setoptyn    SURFRAW_duckduckgo_redirect_arg        1 ;;
@@ -76,7 +76,7 @@ fi
 
 escaped_args=`w3_url_of_arg $w3_args`
 if [ "$SURFRAW_duckduckgo_got_a_ducky_feeling" = 1 ]; then
-    escaped_args="! ${escaped args}"
+    escaped_args="! ${escaped_args}"
 fi
 
 w3_browse_url "${SURFRAW_duckduckgo_base_url}/?q=${escaped_args}${SURFRAW_duckduckgo_params}"
