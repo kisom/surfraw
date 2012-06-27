@@ -25,7 +25,7 @@ Description:
 Local options:
     -d,-ducky,-l,-lucky         use in case of overwhelming feeling of duckiness
     -j,-javascript              use javascript
-    -p,-safe                    enable safe search
+    -safe                       enable safe search
     -r,-redirect                use redirection
     -s,-insecure                disable SSL search
 EOF
@@ -38,7 +38,7 @@ w3_parse_option_hook () {
     case "$opt" in
     -d*|-l|-lu*)            setoptyn    SURFRAW_duckduckgo_got_a_ducky_feeling 1 ;;
     -j|-javascript*)    setoptyn    SURFRAW_duckduckgo_use_javascript      1 ;;
-    -p|-safe*)		setoptyn    SURFRAW_duckduckgo_safe_arg            1 ;;
+    -safe*)				setoptyn    SURFRAW_duckduckgo_safe_arg            1 ;;
     -r|-redirect*)      setoptyn    SURFRAW_duckduckgo_redirect_arg        1 ;;
     -s|-sec*)           setoptyn    SURFRAW_duckduckgo_https_arg           1 ;;
     *) return 1 ;;
