@@ -268,6 +268,10 @@ w3_global_usage () {
 #-------------------------------------79 cols----------------------------------
     cat <<EOF
 Global options:
+  -bookmark-search-elvis=ELVIS	If args are passed to a non-searchable
+				bookmark, search with this elvis instead.
+				Default: $SURFRAW_bookmark_search_elvis
+				Environment: SURFRAW_bookmark_search_elvis
   -browser=EXECUTABLE		Set browser
 				Default: $SURFRAW_browser
   -elvi				List Surfraw mechanisms for conquering evil
@@ -330,6 +334,8 @@ w3_parse_option () {
     esac
     w3_parse_option_hook "$opt" "$optarg" && return 0
     case "$opt" in
+    -bookmark-search-elvis=*)
+        setopt SURFRAW_bookmark_search_elvis   $optarg ;;
 	-browser=*)	    setopt   SURFRAW_browser		$optarg	;;
 	-elvi)		    echo " GLOBAL ELVI:"
 			    list_elvi "$elvidir"
@@ -483,7 +489,7 @@ quote () {
 surfraw_usage() {
 	cat <<EOF
 Usage: $w3_argv0 [-help] [-elvi] elvis [elvioptions] [search terms]
-       $w3_argv0 [options] bookmark
+       $w3_argv0 [options] bookmark [search terms]
     If you wish to run the elvi directly, run "surfraw-update-path" to append
 	$elvidir to your \$PATH in your shell's config files.
     See surfraw-update-path(1) for details
@@ -495,27 +501,25 @@ EOF
 	w3_global_usage
 }
 
-# Browse URL or perform a search on URL(s) if search
-# terms are provided (use google elvi if URL has no %s
-# field or multiple URLS)
-browse_or_google ()
+# Browse URL or perform a search on URL(s) if search terms
+# are provided (use the user's elvis of choice if URL has no
+# %s field or multiple if multiple URLs are provided)
+parse_bookmark()
 {
     if [ -z "$w3_args" ]; then
         case "$bookmark" in
             *"%s"*) 
                 # Keep only the domain address, the rest could be garbage.
                 # This bookmark was probably meant to be used like that anyway.
-                get_domain_from_bookmark
+                $bookmark=$(get_domain_from_bookmark)
                 ;;
         esac
-        w3_browse_url "$bookmark"
     else
         escaped_args=$(w3_url_of_arg $w3_args)
 
         case "$bookmark" in
             *"%s"*) 
                 bookmark="$(printf '%s\n' "$bookmark" | sed "s|\%s|$escaped_args|")"
-                w3_browse_url "$bookmark"
                 ;;
             *)
                 n=${#bookmark[*]}
@@ -526,18 +530,21 @@ browse_or_google ()
                     i=$(($i+1))
                 done
 
-                googleargs="$w3_args $bookmark"
+                searchargs="$w3_args $bookmark"
 
                 i=1
                 while test $i -lt $n; do
-                    googleargs="$googleargs OR ${bookmark[$i]}"
+                    searchargs="$searchargs OR ${bookmark[$i]}"
                     i=$(($i+1))
                 done
 
-                google "$googleargs"
+                [ -z $SURFRAW_bookmark_search_elvis ] && \
+                    SURFRAW_bookmark_search_elvis=google
+                bookmark=$($SURFRAW_bookmark_search_elvis -print $searchargs)
                 ;;
         esac
     fi
+    echo $bookmark
 }
 
 get_domain_from_bookmark ()
@@ -621,7 +628,8 @@ then
 			if [ -n "$bookmark" ]
 			then
                 w3_parse_args $unquoted_opts $unquoted_searchterms
-                browse_or_google
+                bookmark=$(parse_bookmark)
+                w3_browse_url "$bookmark"
                 exit 0
 			else
 				echo "`basename $0`: $elvi: No elvis or bookmark with that name"

@@ -1,4 +1,19 @@
-2012-06-01  Jason Ryan <jasonwryan@surfraw.org>
+2012-07-27  Ivy Foster  <joyfulgirl@archlinux.us>
+
+	* Fixed arg parsing in searchable bookmarks
+	* New variable: SURFRAW_bookmark_search_elvis
+	  + When using searchable bookmarks, if all else fails
+	    run this elvis. Defaults to google
+	* Updated manual to reflect changes to bookmarks
+
+2012-07-27  Thomas Zervogiannis <tzervo@gmail.com>
+
+	* Added searchable bookmarks
+
+	  + Bookmarks can now be searchable by adding '%s' to
+	    the url string.
+
+2012-06-01  Jason Ryan	<jasonwryan@surfraw.org>
 
 	* New elvi: github (search github.com)
 

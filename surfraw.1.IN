@@ -27,7 +27,7 @@ surfraw \- a fast unix command line interface to WWW services
 .B sr \-elvi
 .br
 .B sr
-.I bookmark
+.I [options] bookmark [search words]
 .br
 
 .SH DESCRIPTION
@@ -78,6 +78,12 @@ separate line, with the bookmark and URL separated by whitespace,
 eg:
 
  ntk   http://www.ntk.net/
+
+If the url contains the string \fB%s\fP, you can specify an
+optional argument to the bookmark. Without an argument, only
+the domain will be returned. With arguments, \fb%s\fP will
+be replaced by the arguments. This obviates the need to
+create elvi for sites with very simple search options.
 
 To invoke a bookmark, use "surfraw bookmark" or "sr bookmark",
 and if an elvis of that name doesn't exist, it searches for a
