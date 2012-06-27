@@ -169,7 +169,7 @@ bookmark_file_search () {
 	file="$2"
 	if [ -r "$file" ]
 	then
-		@AWK@ -v search="$search" '$1 == search { print $2; }'  $file | head -n 1
+		@AWK@ -v search="$search" '$1 == search { for (nLoop = 2;nLoop <= NF; nLoop++) printf("%s ", $nLoop); print ""; }' $file | head -n 1
 	fi
 }
 
@@ -495,11 +495,69 @@ EOF
 	w3_global_usage
 }
 
+# Browse URL or perform a search on URL(s) if search
+# terms are provided (use google elvi if URL has no %s
+# field or multiple URLS)
+browse_or_google ()
+{
+    if [ -z "$w3_args" ]; then
+        case "$bookmark" in
+            *"%s"*) 
+                # Keep only the domain address, the rest could be garbage.
+                # This bookmark was probably meant to be used like that anyway.
+                get_domain_from_bookmark
+                ;;
+        esac
+        w3_browse_url "$bookmark"
+    else
+        escaped_args=$(w3_url_of_arg $w3_args)
+
+        case "$bookmark" in
+            *"%s"*) 
+                bookmark="$(printf '%s\n' "$bookmark" | sed "s|\%s|$escaped_args|")"
+                w3_browse_url "$bookmark"
+                ;;
+            *)
+                n=${#bookmark[*]}
+
+                i=0
+                while test $i -lt $n; do
+                    bookmark[$i]="site:${bookmark[$i]}"
+                    i=$(($i+1))
+                done
+
+                googleargs="$w3_args $bookmark"
+
+                i=1
+                while test $i -lt $n; do
+                    googleargs="$googleargs OR ${bookmark[$i]}"
+                    i=$(($i+1))
+                done
+
+                google "$googleargs"
+                ;;
+        esac
+    fi
+}
+
+get_domain_from_bookmark ()
+{
+    case "$bookmark" in
+        https://*)
+            bookmark=https://$(echo $bookmark | @AWK@ -F '/' '{print $3}')/
+            ;;
+        *)
+            bookmark=http://$(echo $bookmark | @AWK@ -F '/' '{print $3}')/
+            ;;
+    esac
+}
+
 if [ "$w3_argv0" = "surfraw" -o "$w3_argv0" = "sr" ]
 then
 	w3_config
 	opts=""
 	unquoted_opts=""
+	unquoted_searchterms=""
 	elvi=""
 	searchterms=""
 	do_help=0
@@ -539,8 +597,10 @@ then
 		  if [ -z "$searchterms" ]
 		  then
 			  searchterms="`quote "$arg"`"
+			  unquoted_searchterms="$arg"
 		  else
 			  searchterms="$searchterms `quote "$arg"`"
+			  unquoted_searchterms="$unquoted_searchterms $arg"
 		  fi
 	  fi
 	done
@@ -557,15 +617,17 @@ then
 		then
  			sh -c "$elvidir/$elvi $opts $searchterms"
 		else
-			bookmark=`bookmark_lookup $elvi`
+			bookmark=(`bookmark_lookup $elvi`)
 			if [ -n "$bookmark" ]
 			then
-				w3_parse_args $unquoted_opts
-				w3_browse_url "$bookmark"
+                w3_parse_args $unquoted_opts $unquoted_searchterms
+                browse_or_google
+                exit 0
 			else
 				echo "`basename $0`: $elvi: No elvis or bookmark with that name"
-				surfraw_usage >&2
-				exit 1
+				echo "Passing everything to browser and hoping for the best..."
+                $BROWSER "$elvi $opts $unquoted_searchterms"
+                exit 0
 			fi
 	   fi
 	fi
