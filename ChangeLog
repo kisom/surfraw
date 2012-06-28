@@ -1,3 +1,15 @@
+2012-06-28  Manolo Martínez  <manolo@austrohungaro.com>
+
+	* examples/hooks.lua: Added elinks integration script
+
+2012-06-28  Ivy Foster  <joyfulgirl@archlinux.us>
+
+	* Further simplified searchable bookmarks
+
+2012-06-28  Thomas Zervogiannis <tzervo@gmail.com>
+
+	* Simplified searchable bookmarks
+
 2012-06-27  Ivy Foster  <joyfulgirl@archlinux.us>
 
 	* Fixed arg parsing in searchable bookmarks
