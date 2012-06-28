@@ -507,40 +507,19 @@ EOF
 parse_bookmark()
 {
     if [ -z "$w3_args" ]; then
-        case "$bookmark" in
-            *"%s"*) 
-                # Keep only the domain address, the rest could be garbage.
-                # This bookmark was probably meant to be used like that anyway.
-                $bookmark=$(get_domain_from_bookmark)
-                ;;
-        esac
+        # Keep only the domain address, the rest could be garbage.
+        # This bookmark was probably meant to be used like that anyway.
+        bookmark=$(get_domain_from_bookmark)
     else
         escaped_args=$(w3_url_of_arg $w3_args)
 
         case "$bookmark" in
-            *"%s"*) 
+            *"%s"*)
                 bookmark="$(printf '%s\n' "$bookmark" | sed "s|\%s|$escaped_args|")"
                 ;;
             *)
-                n=${#bookmark[*]}
-
-                i=0
-                while test $i -lt $n; do
-                    bookmark[$i]="site:${bookmark[$i]}"
-                    i=$(($i+1))
-                done
-
-                searchargs="$w3_args $bookmark"
-
-                i=1
-                while test $i -lt $n; do
-                    searchargs="$searchargs OR ${bookmark[$i]}"
-                    i=$(($i+1))
-                done
-
-                [ -z $SURFRAW_bookmark_search_elvis ] && \
-                    SURFRAW_bookmark_search_elvis=google
-                bookmark=$($SURFRAW_bookmark_search_elvis -print $searchargs)
+                bookmark=$(echo $bookmark | sed -e 's|^|site:|' -e 's|\ |\ OR\ site:|g')
+                bookmark="$w3_args $bookmark"
                 ;;
         esac
     fi
@@ -557,6 +536,7 @@ get_domain_from_bookmark ()
             bookmark=http://$(echo $bookmark | @AWK@ -F '/' '{print $3}')/
             ;;
     esac
+    echo $bookmark
 }
 
 if [ "$w3_argv0" = "surfraw" -o "$w3_argv0" = "sr" ]
@@ -624,7 +604,7 @@ then
 		then
  			sh -c "$elvidir/$elvi $opts $searchterms"
 		else
-			bookmark=(`bookmark_lookup $elvi`)
+			bookmark=`bookmark_lookup $elvi`
 			if [ -n "$bookmark" ]
 			then
                 w3_parse_args $unquoted_opts $unquoted_searchterms
