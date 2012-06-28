@@ -509,33 +509,24 @@ parse_bookmark()
     if [ -z "$w3_args" ]; then
         # Keep only the domain address, the rest could be garbage.
         # This bookmark was probably meant to be used like that anyway.
-        bookmark=$(get_domain_from_bookmark)
+        echo "$bookmark" | grep -q '%s' && \
+            bookmark=$(echo $bookmark | @AWK@ -F '/' '{print $1 "//" $3}')
     else
         escaped_args=$(w3_url_of_arg $w3_args)
 
         case "$bookmark" in
             *"%s"*)
-                bookmark="$(printf '%s\n' "$bookmark" | sed "s|\%s|$escaped_args|")"
+                bookmark="$(echo $bookmark | sed "s|\%s|$escaped_args|")"
                 ;;
             *)
-                bookmark=$(echo $bookmark | sed -e 's|^|site:|' -e 's|\ |\ OR\ site:|g')
-                bookmark="$w3_args $bookmark"
+                [ -z $SURFRAW_bookmark_search_elvis ] && SURFRAW_bookmark_search_elvis=google
+                bookmark=$(echo $bookmark | sed -e 's|^|site:|' \
+                                                -e 's|\ |\ OR\ site:|g' \
+                                                -e "s|^|$SURFRAW_bookmark_search_elvis |" \
+                                                -e "s|$| $w3_args|")
                 ;;
         esac
     fi
-    echo $bookmark
-}
-
-get_domain_from_bookmark ()
-{
-    case "$bookmark" in
-        https://*)
-            bookmark=https://$(echo $bookmark | @AWK@ -F '/' '{print $3}')/
-            ;;
-        *)
-            bookmark=http://$(echo $bookmark | @AWK@ -F '/' '{print $3}')/
-            ;;
-    esac
     echo $bookmark
 }
 
