@@ -39,8 +39,8 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if null "$w3_args"; then
-    w3_browse_url "http://buscon.rae.es/diccionario/drae.htm"
+    w3_browse_url "http://www.rae.es/drae/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://buscon.rae.es/draeI/SrvltGUIBusUsual?TIPO_HTML=2&LEMA=${escaped_args}&&TIPO_BUS=${SURFRAW_rae_tipo}"
+    w3_browse_url "http://www.rae.es/drae/srv/search?type=3D${SURFRAW_rae_tipo}=&val=${escaped_args}"
 fi
