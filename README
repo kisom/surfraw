@@ -209,6 +209,7 @@ fsfdir          -- Search the FSF/UNESCO Free Software Directory (directory.fsf.
 gcache          -- Search the web using Google cache (www.google.com)
 genbugs         -- Search the Gentoo bug tracker (bugs.gentoo.org)
 genportage      -- Search gentoo-portage.com for packages
+github          -- Search github for code (www.github.com)
 google          -- Search the web using Google (www.google.com)
 gutenberg       -- Search for books on Project Gutenberg (gutenberg.org)
 happypenguin    -- Search the Linux Game Tome (www.happypenguin.org)

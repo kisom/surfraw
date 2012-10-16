@@ -57,6 +57,7 @@ dist_elvi_SCRIPTS	= \
 		  gcache \
 		  genbugs \
 		  genportage \
+		  github \
 		  gutenberg \
 		  google \
 		  happypenguin \
