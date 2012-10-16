@@ -1,3 +1,50 @@
+2012-06-28  Manolo Martínez  <manolo@austrohungaro.com>
+
+	* examples/hooks.lua: Added elinks integration script
+
+2012-06-28  Ivy Foster  <joyfulgirl@archlinux.us>
+
+	* Further simplified searchable bookmarks
+
+2012-06-28  Thomas Zervogiannis <tzervo@gmail.com>
+
+	* Simplified searchable bookmarks
+
+2012-06-27  Ivy Foster  <joyfulgirl@archlinux.us>
+
+	* Fixed arg parsing in searchable bookmarks
+	* New variable: SURFRAW_bookmark_search_elvis
+	  + When using searchable bookmarks, if all else fails
+	    run this elvis. Defaults to google
+	* Updated manual to reflect changes to bookmarks
+	* duckduckgo: Removed -p option. -safe still works.
+	  + Prevents clobbering global option -p[rint].
+
+2012-06-27  Thomas Zervogiannis <tzervo@gmail.com>
+
+	* Added searchable bookmarks
+
+	  + Bookmarks can now be searchable by adding '%s' to
+	    the url string.
+
+2012-06-01  Jason Ryan	<jasonwryan@surfraw.org>
+
+	* New elvi: github (search github.com)
+
+2012-03-17  Ivy Foster  <joyfulgirl@archlinux.us>
+
+	* Fix a typo in duckduckgo code.
+
+2012-03-17  Ivy Foster  <joyfulgirl@archlinux.us>
+
+	* Keep duckduckgo's -l[ucky] from clobbering -lh
+
+2012-01-10  Ivy Foster  <joyfulgirl@archlinux.us>
+
+	* aur: now uses HTTPS by default
+	  + On the AUR, connecting via HTTP disables login.
+	  + Added switch -no-https to enable connection via plain HTTP
+
 2011-10-10  Ian Beckwith  <ianb@erislabs.net>
 
 	* surfraw.IN: test_elvi(): tweak sed regex
