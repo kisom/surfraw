@@ -169,7 +169,7 @@ bookmark_file_search () {
 	file="$2"
 	if [ -r "$file" ]
 	then
-		@AWK@ -v search="$search" '$1 == search { print $2; }'  $file | head -n 1
+		@AWK@ -v search="$search" '$1 == search { for (nLoop = 2;nLoop <= NF; nLoop++) printf("%s ", $nLoop); print ""; }' $file | head -n 1
 	fi
 }
 
@@ -268,6 +268,10 @@ w3_global_usage () {
 #-------------------------------------79 cols----------------------------------
     cat <<EOF
 Global options:
+  -bookmark-search-elvis=ELVIS	If args are passed to a non-searchable
+				bookmark, search with this elvis instead.
+				Default: $SURFRAW_bookmark_search_elvis
+				Environment: SURFRAW_bookmark_search_elvis
   -browser=EXECUTABLE		Set browser
 				Default: $SURFRAW_browser
   -elvi				List Surfraw mechanisms for conquering evil
@@ -330,6 +334,8 @@ w3_parse_option () {
     esac
     w3_parse_option_hook "$opt" "$optarg" && return 0
     case "$opt" in
+    -bookmark-search-elvis=*)
+        setopt SURFRAW_bookmark_search_elvis   $optarg ;;
 	-browser=*)	    setopt   SURFRAW_browser		$optarg	;;
 	-elvi)		    echo " GLOBAL ELVI:"
 			    list_elvi "$elvidir"
@@ -483,7 +489,7 @@ quote () {
 surfraw_usage() {
 	cat <<EOF
 Usage: $w3_argv0 [-help] [-elvi] elvis [elvioptions] [search terms]
-       $w3_argv0 [options] bookmark
+       $w3_argv0 [options] bookmark [search terms]
     If you wish to run the elvi directly, run "surfraw-update-path" to append
 	$elvidir to your \$PATH in your shell's config files.
     See surfraw-update-path(1) for details
@@ -495,11 +501,41 @@ EOF
 	w3_global_usage
 }
 
+# Browse URL or perform a search on URL(s) if search terms
+# are provided (use the user's elvis of choice if URL has no
+# %s field or multiple if multiple URLs are provided)
+parse_bookmark()
+{
+    if [ -z "$w3_args" ]; then
+        # Keep only the domain address, the rest could be garbage.
+        # This bookmark was probably meant to be used like that anyway.
+        echo "$bookmark" | grep -q '%s' && \
+            bookmark=$(echo $bookmark | @AWK@ -F '/' '{print $1 "//" $3}')
+    else
+        escaped_args=$(w3_url_of_arg $w3_args)
+
+        case "$bookmark" in
+            *"%s"*)
+                bookmark="$(echo $bookmark | sed "s|\%s|$escaped_args|")"
+                ;;
+            *)
+                [ -z $SURFRAW_bookmark_search_elvis ] && SURFRAW_bookmark_search_elvis=google
+                bookmark=$(echo $bookmark | sed -e 's|^|site:|' \
+                                                -e 's|\ |\ OR\ site:|g' \
+                                                -e "s|^|$SURFRAW_bookmark_search_elvis |" \
+                                                -e "s|$| $w3_args|")
+                ;;
+        esac
+    fi
+    echo $bookmark
+}
+
 if [ "$w3_argv0" = "surfraw" -o "$w3_argv0" = "sr" ]
 then
 	w3_config
 	opts=""
 	unquoted_opts=""
+	unquoted_searchterms=""
 	elvi=""
 	searchterms=""
 	do_help=0
@@ -539,8 +575,10 @@ then
 		  if [ -z "$searchterms" ]
 		  then
 			  searchterms="`quote "$arg"`"
+			  unquoted_searchterms="$arg"
 		  else
 			  searchterms="$searchterms `quote "$arg"`"
+			  unquoted_searchterms="$unquoted_searchterms $arg"
 		  fi
 	  fi
 	done
@@ -560,12 +598,15 @@ then
 			bookmark=`bookmark_lookup $elvi`
 			if [ -n "$bookmark" ]
 			then
-				w3_parse_args $unquoted_opts
-				w3_browse_url "$bookmark"
+                w3_parse_args $unquoted_opts $unquoted_searchterms
+                bookmark=$(parse_bookmark)
+                w3_browse_url "$bookmark"
+                exit 0
 			else
 				echo "`basename $0`: $elvi: No elvis or bookmark with that name"
-				surfraw_usage >&2
-				exit 1
+				echo "Passing everything to browser and hoping for the best..."
+                $BROWSER "$elvi $opts $unquoted_searchterms"
+                exit 0
 			fi
 	   fi
 	fi
