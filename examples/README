@@ -1,5 +1,9 @@
 Useful example code.
 
+* hooks.lua
+  Integrates surfraw with elinks (see elinks.cz).
+  Contributed by Manolo Martínez
+
 * uzbl_load_url_from_surfraw
   Integrates surfraw with uzbl (see www.uzbl.org).
   Contributed by Sumant Oemrawsingh.

@@ -1,5 +1,5 @@
 noinst_SCRIPTS = uzbl_load_url_from_surfraw
-EXTRA_DIST     = README uzbl_load_url_from_surfraw.IN
+EXTRA_DIST     = README uzbl_load_url_from_surfraw.IN hooks.lua
 CLEANFILES     = uzbl_load_url_from_surfraw
 
 uzbl_load_url_from_surfraw: uzbl_load_url_from_surfraw.IN
