@@ -25,6 +25,7 @@ Local options:
 	  images	|	Images
 	  videos	|	Videos
 	  maps		|	Maps
+	  groups	|	groups
 	  news		|	News
           bsd           |       BSD
           linux         |       Linux
@@ -38,7 +39,8 @@ Local options:
   -i, -images                   Image Search (same as -search=images)
   -v, -videos                   Video Search (same as -search=videos)
   -m, -maps                     Map Search (same as -search=maps)
-  -n, -news                     News Search (same as -search-news)
+  -n, -news                     News Search (same as -search=news)
+  -g, -groups                   Groups Search (same as -search=groups)
   -safe=                        Safe Search level
         default         |       Default: $SURFRAW_google_safe
 	off             |       Environment: SURFRAW_google_safe
@@ -61,6 +63,7 @@ w3_parse_option_hook () {
     -v*)        setopt   SURFRAW_google_search  videos    ;;
     -m*)        setopt   SURFRAW_google_search  maps      ;;
     -n|-news)   setopt   SURFRAW_google_search  news      ;;
+    -g|-groups) setopt   SURFRAW_google_search  groups    ;;
     *) return 1 ;;
     esac
     return 0
@@ -95,6 +98,7 @@ if test -z "$w3_args" ; then
     case "$SURFRAW_google_search" in
 	i*) url="${url}images" ;;
 	m*) url="${url}maps"   ;;
+	g*) url="${url}groups" ;;
 	n*) url="${url}news"   ;;
 	v*) url="${url}video"  ;;
 	*)  url="${url}www"    ;;
@@ -106,6 +110,7 @@ else
 	v*) url="${url}www"; search="search"; extra="&tbo=p&tbm=vid";;
 	i*) url="${url}images" ; search="images";;
 	m*) url="${url}maps"   ; search=maps    ;;
+	g*) url="${url}groups" ; search=groups  ;;
 	n*) url="${url}news"   ; search=news    ;;
 	*)  url="${url}www"    ;;
     esac
