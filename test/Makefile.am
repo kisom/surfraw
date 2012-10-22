@@ -18,7 +18,7 @@ EXTRA_DIST = runtests elviwithouttests README COOKIES W.test            \
        openports.test opensearch.test pasearch.test pin.test            \
        piratebay.test pgpkeys.test priberam.test pubmed.test rae.test   \
        rfc.test rhyme.test rpmsearch.test scholar.test scicom.test      \
-       scitopia.test scirus.test scpan.test scroogle.test               \
+       scitopia.test scirus.test scpan.test                             \
        slashdot.test slinuxdoc.test sourceforge.test springer.test      \
        stack.test stockquote.test sunonesearch.test thesaurus.test      \
        translate.test urban.test w3css.test w3html.test w3link.test     \

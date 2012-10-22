@@ -1,3 +1,8 @@
+2012-10-22  Ian Beckwith  <ianb@erislabs.net>
+
+	* Removed elvi: scroogle (site gone).
+	* test/Makefile.am: Added missing tests to EXTRA_DIST
+
 2012-06-28  Manolo Martínez  <manolo@austrohungaro.com>
 
 	* examples/hooks.lua: Added elinks integration script

@@ -93,7 +93,6 @@ dist_elvi_SCRIPTS	= \
 		  scitopia \
 		  scirus \
 		  scpan \
-		  scroogle \
 		  slashdot \
 		  slinuxdoc \
 		  sourceforge \
