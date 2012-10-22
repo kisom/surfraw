@@ -1,6 +1,9 @@
 2012-10-22  Ian Beckwith  <ianb@erislabs.net>
 
+	* slashdot: fixed elvi
 	* Removed elvi: scroogle (site gone).
+	* fixed tests: leodict, lastfm, openbsd[2], ixquick,
+	  fsfdir, github.
 	* test/Makefile.am: Added missing tests to EXTRA_DIST
 
 2012-06-28  Manolo Martínez  <manolo@austrohungaro.com>
