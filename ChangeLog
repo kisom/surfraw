@@ -1,9 +1,10 @@
 2012-10-22  Ian Beckwith  <ianb@erislabs.net>
 
-	* slashdot: fixed elvi
+	* Fixed elvi: cisco, slashdot, slinuxdoc.
 	* Removed elvi: scroogle (site gone).
-	* fixed tests: leodict, lastfm, openbsd[2], ixquick,
-	  fsfdir, github.
+	* Fixed tests: acronym, bbcnews, bugzilla, cisco, cite[1],
+	  currency, discogs, excite, fsfdir, gcache, github, imdb,
+	  ixquick, lastfm, leodict, openbsd[2], scholar.
 	* test/Makefile.am: Added missing tests to EXTRA_DIST
 
 2012-06-28  Manolo Martínez  <manolo@austrohungaro.com>

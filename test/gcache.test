@@ -1,4 +1,4 @@
 gcache www.mozilla.org
-http://www.google.com/intl/[A-Za-z]+/help/features_list.html#cached
+This is Google.*s cache of
 gcache -i www.openoffice.org
 cache:www.openoffice.org&amp;hl=.*&strip=1
