@@ -20,5 +20,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://tools.cisco.com/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://tools.cisco.com/search/JSP/search-results.get?isFormSubmit=true&strQueryText=${escaped_args}"
+    w3_browse_url "http://tools.cisco.com/search/JSP/search-results.get?strQueryText=${escaped_args}&Search+All+cisco.com=cisco.com"
 fi

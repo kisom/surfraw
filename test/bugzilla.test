@@ -10,11 +10,11 @@ bugzilla -s=apache ipv6
 bugs found
 bugzilla -s=freedesktop ipv6
 bugs found
-bugzilla -s=eclipse delete
+bugzilla -s=eclipse SQLIntegrityConstraintViolationException
 bugs found
 bugzilla -s=mandriva ipv6
 bugs found
-bugzilla -s=gentoo ipv6
+bugzilla -s=gentoo net-wireless/wimax
 bugs found
 bugzilla -s=novell ipv6
 bugs found

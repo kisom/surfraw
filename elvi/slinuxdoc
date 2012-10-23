@@ -20,5 +20,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://www.tldp.org/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.google.com/cse?cx=017644269519104757279%3Agm62gtzaoky&q=${escaped_args}&sa=go"
+    w3_browse_url "http://www.google.com/search?q=${escaped_args}+site:tldp.org"
 fi
