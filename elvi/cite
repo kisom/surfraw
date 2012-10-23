@@ -43,12 +43,12 @@ if test -z "$w3_args"; then
     w3_browse_url "http://citeseerx.ist.psu.edu/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    url="http://citeseerx.ist.psu.edu/search?q=${escaped_args}&Submit=Search&sort=rel"
+    url="http://citeseerx.ist.psu.edu/search?q=${escaped_args}&submit=Search"
     if ifyes SURFRAW_cite_citations; then
 	url="${url}&ic=1"
     fi
     if ifyes SURFRAW_cite_authors; then
-	url="${url}&t=auth"
+	url="${url}&uauth=1"
     fi
     w3_browse_url "$url"
 fi
