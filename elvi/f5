@@ -41,16 +41,16 @@ test -z "$w3_args" || escaped_args=`w3_url_of_arg $w3_args`
 
 if ok SURFRAW_f5_dc; then
     if test -z "$escaped_args"; then
-        w3_browse_url "http://devcentral.f5.com"
+        w3_browse_url "https://devcentral.f5.com"
     else
-        w3_browse_url "http://devcentral.f5.com/Default.aspx?tabid=37&cx=015798286719081439686:g38hs-tdy64&cof=FORID:11i&q=${escaped_args}"
+        w3_browse_url "https://devcentral.f5.com/Default.aspx?tabid=37&cx=015798286719081439686:g38hs-tdy64&cof=FORID:11i&q=${escaped_args}"
     fi
     exit $?
 fi
 if test -z "$escaped_args"; then
     w3_browse_url "http://www.f5.com"
 else
-    w3_browse_url "http://search.f5.com/search?q=${escaped_args}&btnG=Search&entqr=0&ud=1&sort=date%3AD%3AL%3Ad1&output=xml_no_dtd&oe=UTF-8&ie=UTF-8&client=default_frontend&proxystylesheet=default_frontend"
+    w3_browse_url "http://www.f5.com/search?q=${escaped_args}"
 
 fi
 exit $?
