@@ -2,7 +2,5 @@ openbsd Raadt
 About [\d,]+ results
 openbsd -mail Raadt
 Theo
-openbsd -pr 666
-DESCRIPTION
 openbsd -ps surfraw
 command line interface to popular WWW search engines

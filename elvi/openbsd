@@ -20,9 +20,6 @@ Local options:
   -mail[=(yes|no)]              Search OpenBSD mailinglists
                                 Default: $SURFRAW_openbsd_mail
                                 Environment: SURFRAW_openbsd_mail
-  -pr[=(yes|no)]                Query Problem Reports
-                                Default: $SURFRAW_openbsd_pr
-                                Environment: SURFRAW_openbsd_pr
   -ps[=(yes|no)]                Search ports.
                                 Default: $SURFRAW_openbsd_ports
                                 Environment: SURFRAW_openbsd_ports
@@ -35,8 +32,6 @@ Examples:
   $w3_argv0 mycroft             Search OpenBSD website for odeur de mycroft
   $w3_argv0 -mail               Teleport to the mail-index Query form
   $w3_argv0 -mail proff         Search mailing-list archives for odeur de proff
-  $w3_argv0 -pr                 Query Problem Report form
-  $w3_argv0 -pr 666             Display PR 666
   $w3_argv0 -ps surfraw         Search ports for surfraw
   $w3_argv0 -misc supermicro    Search misc mailing list for supermico
   $w3_argv0 -tech SMP           Search tech mailing list for SMP
@@ -50,8 +45,6 @@ w3_parse_option_hook () {
     case "$opt" in
 	-mail)		setoptyn	SURFRAW_openbsd_mail		yes	;;
 	-mail=*) 	setoptyn	SURFRAW_openbsd_mail		$optarg	;;
-	-pr)		setoptyn	SURFRAW_openbsd_pr		yes	;;
-	-pr=*)		setoptyn	SURFRAW_openbsd_pr		$optarg	;;
 	-ps)		setoptyn	SURFRAW_openbsd_ports		yes	;;
 	-ps=*)		setoptyn	SURFRAW_openbsd_ports		$optarg	;;
 	-misc)		setoptyn	SURFRAW_openbsd_mail_misc	yes	;;
@@ -73,14 +66,6 @@ if ok SURFRAW_openbsd_ports; then
         w3_browse_url "http://openports.se/"
     else
         w3_browse_url "http://openports.se/search.php?so=${escaped_args}"
-    fi
-    exit $?
-fi
-if ok SURFRAW_openbsd_pr; then
-    if test -z "$escaped_args"; then
-        w3_browse_url "http://www.openbsd.org/query-pr.html"
-    else
-        w3_browse_url "http://cvs.openbsd.org/cgi-bin/query-pr-wrapper?full=yes&numbers=${escaped_args}"
     fi
     exit $?
 fi
