@@ -1,4 +1,2 @@
 translate -from=en -to=de cats
-Katzen
-translate -provider=google -from=en -to=es cats
-gatos
+Katze
