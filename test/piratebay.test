@@ -1,2 +1,7 @@
 piratebay simpsons
 impsons.*S\d+E\d+
+piratebay -s=tv simpsons
+The Simpsons
+piratebay -s=movies revolution
+Revolution OS
+

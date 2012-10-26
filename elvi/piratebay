@@ -1,28 +1,87 @@
 #!/bin/sh
-#
-# AUTHOR: J.R. Mauro
-#
-# DATE: Mon Sep  1 12:18:12 EDT 2008
-#
-# DESC: Elvi to search The Pirate Bay
-# elvis: piratebay	-- Search thepiratebay.org for torrents
+# elvis: piratebay		-- Search The Pirate Bay (http://thepiratebay.org)
+
 . surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_bay_categories  "$SURFRAW_categories"
+}
+
 
 w3_usage_hook () {
     cat <<EOF
+
 Usage: $w3_argv0 [options] [search words]...
 Description:
   Search thepiratebay.org for torrents
+
+ -sort=CATEGORIES | -s=CATEGORIES
+
+  Local options:
+	all       | search all categories (default)
+	apps      | search applications
+	games     | search games
+	music     | search music
+	tv        | search TV shows
+	movies    | search movies
+                   Default: All
+
+	Subcategories:
+	flac      | flac audio files
+	books     | audio books
+	
+	dvd       | DVD rips
+	hrm       | High-res movies
+	hrt       | High-res TV
+
 EOF
     w3_global_usage
 }
 
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-s*=*)   setopt   SURFRAW_bay_categories   $optarg ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
 w3_config
 w3_parse_args "$@"
+
+case "$SURFRAW_bay_categories" in
+	al*)	category="0"    ;;
+	ap*)	category="300"  ;;
+	ga*)	category="400"  ;;
+	mu*)	category="100"  ;;
+	tv*)	category="205"  ;;
+	mo*)	category="201"  ;;
+	fl*)	category="104"  ;;
+	bo*)	category="102"  ;;
+	dv*)	category="202"  ;;
+	hrm)	category="207"  ;;
+	hrt)	category="208"  ;;
+	*)      category="0"    ;;
+esac
+
 # w3_args now contains a list of arguments
-if test -z "$w3_args"; then
-    w3_browse_url "http://thepiratebay.org"
-else
-    escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://thepiratebay.org/search/${escaped_args}"
+escaped_args=$(w3_url_of_arg $w3_args)
+
+# just browsing category
+if [ -n "$SURFRAW_bay_categories" ] && [ -z "$w3_args" ]; then
+	w3_browse_url "http://thepiratebay.org/browse/${category}"
+
+	# searching category for string
+	elif [ -n "$SURFRAW_bay_categories" ] && [ -n "$w3_args" ]; then
+		w3_browse_url "http://thepiratebay.org/search/${escaped_args}/0/99/${category}"
+	
+	# no arguments passed
+	elif [ -z "$w3_args" ]; then
+    	w3_browse_url "http://thepiratebay.org/"
+	
+# no category specified
+else w3_browse_url "http://thepiratebay.org/search/${escaped_args}"
+		
 fi
