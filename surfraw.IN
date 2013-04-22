@@ -507,10 +507,16 @@ EOF
 parse_bookmark()
 {
     if [ -z "$w3_args" ]; then
-        # Keep only the domain address, the rest could be garbage.
-        # This bookmark was probably meant to be used like that anyway.
-        echo "$bookmark" | grep -q '%s' && \
-            bookmark=$(echo $bookmark | @AWK@ -F '/' '{print $1 "//" $3}')
+        case "$bookmark" in
+            *"%s"*)
+                # Keep only the domain address, the rest contains %s which should be filtered.
+                bookmark=$(echo $bookmark | @AWK@ -F '/' '{print $1 "//" $3}')
+                ;;
+            *)
+                # Keep the first URL (if multiple-URL bookmark) as-is, no %s here...
+                bookmark=$(echo $bookmark | cut -f 1 -d ' ')
+                ;;
+        esac
     else
         escaped_args=$(w3_url_of_arg $w3_args)
 
@@ -522,8 +528,8 @@ parse_bookmark()
                 [ -z $SURFRAW_bookmark_search_elvis ] && SURFRAW_bookmark_search_elvis=google
                 bookmark=$(echo $bookmark | sed -e 's|^|site:|' \
                                                 -e 's|\ |\ OR\ site:|g' \
-                                                -e "s|^|$SURFRAW_bookmark_search_elvis |" \
-                                                -e "s|$| $w3_args|")
+                                                -e "s|^|$w3_args |" \
+                                                -e "s|^|$SURFRAW_bookmark_search_elvis |")
                 ;;
         esac
     fi

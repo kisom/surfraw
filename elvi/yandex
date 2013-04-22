@@ -33,7 +33,7 @@ w3_parse_option_hook () {
        *)      return 1
     esac
     setopt SURFRAW_yandex_domain "${opt:+${opt#-}.}"
-    [[ -n $search ]] && setopt SURFRAW_yandex_search "${search}text"
+    [ -n $search ] && setopt SURFRAW_yandex_search "${search}text"
     return 0
 }
 
