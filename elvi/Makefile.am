@@ -60,7 +60,6 @@ dist_elvi_SCRIPTS	= \
 		  github \
 		  gutenberg \
 		  google \
-		  happypenguin \
 		  imdb \
 		  ixquick \
 		  jamendo \
