@@ -1,17 +1,14 @@
 #!/bin/sh
-# $Id$
 # elvis: deblists	-- Search debian mailing lists (lists.debian.org/search.html)
 # ianb@erislabs.net 2003919
 . surfraw || exit 1
 
 w3_config_hook () {
-defyn SURFRAW_deblists_matchany    no
-defyn SURFRAW_deblists_searchmsgid no
-def   SURFRAW_deblists_author      ""
-def   SURFRAW_deblists_lists       ""
-def   SURFRAW_deblists_sort        "relevance"
-def   SURFRAW_deblists_results     $SURFRAW_results
-def   SURFRAW_deblists_lang        $SURFRAW_lang
+defyn SURFRAW_deblists_matchany         no
+defyn SURFRAW_deblists_searchmsgid      no
+def   SURFRAW_deblists_msgidsearchtype  direct
+def   SURFRAW_deblists_sort             relevance
+def   SURFRAW_deblists_results          $SURFRAW_results
 }
 
 w3_usage_hook () {
@@ -20,64 +17,18 @@ Usage: $w3_argv0 [options] [search patterns]...
 Description:
   Surfraw search debian mailing lists (lists.debian.org/search.html)
 Local options:
-  -results=NUM		 	Number of search results returned
-  				Default: $SURFRAW_deblists_results
-				Environment: SURFRAW_deblists_results
-  -m|-msgid		 	Search by message-id
-  -any			 	Match any word in search rather than all words
-  -author=AUTHOR	 	Limit search to messages from AUTHOR
-  -sort=relevance	|	How to sort the results
-        date		|
+  -results=NUM                  Number of search results returned
+                                Default: $SURFRAW_deblists_results
+                                Environment: SURFRAW_deblists_results
+  -m|-msgid                     Search by message-id, jump to result
+  -mv                           Search by message-id and show matches
+  -ml                           Search by message-id and show links
+  -any                          Match any word in search rather than all words
+  -sort=relevance       |       How to sort the results
+        date            |
         revdate
-				Default: $SURFRAW_deblists_sort
-				Environment: SURFRAW_deblists_sort
-  -lists=LIST1,LIST2		List to search
-	  			Default: all
-  				Environment: SURFRAW_deblists_lists
-				Lists (as of 2008-02-11):
-	68k accessibility admintool alpha amd64 announce apache arm
-	autobuild beowulf books boot bsd cd cd-vendors changes chinese
-	chinese-big5 chinese-gb commercial consultants ctte curiosa
-	custom dak ddtp debbugs desktop devel devel-announce
-	devel-changes devel-french devel-games devel-italian
-	devel-m68k-changes devel-portuguese devel-powerpc-changes
-	devel-s390-changes devel-spanish devel-sparc-changes doc dpkg
-	edu edu-announce edu-french emacsen embedded enterprise
-	esperanto events-eu events-na events-nl faq firewall flash
-	french gcc glibc gtk-gnome hams handheld hppa hurd i18n ia64
-	infrastructure-announce ipv6 isp italian japanese java jobs jr
-	kde kernel kernel-maint knoppix l10n-arabic l10n-catalan
-	l10n-czech l10n-danish l10n-dutch l10n-english l10n-esperanto
-	l10n-finnish l10n-french l10n-galician l10n-german l10n-greek
-	l10n-hungarian l10n-italian l10n-kannada l10n-korean
-	l10n-malayalam l10n-persian l10n-polish l10n-portuguese
-	l10n-romanian l10n-russian l10n-spanish l10n-swedish
-	l10n-turkish laespiral laptop legal lex lint-maint lsb med
-	mentors mips mirrors mirrors-announce multimedia newmaint
-	newmaint-admin newmaint-discuss news news-french news-german
-	news-italian news-portuguese news-spanish nonprofit
-	ocaml-maint openoffice parisc perl photo pilot policy pool
-	powerpc printing project publicity python qa qa-packages
-	qa-packages qa-private qt-kde release ruby russian s390
-	s390-changes science security security-announce
-	security-tracker sgml simplified-chinese snapshots sparc
-	sparc-changes ssh superh testing testing-changes tetex-maint
-	tex-maint toolchain ultralinux user user-catalan user-danish
-	user-de user-french user-german user-icelandic user-indonesian
-	user-polish user-portuguese user-spanish user-swedish
-	user-turkish user-ukrainian user-vietnamese volatile
-	volatile-announce vote webapps win32 wnpp women www x deity
-
-  -lang=LANG			Preferred language
-	  			Default: $SURFRAW_deblists_lang
-  				Environment: SURFRAW_lang, SURFRAW_deblists_lang
-				Supported values:
-	ar | arabic, ca | catalan, zh | chinese, da | danish, nl | dutch,
-	en | english, eo | esperanto, fi | finnish, fr | french, gl | galician,
-	de | german, el | greek, hu | hungarian, id | indonesian, it | italian,
-	kn | kannada, ml | malayalam, fa | persian, pl | polish,
-	pt | portuguese, ro | romanian, ru | russian, es | spanish,
-	sv | swedish, tr | turkish, uk | ukrainian, vi | vietnamese
+                                Default: $SURFRAW_deblists_sort
+                                Environment: SURFRAW_deblists_sort
 EOF
     w3_global_usage
 }
@@ -86,14 +37,15 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-	-result*=*)	setopt   SURFRAW_deblists_results	$optarg	;;
-	-m|-msg*) 	setoptyn SURFRAW_deblists_searchmsgid 	yes	;;
-	-any)	 	setoptyn SURFRAW_deblists_matchany 	yes	;;
-	-sort*=*) 	setopt	SURFRAW_deblists_sort	 	$optarg	;;
-	-auth*=*) 	setopt	SURFRAW_deblists_author	 	$optarg	;;
-	-lis*=*) 	setopt	SURFRAW_deblists_lists		$optarg	;;
-	-lan*=*) 	setopt	SURFRAW_deblists_lang		$optarg ;;
-	*) return 1 ;;
+        -result*=*) setopt   SURFRAW_deblists_results         $optarg ;;
+        -mv)        setoptyn SURFRAW_deblists_searchmsgid     yes ;
+                    setopt   SURFRAW_deblists_msgidsearchtype view    ;;
+        -ml)        setoptyn SURFRAW_deblists_searchmsgid     yes ;
+                    setopt   SURFRAW_deblists_msgidsearchtype links   ;;
+        -m|-msg*)   setoptyn SURFRAW_deblists_searchmsgid     yes     ;;
+        -any)       setoptyn SURFRAW_deblists_matchany        yes     ;;
+        -sort*=*)   setopt   SURFRAW_deblists_sort            $optarg ;;
+        *) return 1 ;;
     esac
     return 0
 }
@@ -102,276 +54,50 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if test -z "$w3_args"; then
-    w3_browse_url "http://lists.debian.org/search.html"
+    if ifyes SURFRAW_deblists_searchmsgid
+    then
+        w3_browse_url "http://lists.debian.org/msgid-search"
+    else
+        w3_browse_url "http://lists.debian.org/search.html"
+    fi
 elif ifyes SURFRAW_deblists_searchmsgid
 then
+    if [ "$SURFRAW_deblists_msgidsearchtype" = links ]
+    then
+        searchtype="&links=Query"
+    elif [ "$SURFRAW_deblists_msgidsearchtype" = view ]
+    then
+        searchtype=""
+    else
+        searchtype="&firsthit=I%27m+feeling+lucky"
+    fi
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://lists.debian.org/msgid-search/?m=${escaped_args}"
+    w3_browse_url "http://lists.debian.org/msgid-search/?m=${escaped_args}${searchtype}"
+
 else
+
     escaped_args=`w3_url_of_arg $w3_args`
-    url="http://lists.debian.org/cgi-bin/search?query=${escaped_args}&author=${SURFRAW_deblists_author}"
+    url="http://lists.debian.org/cgi-bin/search?P=${escaped_args}"
     if ifyes SURFRAW_deblists_matchany
     then
-	url="$url&MATCHOP=or"
+        url="$url&DEFAULTOP=or"
     else
-	url="$url&MATCHOP=and"
+        url="$url&DEFAULTOP=and"
     fi
-
-    lists=""
-    if [ -z "$SURFRAW_deblists_lists" ]
-    then
-	lists="&list="
-    else
-	for list in $( echo "${SURFRAW_deblists_lists}" | sed 's/[[:space:]]//g;s/,/ /g;' )
-	do
-	    case $list in 
-		68k|debian-68k)	thislist=debian-68k ;;
-		accessibility|debian-accessibility)	thislist=debian-accessibility ;;
-		admintool|debian-admintool)	thislist=debian-admintool ;;
-		alpha|debian-alpha)	thislist=debian-alpha ;;
-		amd64|debian-amd64)	thislist=debian-amd64 ;;
-		announce|debian-announce)	thislist=debian-announce ;;
-		apache|debian-apache)	thislist=debian-apache ;;
-		arm|debian-arm)	thislist=debian-arm ;;
-		autobuild|debian-autobuild)	thislist=debian-autobuild ;;
-		beowulf|debian-beowulf)	thislist=debian-beowulf ;;
-		books|debian-books)	thislist=debian-books ;;
-		boot|debian-boot)	thislist=debian-boot ;;
-		bsd|debian-bsd)	thislist=debian-bsd ;;
-		cd|debian-cd)	thislist=debian-cd ;;
-		cd-vendors|debian-cd-vendors)	thislist=debian-cd-vendors ;;
-		changes|debian-changes)	thislist=debian-changes ;;
-		chinese|debian-chinese)	thislist=debian-chinese ;;
-		chinese-big5|debian-chinese-big5)	thislist=debian-chinese-big5 ;;
-		chinese-gb|debian-chinese-gb)	thislist=debian-chinese-gb ;;
-		commercial|debian-commercial)	thislist=debian-commercial ;;
-		consultants|debian-consultants)	thislist=debian-consultants ;;
-		ctte|debian-ctte)	thislist=debian-ctte ;;
-		curiosa|debian-curiosa)	thislist=debian-curiosa ;;
-		custom|debian-custom)	thislist=debian-custom ;;
-		dak|debian-dak)	thislist=debian-dak ;;
-		ddtp|debian-ddtp)	thislist=debian-ddtp ;;
-		debbugs|debian-debbugs)	thislist=debian-debbugs ;;
-		desktop|debian-desktop)	thislist=debian-desktop ;;
-		devel|debian-devel)	thislist=debian-devel ;;
-		devel-announce|debian-devel-announce)	thislist=debian-devel-announce ;;
-		devel-changes|debian-devel-changes)	thislist=debian-devel-changes ;;
-		devel-french|debian-devel-french)	thislist=debian-devel-french ;;
-		devel-games|debian-devel-games)	thislist=debian-devel-games ;;
-		devel-italian|debian-devel-italian)	thislist=debian-devel-italian ;;
-		devel-m68k-changes|debian-devel-m68k-changes)	thislist=debian-devel-m68k-changes ;;
-		devel-portuguese|debian-devel-portuguese)	thislist=debian-devel-portuguese ;;
-		devel-powerpc-changes|debian-devel-powerpc-changes)	thislist=debian-devel-powerpc-changes ;;
-		devel-s390-changes|debian-devel-s390-changes)	thislist=debian-devel-s390-changes ;;
-		devel-spanish|debian-devel-spanish)	thislist=debian-devel-spanish ;;
-		devel-sparc-changes|debian-devel-sparc-changes)	thislist=debian-devel-sparc-changes ;;
-		doc|debian-doc)	thislist=debian-doc ;;
-		dpkg|debian-dpkg)	thislist=debian-dpkg ;;
-		edu|debian-edu)	thislist=debian-edu ;;
-		edu-announce|debian-edu-announce)	thislist=debian-edu-announce ;;
-		edu-french|debian-edu-french)	thislist=debian-edu-french ;;
-		emacsen|debian-emacsen)	thislist=debian-emacsen ;;
-		embedded|debian-embedded)	thislist=debian-embedded ;;
-		enterprise|debian-enterprise)	thislist=debian-enterprise ;;
-		esperanto|debian-esperanto)	thislist=debian-esperanto ;;
-		events-eu|debian-events-eu)	thislist=debian-events-eu ;;
-		events-na|debian-events-na)	thislist=debian-events-na ;;
-		events-nl|debian-events-nl)	thislist=debian-events-nl ;;
-		faq|debian-faq)	thislist=debian-faq ;;
-		firewall|debian-firewall)	thislist=debian-firewall ;;
-		flash|debian-flash)	thislist=debian-flash ;;
-		french|debian-french)	thislist=debian-french ;;
-		gcc|debian-gcc)	thislist=debian-gcc ;;
-		glibc|debian-glibc)	thislist=debian-glibc ;;
-		gtk-gnome|debian-gtk-gnome)	thislist=debian-gtk-gnome ;;
-		hams|debian-hams)	thislist=debian-hams ;;
-		handheld|debian-handheld)	thislist=debian-handheld ;;
-		hppa|debian-hppa)	thislist=debian-hppa ;;
-		hurd|debian-hurd)	thislist=debian-hurd ;;
-		i18n|debian-i18n)	thislist=debian-i18n ;;
-		ia64|debian-ia64)	thislist=debian-ia64 ;;
-		infrastructure-announce|debian-infrastructure-announce)thislist=debian-infrastructure-announce ;;
-		ipv6|debian-ipv6)	thislist=debian-ipv6 ;;
-		isp|debian-isp)	thislist=debian-isp ;;
-		italian|debian-italian)	thislist=debian-italian ;;
-		japanese|debian-japanese)	thislist=debian-japanese ;;
-		java|debian-java)	thislist=debian-java ;;
-		jobs|debian-jobs)	thislist=debian-jobs ;;
-		jr|debian-jr)	thislist=debian-jr ;;
-		kde|debian-kde)	thislist=debian-kde ;;
-		kernel|debian-kernel)	thislist=debian-kernel ;;
-		kernel-maint|debian-kernel-maint)	thislist=debian-kernel-maint ;;
-		knoppix|debian-knoppix)	thislist=debian-knoppix ;;
-		l10n-arabic|debian-l10n-arabic)	thislist=debian-l10n-arabic ;;
-		l10n-catalan|debian-l10n-catalan)	thislist=debian-l10n-catalan ;;
-		l10n-czech|debian-l10n-czech)	thislist=debian-l10n-czech ;;
-		l10n-danish|debian-l10n-danish)	thislist=debian-l10n-danish ;;
-		l10n-dutch|debian-l10n-dutch)	thislist=debian-l10n-dutch ;;
-		l10n-english|debian-l10n-english)	thislist=debian-l10n-english ;;
-		l10n-esperanto|debian-l10n-esperanto)	thislist=debian-l10n-esperanto ;;
-		l10n-finnish|debian-l10n-finnish)	thislist=debian-l10n-finnish ;;
-		l10n-french|debian-l10n-french)	thislist=debian-l10n-french ;;
-		l10n-galician|debian-l10n-galician)	thislist=debian-l10n-galician ;;
-		l10n-german|debian-l10n-german)	thislist=debian-l10n-german ;;
-		l10n-greek|debian-l10n-greek)	thislist=debian-l10n-greek ;;
-		l10n-hungarian|debian-l10n-hungarian)	thislist=debian-l10n-hungarian ;;
-		l10n-italian|debian-l10n-italian)	thislist=debian-l10n-italian ;;
-		l10n-kannada|debian-l10n-kannada)	thislist=debian-l10n-kannada ;;
-		l10n-korean|debian-l10n-korean)	thislist=debian-l10n-korean ;;
-		l10n-malayalam|debian-l10n-malayalam)	thislist=debian-l10n-malayalam ;;
-		l10n-persian|debian-l10n-persian)	thislist=debian-l10n-persian ;;
-		l10n-polish|debian-l10n-polish)	thislist=debian-l10n-polish ;;
-		l10n-portuguese|debian-l10n-portuguese)	thislist=debian-l10n-portuguese ;;
-		l10n-romanian|debian-l10n-romanian)	thislist=debian-l10n-romanian ;;
-		l10n-russian|debian-l10n-russian)	thislist=debian-l10n-russian ;;
-		l10n-spanish|debian-l10n-spanish)	       	thislist=debian-l10n-spanish ;;
-		l10n-swedish|debian-l10n-swedish)	       	thislist=debian-l10n-swedish ;;
-		l10n-turkish|debian-l10n-turkish)	       	thislist=debian-l10n-turkish ;;
-		laespiral|debian-laespiral)	       	thislist=debian-laespiral ;;
-		laptop|debian-laptop)	thislist=debian-laptop ;;
-		legal|debian-legal)	thislist=debian-legal ;;
-		lex|debian-lex)	thislist=debian-lex ;;
-		lint-maint|debian-lint-maint)	       	thislist=debian-lint-maint ;;
-		lsb|debian-lsb)	thislist=debian-lsb ;;
-		med|debian-med)	thislist=debian-med ;;
-		mentors|debian-mentors)	       	thislist=debian-mentors ;;
-		mips|debian-mips)	thislist=debian-mips ;;
-		mirrors|debian-mirrors)	       	thislist=debian-mirrors ;;
-		mirrors-announce|debian-mirrors-announce)	thislist=debian-mirrors-announce ;;
-		multimedia|debian-multimedia)	       	thislist=debian-multimedia ;;
-		newmaint|debian-newmaint)	thislist=debian-newmaint ;;
-		newmaint-admin|debian-newmaint-admin)	thislist=debian-newmaint-admin ;;
-		newmaint-discuss|debian-newmaint-discuss)	thislist=debian-newmaint-discuss ;;
-		news|debian-news)	thislist=debian-news ;;
-		news-french|debian-news-french)	thislist=debian-news-french ;;
-		news-german|debian-news-german)	thislist=debian-news-german ;;
-		news-italian|debian-news-italian)	thislist=debian-news-italian ;;
-		news-portuguese|debian-news-portuguese)	thislist=debian-news-portuguese ;;
-		news-spanish|debian-news-spanish)	       	thislist=debian-news-spanish ;;
-		nonprofit|debian-nonprofit)	thislist=debian-nonprofit ;;
-		ocaml-maint|debian-ocaml-maint)	thislist=debian-ocaml-maint ;;
-		openoffice|debian-openoffice)	thislist=debian-openoffice ;;
-		parisc|debian-parisc)	thislist=debian-parisc ;;
-		perl|debian-perl)	thislist=debian-perl ;;
-		photo|debian-photo)	thislist=debian-photo ;;
-		pilot|debian-pilot)	thislist=debian-pilot ;;
-		policy|debian-policy)	thislist=debian-policy ;;
-		pool|debian-pool)	thislist=debian-pool ;;
-		powerpc|debian-powerpc)	thislist=debian-powerpc ;;
-		printing|debian-printing)	thislist=debian-printing ;;
-		project|debian-project)	thislist=debian-project ;;
-		publicity|debian-publicity)	thislist=debian-publicity ;;
-		python|debian-python)	thislist=debian-python ;;
-		qa|debian-qa)	thislist=debian-qa ;;
-		qa-packages|debian-qa-packages)	thislist=debian-qa-packages ;;
-		qa-private|debian-qa-private)	thislist=debian-qa-private ;;
-		qt-kde|debian-qt-kde)	thislist=debian-qt-kde ;;
-		release|debian-release)	thislist=debian-release ;;
-		ruby|debian-ruby)	thislist=debian-ruby ;;
-		russian|debian-russian)	thislist=debian-russian ;;
-		s390|debian-s390)	thislist=debian-s390 ;;
-		s390-changes|debian-s390-changes)	thislist=debian-s390-changes ;;
-		science|debian-science)	thislist=debian-science ;;
-		security|debian-security)	thislist=debian-security ;;
-		security-announce|debian-security-announce)	thislist=debian-security-announce ;;
-		security-tracker|debian-security-tracker)	thislist=debian-security-tracker ;;
-		sgml|debian-sgml)	thislist=debian-sgml ;;
-		simplified-chinese|debian-simplified-chinese)	thislist=debian-simplified-chinese ;;
-		snapshots|debian-snapshots)	thislist=debian-snapshots ;;
-		sparc|debian-sparc)	thislist=debian-sparc ;;
-		sparc-changes|debian-sparc-changes)	thislist=debian-sparc-changes ;;
-		ssh|debian-ssh)	thislist=debian-ssh ;;
-		superh|debian-superh)	thislist=debian-superh ;;
-		testing|debian-testing)	thislist=debian-testing ;;
-		testing-changes|debian-testing-changes)	thislist=debian-testing-changes ;;
-		tetex-maint|debian-tetex-maint)	thislist=debian-tetex-maint ;;
-		tex-maint|debian-tex-maint)	thislist=debian-tex-maint ;;
-		toolchain|debian-toolchain)	thislist=debian-toolchain ;;
-		ultralinux|debian-ultralinux)	thislist=debian-ultralinux ;;
-		user|debian-user)	thislist=debian-user ;;
-		user-catalan|debian-user-catalan)	thislist=debian-user-catalan ;;
-		user-danish|debian-user-danish)	thislist=debian-user-danish ;;
-		user-de|debian-user-de)	thislist=debian-user-de ;;
-		user-french|debian-user-french)	thislist=debian-user-french ;;
-		user-german|debian-user-german)	thislist=debian-user-german ;;
-		user-icelandic|debian-user-icelandic)	thislist=debian-user-icelandic ;;
-		user-indonesian|debian-user-indonesian)	thislist=debian-user-indonesian ;;
-		user-polish|debian-user-polish)	thislist=debian-user-polish ;;
-		user-portuguese|debian-user-portuguese)	thislist=debian-user-portuguese ;;
-		user-spanish|debian-user-spanish)	thislist=debian-user-spanish ;;
-		user-swedish|debian-user-swedish)	thislist=debian-user-swedish ;;
-		user-turkish|debian-user-turkish)	thislist=debian-user-turkish ;;
-		user-ukrainian|debian-user-ukrainian)	thislist=debian-user-ukrainian ;;
-		user-vietnamese|debian-user-vietnamese)	thislist=debian-user-vietnamese ;;
-		volatile|debian-volatile)	thislist=debian-volatile ;;
-		volatile-announce|debian-volatile-announce)	thislist=debian-volatile-announce ;;
-		vote|debian-vote)	thislist=debian-vote ;;
-		webapps|debian-webapps)	thislist=debian-webapps ;;
-		win32|debian-win32)	thislist=debian-win32 ;;
-		wnpp|debian-wnpp)	thislist=debian-wnpp ;;
-		women|debian-women)	thislist=debian-women ;;
-		www|debian-www)	thislist=debian-www ;;
-		x|debian-x)	thislist=debian-x ;;
-		deity|debian-deity)	thislist=deity ;;
-
-		*) err "Unknown list: $list"
-	    esac
-	    lists="$lists&list=$thislist"
-    done
-    fi
-    url="${url}${lists}"
 
     case "$SURFRAW_deblists_sort" in
-	rel*) SURFRAW_deblists_sort="relevance" ;;
-	rev*) SURFRAW_deblists_sort="revdate"   ;;
-	d*)   SURFRAW_deblists_sort="date"      ;;
-	*)    err "Unknown sort method: $SURFRAW_deblists_sort"
+        rel*) SURFRAW_deblists_sort="relevance" ;;
+        rev*) SURFRAW_deblists_sort="revdate"   ;;
+        d*)   SURFRAW_deblists_sort="date"      ;;
+        *)    err "Unknown sort method: $SURFRAW_deblists_sort"
     esac
     url="$url&sort=${SURFRAW_deblists_sort}"
 
-    if [ -n "$SURFRAW_deblists_lang" ]
+    if [ "$SURFRAW_deblists_results" = "" ]
     then
-	case "$SURFRAW_deblists_lang" in
-	    arabic)		SURFRAW_deblists_lang=ar;;
-	    catalan)		SURFRAW_deblists_lang=ca;;
-	    chinese)		SURFRAW_deblists_lang=zh;;
-	    danish)		SURFRAW_deblists_lang=da;;
-	    dutch)		SURFRAW_deblists_lang=nl;;
-	    english)		SURFRAW_deblists_lang=en;;
-	    esperanto)		SURFRAW_deblists_lang=eo;;
-	    finnish)		SURFRAW_deblists_lang=fi;;
-	    french)		SURFRAW_deblists_lang=fr;;
-	    galician)		SURFRAW_deblists_lang=gl;;
-	    german)		SURFRAW_deblists_lang=de;;
-	    greek)		SURFRAW_deblists_lang=el;;
-	    hungarian)		SURFRAW_deblists_lang=hu;;
-	    indonesian)		SURFRAW_deblists_lang=id;;
-	    italian)		SURFRAW_deblists_lang=it;;
-	    kannada)		SURFRAW_deblists_lang=kn;;
-	    malayalam)		SURFRAW_deblists_lang=ml;;
-	    persian)		SURFRAW_deblists_lang=fa;;
-	    polish)		SURFRAW_deblists_lang=pl;;
-	    portuguese)		SURFRAW_deblists_lang=pt;;
-	    romanian)		SURFRAW_deblists_lang=ro;;
-	    russian)		SURFRAW_deblists_lang=ru;;
-	    spanish)		SURFRAW_deblists_lang=es;;
-	    swedish)		SURFRAW_deblists_lang=sv;;
-	    turkish)		SURFRAW_deblists_lang=tr;;
-	    ukrainian)		SURFRAW_deblists_lang=uk;;
-	    vietnamese)		SURFRAW_deblists_lang=vi;;
-	    # pass through
-	    ar|ca|zh|da|nl|\
-	    en|eo|fi|fr|gl|\
-	    de|el|hu|id|it|\
-	    kn|ml|fa|pl|pt|\
-	    ro|ru|es|sv|tr|\
-	    uk|vi)		;;
-	    # in case SURFRAW_lang value is unsupported
-	    *)			SURFRAW_deblists_lang=en ;;
-	esac
+        SURFRAW_deblists_results=10
     fi
-    url="$url&language=${SURFRAW_deblists_lang}"
-
+    url="$url&HITSPERPAGE=${SURFRAW_deblists_results}"
     w3_browse_url "$url"
 
 fi
