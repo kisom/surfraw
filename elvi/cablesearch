@@ -1,12 +1,12 @@
 #!/bin/sh
-# elvis: cablesearch	-- search openports for OpenBSD packages
+# elvis: cablesearch	-- search for leaked diplomatic communications
 # coder@kyleisom.net 20110105
 . surfraw || exit 1
 
 w3_config_hook () {
     # for when I figured out how to parse json in surfraw...
-    def     SURFRAW_cablesearch_api     "http://cablesearch.org/cable/api/search"
-    def     SURFRAW_cablesearch         "http://cablesearch.org/"
+    def     SURFRAW_cablesearch_api     "http://cablegatesearch.net/cable/api/search"
+    def     SURFRAW_cablesearch         "http://cablegatesearch.net/"
 }
 
 w3_usage_hook () {

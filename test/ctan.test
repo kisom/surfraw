@@ -1,2 +1,2 @@
-ctan -d -i -n exlive
-texlive
+ctan -d -i -n texlive
+texlive-repo
