@@ -39,5 +39,5 @@ elif test -z "$w3_args"; then
 	w3_browse_url "http://packages.qa.debian.org/common/index.html"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-	w3_browse_url "http://packages.qa.debian.org/common/index.html?src=${escaped_args}"
+    w3_browse_url "http://packages.qa.debian.org/common/index.html?src=${escaped_args}"
 fi

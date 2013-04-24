@@ -1,6 +1,6 @@
 debcontents surfraw
 usr/bin.*surfraw
 debcontents -u surfraw
-usr/bin.*surfraw
+etc/bash_completion.d.*surfraw
 debcontents -distro=slink -a grep
 base/help/.*grep

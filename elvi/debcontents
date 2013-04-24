@@ -129,7 +129,7 @@ else
     then
 	if [ "$SURFRAW_debcontents_distro" = "stable" ]
 	then
-		SURFRAW_debcontents_distro=jaunty
+		SURFRAW_debcontents_distro=raring
 	fi
     fi
     url="$searchurl?keywords=${escaped_args}&searchon=contents"
