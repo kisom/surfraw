@@ -11,7 +11,7 @@ EXTRA_DIST = runtests elviwithouttests README COOKIES W.test            \
        ebay.test etym.test excite.test f5.test finkpkg.test             \
        foldoc.test freebsd.test freedb.test freshmeat.test fsfdir.test  \
        gcache.test genbugs.test genportage.test github.test             \
-       google.test gutenberg.test happypenguin.test imdb.test           \
+       google.test gutenberg.test imdb.test                             \
        ixquick.test jamendo.test javasun.test lastfm.test leodict.test  \
        l1sp.test lsm.test macports.test mathworld.test mininova.test    \
        musicbrainz.test netbsd.test ntrs.test openbsd.test              \
