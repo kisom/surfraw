@@ -1,3 +1,7 @@
+2013-04-27  Ian Beckwith  <ianb@erislabs.net>
+
+	* javasun: fixed test.
+
 2013-04-24  Ian Beckwith  <ianb@erislabs.net>
 
 	* Rewrote deblists for new xapian search.
