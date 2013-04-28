@@ -14,7 +14,7 @@ Ian Beckwith <ianb@erislabs.net>
               dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc,
               sunonesearch, lsm, finkpkg, rpmsearch, macports,
               debpkghome, debvcsbrowse, scroogle, scirus,
-	      scitopia, worldwidescience
+              scitopia, worldwidescience
         plus various tweaks/bugfixes/features.
 
 Moritz Muehlenhoff <jmm@inutil.org>
@@ -75,7 +75,7 @@ tczy <cy@wre.ath.cx>
 
 Simone Fittabile <fittabile@lifegate.it>
         elvi: acronym, gcache, jamendo
-	plus patches.
+        plus patches.
 
 Micah Anderson <micah@debian.org>
         various patches
@@ -115,7 +115,7 @@ Jakob <jakob@pipefour.org>
 
 Kyle Isom <coder@kyleisom.net>
         elvi: cablesearch, duckduckgo, openports, wolfram
-	plus fixes.
+        plus fixes.
 
 Jason Ryan <jasonwryan@surfraw.org>
         elvi: archwiki, deli, github, stack, pin
