@@ -1,6 +1,7 @@
 surfraw (2.2.9-1) unstable; urgency=low
 
-  * New upstream version.
+  * New upstream version
+    + Fixes bashism in yandex (Closes: #690615).
   * Standards-Version: 3.9.4 (no changes).
 
  -- Ian Beckwith <ianb@debian.org>  Sun, 28 Apr 2013 04:26:55 +0100
