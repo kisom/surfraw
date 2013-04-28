@@ -1,3 +1,7 @@
+2013-04-28  Ian Beckwith  <ianb@erislabs.net>
+
+	* musicbrainz: fixed mbid search.
+
 2013-04-27  Ian Beckwith  <ianb@erislabs.net>
 
 	* javasun: fixed test.
@@ -9,7 +13,6 @@
 	  + added -ml and -mv to show message id links and list view.
 	* Removed happypenguin. Currently defunct and they are talking
 	  about a rewrite, so when it is back it will need fixing anyway.
-	
 
 2012-10-22  Ian Beckwith  <ianb@erislabs.net>
 

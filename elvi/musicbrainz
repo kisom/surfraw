@@ -146,9 +146,12 @@ else
 		fi ;;
 
             catno|barcode|discid|freedbid|freedb| \
-	    puid|trmid|isrc|iswc|mbid| \
+	    puid|trmid|isrc|iswc| \
 	    discid)
 		url="${url}/otherlookup?${SURFRAW_musicbrainz_search}=${escaped_args}" ;;
+
+        mbid)
+		url="${url}/release/${escaped_args}" ;;
 
 	    tag)
 	        url="${url}/taglookup?artist=${escaped_args}&release=${SURFRAW_musicbrainz_tagrelease}&track=${SURFRAW_musicbrainz_tagtrack}&tracknum=${SURFRAW_musicbrainz_tagnum}&duration=${SURFRAW_musicbrainz_taglen}&filename=${SURFRAW_musicbrainz_tagfile}&puid=${SURFRAW_musicbrainz_puid}" ;;
