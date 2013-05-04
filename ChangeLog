@@ -3,6 +3,8 @@
 	* rae: fixed, at least as far as the test passing.
 	  Could really do with some love from someone who
 	  actually speaks spanish.
+	* ctan: fixed search, updated options.
+	  Note command-line options have changed.
 
 2013-04-28  Ian Beckwith  <ianb@erislabs.net>
 

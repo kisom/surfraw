@@ -4,9 +4,10 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-defyn SURFRAW_ctan_name  0
-defyn SURFRAW_ctan_desc  0
-defyn SURFRAW_ctan_id    0
+defyn SURFRAW_ctan_topics   0
+defyn SURFRAW_ctan_desc     0
+defyn SURFRAW_ctan_authors  0
+def   SURFRAW_ctan_results  $SURFRAW_results
 }
 
 w3_usage_hook () {
@@ -15,9 +16,9 @@ Usage: $w3_argv0 [options] [search words]...
 Description:
   Search the Comprehensive TeX Archive Network (ctan.org)
 Local options:
-  -name                         Search by filename
   -desc                         Search descriptions (default)
-  -id                           Search package identifiers
+  -topics                       Search by filename
+  -authors                      Search package identifiers
 Options can be combined to search multiple types at once.
 EOF
     w3_global_usage
@@ -27,9 +28,9 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-    -n*)    setoptyn SURFRAW_ctan_name   1       ;;
-    -d*)    setoptyn SURFRAW_ctan_desc   1       ;;
-    -i*)    setoptyn SURFRAW_ctan_id     1       ;;
+    -top*)    setoptyn SURFRAW_ctan_topics    1       ;;
+    -d*)      setoptyn SURFRAW_ctan_desc      1       ;;
+    -au*)     setoptyn SURFRAW_ctan_authors   1       ;;
 	*) return 1 ;;
     esac
     return 0
@@ -42,25 +43,27 @@ if test -z "$w3_args"; then
     w3_browse_url "http://www.ctan.org/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-	if ifno SURFRAW_ctan_name &&
+	if ifno SURFRAW_ctan_topics  &&
 	   ifno SURFRAW_ctan_desc  &&
-	   ifno SURFRAW_ctan_id
+	   ifno SURFRAW_ctan_authors
 	then
 		SURFRAW_ctan_desc=1
 	fi
 
-	url="http://www.ctan.org/search/?search=${escaped_args}"
-	if ifyes SURFRAW_ctan_name
+	url="http://www.ctan.org/search/?x=1&PORTAL=on"
+    url="${url}&phrase=${escaped_args}&max=${SURFRAW_results}"
+
+	if ifyes SURFRAW_ctan_topics
 	then
-		url="${url}&search_type=filename"
+		url="${url}&TOPICS=on"
 	fi
 	if ifyes SURFRAW_ctan_desc
 	then
-		url="${url}&search_type=description"
+		url="${url}&PKG=on"
 	fi
-	if ifyes SURFRAW_ctan_id
+	if ifyes SURFRAW_ctan_authors
 	then
-		url="${url}&search_type=id"
+		url="${url}&AUTHORS=on"
 	fi
 
 	w3_browse_url "$url"

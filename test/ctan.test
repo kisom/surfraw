@@ -1,2 +1,2 @@
-ctan -d -i -n texlive
+ctan -d -au -top texlive
 texlive-repo
