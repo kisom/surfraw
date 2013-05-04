@@ -182,6 +182,7 @@ ctan            -- Search the Comprehensive TeX Archive Network (ctan.org)
 currency        -- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
 cve             -- Search for CAN assignments in CVE
 debbugs         -- Search the debian BTS (bugs.debian.org)
+debcodesearch   -- Search debian source code
 debcontents     -- Search contents of debian/ubuntu packages (packages.debian.org/packages.ubuntu.com)
 deblists        -- Search debian mailing lists (lists.debian.org/search.html)
 deblogs         -- Show changelogs for a package in Debian main (changelogs.debian.net)
@@ -212,7 +213,6 @@ genportage      -- Search gentoo-portage.com for packages
 github          -- Search github for code (www.github.com)
 google          -- Search the web using Google (www.google.com)
 gutenberg       -- Search for books on Project Gutenberg (gutenberg.org)
-happypenguin    -- Search the Linux Game Tome (www.happypenguin.org)
 imdb            -- Search the Internet Movie Database (www.imdb.com)
 ixquick         -- Search the web using ixquick [HTTPS] (www.ixquick.com)
 jamendo         -- Search Jamendo: free music with Creative Commons licenses (www.jamendo.com)

@@ -6,6 +6,7 @@
 	* ctan: fixed search, updated options.
 	  Note command-line options have changed.
 	* genportage: switch to gpo.zugaina.org
+	* debcodesearch: new (trivial) elvi for codesearch.debian.net
 
 2013-04-28  Ian Beckwith  <ianb@erislabs.net>
 

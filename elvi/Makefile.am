@@ -30,6 +30,7 @@ dist_elvi_SCRIPTS	= \
 		  currency \
 		  cve \
 		  debbugs \
+		  debcodesearch \
 		  debcontents \
 		  deblists \
 		  deblogs \
