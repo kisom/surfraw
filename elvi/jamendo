@@ -1,8 +1,11 @@
 #!/bin/sh
-# $Id$
 # elvis: jamendo		-- Search Jamendo: free music with Creative Commons licenses (www.jamendo.com)
 . surfraw || exit 1
 
+
+w3_config_hook () {
+    def   SURFRAW_jamendo_lang "$SURFRAW_lang"
+}
 
 w3_usage_hook () {
     cat <<EOF
@@ -10,18 +13,6 @@ Usage: $w3_argv0 [options] [search words]...
 Description:
   Surfraw search the web using Jamendo: free music with Creative Commons licenses (www.jamendo.com)
 Local options:
-  -t=     |  -type=		Type of search (Default All types)
-	artist 			Artists
-	album			Albums
-	xartist			External artists
-	lyrics			Lyrics
-	user			Members
-	tag			Tags
-	playlist		Playlists 
-	  
-	 
-                                Environment: SURFRAW_jamendo_results
-
   -l=     |  -lang=             Search with this l10n
         en|english
         fr|french
@@ -41,7 +32,6 @@ w3_parse_option_hook () {
     opt="$1"
     optarg="$2"
     case "$opt" in
-    -t=*|-type=*)     setopt   SURFRAW_jamendo_type	$optarg ;;
     -l=*|-lang=*)     setopt   SURFRAW_jamendo_lang	$optarg ;;
     *) return 1 ;;
     esac
@@ -52,17 +42,14 @@ w3_config
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 
-	
 # Use SURFRAW_lang if present
 if [ -z $SURFRAW_jamendo_lang ]; then
-    SURFRAW_jamendo_lang="$SURFRAW_lang";
+    SURFRAW_jamendo_lang="en";
 fi
 
 
 if test -z "$w3_args"; then
-
-
-    w3_browse_url "http://www.jamendo.com/${SURFRAW_jamendo_lang}/about"
+    w3_browse_url "http://www.jamendo.com/${SURFRAW_jamendo_lang}/search"
 else
     case "$SURFRAW_jamendo_lang" in
         en|english) setopt   SURFRAW_jamendo_lang en  ;;
@@ -75,17 +62,7 @@ else
         es|spanish) setopt   SURFRAW_jamendo_lang es  ;;
 	*)          setopt   SURFRAW_jamendo_lang en  ;;
     esac
-    case "$SURFRAW_jamendo_type" in
-	artist) ;;
-        album)  ;;
-        xartist) ;;
-        lyrics)  ;;
-        user)  ;;
-        tag)  ;;
-        playlist) ;;
-	*)          setopt   SURFRAW_jamendo_type ""  ;;
-    esac
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.jamendo.com/${SURFRAW_jamendo_lang}/search/${SURFRAW_jamendo_type}/search?search_string=${escaped_args}"
+    w3_browse_url "http://www.jamendo.com/${SURFRAW_jamendo_lang}/search?qs=q=${escaped_args}"
 
 fi
