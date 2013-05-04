@@ -1,3 +1,9 @@
+2013-05-04  Ian Beckwith  <ianb@erislabs.net>
+
+	* rae: fixed, at least as far as the test passing.
+	  Could really do with some love from someone who
+	  actually speaks spanish.
+
 2013-04-28  Ian Beckwith  <ianb@erislabs.net>
 
 	* musicbrainz: fixed mbid search.
