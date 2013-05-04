@@ -9,6 +9,7 @@
 	* genportage: switch to gpo.zugaina.org
 	* debcodesearch: new (trivial) elvi for codesearch.debian.net
 	* jamendo: fix url, disable test (search now javascript)
+	* deli: fix url; remove options; disable test (search now javascript)
 
 2013-04-28  Ian Beckwith  <ianb@erislabs.net>
 
