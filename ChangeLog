@@ -5,6 +5,7 @@
 	  actually speaks spanish.
 	* ctan: fixed search, updated options.
 	  Note command-line options have changed.
+	* genportage: switch to gpo.zugaina.org
 
 2013-04-28  Ian Beckwith  <ianb@erislabs.net>
 
