@@ -65,6 +65,7 @@ dist_elvi_SCRIPTS	= \
 		  ixquick \
 		  jamendo \
 		  javasun \
+		  jquery \
 		  l1sp \
 		  lastfm \
 		  leodict \

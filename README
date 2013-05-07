@@ -217,6 +217,7 @@ imdb            -- Search the Internet Movie Database (www.imdb.com)
 ixquick         -- Search the web using ixquick [HTTPS] (www.ixquick.com)
 jamendo         -- Search Jamendo: free music with Creative Commons licenses (www.jamendo.com)
 javasun         -- Search Java API docs (java.sun.com)
+jquery          -- Search the jQuery documentation (api.jquery.com)
 l1sp            -- Search lisp documentation
 lastfm          -- Search last.fm
 leodict         -- Search Leo's German <-> English dictionary (dict.leo.org)
