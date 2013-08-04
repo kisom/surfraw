@@ -67,7 +67,7 @@ if ok SURFRAW_netbsd_pr; then
     if test -z "$escaped_args"; then
         w3_browse_url "http://www.netbsd.org/Misc/query-pr.html"
     else
-        w3_browse_url "http://www.NetBSD.org/cgi-bin/query-pr-single.pl?number=${escaped_args}"
+        w3_browse_url "http://gnats.netbsd.org/cgi-bin/query-pr-single.pl?number=${escaped_args}"
     fi
     exit $?
 fi
