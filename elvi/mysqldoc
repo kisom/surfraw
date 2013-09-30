@@ -1,0 +1,65 @@
+#!/bin/sh
+# ianb@erislabs.net 20130923
+# elvis: mysqldoc	-- Search mysql documentation (dev.mysql.com)
+. surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_mysqldoc_version 5.5
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search mysql documentation (dev.mysql.com)
+Local options:
+  -a                            Search all versions/docs
+  -v=VERSION                    Search docs for mysql version VERSION
+                                Default: $SURFRAW_mysqldoc_version
+                                Environment: SURFRAW_mysqldoc_version
+                                (NB: doesn't really work with
+                                 SURFRAW_customsearch_provider=ixquick )
+EOF
+    w3_custom_search_usage
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+        -a)         setopt   SURFRAW_mysqldoc_version "all" ;;
+        -v*=*)      setopt   SURFRAW_mysqldoc_version "$optarg" ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+
+if test -z "$w3_args"
+then
+    case "$SURFRAW_mysqldoc_version" in
+        all)    inurl="/doc/"               ;;
+        *5.7*)  inurl="/doc/refman/5.7/en/" ;;
+        *5.6*)  inurl="/doc/refman/5.6/en/" ;;
+        *5.5*)  inurl="/doc/refman/5.5/en/" ;;
+        *5.0*)  inurl="/doc/refman/5.0/en/" ;;
+        *[34]*) inurl="/doc/refman/4.1/en/" ;;
+        *)      inurl="/doc/"
+    esac
+    w3_browse_url "http://dev.mysql.com${inurl}"
+else
+    case "$SURFRAW_mysqldoc_version" in
+        all)    inurl="-u=doc"                  ;;
+        *5.7*)  inurl="-u=doc -u=refman -u=5.7" ;;
+        *5.6*)  inurl="-u=doc -u=refman -u=5.6" ;;
+        *5.5*)  inurl="-u=doc -u=refman -u=5.5" ;;
+        *5.0*)  inurl="-u=doc -u=refman -u=5.0" ;;
+        *[34]*) inurl="-u=doc -u=refman -u=4.1" ;;
+        *)      inurl="-u=doc"                  ;;
+    esac
+
+    w3_custom_search -s=dev.mysql.com $inurl "$w3_shquoted_args"
+fi

@@ -1,3 +1,23 @@
+2013-09-30  Ian Beckwith  <ianb@erislabs.net>
+
+	* new elvi: mdn, mysqldoc, pgdoc, phpdoc
+	* new function: w3_custom_search
+	  Is used by elvi that use a generic search engine with (eg) site:
+	  or inurl: to narrow down the search.
+	  Pass it -s=site -u=url for site: and inurl: args
+	  plus the quoted search args
+	* new environment variable: SURFRAW_customsearch_provider
+	  to set provider used by w3_custom_search
+	  can be set to: google, duckduckgo or ixquick.
+	  Currently affects: mysqldoc, netbsd(*), openbsd(*), pgdoc,
+	  phpdoc, mysqldoc.
+	  (*) = only used by some options of elvi.
+	* new internal variable w3_shquoted_args, contains
+	  arguments 'quoted' 'like this' for passing
+	  to w3_custom_search
+	* Fixed url-encoding for '\'
+
+
 2013-05-07  Ian Beckwith  <ianb@erislabs.net>
 
 	* new elvi: jquery

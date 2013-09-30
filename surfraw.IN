@@ -1,5 +1,4 @@
 #!/bin/sh
-# $Id$
 # Surfraw -- Shell Users' Revolutionary Front Against the World wide web
 #
 #  Copyright (c) 2003-2010 The Surfraw-Devel Team
@@ -227,7 +226,7 @@ w3_url_escape () {
 		     s/?/%3F/g;
 		     s/@/%40/g;
 		     s/\[/%5B/g;
-		     s/\\/%74/g;
+		     s/\\/%5C/g;
 		     s/\]/%5D/g;
 		     s/\^/%5E/g;
 		     s/{/%7B/g;
@@ -371,6 +370,7 @@ w3_parse_option () {
 
 w3_parse_args () {
     w3_args=
+    w3_shquoted_args=
     def SURFRAW_browser none
     def SURFRAW_browser_args none
     defyn SURFRAW_quote_ifs yes
@@ -386,6 +386,12 @@ w3_parse_args () {
 	fi
         if [ $isarg -eq 1 ]
 	then
+	    if  [ -z "$w3_shquoted_args" ]
+	    then
+		w3_shquoted_args="`quote "$arg"`"
+	    else
+		w3_shquoted_args="$w3_shquoted_args `quote "$arg"`"
+	    fi
 	    if ok SURFRAW_quote_ifs
 	    then
 		arg=`quote_ifs "$arg"`
@@ -481,6 +487,68 @@ w3_browse_url () {
     fi
 }
 
+w3_custom_search_usage() {
+    echo "Custom search:"
+    echo "  To choose which search engine gets used for custom searches,"
+    echo "  configure SURFRAW_customsearch_provider"
+    echo "  supported: google, duckduckgo, ixquick"
+    echo "  default: $SURFRAW_customsearch_provider"
+}
+
+w3_custom_search() {
+    case "$SURFRAW_customsearch_provider" in
+        google)      w3_custom_search_google     "$@" ;;
+        duckduckgo)  w3_custom_search_duckduckgo "$@" ;;
+        ixquick)     w3_custom_search_ixquick    "$@" ;;
+        *)           w3_custom_search_duckduckgo "$@" ;;
+    esac
+}
+
+w3_custom_search_google() {
+    params=$(eval w3_custom_search_mangle -s site: $*)
+    params=$(eval w3_custom_search_mangle -u inurl: $params)
+    params=$(eval w3_custom_search_inurl_quote_dots $params)
+    url="$(eval /usr/bin/surfraw google -p $params )"
+    w3_browse_url "$url"
+}
+
+w3_custom_search_duckduckgo() {
+    params=$(eval w3_custom_search_mangle -s site: $*)
+    params=$(eval w3_custom_search_mangle -u inurl: $params)
+    url="$(eval surfraw duckduckgo -p $params )"
+    w3_browse_url "$url"
+}
+
+w3_custom_search_ixquick() {
+    params=$(eval w3_custom_search_mangle -s host: $*)
+    params=$(eval w3_custom_search_mangle -u url: $params)
+    url="$(eval surfraw ixquick -p $params )"
+    w3_browse_url "$url"
+}
+
+w3_custom_search_mangle() {
+    search="$1"
+    replace="$2"
+    shift
+    shift
+    for arg in "$@"
+    do
+        quote "$(echo "$arg" | sed "s/^${search}=\(.*\)/${replace}\1/")"
+    done
+}
+
+w3_custom_search_inurl_quote_dots() {
+    for arg in "$@"
+    do
+        if echo "$arg" | grep -q -- inurl:
+        then
+            quote "$(echo "$arg" | sed 's/\./\\./g;')"
+        else
+            quote "$arg"
+        fi
+    done
+}
+
 quote () {
 	quoted=`echo "$1"|sed "s/'/'\\\\\''/g"`
 	echo "'$quoted'"
@@ -548,7 +616,7 @@ then
 	for arg in "$@"
 	do
 	  # if it is an option
-	  if @AWK@ -v arg="$arg" 'BEGIN { if(arg ~ /^-/) { exit 0 } else { exit 1 } } '
+	  if [ "$(echo "$arg" | sed 's/^\(.\).*/\1/;' )" = "-" ]
 	  then
 		  # if option before elvi
 		  if [ -z "$elvi" ]

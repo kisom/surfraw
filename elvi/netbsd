@@ -75,13 +75,13 @@ if ok SURFRAW_netbsd_mail; then
     if test -z "$escaped_args"; then
         w3_browse_url "http://mail-index.netbsd.org/"
     else
-    w3_browse_url "http://www.google.com/search?q=${escaped_args}%20site%3Amail-index.netbsd.org&num=$SURFRAW_results"
+        w3_custom_search -s=mail-index.netbsd.org "$w3_shquoted_args"
     fi
     exit $?
 fi
 if test -z "$escaped_args"; then
     w3_browse_url "http://www.netbsd.org/"
 else
-    w3_browse_url "http://www.google.com/search?q=${escaped_args}%20site%3Anetbsd.org&num=$SURFRAW_results"
+    w3_custom_search -s=netbsd.org "$w3_shquoted_args"
 fi
 exit $?

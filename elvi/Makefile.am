@@ -72,17 +72,21 @@ dist_elvi_SCRIPTS	= \
 		  lsm \
 		  macports \
 		  mathworld \
+		  mdn \
 		  mininova \
 		  musicbrainz \
+		  mysqldoc \
 		  netbsd \
 		  ntrs \
 		  openbsd \
 		  openports \
 		  opensearch \
 		  pasearch \
+		  pgdoc \
+		  pgpkeys \
+		  phpdoc \
 		  pin \
 		  piratebay \
-		  pgpkeys \
 		  priberam \
 		  pubmed \
 		  rae \

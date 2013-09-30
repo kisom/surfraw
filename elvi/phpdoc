@@ -1,0 +1,25 @@
+#!/bin/sh
+# ianb@erislabs.net 20130923
+# elvis: phpdoc		-- Search php documentation (php.net)
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [search words]...
+Description:
+  Surfraw search php documentation (php.net)
+EOF
+    w3_custom_search_usage
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+if test -z "$w3_args"
+then
+    w3_browse_url "http://www.php.net/docs.php"
+else
+    w3_custom_search -s=php.net "$w3_shquoted_args"
+fi
+
+

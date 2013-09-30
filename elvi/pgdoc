@@ -1,0 +1,87 @@
+#!/bin/sh
+# ianb@erislabs.net 20130923
+# elvis: pgdoc		-- Search postgres documentation (www.pgdoc.com)
+. surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_pgdoc_version 9.1
+    defyn SURFRAW_pgdoc_comments no
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search the Postgresql documentation (www.postgresql.org)
+Local options:
+  -c                            Search in comments too
+  -v=VERSION                    Search in version VERSION
+                                Default: $SURFRAW_pgdoc_version
+                                Environment: SURFRAW_pgdoc_version
+                                (NB: doesn't really work with
+                                 SURFRAW_customsearch_provider=ixquick )
+EOF
+    w3_custom_search_usage
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -c*)        setoptyn SURFRAW_pgdoc_comments  1  ;;
+    -v*=*)      setopt   SURFRAW_pgdoc_version   "$optarg" ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+
+if test -z "$w3_args"
+then
+    case "$SURFRAW_pgdoc_version" in
+        all)    inurl="/docs/"       ;;
+        *9.3*)  inurl="/docs/9.3/"   ;;
+        *9.2*)  inurl="/docs/9.2/"   ;;
+        *9.1*)  inurl="/docs/9.1/"   ;;
+        *9.0*)  inurl="/docs/9.0/"   ;;
+        *8.4*)  inurl="/docs/8.4/"   ;;
+        *)      inurl="/docs/"       ;;
+    esac
+
+    if  [ "$SURFRAW_pgdoc_version" != all ]
+    then
+        if ifyes SURFRAW_pgdoc_comments
+    then
+            inurl="${inurl}interactive/"
+        else
+            inurl="${inurl}static/"
+        fi
+    fi
+    w3_browse_url "http://www.postgresql.org${inurl}"
+
+else
+
+    case "$SURFRAW_pgdoc_version" in
+        all)    inurl="-u=docs"        ;;
+        *9.3*)  inurl="-u=docs -u=9.3" ;;
+        *9.2*)  inurl="-u=docs -u=9.2" ;;
+        *9.1*)  inurl="-u=docs -u=9.1" ;;
+        *9.0*)  inurl="-u=docs -u=9.0" ;;
+        *8.4*)  inurl="-u=docs -u=8.4" ;;
+        *)      inurl="-u=docs"        ;;
+esac
+
+if  [ "$SURFRAW_pgdoc_version" != all ]
+then
+    if ifyes SURFRAW_pgdoc_comments
+    then
+        inurl="${inurl} -u=interactive"
+    else
+        inurl="${inurl} -u=static"
+    fi
+fi
+    w3_custom_search -s=www.postgresql.org $inurl "$w3_shquoted_args"
+fi

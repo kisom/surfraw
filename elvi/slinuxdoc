@@ -10,6 +10,7 @@ Usage: $w3_argv0 [options] [search words]...
 Description:
   Surfraw search entries in LDP (www.linuxdoc.org)
 EOF
+    w3_custom_search_usage
     w3_global_usage
 }
 
@@ -19,6 +20,5 @@ w3_parse_args "$@"
 if test -z "$w3_args"; then
     w3_browse_url "http://www.tldp.org/"
 else
-    escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.google.com/search?q=${escaped_args}+site:tldp.org"
+    w3_custom_search -s=tldp.org "$w3_shquoted_args"
 fi

@@ -1,5 +1,5 @@
 #!/bin/sh
-# elvis: worldwidescience	-- Search for science with www.worldwidescience.org
+# elvis: worldwidescience -- Search for science with www.worldwidescience.org
 . surfraw || exit 1
 
 w3_usage_hook () {

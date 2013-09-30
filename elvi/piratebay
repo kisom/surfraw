@@ -1,5 +1,5 @@
 #!/bin/sh
-# elvis: piratebay		-- Search The Pirate Bay (http://thepiratebay.org)
+# elvis: piratebay	-- Search The Pirate Bay (http://thepiratebay.org)
 
 . surfraw || exit 1
 

@@ -36,6 +36,7 @@ Examples:
   $w3_argv0 -misc supermicro    Search misc mailing list for supermico
   $w3_argv0 -tech SMP           Search tech mailing list for SMP
 EOF
+    w3_custom_search_usage
     w3_global_usage
 }
 
@@ -96,6 +97,6 @@ fi
 if test -z "$escaped_args"; then
     w3_browse_url "http://www.openbsd.org/"
 else
-    w3_browse_url "http://www.google.com/search?q=site:openbsd.org+${escaped_args}"
+    w3_custom_search -s=openbsd.org "$w3_shquoted_args"
 fi
 exit $?
