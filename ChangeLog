@@ -3,6 +3,8 @@
 	* google: -g for groups clashed with -g for graphical browser.
 	  Invoke groups with -G, -gr, -groups or -search=groups.
 	* cisco: fix elvi & test.
+	* alioth: changed test to SKIP:, works OK but won't talk
+	  to LWP, hence test breaks.
 
 2013-09-30  Ian Beckwith  <ianb@erislabs.net>
 
