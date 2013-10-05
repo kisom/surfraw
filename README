@@ -115,6 +115,25 @@ BOOKMARKS
 
   There are some example bookmarks in /etc/xdg/surfraw/bookmarks
 
+CUSTOM SEARCH
+
+Several elvi use a search engine with site: and inurl: keywords.
+The search engine used can be customized by setting
+the environment variable SURFRAW_customsearch_provider
+or using the command-line argument -customsearch=
+Currently google and duckduckgo are supported
+
+Examples:
+
+SURFRAW_customsearch_provider=duckduckgo sr mysqldoc -v=5.5 select
+sr pgdoc -customsearch=google -v=9.1 select
+
+The default is to use duckduckgo.
+
+Currently affected elvi:
+
+mdn mysqldoc netbsd openbsd pgdoc phpdoc slinuxdoc
+
 INSTALLATION
 
   Surfraw is installed with the standard ./configure; make; make install
