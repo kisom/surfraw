@@ -5,6 +5,7 @@
 	* ask, cisco: fix elvi.
 	* alioth: changed test to SKIP:, works OK but won't talk
 	  to LWP, hence test breaks.
+	* discogs: fixed test.
 
 2013-09-30  Ian Beckwith  <ianb@erislabs.net>
 
