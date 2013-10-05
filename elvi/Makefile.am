@@ -81,6 +81,7 @@ dist_elvi_SCRIPTS	= \
 		  openbsd \
 		  openports \
 		  opensearch \
+		  oraclesearch \
 		  pasearch \
 		  pgdoc \
 		  pgpkeys \
@@ -104,7 +105,6 @@ dist_elvi_SCRIPTS	= \
 		  springer \
 		  stack \
 		  stockquote \
-		  sunonesearch \
 		  thesaurus \
 		  translate \
 		  urban \
@@ -117,7 +117,7 @@ dist_elvi_SCRIPTS	= \
 		  wetandwild \
 		  wikipedia \
 		  woffle \
-                  wolfram \
+		  wolfram \
 		  worldwidescience \
 		  yahoo \
 		  yandex \

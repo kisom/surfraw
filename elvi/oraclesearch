@@ -1,0 +1,24 @@
+#!/bin/sh
+# elvis: oraclesearch	-- Search Oracle (search.oracle.com)
+
+. surfraw || exit 1
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search Oracle (search.oracle.com)
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+
+if test -z "$w3_args"; then
+    w3_browse_url "http://search.oracle.com/search/search"
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    w3_browse_url "http://search.oracle.com/search/search?q=${escaped_args}"
+
+fi

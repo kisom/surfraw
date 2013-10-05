@@ -74,6 +74,7 @@ elvi.1sr.gz @mandir@/man1/ntrs.1sr.gz
 elvi.1sr.gz @mandir@/man1/openbsd.1sr.gz
 elvi.1sr.gz @mandir@/man1/openports.1sr.gz
 elvi.1sr.gz @mandir@/man1/opensearch.1sr.gz
+elvi.1sr.gz @mandir@/man1/oraclesearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/pasearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/pgdoc.1sr.gz
 elvi.1sr.gz @mandir@/man1/pgpkeys.1sr.gz
@@ -97,7 +98,6 @@ elvi.1sr.gz @mandir@/man1/sourceforge.1sr.gz
 elvi.1sr.gz @mandir@/man1/springer.1sr.gz
 elvi.1sr.gz @mandir@/man1/stack.1sr.gz
 elvi.1sr.gz @mandir@/man1/stockquote.1sr.gz
-elvi.1sr.gz @mandir@/man1/sunonesearch.1sr.gz
 elvi.1sr.gz @mandir@/man1/thesaurus.1sr.gz
 elvi.1sr.gz @mandir@/man1/translate.1sr.gz
 elvi.1sr.gz @mandir@/man1/urban.1sr.gz

@@ -233,6 +233,7 @@ ntrs            -- Search the NASA Technical Report Server
 openbsd         -- Search OpenBSD related information (www.openbsd.org)
 openports       -- search openports for OpenBSD packages
 opensearch      -- Search an OpenSearch-enabled website
+oraclesearch    -- Search an OpenSearch-enabled website
 pasearch        -- Search the unofficial Penny Arcade archives (pipefour.org/pa)
 pgdoc           -- Search postgres documentation (www.pgdoc.com)
 pgpkeys         -- Search the PGP key database
@@ -256,7 +257,6 @@ sourceforge     -- Search SourceForge (www.sourceforge.net)
 springer        -- Search Springer for Books and Articles
 stack           -- Search Stack Overflow
 stockquote      -- Get a single stock quote (multiple providers)
-sunonesearch    -- Search Sun One Search (onesearch.sun.com)
 thesaurus       -- Look up word in Merriam-Webster's Thesaurus (www.m-w.com)
 translate       -- Translate human languages
 urban           -- Search urbandictionary.com for a definition
