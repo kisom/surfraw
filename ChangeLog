@@ -1,11 +1,14 @@
 2013-10-05  Ian Beckwith  <ianb@erislabs.net>
 
+	* ask, cisco: fix elvi.
 	* google: -g for groups clashed with -g for graphical browser.
 	  Invoke groups with -G, -gr, -groups or -search=groups.
-	* ask, cisco: fix elvi.
+	* mdn: site invokes google custom search via gratuitous
+	  javascript, so switch to w3_custom_search.
 	* alioth: changed test to SKIP:, works OK but won't talk
 	  to LWP, hence test breaks.
 	* discogs, openbsd: fixed tests.
+	* mdn, mysqldoc, pgdoc, phpdoc: added tests.
 
 2013-09-30  Ian Beckwith  <ianb@erislabs.net>
 

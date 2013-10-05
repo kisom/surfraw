@@ -4,7 +4,7 @@
 . surfraw || exit 1
 
 w3_config_hook () {
-    def   SURFRAW_mysqldoc_version 5.5
+    def   SURFRAW_mysqldoc_version all
 }
 
 w3_usage_hook () {
