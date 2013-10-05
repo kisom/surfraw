@@ -40,7 +40,7 @@ Local options:
   -v, -videos                   Video Search (same as -search=videos)
   -m, -maps                     Map Search (same as -search=maps)
   -n, -news                     News Search (same as -search=news)
-  -g, -groups                   Groups Search (same as -search=groups)
+  -G, -groups                   Groups Search (same as -search=groups)
   -safe=                        Safe Search level
         default         |       Default: $SURFRAW_google_safe
 	off             |       Environment: SURFRAW_google_safe
@@ -63,7 +63,7 @@ w3_parse_option_hook () {
     -v*)        setopt   SURFRAW_google_search  videos    ;;
     -m*)        setopt   SURFRAW_google_search  maps      ;;
     -n|-news)   setopt   SURFRAW_google_search  news      ;;
-    -g|-groups) setopt   SURFRAW_google_search  groups    ;;
+    -G|-gr|-groups) setopt   SURFRAW_google_search  groups    ;;
     *) return 1 ;;
     esac
     return 0

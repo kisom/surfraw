@@ -1,3 +1,9 @@
+2013-10-05  Ian Beckwith  <ianb@erislabs.net>
+
+	* google: -g for groups clashed with -g for graphical browser.
+	  Invoke groups with -G, -gr, -groups or -search=groups.
+	* cisco: fix elvi & test.
+
 2013-09-30  Ian Beckwith  <ianb@erislabs.net>
 
 	* new elvi: mdn, mysqldoc, pgdoc, phpdoc
