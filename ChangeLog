@@ -5,7 +5,7 @@
 	* ask, cisco: fix elvi.
 	* alioth: changed test to SKIP:, works OK but won't talk
 	  to LWP, hence test breaks.
-	* discogs: fixed test.
+	* discogs, openbsd: fixed tests.
 
 2013-09-30  Ian Beckwith  <ianb@erislabs.net>
 
@@ -25,7 +25,6 @@
 	  arguments 'quoted' 'like this' for passing
 	  to w3_custom_search
 	* Fixed url-encoding for '\'
-
 
 2013-05-07  Ian Beckwith  <ianb@erislabs.net>
 
