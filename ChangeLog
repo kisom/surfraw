@@ -2,7 +2,7 @@
 
 	* google: -g for groups clashed with -g for graphical browser.
 	  Invoke groups with -G, -gr, -groups or -search=groups.
-	* cisco: fix elvi & test.
+	* ask, cisco: fix elvi.
 	* alioth: changed test to SKIP:, works OK but won't talk
 	  to LWP, hence test breaks.
 

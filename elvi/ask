@@ -21,5 +21,5 @@ if test -z "$w3_args"; then
     w3_browse_url "http://www.ask.com/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.askjeeves.com/main/askjeeves.asp?ask=${escaped_args}&origin=Jeeves&metasearch=yes&ads=no"
+    w3_browse_url "http://www.ask.com/web?q=${escaped_args}"
 fi
