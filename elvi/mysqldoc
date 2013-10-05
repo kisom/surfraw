@@ -17,8 +17,6 @@ Local options:
   -v=VERSION                    Search docs for mysql version VERSION
                                 Default: $SURFRAW_mysqldoc_version
                                 Environment: SURFRAW_mysqldoc_version
-                                (NB: doesn't really work with
-                                 SURFRAW_customsearch_provider=ixquick )
 EOF
     w3_custom_search_usage
     w3_global_usage

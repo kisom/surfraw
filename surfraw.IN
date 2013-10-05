@@ -491,7 +491,7 @@ w3_custom_search_usage() {
     echo "Custom search:"
     echo "  To choose which search engine gets used for custom searches,"
     echo "  configure SURFRAW_customsearch_provider"
-    echo "  supported: google, duckduckgo, ixquick"
+    echo "  supported: google, duckduckgo"
     echo "  default: $SURFRAW_customsearch_provider"
 }
 

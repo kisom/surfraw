@@ -88,5 +88,5 @@ def SURFRAW_lang     	  	""
 
 # provider for searches that use a search engine
 # with (eg) site: specifiers
-# supported: google duckduckgo ixquick
+# supported: google duckduckgo
 def SURFRAW_customsearch_provider duckduckgo
