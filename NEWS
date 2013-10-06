@@ -53,6 +53,7 @@ Sun Oct  6 02:17:09 BST 2013  - surfraw 2.2.9
 	  When using searchable bookmarks, if all else fails run this elvis.
           Defaults to google
         * New example elinks integration script in examples/hooks.lua.
+        * Debian packaging now included in release, in debian/ dir.
         * Known problems
           + ntrs - site (temporarily?) down due to US being weird:
             http://blogs.fas.org/secrecy/2013/03/ntrs_dark/

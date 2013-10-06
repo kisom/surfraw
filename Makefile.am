@@ -10,11 +10,16 @@ man_MANS = surfraw-update-path.1 surfraw.1 elvi.1sr
 if OPENSEARCH
 man_MANS += opensearch-discover.1 opensearch-genquery.1
 endif
+
+debian_extra = debian/NEWS debian/README.Debian debian/changelog debian/compat debian/control \
+				debian/copyright debian/docs debian/postrm debian/rules debian/source/format \
+				debian/surfraw-extra.files debian/surfraw-extra.install debian/watch
+
 EXTRA_DIST	= surfraw.lsm.in surfraw.IN surfraw-update-path.IN\
                   surfraw.spec.in aclocal.m4 HACKING  \
 		  surfraw.1.IN elvi.1sr.IN surfraw.bookmarks links.IN \
 		  surfraw-bash-completion.IN surfraw.conf.IN \
-		  $(devel_extra)
+		  $(devel_extra) $(debian_extra)
 
 CLEANFILES = surfraw surfraw-update-path surfraw-update-path.1 surfraw.spec surfraw.lsm \
 		surfraw.1 elvi.1sr links surfraw-bash-completion surfraw.conf surfraw.1 \

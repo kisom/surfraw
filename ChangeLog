@@ -4,6 +4,7 @@
 	  2011 by Jon Yamokoski <jon@jonyamo.net>
 	  Thanks, and apologies for missing it!
 	* S: add test.
+	* Include debian packaging in upstream tarball.
 
 2013-10-05  Ian Beckwith  <ianb@erislabs.net>
 
