@@ -1,13 +1,17 @@
-This package has initially been debianized by Christian Surchi
-<csurchi@debian.org>  since Sat,  5 Aug 2000 18:59:30 +0200. 
+Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: surfraw
+Upstream-Contact: Surfraw-Devel <surfraw-devel@lists.alioth.debian.org>
+Source: http://surfraw.alioth.debian.org/dist/
 
-surfraw has originally been developed by Julian Assange <proff@iq.org>,
-and was originally downloaded from ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/
-
-Since July 2003 its development has continued through the surfraw Alioth
-project, you're welcome to contribute.
-
-New versions are available from http://surfraw.alioth.debian.org/dist/
+Comment:
+ This package has initially been debianized by Christian Surchi
+ <csurchi@debian.org>  since Sat,  5 Aug 2000 18:59:30 +0200. 
+ .
+ surfraw has originally been developed by Julian Assange <proff@iq.org>,
+ and was originally downloaded from ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/
+ .
+ Since July 2003 its development has continued through the surfraw Alioth
+ project, you're welcome to contribute.
 
 Files: *
 Copyright: Copyright (c) 2003-2013 The Surfraw-Devel team

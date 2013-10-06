@@ -4,8 +4,9 @@ surfraw (2.2.9-1) unstable; urgency=low
     + yandex: Fix bashism (Closes: #690615).
     + rae: Fix URL (Closes: #680138).
   * Standards-Version: 3.9.4 (no changes).
+  * update debian/copyright.
 
- -- Ian Beckwith <ianb@debian.org>  Sat, 04 May 2013 14:12:40 +0100
+ -- Ian Beckwith <ianb@debian.org>  Sun, 06 Oct 2013 05:30:37 +0100
 
 surfraw (2.2.8-1) unstable; urgency=low
 
