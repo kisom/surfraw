@@ -1,2 +1,2 @@
-SURFRAW_customsearch_provider=duckduckgo phpdoc array_merge
+phpdoc array_merge
 Merges the elements

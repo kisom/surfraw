@@ -1,25 +1,129 @@
 #!/bin/sh
-# ianb@erislabs.net 20130923
-# elvis: phpdoc		-- Search php documentation (php.net)
+# elvis: phpdoc    -- Search PHP documentation (php.net)
+# Author: http://jonyamo.net
+
 . surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_php_language "$SURFRAW_lang"
+    def   SURFRAW_php_search   "functions"
+}
 
 w3_usage_hook () {
     cat <<EOF
-Usage: $w3_argv0 [search words]...
+Usage: $w3_argv0 [options] [search-string]
 Description:
-  Surfraw search php documentation (php.net)
+    Surfraw search PHP documentation (php.net)
+
+Local options:
+    -l, -language=        Two letter language code (resembles ISO country codes)
+        en           |    English (default)
+        pt           |    Brazilian Portuguese
+        zh           |    Chinese (Simplified)
+        fr           |    French
+        de           |    German
+        ja           |    Japanese
+        pl           |    Polish
+        ro           |    Romanian
+        fa           |    Persian
+        es           |    Spanish
+        tr           |    Turkish
+                          Environment: SURFRAW_php_language, SURFRAW_lang
+                          Default: en
+
+    -s, -search=          Specialized search on topic
+        all          |    All php.net sites
+        functions    |    Function search
+        manual       |    Online documentation
+        bugs         |    Bug database
+        news         |    News archive
+        changelogs   |    Changelogs
+        pear         |    Just pear.php.net
+        pecl         |    Just pecl.php.net
+        talks        |    Just talks.php.net
+        maillist     |    General mailing list
+        devlist      |    Developer mailing list
+        phpdoc       |    Documentation mailing list
+                          Environment: SURFRAW_php_search
+                          Default: functions
+
+    -a, -all              alias of -search=all
+    -f, -functions        alias of -search=functions
+    -m, -manual           alias of -search=manual
+    -b, -bugs             alias of -search=bugs
+    -n, -news             alias of -search=news
+    -c, -changelogs       alias of -search=changelogs
+    -t, -talks            alias of -search=talks
+    -maillist             alias of -search=maillist
+    -devlist              alias of -search=devlist
+    -phpdoc               alias of -search=phpdoc
 EOF
-    w3_custom_search_usage
     w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+        -language=*)    setopt SURFRAW_php_language  "$optarg"    ;;
+        -l=*)           setopt SURFRAW_php_language  "$optarg"    ;;
+        -search=*)      setopt SURFRAW_php_search    "$optarg"    ;;
+        -s=*)           setopt SURFRAW_php_search    "$optarg"    ;;
+        -a|-all)        setopt SURFRAW_php_search    "all"        ;;
+        -f|-functions)  setopt SURFRAW_php_search    "functions"  ;;
+        -m|-manual)     setopt SURFRAW_php_search    "manual"     ;;
+        -b|-bugs)       setopt SURFRAW_php_search    "bugs"       ;;
+        -n|-news)       setopt SURFRAW_php_search    "news"       ;;
+        -c|-changelogs) setopt SURFRAW_php_search    "changelogs" ;;
+        -t|-talks)      setopt SURFRAW_php_search    "talks"      ;;
+        -maillist)      setopt SURFRAW_php_search    "maillist"   ;;
+        -devlist)       setopt SURFRAW_php_search    "devlist"    ;;
+        -phpdoc)        setopt SURFRAW_php_search    "phpdoc"     ;;
+        *)              return 1 ;;
+    esac
+    return 0
 }
 
 w3_config
 w3_parse_args "$@"
-if test -z "$w3_args"
-then
-    w3_browse_url "http://www.php.net/docs.php"
-else
-    w3_custom_search -s=php.net "$w3_shquoted_args"
+# w3_args now contains a list of arguments
+
+url="http://php.net/"
+
+case "$SURFRAW_php_language" in
+    en) lang="en"    ;;
+    pt) lang="pt_BR" ;;
+    zh) lang="zh"    ;;
+    fr) lang="fr"    ;;
+    de) lang="de"    ;;
+    ja) lang="ja"    ;;
+    pl) lang="pl"    ;;
+    ro) lang="ro"    ;;
+    fa) lang="fa"    ;;
+    es) lang="es"    ;;
+    tr) lang="tr"    ;;
+     *) lang="en"    ;;
+esac
+
+case "$SURFRAW_php_search" in
+    all)          search="all"           ;;
+    functions)    search="quickref"      ;;
+    manual)       search="manual"        ;;
+    bugs)         search="bugdb"         ;;
+    news)         search="news_archive"  ;;
+    changelogs)   search="changelogs"    ;;
+    pear)         search="pear"          ;;
+    pecl)         search="pecl"          ;;
+    talks)        search="talks"         ;;
+    maillist)     search="maillist"      ;;
+    devlist)      search="devlist"       ;;
+    phpdoc)       search="phpdoc"        ;;
+    *)            search="functions"     ;;
+esac
+
+if [ -n "$w3_args" ]; then
+    escaped_args=$(w3_url_of_arg $w3_args)
+    url="${url}search.php?lang=${lang}&show=${search}&pattern=${escaped_args}"
 fi
 
-
+w3_browse_url "$url"

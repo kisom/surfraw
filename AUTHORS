@@ -16,7 +16,7 @@ Ian Beckwith <ianb@erislabs.net>
               finkpkg, rpmsearch, macports, debpkghome, debvcsbrowse,
               scroogle, scirus, scitopia, worldwidescience,
               debcodesearch, jquery, mdn, mysqldoc, pgdoc,
-              phpdoc, oraclesearch, S
+              oraclesearch, S
         plus various tweaks/bugfixes/features.
 
 Moritz Muehlenhoff <jmm@inutil.org>
@@ -138,6 +138,8 @@ Shain Singh <shain.singh@gmail.com>
 Manolo Martínez <manolo@austrohungaro.com>
         examples: elinks integration (hooks.lua)
 
+Jon Yamokoski <jon@jonyamo.net>
+        elvi: phpdoc
 
 THANKS TO
 

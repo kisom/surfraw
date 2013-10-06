@@ -1,3 +1,9 @@
+2013-10-06  Ian Beckwith  <ianb@erislabs.net>
+
+	* Replaced phpdoc with version posted back in
+	  2011 by Jon Yamokoski <jon@jonyamo.net>
+	  Thanks, and apologies for missing it!
+
 2013-10-05  Ian Beckwith  <ianb@erislabs.net>
 
 	* ask, cisco: fix elvi.

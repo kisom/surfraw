@@ -132,7 +132,7 @@ The default is to use duckduckgo.
 
 Currently affected elvi:
 
-mdn mysqldoc netbsd openbsd pgdoc phpdoc slinuxdoc
+mdn mysqldoc netbsd openbsd pgdoc slinuxdoc
 
 INSTALLATION
 

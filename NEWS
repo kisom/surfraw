@@ -46,7 +46,7 @@ Sun Oct  6 02:17:09 BST 2013  - surfraw 2.2.9
           + elvi that use a search engine as a backend with site: and inurl:
             can now choose which search engine to use.
             So far, google and duckduckgo are supported, with duckduckgo the default.
-          + Affected elvi: mdn, mysqldoc, netbsd, openbsd, pgdoc, phpdoc, slinuxdoc
+          + Affected elvi: mdn, mysqldoc, netbsd, openbsd, pgdoc, slinuxdoc
           + To select on the commandline use -custom-search=google or-custom-search=duckduckgo
           + Or configure SURFRAW_customsearch_provider
         * New variable: SURFRAW_bookmark_search_elvis
