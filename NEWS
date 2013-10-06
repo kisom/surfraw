@@ -15,6 +15,47 @@
 
                                   N E W S
 
+Sun Oct  6 02:17:09 BST 2013  - surfraw 2.2.9
+
+        * New elvi:
+          + cisco - search Cisco documentation
+          + debcodesearch - search Debian codebase
+          + github - search github
+          + jquery - search jQuery documentation
+          + mdn - search Mozilla Developer Network
+          + mysqldoc - search MySQL documentation
+          + oraclesearch - search Oracle documentation
+          + pgdoc - search PostgreSQL documentation
+          + phpdoc - search PHP documentation
+          + pin - search pinboard.in
+          + wolfram - search Wolfram Alpha
+        * Changed elvi:
+          + aur - uses HTTPS by default, use -no-https to disable
+          + deblists
+            * Removed options -author, -lists, -lang
+            * added options -ml (message links) and -mv (list view)
+          + duckduckgo:
+            * removed -p (clashes with global print option), use -safe instead
+            * stopped -l[ucky] from clobbering -lh
+          + google: changed -g option to -G to avoid clash with -g for graphical view
+        * Fixed elvi: ask, ctan, deli, genportage, jamendo, javasun,
+          musicbrainz, rae, slashdot, slinuxdoc
+        * Removed elvi for dead sites: happypenguin, scroogle, sunonesearch (replaced by oraclesearch)
+        * w3_custom_search
+          + elvi that use a search engine as a backend with site: and inurl:
+            can now choose which search engine to use.
+            So far, google and duckduckgo are supported, with duckduckgo the default.
+          + Affected elvi: mdn, mysqldoc, netbsd, openbsd, pgdoc, phpdoc, slinuxdoc
+          + To select on the commandline use -custom-search=google or-custom-search=duckduckgo
+          + Or configure SURFRAW_customsearch_provider
+        * New variable: SURFRAW_bookmark_search_elvis
+	  When using searchable bookmarks, if all else fails run this elvis.
+          Defaults to google
+        * New example elinks integration script in examples/hooks.lua.
+        * Known problems
+          + ntrs - site (temporarily?) down due to US being weird:
+            http://blogs.fas.org/secrecy/2013/03/ntrs_dark/
+
 Tue Jul 12 00:46:02 BST 2011  - surfraw 2.2.8
 
         * New elvi:

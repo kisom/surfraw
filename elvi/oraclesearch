@@ -1,6 +1,6 @@
 #!/bin/sh
 # elvis: oraclesearch	-- Search Oracle (search.oracle.com)
-
+# ianb@erislabs.net 20131005
 . surfraw || exit 1
 
 w3_usage_hook () {

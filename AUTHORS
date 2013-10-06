@@ -8,13 +8,15 @@ Christian Surchi <csurchi@debian.org>
         elvi: debcontents, debbugs, debpackages
 
 Ian Beckwith <ianb@erislabs.net>
+        current debian maintainer
         elvi: alioth, bbcnews, bugzilla, deblists, freedb, imdb,
               scpan, codesearch, debwiki, lastfm, musicbrainz,
               opensearch, scholar, ctan, fsfdir, gutenberg, wayback,
-              dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc,
-              sunonesearch, lsm, finkpkg, rpmsearch, macports,
-              debpkghome, debvcsbrowse, scroogle, scirus,
-              scitopia, worldwidescience, debcodesearch, jquery
+              dmoz, w3html, w3link, w3css, w3rdf, debpts, rfc, lsm,
+              finkpkg, rpmsearch, macports, debpkghome, debvcsbrowse,
+              scroogle, scirus, scitopia, worldwidescience,
+              debcodesearch, jquery, mdn, mysqldoc, pgdoc,
+              phpdoc, oraclesearch
         plus various tweaks/bugfixes/features.
 
 Moritz Muehlenhoff <jmm@inutil.org>
@@ -61,7 +63,7 @@ Simon Ernst <se@netmute.org>
 
 Ivy Foster <joyfulgirl@archlinux.us>
         elvi: bookfinder, bugmenot
-        plus patches
+        plus various patches/maintenance
 
 Sumant Oemrawsingh <soemraws@xs4all.nl>
         elvi: cliki, l1sp, mathworth, mininova, youtube
@@ -115,10 +117,11 @@ Jakob <jakob@pipefour.org>
 
 Kyle Isom <coder@kyleisom.net>
         elvi: cablesearch, duckduckgo, openports, wolfram
-        plus fixes.
+        plus various fixes.
 
 Jason Ryan <jasonwryan@surfraw.org>
         elvi: archwiki, deli, github, stack, pin
+        plus various fixes/maintenance
 
 Sara Fauzia <sara@archlinux.us>
         archpkg fix.
