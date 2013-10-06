@@ -1,0 +1,46 @@
+#!/bin/sh
+# ianb@erislabs.net 20131006
+# elvis: S		-- Search using custom search provider
+. surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_S_site ""
+    def   SURFRAW_S_inurl ""
+}
+
+
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search using a custom search provider
+Local options:
+  -s=SITE                       Limit search to SITE
+  -u=INURL                      Limit search to URLs containing INURL
+EOF
+    w3_custom_search_usage
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+        -s=*)    SURFRAW_S_site="$SURFRAW_S_site -s=$optarg" ;;
+        -u=*)    SURFRAW_S_inurl="$SURFRAW_S_inurl -u=$optarg" ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+
+if test -z "$w3_args"
+then
+    w3_custom_search
+else
+    # FIXME: sort out quoting
+    w3_custom_search $SURFRAW_S_site $SURFRAW_S_inurl "$w3_shquoted_args"
+fi

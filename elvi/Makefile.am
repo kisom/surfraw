@@ -2,6 +2,7 @@
 elvidir=$(ELVIDIR)
 
 dist_elvi_SCRIPTS	= \
+		  S \
 		  W \
 		  acronym \
 		  ads \

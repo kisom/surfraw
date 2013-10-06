@@ -1,7 +1,9 @@
 2013-10-05  Ian Beckwith  <ianb@erislabs.net>
 
 	* ask, cisco: fix elvi.
-	* new elvi: oraclesearch. Replaces removed sunonesearch <sigh>.
+	* new elvi:
+	  + oraclesearch - Replaces removed sunonesearch <sigh>.
+	  + S - search using w3_custom_search.
 	* google: -g for groups clashed with -g for graphical browser.
 	  Invoke groups with -G, -gr, -groups or -search=groups.
 	* mdn: site invokes google custom search via gratuitous

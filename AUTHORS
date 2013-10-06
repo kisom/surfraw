@@ -16,7 +16,7 @@ Ian Beckwith <ianb@erislabs.net>
               finkpkg, rpmsearch, macports, debpkghome, debvcsbrowse,
               scroogle, scirus, scitopia, worldwidescience,
               debcodesearch, jquery, mdn, mysqldoc, pgdoc,
-              phpdoc, oraclesearch
+              phpdoc, oraclesearch, S
         plus various tweaks/bugfixes/features.
 
 Moritz Muehlenhoff <jmm@inutil.org>

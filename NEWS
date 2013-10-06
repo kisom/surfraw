@@ -18,6 +18,7 @@
 Sun Oct  6 02:17:09 BST 2013  - surfraw 2.2.9
 
         * New elvi:
+          + S - search using w3_custom_search (see below)
           + cisco - search Cisco documentation
           + debcodesearch - search Debian codebase
           + github - search github
