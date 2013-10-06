@@ -9,9 +9,12 @@
 	  to LWP, hence test breaks.
 	* discogs, openbsd: fixed tests.
 	* mdn, mysqldoc, pgdoc, phpdoc: added tests.
-	* w3_custom_search: remove documentation for ixquick support.
-	  It still works(ish), but doesn't support enough features
-	  to support (eg) mysqldoc -v=.
+	* w3_custom_search:
+	  + document in README.
+	  + remove documentation for ixquick support.
+	    It still works(ish), but doesn't support enough features
+	    to support (eg) mysqldoc -v=.
+	  + add -custom-search= commandline option.
 
 2013-09-30  Ian Beckwith  <ianb@erislabs.net>
 
