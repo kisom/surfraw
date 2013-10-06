@@ -117,7 +117,7 @@ Jakob <jakob@pipefour.org>
 
 Kyle Isom <coder@kyleisom.net>
         elvi: cablesearch, duckduckgo, openports, wolfram
-        plus various fixes.
+        plus various fixes/maintenance.
 
 Jason Ryan <jasonwryan@surfraw.org>
         elvi: archwiki, deli, github, stack, pin
@@ -138,6 +138,7 @@ Shain Singh <shain.singh@gmail.com>
 Manolo Martínez <manolo@austrohungaro.com>
         examples: elinks integration (hooks.lua)
 
+
 THANKS TO
 
 Brian Nelson           <bnelson@bloodclot.net>
@@ -156,5 +157,7 @@ Dan Jacobson           <jidanni@jidanni.org>
 Sunil Nimmagadda       <sunil@devio.us>
 Michel                 <synth17+deb-bugs@gmail.com>
 Nikos Apostolakis      <nikos.ap@gmail.com>
+Facundo Aguirre        <legion82@gmail.com>
+Raphael Geissert       <atomo64@gmail.com>
 
 If we've missed anyone, let us know.
