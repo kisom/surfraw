@@ -47,7 +47,7 @@ Sun Oct  6 02:17:09 BST 2013  - surfraw 2.2.9
             can now choose which search engine to use.
             So far, google and duckduckgo are supported, with duckduckgo the default.
           + Affected elvi: mdn, mysqldoc, netbsd, openbsd, pgdoc, slinuxdoc
-          + To select on the commandline use -custom-search=google or-custom-search=duckduckgo
+          + To select on the commandline use -custom-search=google or -custom-search=duckduckgo
           + Or configure SURFRAW_customsearch_provider
         * New variable: SURFRAW_bookmark_search_elvis
 	  When using searchable bookmarks, if all else fails run this elvis.
@@ -55,9 +55,8 @@ Sun Oct  6 02:17:09 BST 2013  - surfraw 2.2.9
         * New example elinks integration script in examples/hooks.lua.
         * Debian packaging now included in release, in debian/ dir.
         * Known problems
-          + ntrs - site (temporarily?) down due to US being weird:
-            http://blogs.fas.org/secrecy/2013/03/ntrs_dark/
           + fink - down temporarily
+          + deblogs - down (hopefully) temporarily
 
 Tue Jul 12 00:46:02 BST 2011  - surfraw 2.2.8
 
