@@ -1,0 +1,73 @@
+#!/bin/sh
+# elvis: yacy		-- Search YaCy P2P search, including ScienceNet
+. surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_yacy_results   "$SURFRAW_results"
+    def   SURFRAW_yacy_site      search.yacy.net
+    defyn SURFRAW_yacy_image     no
+    defyn SURFRAW_yacy_indexonly no
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search YaCy P2P search, including ScienceNet
+Local options:
+  -i, -images                   Image Search
+  -I, -indexonly                Constrain search to index pages
+  -S                            search ScienceNet (sciencenet.kit.edu)
+  -s=SITE, --site=SITE          Search SITE
+                                Default: $SURFRAW_yacy_site
+                                Environment: SURFRAW_yacy_site
+  -results=NUM                  Number of search results returned
+                                Default: $SURFRAW_yacy_results
+                                Environment: SURFRAW_yacy_results
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -i|-ima*) setoptyn SURFRAW_yacy_image     yes                ;;
+    -I|-ind*) setoptyn SURFRAW_yacy_indexonly yes                ;;
+    -S)       setopt   SURFRAW_yacy_site      sciencenet.kit.edu ;;
+    -s=*)     setopt   SURFRAW_yacy_site      "$optarg"          ;;
+    -r*=*)    setopt   SURFRAW_yacy_results   "$optarg"          ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+
+url="http://${SURFRAW_yacy_site}/"
+
+if test -z "$w3_args" ; then
+    w3_browse_url "$url"
+else
+    escaped_args=$(w3_url_of_arg $w3_args)
+    url="${url}yacysearch.html?query=${escaped_args}&maximumRecords=${SURFRAW_yacy_results}"
+
+    searchtype=text
+    if ifyes SURFRAW_yacy_image
+    then
+        searchtype=image
+    fi
+    url="${url}&contentdom=${searchtype}"
+    
+    if ifyes SURFRAW_yacy_indexonly
+    then
+        url="${url}&indexof=on"
+    fi
+
+    url="${url}&Enter=Suchen&verify=ifexist&contentdom=text&nav=filetype%2Cprotocol%2Chosts%2Cnamespace%2Ctopics&startRecord=0&indexof=off&meanCount=5&resource=global&prefermaskfilter="
+
+    w3_browse_url "$url"
+fi
+
+

@@ -120,6 +120,7 @@ dist_elvi_SCRIPTS	= \
 		  woffle \
 		  wolfram \
 		  worldwidescience \
+		  yacy \
 		  yahoo \
 		  yandex \
 		  youtube \

@@ -1,5 +1,7 @@
 2013-10-20  Ian Beckwith  <ianb@erislabs.net>
 
+	* new elvi: yacy: search using yacy p2p search.
+	  -S searches ScienceNet, a yacy-based science search engine.
 	* rae: fix url, remove -tipo option (no longer supported),
 	  disable test as there is now gratuitous javascript.
 

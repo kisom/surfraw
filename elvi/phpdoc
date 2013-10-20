@@ -1,5 +1,5 @@
 #!/bin/sh
-# elvis: phpdoc    -- Search PHP documentation (php.net)
+# elvis: phpdoc		-- Search PHP documentation (php.net)
 # Author: http://jonyamo.net
 
 . surfraw || exit 1

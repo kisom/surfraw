@@ -30,6 +30,7 @@ Sun Oct  6 02:17:09 BST 2013  - surfraw 2.2.9
           + phpdoc - search PHP documentation
           + pin - search pinboard.in
           + wolfram - search Wolfram Alpha
+          + yacy - search YaCy P2P search engines, including ScienceNet
         * Changed elvi:
           + aur - uses HTTPS by default, use -no-https to disable
           + deblists

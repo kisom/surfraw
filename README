@@ -290,6 +290,7 @@ wikipedia       -- Search the free encyclopedia wikipedia
 woffle          -- Search the web using Woffle (localhost:8080)
 wolfram         -- Ask questions of the computational knowledge engine
 worldwidescience -- Search for science with www.worldwidescience.org
+yacy            -- Search YaCy P2P search, including ScienceNet
 yahoo           -- Search Yahoo categories (www.yahoo.com)
 yandex          -- Search the web using Yandex (yandex.ru)
 youtube         -- Search YouTube (www.youtube.com)
