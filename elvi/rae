@@ -4,43 +4,23 @@
 # Author: Ruben Pollan <meskio@terra.es>
 . surfraw || exit 1
 
-w3_config_hook () {
-def   SURFRAW_rae_tipo 0
-}
 
 w3_usage_hook () {
     cat <<EOF
 Usage: $w3_argv0 [options] [search words]...
 Description:
   Busca en el diccionario de la Real Academia de la Lengua Española (Spanish Dictionary)
-Local options:
-  -tipo=                        Tipo de busqueda
-          0             |       Busqueda exacta
-          1             |       Busqueda sin signos diacriticos
-          2             |       Semejanza fonetico-ortografica
-          3             |       Busqueda escalonada
-                                Default: $SURFRAW_rae_tipo
-                                Environment: SURFRAW_rae_tipo
 EOF
     w3_global_usage
 }
 
-w3_parse_option_hook () {
-    opt="$1"
-    optarg="$2"
-    case "$opt" in
-    	-tipo=*)  setopt SURFRAW_rae_tipo $optarg ;;
-	*)        return 1 ;;
-    esac
-    return 0
-}
-
 w3_config
+
 w3_parse_args "$@"
 # w3_args now contains a list of arguments
 if null "$w3_args"; then
-    w3_browse_url "http://www.rae.es/drae/"
+    w3_browse_url "http://lema.rae.es/drae/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-    w3_browse_url "http://www.rae.es/drae/srv/search?type=${SURFRAW_rae_tipo}=&val=${escaped_args}"
+    w3_browse_url "http://lema.rae.es/drae/?val=${escaped_args}"
 fi

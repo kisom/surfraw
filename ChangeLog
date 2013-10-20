@@ -1,3 +1,8 @@
+2013-10-20  Ian Beckwith  <ianb@erislabs.net>
+
+	* rae: fix url, remove -tipo option (no longer supported),
+	  disable test as there is now gratuitous javascript.
+
 2013-10-06  Ian Beckwith  <ianb@erislabs.net>
 
 	* Replaced phpdoc with version posted back in
