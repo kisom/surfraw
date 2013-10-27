@@ -1,4 +1,4 @@
 SURFRAW_customsearch_provider=duckduckgo pgdoc select
 SELECT.*DISTINCT
 SURFRAW_customsearch_provider=duckduckgo pgdoc -v=9.1 select
-The syntax of the RETURNING list
+Documentation: 9.1

@@ -1,3 +1,8 @@
+2013-10-27  Ian Beckwith  <ianb@erislabs.net>
+
+	* surfraw.IN: w3_custom_search_google: don't give full path to surfraw.
+	* pgdoc, wayback: fixed tests.
+
 2013-10-20  Ian Beckwith  <ianb@erislabs.net>
 
 	* new elvi: yacy: search using yacy p2p search.

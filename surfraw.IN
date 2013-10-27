@@ -514,7 +514,7 @@ w3_custom_search_google() {
     params=$(eval w3_custom_search_mangle -s site: $*)
     params=$(eval w3_custom_search_mangle -u inurl: $params)
     params=$(eval w3_custom_search_inurl_quote_dots $params)
-    url="$(eval /usr/bin/surfraw google -p $params )"
+    url="$(eval surfraw google -p $params )"
     w3_browse_url "$url"
 }
 
