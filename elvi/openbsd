@@ -74,7 +74,7 @@ if ok SURFRAW_openbsd_mail; then
     if test -z "$escaped_args"; then
         w3_browse_url "http://www.openbsd.org/mail.html"
     else
-	w3_browse_url "http://groups.google.com/groups?q=group%3Amailing.openbsd.*+${escaped_args}&hl=en"
+        w3_browse_url "http://search.gmane.org/?query=${escaped_args}&sort=relevance&DEFAULTOP=and&group=gmane.os.openbsd.*"
     fi
     exit $?
 fi

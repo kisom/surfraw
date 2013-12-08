@@ -11,22 +11,22 @@ EXTRA_DIST = runtests elviwithouttests README COOKIES W.test S.test		\
        duckduckgo.test ebay.test etym.test excite.test f5.test			\
        finkpkg.test foldoc.test freebsd.test freedb.test				\
        freshmeat.test fsfdir.test gcache.test genbugs.test				\
-       genportage.test github.test google.test gutenberg.test			\
-       imdb.test ixquick.test jamendo.test javasun.test jquery.test		\
-       lastfm.test leodict.test l1sp.test lsm.test macports.test		\
-       mathworld.test mdn.test mininova.test musicbrainz.test			\
-       mysqldoc.test netbsd.test ntrs.test openbsd.test					\
-       openports.test opensearch.test oraclesearch.test pasearch.test	\
-       pgdoc.test phpdoc.test pin.test piratebay.test pgpkeys.test		\
-       priberam.test pubmed.test rae.test rfc.test rhyme.test			\
-       rpmsearch.test scholar.test scicom.test scitopia.test			\
-       scirus.test scpan.test slashdot.test slinuxdoc.test				\
-       sourceforge.test springer.test stack.test stockquote.test		\
-       thesaurus.test translate.test urban.test w3css.test				\
-       w3html.test w3link.test w3rdf.test wayback.test webster.test		\
-       wetandwild.test wikipedia.test wolfram.test woffle.test			\
-       worldwidescience.test yacy.test yahoo.test yandex.test			\
-       youtube.test yubnub.test
+       genportage.test github.test gmane.test google.test				\
+       gutenberg.test imdb.test ixquick.test jamendo.test				\
+       javasun.test jquery.test lastfm.test leodict.test l1sp.test		\
+       lsm.test macports.test mathworld.test mdn.test mininova.test		\
+       musicbrainz.test mysqldoc.test netbsd.test ntrs.test				\
+       openbsd.test openports.test opensearch.test oraclesearch.test	\
+       pasearch.test pgdoc.test phpdoc.test pin.test piratebay.test		\
+       pgpkeys.test priberam.test pubmed.test rae.test rfc.test			\
+       rhyme.test rpmsearch.test scholar.test scicom.test				\
+       scitopia.test scirus.test scpan.test slashdot.test				\
+       slinuxdoc.test sourceforge.test springer.test stack.test			\
+       stockquote.test thesaurus.test translate.test urban.test			\
+       w3css.test w3html.test w3link.test w3rdf.test wayback.test		\
+       webster.test wetandwild.test wikipedia.test wolfram.test			\
+       woffle.test worldwidescience.test yacy.test yahoo.test			\
+       yandex.test youtube.test yubnub.test
 
 test:
 	./runtests

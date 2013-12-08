@@ -1,0 +1,85 @@
+#!/bin/sh
+# elvis: gmane		-- Search mailing list with gmane (gmane.org)
+. surfraw || exit 1
+
+w3_config_hook () {
+    defyn SURFRAW_gmane_or 0
+    defyn SURFRAW_gmane_listsearch   0
+    def   SURFRAW_gmane_list         ""
+    def   SURFRAW_gmane_author       ""
+    def   SURFRAW_gmane_sort         "relevance"
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search mailing lists with gmane (gmane.org)
+Local options:
+  -list=LIST                    Search list(s)
+                                eg -l=gmane.os.openbsd.vax or -l="gmane.os.openbsd.*"
+  -L                            Search by list name instead of contents
+  -author=NAME                  Limit search to posts by NAME
+                                Default: $SURFRAW_gmane_results
+                                Environment: SURFRAW_gmane_results
+  -sort=                        Sort by:
+         relevance              Relevance
+         date                   Newest first
+         revdate                Oldest first
+  -or                           OR search results instead of ANDing.
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -li*=*)     setopt   SURFRAW_gmane_group      "$optarg" ;;
+    -au*=*)     setopt   SURFRAW_gmane_author     "$optarg" ;;
+    -so*=*)     setopt   SURFRAW_gmane_sort       "$optarg" ;;
+    -L)         setoptyn SURFRAW_gmane_listsearch 1 ;;
+    -or)        setoptyn SURFRAW_gmane_or         1 ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+
+if test -z "$w3_args"
+then
+    if ifyes SURFRAW_gmane_listsearch
+    then
+        url=http://gmane.org/find.php
+    else
+        url=http://search.gmane.org/
+    fi
+else
+    escaped_args=`w3_url_of_arg $w3_args`
+    if ifyes SURFRAW_gmane_listsearch
+    then
+        url="http://dir.gmane.org/search.php?match=${escaped_args}"
+    else
+        url="http://search.gmane.org/?query=${escaped_args}&sort=${SURFRAW_gmane_sort}"
+        if [ "$SURFRAW_gmane_author" != "" ]
+        then
+            url="${url}&author=${SURFRAW_gmane_author}"
+        fi
+        if ifyes SURFRAW_gmane_or
+        then
+            url="${url}&DEFAULTOP=or"
+        else
+            url="${url}&DEFAULTOP=and"
+        fi
+        if [ "${SURFRAW_gmane_group}" != "" ]
+        then
+            url="${url}&group=${SURFRAW_gmane_group}"
+        fi
+    fi
+fi
+
+w3_browse_url "$url"
+
+

@@ -1,4 +1,4 @@
 SURFRAW_customsearch_provider=duckduckgo pgdoc select
 SELECT.*DISTINCT
 SURFRAW_customsearch_provider=duckduckgo pgdoc -v=9.1 select
-Documentation: 9.1
+Documentation:.*9.1

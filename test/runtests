@@ -186,6 +186,7 @@ sub testelvis
 	else
 	{
 	    print "FAIL: No Match";
+#	    print $content;
 	    push(@results,$FAIL);
 	}
     }

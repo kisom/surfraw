@@ -1,3 +1,9 @@
+2013-12-08  Ian Beckwith  <ianb@erislabs.net>
+
+	* new elvi: gmane
+	* openbsd -mail: use gmane (directly, not via gmane elvi)
+	* fix tests: ads, pgdoc, pin, yacy
+
 2013-10-27  Ian Beckwith  <ianb@erislabs.net>
 
 	* surfraw.IN: w3_custom_search_google: don't give full path to surfraw.

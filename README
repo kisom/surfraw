@@ -230,6 +230,7 @@ gcache          -- Search the web using Google cache (www.google.com)
 genbugs         -- Search the Gentoo bug tracker (bugs.gentoo.org)
 genportage      -- Search gentoo-portage.com for packages
 github          -- Search GitHub (https://github.com)
+gmane           -- Search mailing list with gmane (gmane.org)
 google          -- Search the web using Google (www.google.com)
 gutenberg       -- Search for books on Project Gutenberg (gutenberg.org)
 imdb            -- Search the Internet Movie Database (www.imdb.com)

@@ -60,8 +60,9 @@ dist_elvi_SCRIPTS	= \
 		  genbugs \
 		  genportage \
 		  github \
-		  gutenberg \
+		  gmane \
 		  google \
+		  gutenberg \
 		  imdb \
 		  ixquick \
 		  jamendo \
