@@ -56,9 +56,9 @@ Sun Oct  6 02:17:09 BST 2013  - surfraw 2.2.9
           Defaults to google
         * New example elinks integration script in examples/hooks.lua.
         * Debian packaging now included in release, in debian/ dir.
-        * Known problems
-          + fink - down temporarily
+        * Known problems at time of release
           + deblogs - down (hopefully) temporarily
+          + yacy - demo portal down, ScienceNet still up
 
 Tue Jul 12 00:46:02 BST 2011  - surfraw 2.2.8
 
