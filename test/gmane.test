@@ -1,4 +1,4 @@
-gmane -l="gmane.os.openbsd.*" Raadt
+gmane -li="gmane.os.openbsd.*" Raadt
 Theo
 gmane -L openbsd
 gmane.os.openbsd
