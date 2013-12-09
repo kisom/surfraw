@@ -1,3 +1,11 @@
+2013-12-09  Ian Beckwith  <ianb@erislabs.net>
+
+	* deja: disable tests, google groups now requires javascript.
+	* gmane: fix test.
+	* codesearch: removed, service shut down.
+	* scitopia: removed, service shut down.
+	* scicom: down, status unknown, made note in NEWS.
+
 2013-12-08  Ian Beckwith  <ianb@erislabs.net>
 
 	* new elvi: gmane
