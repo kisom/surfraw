@@ -5,8 +5,8 @@ Maintainer: Debian surfraw maintainers <surfraw-devel@lists.alioth.debian.org>
 Uploaders: Christian Surchi <csurchi@debian.org>, Ian Beckwith <ianb@debian.org>
 Standards-Version: 3.9.4
 Build-Depends: debhelper (>= 7)
-Vcs-Git: git://git.debian.org/surfraw/surfraw.git
-Vcs-Browser: http://git.debian.org/?p=surfraw/surfraw.git
+Vcs-Git: git://anonscm.debian.org/surfraw/surfraw.git
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=surfraw/surfraw.git
 Homepage: http://surfraw.alioth.debian.org
 
 Package: surfraw

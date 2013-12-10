@@ -6,8 +6,9 @@ surfraw (2.2.9-1) unstable; urgency=low
   * Standards-Version: 3.9.4 (no changes).
   * update debian/copyright.
   * switch to source format 3.0 (quilt).
+  * update Vcs-Browser fields.
 
- -- Ian Beckwith <ianb@debian.org>  Mon, 09 Dec 2013 15:09:58 +0000
+ -- Ian Beckwith <ianb@debian.org>  Tue, 10 Dec 2013 17:03:19 +0000
 
 surfraw (2.2.8-1) unstable; urgency=low
 
