@@ -195,7 +195,6 @@ cisco           -- Search Cisco documentation (www.cisco.com)
 cite            -- Search computer science papers (citeseerx.ist.psu.edu)
 cliki           -- Search the common lisp wiki
 cnn             -- Search on CNN (cnn.com)
-codesearch      -- Search source code using Google Code Search (www.google.fr/codesearch)
 comlaw          -- Search Australian Law using Comlaw (www.comlaw.gov.au)
 ctan            -- Search the Comprehensive TeX Archive Network (ctan.org)
 currency        -- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
@@ -269,7 +268,6 @@ rpmsearch       -- Search for RPMs in various distros
 scholar         -- Search Google Scholar (scholar.google.com)
 scicom          -- Search Scientific Commons
 scirus          -- Search for science using Scirus (scirus.com)
-scitopia        -- Search for science with scitopia.org
 scpan           -- Search the Comprehensive Perl Archive Network (search.cpan.org)
 slashdot        -- Search stories on Slashdot (www.slashdot.org)
 slinuxdoc       -- Search entries in LDP (www.linuxdoc.org)

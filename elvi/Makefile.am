@@ -25,7 +25,6 @@ dist_elvi_SCRIPTS	= \
 		  cite \
 		  cliki \
 		  cnn \
-		  codesearch \
 		  comlaw \
 		  ctan \
 		  currency \
@@ -98,7 +97,6 @@ dist_elvi_SCRIPTS	= \
 		  rpmsearch \
 		  scholar \
 		  scicom \
-		  scitopia \
 		  scirus \
 		  scpan \
 		  slashdot \

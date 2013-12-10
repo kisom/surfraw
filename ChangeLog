@@ -1,6 +1,7 @@
 2013-12-10  Ian Beckwith  <ianb@erislabs.net>
 
 	* yandex: disabled test: redirects to captcha when used with LWP.
+	* Fix make distcheck: remove last traces of codesearch and scitopia.
 
 2013-12-09  Ian Beckwith  <ianb@erislabs.net>
 
