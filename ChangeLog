@@ -1,3 +1,7 @@
+2013-12-10  Ian Beckwith  <ianb@erislabs.net>
+
+	* yandex: disabled test: redirects to captcha when used with LWP.
+
 2013-12-09  Ian Beckwith  <ianb@erislabs.net>
 
 	* deja: disable tests, google groups now requires javascript.
