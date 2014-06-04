@@ -248,6 +248,7 @@ mininova        -- Search the mininova bittorent source.
 musicbrainz     -- Search MusicBrainz (musicbrainz.org)
 mysqldoc        -- Search mysql documentation (dev.mysql.com)
 netbsd          -- Search NetBSD related information (www.netbsd.org)
+nlab            -- Search the nLab wiki (http://ncatlab.org)
 ntrs            -- Search the NASA Technical Report Server
 openbsd         -- Search OpenBSD related information (www.openbsd.org)
 openports       -- search openports for OpenBSD packages

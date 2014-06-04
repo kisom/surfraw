@@ -1,3 +1,7 @@
+2104-06-04  Jason Ryan <jasonwryan@gmail.com>
+	
+	* new elvi: nlab
+
 2013-12-10  Ian Beckwith  <ianb@erislabs.net>
 
 	* yandex: disabled test: redirects to captcha when used with LWP.

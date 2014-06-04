@@ -78,6 +78,7 @@ dist_elvi_SCRIPTS	= \
 		  musicbrainz \
 		  mysqldoc \
 		  netbsd \
+		  nlab \
 		  ntrs \
 		  openbsd \
 		  openports \
