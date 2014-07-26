@@ -17,7 +17,7 @@ Local options:		Specialized search on topic
   -news		|	News
   -images	|	Images
   -market	|	Market
-  -maps		|	Maps (not implemented)
+  -maps		|	Maps
 EOF
     w3_global_usage
 }
@@ -29,7 +29,8 @@ w3_parse_option_hook () {
       -dict)   search="search.xml?" opt=slovari ;;
       -news)   search="yandsearch?rpt=nnews2\&" ;;
       -market) search="search.xml?" ;;
-      -images|-maps) : ;;
+      -images) search="search?" ;;
+      -maps)   search="?" ;;
        *)      return 1
     esac
     setopt SURFRAW_yandex_domain "${opt:+${opt#-}.}"
