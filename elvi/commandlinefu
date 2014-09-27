@@ -1,0 +1,65 @@
+#!/bin/sh
+# $Id$
+# elvis: commandlinefu		-- search on www.commandlinefu.com
+# The API of the site is described at http://www.commandlinefu.com/site/api.
+. surfraw || exit 1
+
+w3_config_hook () {
+    defyn SURFRAW_commandlinefu_votes  1
+    def   SURFRAW_commandlinefu_format html
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Surfraw search www.commandlinefu.com
+Local options:
+  -html                         get results as html
+  -txt                          get results as plain text
+  -json                         get results as json
+  -rss                          get results as rss data
+                                Default: $SURFRAW_commandlinefu_format
+  -v, -s, -votes, -sort         sort results by votes
+  -u, -n, -unsort, -nosort      do not sort results
+                                Default: $SURFRAW_commandlinefu_votes
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -json)                 setopt   SURFRAW_commandlinefu_format json      ;;
+    -html)                 setopt   SURFRAW_commandlinefu_format html      ;;
+    -rss)                  setopt   SURFRAW_commandlinefu_format rss       ;;
+    -txt)                  setopt   SURFRAW_commandlinefu_format plaintext ;;
+    -v|-votes|-s|-sort)    setoptyn SURFRAW_commandlinefu_votes  1         ;;
+    -u|-unsort|-n|-nosort) setoptyn SURFRAW_commandlinefu_votes  0         ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+url=http://www.commandlinefu.com/commands/matching
+# The next part of the url is a normalized plaintext version of the search
+# query.  It seems to be unused by the CGI but it needs to be present. So we
+# normalize to "x".
+url=$url/x
+# What is really used is the base64 encoded query. (echo -n is not portable)
+url=$url/"`printf %s "$w3_args" | base64`"
+# possibly add the sorting option
+if test $SURFRAW_commandlinefu_votes -eq 1; then
+    url="$url/sort-by-votes"
+fi
+# add the output format option
+if test $SURFRAW_commandlinefu_format != html; then
+    url="$url/$SURFRAW_commandlinefu_format"
+fi
+
+w3_browse_url "$url"

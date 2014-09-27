@@ -196,6 +196,7 @@ cite            -- Search computer science papers (citeseerx.ist.psu.edu)
 cliki           -- Search the common lisp wiki
 cnn             -- Search on CNN (cnn.com)
 comlaw          -- Search Australian Law using Comlaw (www.comlaw.gov.au)
+commandlinefu   -- Search on www.commandlinefu.com
 ctan            -- Search the Comprehensive TeX Archive Network (ctan.org)
 currency        -- Convert currencies with the Universal Currency Converter (www.xe.net/ucc)
 cve             -- Search for CAN assignments in CVE
