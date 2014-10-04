@@ -71,7 +71,7 @@ if($@)
 	elsif(($@ =~/parsing/i) ||
 		  ($@ =~/node\s+should/i))
 	{
-		$errstr="Error parsing OpenSearch Description at $url"; 
+		$errstr="Error parsing OpenSearch Description at $url";
 		$exitcode=2;
 	}
 	else
@@ -143,7 +143,7 @@ if(!defined($besturl))
 	}
 	exit 3;
 }
-	
+
 print $besturl->prepare_query(\%options),"\n";
 
 exit 0;
@@ -196,7 +196,7 @@ I<URL> S<I<SEARCH TERMS...>>
 
 Output the URL of a query generated from an OpenSearch Description
 file at I<URL>, with the specified S<I<SEARCH TERMS>> and other
-options filled in. 
+options filled in.
 
 If multiple search types are available, B<-H>,
 B<-A> and B<-R> can be used to specify which type is wanted. For

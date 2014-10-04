@@ -54,5 +54,5 @@ if test -z $SURFRAW_openports_stype ; then
 else
     url="${SURFRAW_openports_search}stype=${SURFRAW_openports_stype}&so=${escaped_args}"
 fi
-    
+
 w3_browse_url $url

@@ -324,7 +324,7 @@ relevant config files.
   * Fixed surfraw help text
   * Added man page links for pgpkeys, ebay and sharereactor
   * Added linda override (and surfraw.dirs) for usr-lib-in-arch-all
-  * Added debhelper tokens to prerm/postinst 
+  * Added debhelper tokens to prerm/postinst
     (they were in released 2.0-1 but not CVS)
   * Rewrote man page surfraw.1.in, added man page elvi.1sr.in
     Both go via autoconf.
@@ -355,7 +355,7 @@ relevant config files.
   * added elvi/surfraw_elvi to CLEANFILES & removed it from cvs, as it is
     generated on build.
   * disabled ifs quoting in elvi that don't like it:
-    freedb, happypenguin, jake, rhyme, scaleplus, 
+    freedb, happypenguin, jake, rhyme, scaleplus,
         sharereactor, thesaurus, webster, deblists.
   * Added note to HACKING explaining how to disable ifs quoting
   * synced NAMESPACE branch with HEAD

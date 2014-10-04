@@ -16,7 +16,7 @@ Usage: $w3_argv0 [options] [search words]...
 Description:
   Surfraw search the web using wolfram (www.wolfram.com)
 Local options:
-    (null) 
+    (null)
 EOF
     w3_global_usage
 }

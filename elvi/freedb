@@ -83,7 +83,7 @@ w3_parse_option_hook () {
     -cat*=*) if [ "$optarg" = "all" ]; then
             setoptyn SURFRAW_freedb_allcats 1
             SURFRAW_freedb_cats=""
-        else 
+        else
             setoptyn SURFRAW_freedb_allcats 0
             SURFRAW_freedb_cats="${SURFRAW_freedb_cats}&cats%5B%5D=$optarg"
         fi

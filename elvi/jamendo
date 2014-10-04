@@ -57,7 +57,7 @@ else
         de|german)  setopt   SURFRAW_jamendo_lang de  ;;
         it|italian) setopt   SURFRAW_jamendo_lang it  ;;
         pt|portuguese) setopt   SURFRAW_jamendo_lang  br;;
-        pl|polish)  setopt   SURFRAW_jamendo_lang pl  ;; 
+        pl|polish)  setopt   SURFRAW_jamendo_lang pl  ;;
         ru|russian) setopt   SURFRAW_jamendo_lang ru  ;;
         es|spanish) setopt   SURFRAW_jamendo_lang es  ;;
 	*)          setopt   SURFRAW_jamendo_lang en  ;;

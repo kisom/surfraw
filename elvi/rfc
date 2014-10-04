@@ -37,10 +37,10 @@ Local options:
   -ftp                          Retrieve RFCs via FTP instead of HTTP
   -field=                       Which field to search
           all           |       All fields
-          number        |       
-          title         |       
-          author        |       
-          keyword              
+          number        |
+          title         |
+          author        |
+          keyword
                                 Default: if args are numeric, "number",
                                 else "all"
                                 Environment: SURFRAW_rfc_field
@@ -149,39 +149,39 @@ else
                 *)      url="$url&opt=All+Fields";;
             esac
         fi
-            
+
         url="$url&num=$SURFRAW_rfc_results"
         url="$url&filefmt=$SURFRAW_rfc_output"
         url="$url&search_doc=search_$SURFRAW_rfc_search"
-            
+
         if ifyes SURFRAW_rfc_matchexact
-        then    
+        then
             url="$url&match_method=entire"
         else
             url="$url&match_method=prefix"
         fi
-            
+
         if ifyes SURFRAW_rfc_showabs
         then
             url="$url&abstract=abson"
         else
             url="$url&abstract=absoff"
         fi
-            
+
         if ifyes SURFRAW_rfc_showkw
         then
             url="$url&keywords=keyon"
         else
             url="$url&keywords=keyoff"
         fi
-            
+
         if ifyes SURFRAW_rfc_reverse
         then
             url="$url&sort_method=older"
         else
             url="$url&sort_method=newer"
         fi
-            
+
         if ifyes SURFRAW_rfc_ftp
         then
             url="$url&format=ftp"

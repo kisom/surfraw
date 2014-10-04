@@ -2,7 +2,7 @@
 # $Id$
 # elvis: cnn		-- Search on CNN (cnn.com)
 # version 0.1 by Ross Campbell rcampbel3@yahoo.com
-# version 0.2 updated url 
+# version 0.2 updated url
 . surfraw || exit 1
 
 w3_usage_hook () {

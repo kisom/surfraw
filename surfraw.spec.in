@@ -8,15 +8,15 @@
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-Vendor:		Julian Assange 
+Vendor:		Julian Assange
 Packager:	Julian Assange proff-projects-surfraw@iq.org
-#URL:		
+#URL:
 Source:         %{name}-%{version}.tar.gz
-#Patch:		
+#Patch:
 Group:		Application/Generic
 Copyright:	GPL
-#Icon:		
-#Requires:	
+#Icon:
+#Requires:
 BuildRoot:	/var/tmp/%{name}-%{version}
 BuildArchitectures:    noarch
 
@@ -45,7 +45,7 @@ Summary:	Shell Users Revolutionary Front Rage Against the Web
          $ rhyme -method=perfect Julian
 @configure_input@
 %prep
-%setup -n %{name}-%{version} 
+%setup -n %{name}-%{version}
 #%patch -p1
 
 %build

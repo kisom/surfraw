@@ -33,7 +33,7 @@ Local options:
                                 Environment: SURFRAW_w3link_dhidedrd
   -nolang                       Don't send the Accept-Language: header.
                                 Environment: SURFRAW_w3link_noacceptlanguage
-  -cookie                       Save options in a cookie. 
+  -cookie                       Save options in a cookie.
                                 Environment: SURFRAW_w3link_cookie
 EOF
     w3_global_usage

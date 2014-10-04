@@ -99,7 +99,7 @@ else
 		print STDERR "Shell $shell not supported, please manually add $elvidir to your \$PATH\n";
 		exit $ERROR;
 	}
-	
+
 	exit($shells{$shell}($action,$sys));
 }
 
@@ -161,7 +161,7 @@ sub sh_bash
 	}
 }
 
-sub sh_zsh 
+sub sh_zsh
 {
 	my($action,$sys)=@_;
 	if($sys)
@@ -231,7 +231,7 @@ sub sh_es
 sub scan
 {
 	my($file,$action,$sys,$type)=@_;
-	if(-e $file) 
+	if(-e $file)
 	{
 		# file exists
 		my $mode="<";
@@ -351,7 +351,7 @@ sub scan
 				print STDERR "$me: Error closing $file: $!\n";
 				return $ERROR;
 			}
-			chmod(0644,$file) or warn("$me: Could not set permissions on $file: $!\n");	
+			chmod(0644,$file) or warn("$me: Could not set permissions on $file: $!\n");
 			print "$me: Added surfraw config code to $file\n";
 			return $OK;
 		}
@@ -401,7 +401,7 @@ surfraw-update-path - updates PATH in shell config files
 
 =head1 SYNOPSIS
 
-surfraw-update-path [B<-add>] [B<-remove>] [B<-check>] [B<-sys>] [B<-all>] [B<-help>] [B<-shell>=I<SHELL>] 
+surfraw-update-path [B<-add>] [B<-remove>] [B<-check>] [B<-sys>] [B<-all>] [B<-help>] [B<-shell>=I<SHELL>]
 
 =head1 DESCRIPTION
 

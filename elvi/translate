@@ -20,7 +20,7 @@ Local options:
 
   -to=LANGUAGE		Destination language
 		        	Environment: SURFRAW_translate_to, SURFRAW_lang
-                        
+
 Languages (any provider):
   nl                Dutch
   en				English
@@ -59,7 +59,7 @@ Languages (Google only):
   ka                Georgian
   ht                Hatian Creole
   iw                Hebrew
-  hi                Hindi 
+  hi                Hindi
   hu                Hungarian
   is                Icelandic
   id                Indonesian

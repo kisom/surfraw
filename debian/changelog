@@ -88,7 +88,7 @@ surfraw (2.2.3-1) unstable; urgency=low
   * New upstream version.
     + Now defaults to graphical mode, see surfraw(1) for how to change it back.
   * Change default text browser to www-browser and default
-    graphical browser to sensible-browser. 
+    graphical browser to sensible-browser.
 
  -- Ian Beckwith <ianb@erislabs.net>  Tue, 26 Aug 2008 22:36:24 +0100
 
@@ -316,12 +316,12 @@ surfraw (2.1.1) unstable; urgency=low
     + Removed debconf information about new elvi structure, now that
       Sarge has been released with it. Moved it to README.Debian.
       (Closes: #313852, #312979, #319841, #319842)
-    + New elvis: yubnub (by Iain D Broadfoot) (Closes: #315188) 
+    + New elvis: yubnub (by Iain D Broadfoot) (Closes: #315188)
     + Removed unused SURFRAW_p0rn option (Closes: #324166)
     + Bumped standards version (no changes required)
     + Change to a native package, most of the elvis are now more or less
       Debian specific anyway
-	
+
  -- Moritz Muehlenhoff <jmm@inutil.org>  Fri, 29 Apr 2005 16:20:39 +0200
 
 surfraw (2.1.0-1) unstable; urgency=medium
@@ -391,7 +391,7 @@ surfraw (2.0.1-1) unstable; urgency=low
   * Fixed surfraw help text (Closes: #230109)
   * Added man page links for pgpkeys, ebay and sharereactor
   * Added linda override (and surfraw.dirs) for usr-lib-in-arch-all
-  * Added debhelper tokens to prerm/postinst 
+  * Added debhelper tokens to prerm/postinst
     (they were in released 2.0-1 but not CVS)
   * Rewrote man page surfraw.1.in, added man page elvi.1sr.in
     Both go via autoconf.
@@ -402,7 +402,7 @@ surfraw (2.0.1-1) unstable; urgency=low
   * Updated README with text from new man page.
   * Added "Copyright (c) 2003, 2004 The Surfraw-Devel Team
     <surfraw-devel@lists.alioth.debian.org>" to the list of copyright holders.
-  * Fixed quoting so   sr google foo "bar baz" qux   works 
+  * Fixed quoting so   sr google foo "bar baz" qux   works
   * Makefile.am: Added missing files to EXTRA_DIST
   * Added a debconf note (only visible if upgrading from 2.0-1)
     explaining the elvi have moved again.
@@ -424,7 +424,7 @@ surfraw (2.0.1-1) unstable; urgency=low
   * configure.in, elvi/Makefile.in: fixed ELVIDIR quoting
   * Added elvi/surfraw_elvi to CLEANFILES & removed it from cvs, as it is
     generated on build.
-  * Disabled ifs quoting in elvi that don't like it: 
+  * Disabled ifs quoting in elvi that don't like it:
     freedb, happypenguin, jake, rhyme, scaleplus, sharereactor
     thesaurus, webster, deblists.
   * Added note to HACKING explaining how to disable ifs quoting
@@ -469,7 +469,7 @@ surfraw (2.0-1) unstable; urgency=low
     - Complaint about correct behaviour (Closes: #173714).
     - Adds functionality already present in debcontents (Closes: #144080).
     - Obsoleted by sensible-browser (imho) (Closes: #155423).
-    
+
  -- Ian Beckwith <ianb@nessie.mcc.ac.uk>  Sun,  9 Nov 2003 22:02:44 +0000
 
 surfraw (1.0.7-3) unstable; urgency=low
@@ -502,13 +502,13 @@ surfraw (1.0.7-2) unstable; urgency=low
 
 surfraw (1.0.7-1) unstable; urgency=low
 
-  * New upstream release 
+  * New upstream release
   * New debian/rules with DH_COMPAT=3 too
   * Elvi: linuxdoc renamed to slinuxdoc
           translate renamed to stranslate
   * Removed unuseful scripts in debian directory
   * Removed emacs settings in changelog
-  
+
  -- Christian Surchi <csurchi@debian.org>  Sat,  2 Mar 2002 23:54:34 +0100
 
 surfraw (1.0.4-1) unstable; urgency=low

@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# author: Wim Van Hoydonck 
+# author: Wim Van Hoydonck
 #
 # elvis: springer	-- Search Springer for Books and Articles
 . surfraw || exit 1

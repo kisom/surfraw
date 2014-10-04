@@ -27,8 +27,8 @@ Local options:
                                 Environment: SURFRAW_w3css_profile
   -medium=MEDIUM                User Medium
                                 Default: $SURFRAW_w3css_medium
-                                Values: all, aural, braille, embossed, 
-                                        handheld, print, projection, 
+                                Values: all, aural, braille, embossed,
+                                        handheld, print, projection,
                                         screen, tty, tv, presentation
                                 Environment: SURFRAW_w3css_medium
 EOF

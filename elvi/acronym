@@ -17,7 +17,7 @@ w3_config_hook () {
     defyn SURFRAW_acronym_gen 0
     defyn SURFRAW_acronym_alpha 0
     defyn SURFRAW_acronym_attic 0
-    def   SURFRAW_acronym_path 
+    def   SURFRAW_acronym_path
     def   SURFRAW_acronym_par
 
 }
@@ -99,8 +99,8 @@ w3_parse_option_hook () {
 		setoptyn SURFRAW_acronym_wim   0
                 setoptyn SURFRAW_acronym_zip   0 ;;
 #Word(s) in meaning match
-    -w*)        setoptyn SURFRAW_acronym_wim   1 
-                setoptyn SURFRAW_acronym_exa   0 
+    -w*)        setoptyn SURFRAW_acronym_wim   1
+                setoptyn SURFRAW_acronym_exa   0
                 setoptyn SURFRAW_acronym_zip   0 ;;
 #Location (postal code, name) match
     -z*)        setoptyn SURFRAW_acronym_zip   1
@@ -157,7 +157,7 @@ else
         	par="Business"
 	elif [ "$SURFRAW_acronym_pop" = 1 ]; then
         	par="Slang"
-	fi   
+	fi
 	SURFRAW_acronym_par="$SURFRAW_acronym_par&Category=$par"
      fi
      if [ "$SURFRAW_acronym_alpha" = 1 ]; then

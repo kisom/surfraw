@@ -11,7 +11,7 @@ Description:
     Search the nLab Wiki (http://ncatlab.org)
 
     Local options:
-    The nLab wiki search accepts regular expressions as search terms.                                   
+    The nLab wiki search accepts regular expressions as search terms.
 
 EOF
     w3_global_usage

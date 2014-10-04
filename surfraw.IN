@@ -472,7 +472,7 @@ w3_browse_url () {
 	fi
     else
 	if ok SURFRAW_graphical_remote && test $mode = graphical; then
-		if ok SURFRAW_new_window; then 
+		if ok SURFRAW_new_window; then
 			newwin=", new-window"
 		else
 			newwin=""

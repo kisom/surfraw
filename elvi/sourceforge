@@ -53,7 +53,7 @@ if test -z "$w3_args"; then
     w3_browse_url "http://www.sourceforge.net/"
 else
     escaped_args=`w3_url_of_arg $w3_args`
-	if  `yesno SURFRAW_sourceforge_exact` 
+	if  `yesno SURFRAW_sourceforge_exact`
 	then
 		isexact=1
 	else

@@ -4,7 +4,7 @@ Upstream-Contact: Surfraw-Devel <surfraw-devel@lists.alioth.debian.org>
 Source: http://surfraw.alioth.debian.org/dist/
 Comment:
  This package has initially been debianized by Christian Surchi
- <csurchi@debian.org>  since Sat,  5 Aug 2000 18:59:30 +0200. 
+ <csurchi@debian.org>  since Sat,  5 Aug 2000 18:59:30 +0200.
  .
  surfraw has originally been developed by Julian Assange <proff@iq.org>,
  and was originally downloaded from ftp://ftp.netbsd.org/pub/NetBSD/misc/proff/
@@ -75,7 +75,7 @@ License: other
  FSF changes to this file are in the public domain.
 
 Files: Makefile.in */Makefile.in
-Copyright: © 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 
+Copyright: © 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002,
   2003, 2004, 2005, 2006  Free Software Foundation, Inc.
 License: other
  This Makefile.in is free software; the Free Software Foundation

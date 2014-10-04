@@ -1,6 +1,6 @@
 -- Using surfraw from elinks. To search using an elvi from
 -- the Go to URL dialog box, use the syntax "!elvis your
--- search terms". E.g., to search for 
+-- search terms". E.g., to search for
 -- Wargames torrents in piratebay, type "!piratebay
 -- wargames" in the Go to URL dialog box.
 --

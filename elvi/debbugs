@@ -38,7 +38,7 @@ Examples:
   debbugs surfraw               | show bugs for surfraw package
   debbugs -raw -rb surfraw      | show surfraw bugs newest first
 Defaults if -search is not supplied:
-  If arg is numeric, searches by bug number, 
+  If arg is numeric, searches by bug number,
   If it contains '@', searches by maintainer,
   Otherwise, searches by package.
 Local options:
@@ -78,7 +78,7 @@ Local options:
   -incsev=sev1,sev2             Include given severities.
   -exsev=sev3,sev4              Exclude given severities.
                                 Available severities:
-                                 critical, grave, serious, important, 
+                                 critical, grave, serious, important,
                                  normal, minor, wishlist, fixed.
   -inctag=tag1,tag2             Include given tags.
   -extag=tag3,tag4              Exclude given tags.
@@ -101,23 +101,23 @@ w3_parse_option_hook () {
 	-se*=*)      setopt   SURFRAW_debbugs_search     $optarg; setoptyn setsearch 1  ;;
 	-ve*=*)      setopt   SURFRAW_debbugs_version    $optarg ;;
 	-dis*=*)     setopt   SURFRAW_debbugs_dist       $optarg ;;
-	-arc*)       setoptyn SURFRAW_debbugs_archive    1;;  
-	-mer*)       setoptyn SURFRAW_debbugs_merge      1;;  
-	-raw*)       setoptyn SURFRAW_debbugs_statussort 0;;  
-	-noh*)       setoptyn SURFRAW_debbugs_head       0;;  
-	-nof*)       setoptyn SURFRAW_debbugs_foot       0;;  
-	-in*stat*=*) setopt   SURFRAW_debbugs_incstatus  $optarg;;  
-	-ex*stat*=*) setopt   SURFRAW_debbugs_excstatus  $optarg;;  
-	-in*sev*=*)  setopt   SURFRAW_debbugs_incsev     $optarg;;  
-	-ex*sev*=*)  setopt   SURFRAW_debbugs_excsev     $optarg;;  
-	-in*tag*=*)  setopt   SURFRAW_debbugs_inctag     $optarg;;  
+	-arc*)       setoptyn SURFRAW_debbugs_archive    1;;
+	-mer*)       setoptyn SURFRAW_debbugs_merge      1;;
+	-raw*)       setoptyn SURFRAW_debbugs_statussort 0;;
+	-noh*)       setoptyn SURFRAW_debbugs_head       0;;
+	-nof*)       setoptyn SURFRAW_debbugs_foot       0;;
+	-in*stat*=*) setopt   SURFRAW_debbugs_incstatus  $optarg;;
+	-ex*stat*=*) setopt   SURFRAW_debbugs_excstatus  $optarg;;
+	-in*sev*=*)  setopt   SURFRAW_debbugs_incsev     $optarg;;
+	-ex*sev*=*)  setopt   SURFRAW_debbugs_excsev     $optarg;;
+	-in*tag*=*)  setopt   SURFRAW_debbugs_inctag     $optarg;;
 	-ex*tag*=*)  setopt   SURFRAW_debbugs_exctag     $optarg;;
 	-rb*)        setoptyn SURFRAW_debbugs_revbugs    1;;
 	-rst*)       setoptyn SURFRAW_debbugs_revstat    1;;
 	-rse*)       setoptyn SURFRAW_debbugs_revsev     1;;
-	-mb*)        setoptyn SURFRAW_debbugs_asmbox     1;;  
-	-sh*)        setoptyn SURFRAW_debbugs_headers    1;;  
-	-bo*)        setoptyn SURFRAW_debbugs_boring     1;;  
+	-mb*)        setoptyn SURFRAW_debbugs_asmbox     1;;
+	-sh*)        setoptyn SURFRAW_debbugs_headers    1;;
+	-bo*)        setoptyn SURFRAW_debbugs_boring     1;;
 	*) return 1 ;;
     esac
     return 0
@@ -148,7 +148,7 @@ else
 	    setopt SURFRAW_debbugs_search "maint"
 	fi
     fi
-    
+
     if ifyes donum
     then
 	url="http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=${escaped_args}"

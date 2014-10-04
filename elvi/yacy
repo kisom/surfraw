@@ -59,7 +59,7 @@ else
         searchtype=image
     fi
     url="${url}&contentdom=${searchtype}"
-    
+
     if ifyes SURFRAW_yacy_indexonly
     then
         url="${url}&indexof=on"

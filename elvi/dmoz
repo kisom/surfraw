@@ -20,10 +20,10 @@ Description:
 Local options:
   -cat=CATEGORY                 Search category
                                 Default: all
-                                Values: Arts, Business, Computers, Games, 
+                                Values: Arts, Business, Computers, Games,
                                         Health, Home, Kids_and_Teens, News,
-                                        Recreation, Reference, Regional, 
-                                        Science, Shopping, Society, Sports, 
+                                        Recreation, Reference, Regional,
+                                        Science, Shopping, Society, Sports,
                                         World, Adult
                                 Environment: SURFRAW_dmoz_category
   -type=SEARCHTYPE              Search type

@@ -4,7 +4,7 @@
 # installing the bash-completion package which sets this explicitly.
 shopt -s extglob
 
-_surfraw() 
+_surfraw()
 {       COMPREPLY=()
 	local cur=${COMP_WORDS[COMP_CWORD]}
 	local prev=${COMP_WORDS[COMP_CWORD-1]}

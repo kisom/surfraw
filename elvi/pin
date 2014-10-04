@@ -18,17 +18,17 @@ Description:
     Surfraw search Pinboard bookmarks (http://pinboard.in)
 
     Local options:
-    Default search (without any options) includes tags, titles and descriptions 
+    Default search (without any options) includes tags, titles and descriptions
     and is not limited to a specific number of search terms.
 
     -popular    |  -p  Search popular tags
     -recent     |  -r  Search recent tags
 
-    -tags=TAGS  |  -t=TAGS  Only search tags (separate a maximum of 3 TAGS with 
+    -tags=TAGS  |  -t=TAGS  Only search tags (separate a maximum of 3 TAGS with
                    a "+" eg., unix+linux)
     -user=NAME  |  -u=NAME  Search a user's bookmarks
-                    
-                                       
+
+
 EOF
     w3_global_usage
 }
@@ -47,7 +47,7 @@ w3_parse_option_hook () {
 }
 
 # create tag string
-tags () {    
+tags () {
     local IFS=+
 
     for tag in $SURFRAW_pinboard_tags; do
@@ -71,8 +71,8 @@ elif [ "$SURFRAW_pinboard_popular" = 1 ]; then
 fi
 
 # Run through the other possibilities...
-if [ -z "$w3_args" ]; then  
-    
+if [ -z "$w3_args" ]; then
+
     if [ -n "$SURFRAW_pinboard_user" ] && [ -n "$SURFRAW_pinboard_tags" ]; then
         w3_browse_url "${base_url}u:$SURFRAW_pinboard_user/$(tags)"
 

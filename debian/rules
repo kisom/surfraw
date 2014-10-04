@@ -31,7 +31,7 @@ build-arch: build-stamp
 
 build-indep: build-stamp
 
-build-stamp: configure-stamp 
+build-stamp: configure-stamp
 	dh_testdir
 
 	# Add here commands to compile the package.

@@ -21,7 +21,7 @@ Local options:
              artists      |
              labels       |
              releases     |
-             catno     
+             catno
                                 Default: $SURFRAW_discogs_category
                                 Environment: SURFRAW_discogs_category
 EOF
@@ -32,7 +32,7 @@ w3_parse_option_hook()
 {
  opt="$1"
  optarg="$2"
- 
+
  case "$opt" in
   -category=*) setopt SURFRAW_discogs_category $optarg ;;
   *) return 1 ;;

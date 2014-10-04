@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# author: Wim Van Hoydonck 
+# author: Wim Van Hoydonck
 #
 # elvis: ntrs		-- Search the NASA Technical Report Server
 . surfraw || exit 1
@@ -75,7 +75,7 @@ if null "$w3_args"; then
     w3_browse_url "http://ntrs.nasa.gov/search.jsp"
 else
     # TODO: combine multiple searches, e.g.
-    # first search the abstract for certain keywords, 
+    # first search the abstract for certain keywords,
     # then search the authors of those results
     # this gives urls that look like this:
     #http://ntrs.nasa.gov/search.jsp?N=0&Ntk=Abstract|AuthorList&Ntx=mode%20matchall|mode%20matchall&Ntt=free%20wake|wachspress

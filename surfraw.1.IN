@@ -60,7 +60,7 @@ using the "I'm feeling lucky" option:
  sr google \-l debian ports
 
 .SS Adding the elvi to your path
-  
+
 If you are a regular user of surfraw, you will probably get sick
 of typing sr or surfraw each time. You can regain the old
 behaviour of running the elvi directly by adding the elvi

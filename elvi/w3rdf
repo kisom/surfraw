@@ -31,7 +31,7 @@ Local options:
                                 Default: Triples
                                 Environment: SURFRAW_w3rdf_output
   -format=TYPE                  Graph Format
-                                Values: PNG_EMBED, PNG_LINK, SVG_LINK, 
+                                Values: PNG_EMBED, PNG_LINK, SVG_LINK,
                                         SVG_EMBED, GIF_EMBED, GIF_LINK,
                                         PS_LINK, HP_PCL_LINK, HP_GL_LINK,
                                         ISV_ZVTM
