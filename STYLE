@@ -1,0 +1,59 @@
+                      ____ _______   ___     _____ 
+                     / ___|_   _\ \ / / |   | ____|
+                     \___ \ | |  \ V /| |   |  _|  
+                      ___) || |   | | | |___| |___ 
+                     |____/ |_|   |_| |_____|_____|
+                                                   
+
+                                                       
+It's important to rage against the web in _style_. Fellow surfer,
+take these guidelines with you when developing revolutionary elvi:
+
+FOR STATEMENTS:
+Prefer
+	for something in stuff
+	do
+		whatever
+	done
+
+over
+	for something in stuff ; do
+		whatever
+	done
+
+IF STATEMENTS:
+Prefer
+	if rage ;
+	then
+		surf
+	fi
+
+over
+	if rage ; then
+		surf
+	fi
+
+INITIALISING VARIABLES WITH AN EMPTY STRING
+The var="" syntax is preferred over var=.
+
+LEGIBILITY:
+Revolutionary elvi are of greatest utility when they are readable. If
+the consensus is that a breach of the style guide yields more readable
+code, the more legible option should be chosen.
+
+LEADING WHITESPACE
+Tabs are preferred.
+
+LINE LENGTH
+Lines should be wrapped at 80 characters so long as it doesn't require
+absurd contortions to fit this.
+
+LOCAL VARIABLE DECLARATION
+Function variables should be defined local. What happens in the
+function should stay in the function.
+
+PROCEESS SUBSTITUTION
+Use $() over `` for legibility.
+
+QUICHE EATING
+This is generally frowned upon.
