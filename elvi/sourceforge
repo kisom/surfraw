@@ -52,12 +52,12 @@ w3_parse_args "$@"
 if test -z "$w3_args"; then
     w3_browse_url "http://www.sourceforge.net/"
 else
-    escaped_args=`w3_url_of_arg $w3_args`
-	if  `yesno SURFRAW_sourceforge_exact`
+    escaped_args=$(w3_url_of_arg $w3_args)
+    if  $(yesno SURFRAW_sourceforge_exact)
 	then
 		isexact=1
 	else
 		isexact=0
 	fi
-    w3_browse_url "http://sourceforge.net/search/?words=${escaped_args}&exact=$isexact&type_of_search=$SURFRAW_sourceforge_searchtype"
+    w3_browse_url "http://sourceforge.net/search/?words=${escaped_args}&exact=$isexact&typeofsearch=$SURFRAW_sourceforge_searchtype"
 fi
