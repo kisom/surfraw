@@ -1,0 +1,87 @@
+#!/bin/sh
+# elvis: searx           -- Search using searx metasearch engine instances (https://searx.me and others)
+# author: krosos         -- contact: krosos.sdf.org
+# 2015-08-04
+
+. surfraw || exit 1
+
+w3_config_hook () {
+    def SURFRAW_searx_categories  "$SURFRAW_categories"
+    def SURFRAW_searx_base_url    "$SURFRAW_url"
+}
+
+w3_usage_hook () {
+    cat <<EOF
+
+Usage: $w3_argv0 [options] [search words]...
+Description:
+  Use the searx metasearch engine
+
+ -category,c=CATEGORIES
+
+  Local options:
+    default   | search category "general" (default)
+    vid       | search category "videos"
+    socialm   | search category "social+media"
+    news      | search category "news"
+    music     | search category "music"
+    map       | search category "map"
+    it        | search category "it"
+    img       | search category "images"
+    files     | search category "files"
+                 Default: general
+
+ -url,u=URL
+
+  Local options:
+    1       | https://searx.me
+    2       | https://searx.laquadrature.net
+    3       | https://www.privatesearch.io
+    o1      | http://searchb5a7tmimez.onion (laquadrature)
+    o2      | http://ulrn6sryqaifefld.onion (searx.me)
+    cjdns   | fc00:59dd:3bb2:d592:4083:c138:5489:560a
+                  Default: https://searx.me
+
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+    -c*=*)   setopt   SURFRAW_searx_categories   $optarg ;;
+    -u*=*)   setopt   SURFRAW_searx_base_url     $optarg ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+
+case "$SURFRAW_searx_categories" in
+    default*)   category="general"        ;;
+    vid*)       category="videos"         ;;
+    socialm*)   category="social+media"   ;;
+    news*)      category="news"           ;;
+    music*)     category="music"          ;;
+    map*)       category="map"            ;;
+    it*)        category="it"             ;;
+    img*)       category="images"         ;;
+    files*)     category="files"          ;;
+    *)          category="general"        ;;
+esac
+case "$SURFRAW_searx_base_url" in
+    1*)   searx_url="https://searx.me"         ;;
+    2*)         searx_url="https://searx.laquadrature.net" ;;
+    3*)         searx_url="https://www.privatesearch.io" ;;
+    o1*)        searx_url="http://searchb5a7tmimez.onion" ;;
+    o2*)        searx_url="http://ulrn6sryqaifefld.onion" ;;
+    cjdns*)     searx_url="fc00:59dd:3bb2:d592:4083:c138:5489:560a" ;;
+    *)          searx_url="https://searx.me" ;;
+esac
+# w3_args now contains a list of arguments
+escaped_args=$(w3_url_of_arg $w3_args)
+
+w3_browse_url "${searx_url}/?q=${escaped_args}&categories=${category}"

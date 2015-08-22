@@ -271,6 +271,7 @@ scholar         -- Search Google Scholar (scholar.google.com)
 scicom          -- Search Scientific Commons
 scirus          -- Search for science using Scirus (scirus.com)
 scpan           -- Search the Comprehensive Perl Archive Network (search.cpan.org)
+searx           -- Search using searx metasearch engine instances (searx.me)
 slashdot        -- Search stories on Slashdot (www.slashdot.org)
 slinuxdoc       -- Search entries in LDP (www.linuxdoc.org)
 sourceforge     -- Search SourceForge (www.sourceforge.net)

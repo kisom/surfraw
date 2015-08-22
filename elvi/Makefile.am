@@ -101,6 +101,7 @@ dist_elvi_SCRIPTS	= \
 		  scicom \
 		  scirus \
 		  scpan \
+		  searx \
 		  slashdot \
 		  slinuxdoc \
 		  sourceforge \
