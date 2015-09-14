@@ -323,9 +323,9 @@ w3_parse_option_hook () {
 }
 
 list_elvi() {
-    local dir="$1"
-    sed -n 's/^.*elvis:[ 	]\+\(.*\)$/\1/p' $(find "$dir" ! -type d ! -type l ! -name '*~' | sort)
-    for script in $(find "$dir" ! -type d -type l | sort) ; do
+    local_dir="$1"
+    awk '/^#[ 	]+elvis:[ 	]+/{ sub("^# elvis: ",""); print $0; }' $(find "$local_dir/" ! -type d ! -type l ! -name '*~' | sort | xargs)
+    for script in $(find "$local_dir/" ! -type d -type l | sort) ; do
 	printf '%-16s--> %s\n' $(basename "$script") $(basename $(readlink "${script}"))
     done
 }
